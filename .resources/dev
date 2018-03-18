@@ -1,0 +1,85 @@
+#!/bin/sh
+compose_file="docker/dev.yml"
+
+up() {
+  $colors --yellow --newline "Starting project '${project}' dev environment on '${development_domain}'"
+  docker-compose --file $compose_file up -d
+}
+
+down() {
+  $colors --yellow --newline "Stopping project '${project}' dev environment"
+  docker-compose --file $compose_file down
+}
+
+pause() {
+  $colors --yellow --newline "Pausing project '${project}' dev environment"
+  docker-compose --file $compose_file pause
+}
+
+unpause() {
+  $colors --yellow --newline "Unpausing project '${project}' dev environment"
+  docker-compose --file $compose_file unpause
+}
+
+restart() {
+  $colors --yellow --newline "Restarting project '${project}' dev environment"
+  docker-compose --file $compose_file restart
+}
+
+
+usage() {
+cat << EOF
+usage: wordpress dev [options] <argv>...
+
+Options:
+  -h, --help          Show help options
+
+Arguments:
+  init                Initialises the dev environment, including a database restore
+  up                  Starts the dev environment
+  down                Saves the database and stops the dev environment
+  pause               Pause the dev environment
+  unpause             Unpause the dev environment
+  restart             Restart the dev environment
+EOF
+}
+
+for var in "$@"
+do
+    case $var in
+    init)
+      up
+      sleep 20
+      ./wordpress database replace_dev
+      ./wordpress database restore
+      exit
+    ;;
+    up)
+      up
+      exit
+    ;;
+    down)
+      ./wordpress database save
+      down
+      exit
+    ;;
+    pause)
+      pause
+      exit
+    ;;
+    unpause)
+      unpause
+      exit
+    ;;
+    restart)
+      restart
+      exit
+    ;;
+    *)
+      usage
+    ;;
+    esac
+done
+
+if [ -z ${1+x} ]; then usage; fi
+

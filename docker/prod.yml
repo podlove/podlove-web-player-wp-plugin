@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  wordpress:
+    container_name: "${project}_wordpress"
+    image: wordpress
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ../content:/var/www/html/wp-content
+    environment:
+      WORDPRESS_DB_PASSWORD: "${database_password}"
+    restart: always
+
+  mysql:
+    container_name: "${project}_database"
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: "${database_password}"
+    restart: always

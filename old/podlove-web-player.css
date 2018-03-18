@@ -1,0 +1,881 @@
+.podlovewebplayer_wrapper * {
+	font: normal 11px/1.25 helvetica, arial, sans-serif;
+	-webkit-text-size-adjust: inherit;
+}
+
+.podlovewebplayer_wrapper,
+.podlovewebplayer_wrapper *,
+.podlovewebplayer_wrapper *:before,
+.podlovewebplayer_wrapper *:after {
+	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+
+.podlovewebplayer_wrapper div {
+	display: block;
+}
+
+.podlovewebplayer_wrapper *:after,
+.podlovewebplayer_wrapper *:before {
+	content: '';
+	content: none;
+}
+
+.podlovewebplayer_wrapper a {
+	background: transparent !important;
+	text-decoration: none;
+}
+
+.podlovewebplayer_wrapper .mejs-container.mejs-audio {
+	min-height: 30px;
+	margin-bottom: 5px;
+}
+
+.podlovewebplayer_wrapper .mejs-container .mejs-controls {
+	background: #444;
+}
+
+.podlovewebplayer_wrapper .mejs-container .mejs-controls > div:first-child {
+	margin-left: 8px;
+}
+
+.podlovewebplayer_wrapper .mejs-container .mejs-controls > div.mejs-duration-container:last-child {
+	margin-right: 5px;
+}
+
+.podlovewebplayer_wrapper {
+	clear: both;
+	display: block;
+	position: relative;
+	padding-bottom: 1.5em;
+	padding: 0px;
+	border: 0px solid black;
+	background: #444;
+}
+
+.podlovewebplayer_wrapper a, .podlovewebplayer_wrapper a:active, .podlovewebplayer_wrapper a:focus {
+	border: 0px none !important;
+	text-decoration: none !important;
+	outline: none !important;
+}
+
+.podlovewebplayer_wrapper:after {
+	content: ".";
+	color: #fff;
+	font-size: 1px;
+	height: 1px;
+	display: block;
+	overflow: hidden;
+	clear: both;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_chapters {
+	margin: 0 !important;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+/*
+ * Hide only visually, but have it available for screenreaders: h5bp.com/v
+ */
+.podlovewebplayer_wrapper .podlovewebplayer_chapters thead,
+.podlovewebplayer_wrapper .podlovewebplayer_chapters caption {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	display: none; /* sorry screen readers, but without this there are side effects */
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_chapters tr {
+	color: black;
+	cursor: pointer;
+	background: #f2f2f2;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_chapters tr:hover {
+	background: #d2d2d2;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_chapters tr.active,
+.podlovewebplayer_wrapper .podlovewebplayer_chapters tr.active:hover {
+	background: #b6cfdd;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_chapters tr td {
+	padding: 8px 5px 6px 5px !important;
+	vertical-align: middle;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-left-width: 0px;
+	border-bottom: 1px solid #e9e9e9;
+	cursor: pointer !important;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_chapters tr:hover {
+	background: #e3e3e3;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_chapters tr td.title {
+	padding-top: 7px;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_chapters tr td.timecode {
+	white-space: nowrap;
+	padding-right: 10px !important;
+	text-align: right;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_chapters tr td.timecode {
+    padding-right: 5px !important;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_chapters tr td span {
+	text-align: right;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_top,
+.podlovewebplayer_wrapper .podlovewebplayer_meta {
+	position: relative;
+	display: block;
+	background: #000;
+	min-height: 100px;
+	height: auto;
+	margin-bottom: 1px;
+	padding-bottom: 5px;
+	background: #444;
+}
+
+.podlovewebplayer_top {
+	min-height: 11px !important;
+	height: 11px !important;
+	margin-bottom: 0px !important;
+	padding-bottom: 0px;
+}
+
+.podlovewebplayer_wrapper .mejs-container {
+	display: block;
+	position: relative;
+	margin-top: -1px;
+	margin-bottom: 0;
+	background: #000000;
+}
+
+.podlovewebplayer_wrapper .mejs-button.mejs-volume-button button {
+	font-size: 16px;
+	background: transparent;
+	color: white;
+}
+.podlovewebplayer_wrapper .mejs-button.mejs-volume-button button::after,
+.podlovewebplayer_wrapper .podlovewebplayer_chapterbox .chaptername a {
+	font-size: 16;
+	padding-left: 0.02em;
+	font-family: "pwpfont" !important;
+	font-style: normal !important;
+	font-weight: normal !important;
+	text-decoration: inherit;
+	-webkit-font-smoothing: antialiased;
+	speak: none;
+	display: inline-block;
+	width: 1em;
+	margin-right: 0.2em;
+	text-align: center;
+	font-variant: normal !important;
+	text-transform: none !important;
+	line-height: 1em;
+}
+
+.podlovewebplayer_wrapper .mejs-button.mejs-volume-button.mejs-unmute button::after {
+	content: "\1f507";
+}
+
+.podlovewebplayer_wrapper .mejs-button.mejs-volume-button.mejs-mute button::after {
+	content: "\1f50a";
+}
+
+.podlovewebplayer_meta .bigplay {
+	font-family: "pwpfont" !important;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1.33em;
+	speak: none;
+	color: #ffffff;
+	background: transparent !important;
+	float: left;
+	position: relative;
+	z-index: 78;
+	border: 5px solid white !important;
+	border-radius: 60px !important;
+	font-size: 42px;
+	padding: 5px 6px 10px 20px;
+	height: 75px;
+	width: 75px;
+	margin: 10px 10px 10px 10px;
+	-webkit-transition: none;
+	-moz-transition: none;
+	-o-transition: none;
+	transition: none;
+}
+
+.podlovewebplayer_meta .bigplay:before {
+	content: "\25b6";
+	padding-left: 0.02em;
+}
+
+.podlovewebplayer_meta .bigplay:focus,
+.podlovewebplayer_meta .bigplay:hover,
+.podlovewebplayer_meta .bigplay:active {
+	border: 5px solid white !important;
+	border-radius: 60px !important;
+	-webkit-text-shadow: 0px 0px 10px #FFFFFF;
+	-moz-text-shadow: 0px 0px 10px #FFFFFF;
+	-o-text-shadow: 0px 0px 10px #FFFFFF;
+	text-shadow: 0px 0px 10px #FFFFFF;
+}
+
+.podlovewebplayer_meta .bigplay.playing:before {
+	content: "\2389";
+}
+
+.podlovewebplayer_meta .bigplay.playing {
+	padding: 5px 11px 20px 15px;
+}
+
+.podlovewebplayer_meta .bigplay.playing:focus,
+.podlovewebplayer_meta .bigplay.playing:hover,
+.podlovewebplayer_meta .bigplay.playing:active {
+	border: 5px solid white !important;
+	border-radius: 60px !important;
+	-webkit-text-shadow: 0px 0px 10px #FFFFFF;
+	-moz-text-shadow: 0px 0px 10px #FFFFFF;
+	-o-text-shadow: 0px 0px 10px #FFFFFF;
+	text-shadow: 0px 0px 10px #FFFFFF;
+}
+
+.podlovewebplayer_wrapper .togglers a.pwp-icon-info-circle:before { content: "\e705"; }
+.podlovewebplayer_wrapper .togglers a.pwp-icon-list-bullet:before { content: "\f0ca"; }
+.podlovewebplayer_wrapper .togglers a.pwp-icon-clock:before { content: "\1f554"; }
+.podlovewebplayer_wrapper .togglers a.pwp-icon-export:before { content: "\e715"; }
+.podlovewebplayer_wrapper .togglers a.pwp-icon-download:before { content: "\1f4e5"; }
+
+.podlovewebplayer_wrapper .podlovewebplayer_timecontrol.podlovewebplayer_controlbox a.pwp-icon-to-start:before { content: "\23ee"; }
+.podlovewebplayer_wrapper .podlovewebplayer_timecontrol.podlovewebplayer_controlbox a.pwp-icon-to-end:before { content: "\23ed"; }
+.podlovewebplayer_wrapper .podlovewebplayer_timecontrol.podlovewebplayer_controlbox a.pwp-icon-fast-bw:before { content: "\23ea"; }
+.podlovewebplayer_wrapper .podlovewebplayer_timecontrol.podlovewebplayer_controlbox a.pwp-icon-fast-fw:before { content: "\23e9"; }
+
+.podlovewebplayer_wrapper .podlovewebplayer_sharebuttons.podlovewebplayer_controlbox a.pwp-icon-link:before { content: "\1f517"; font-size: 0.9em; }
+.podlovewebplayer_wrapper .podlovewebplayer_sharebuttons.podlovewebplayer_controlbox a.pwp-icon-twitter:before { content: "\54"; font-size: 0.9em; }
+.podlovewebplayer_wrapper .podlovewebplayer_sharebuttons.podlovewebplayer_controlbox a.pwp-icon-facebook:before { content: "\f308"; }
+.podlovewebplayer_wrapper .podlovewebplayer_sharebuttons.podlovewebplayer_controlbox a.pwp-icon-gplus:before { content: "\e81a"; font-size: 0.9em; }
+.podlovewebplayer_wrapper .podlovewebplayer_sharebuttons.podlovewebplayer_controlbox a.pwp-icon-appnet:before { content: "\e1"; font-size: 0.8em; }
+.podlovewebplayer_wrapper .podlovewebplayer_sharebuttons.podlovewebplayer_controlbox a.pwp-icon-mail:before { content: "\2709"; }
+
+.podlovewebplayer_wrapper .podlovewebplayer_downloadbuttons.podlovewebplayer_controlbox a.pwp-icon-download:before { content: "\1f4e5"; }
+.podlovewebplayer_wrapper .podlovewebplayer_downloadbuttons.podlovewebplayer_controlbox a.pwp-icon-link-ext:before { content: "\f08e"; }
+.podlovewebplayer_wrapper .podlovewebplayer_downloadbuttons.podlovewebplayer_controlbox a.pwp-icon-info-circle:before { content: "\e705"; }
+
+.podlovewebplayer_meta .coverart {
+	display: inline;
+}
+
+.podlovewebplayer_meta .coverart img {
+	position: relative !important;
+	float: left !important;
+	margin-top: 0px !important;
+	margin-right: 10px !important;
+	margin-left: 0px !important;
+	margin-bottom: 10px !important;
+	height: 75px !important;
+	width: auto !important;
+	max-width: 275px !important;
+	top: 10px !important;
+	left: 0px !important;
+	right: auto !important;
+	bottom: auto !important;
+	box-shadow: none !important;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	-o-border-radius: 0px;
+	border-radius: 0px;
+}
+
+.podlovewebplayer_meta h3 a,
+.podlovewebplayer_meta h3 {
+	clear: none;
+	color: #fff !important;
+	background: transparent !important;
+	padding: 7px 0 0 0;
+	font-size: 16px;
+	line-height: 22px;
+	font-weight: bold;
+	margin: 0 !important;
+	padding-right: 10px;
+	text-transform: none;
+	letter-spacing: 0;
+	text-shadow: none;
+	text-decoration: none;
+}
+
+.podlovewebplayer_meta h3 a {
+	line-height: 20px !important;
+}
+
+.podlovewebplayer_meta h3 a {
+	color: #fff;
+}
+
+.podlovewebplayer_meta h3 a:focus,
+.podlovewebplayer_meta h3 a:hover,
+.podlovewebplayer_meta h3 a:active {
+	color: #bbb !important;
+}
+
+.podlovewebplayer_meta .subtitle {
+	margin-right: 15px;
+	font-size: 12px;
+	color: #eee !important;
+	text-shadow: none !important;
+	background: transparent !important;
+	margin-left: 170px;
+	padding-bottom: 35px;
+	padding-left: 0px;
+}
+
+.podlovewebplayer_meta .subtitle strong{
+	color: #ccc;
+	font-size: 13px !important;
+}
+
+.podlovewebplayer_video.podlovewebplayer_wrapper {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.podlovewebplayer_video .podlovewebplayer_meta .episodetitle {
+	text-align: left;
+	padding-left: 20px;
+}
+
+.podlovewebplayer_video .podlovewebplayer_meta .subtitle {
+	font-size: 13px;
+	float: none;
+	margin-right: 20px;
+	margin-left: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.podlovewebplayer_video .podlovewebplayer_meta {
+	min-height: 40px;
+	height: auto;
+	padding-top: 30px;
+	padding-bottom: 45px;
+	margin-bottom: 0px !important;
+}
+
+.podlovewebplayer_video .mejs-container .mejs-inner .mejs-controls {
+	bottom: -30px;
+	z-index: 78;
+	background: initial;
+}
+
+.podlovewebplayer_video .mejs-container .mejs-inner .mejs-layers .mejs-poster.mejs-layer img {
+	width: 100%;
+	height: 100%;
+}
+
+.podlovewebplayer_wrapper.podlovewebplayer_video .mejs-container div.mejs-poster.mejs-layer {
+	display: none !important;
+}
+
+.podlovewebplayer_video .mejs-container .mejs-overlay-button {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100px;
+	height: 100px;
+	margin: -50px 0 0 -50px;
+	background: url(bigplay.svg) no-repeat;
+}
+
+.no-svg .mejs-overlay-button {
+	background-image: url(bigplay.png);
+}
+
+.podlovewebplayer_wrapper .mejs-overlay:hover .mejs-overlay-button {
+	background-position: 0 -100px ;
+}
+
+.podlovewebplayer_wrapper .mejs-overlay-loading span {
+	display: block;
+	width: 80px;
+	height: 80px;
+	background: transparent url(loading.gif) 50% 50% no-repeat;
+}
+
+.podlovewebplayer_wrapper .mejs-container .mejs-inner .mejs-controls .mejs-time-rail .mejs-time-total .mejs-time-loaded {
+	background: #777;
+}
+
+.podlovewebplayer_wrapper .mejs-container .mejs-controls .mejs-time-rail span,
+.podlovewebplayer_wrapper .mejs-container .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-total,
+.podlovewebplayer_wrapper .mejs-container .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-current,
+.podlovewebplayer_wrapper .mejs-container .mejs-inner .mejs-controls .mejs-volume-button .mejs-volume-slider .mejs-volume-handle {
+	cursor: move;
+	border-radius: 2px;
+}
+
+.podlovewebplayer_wrapper .mejs-controls div.mejs-horizontal-volume-slider {
+	width: 60px;
+}
+
+.podlovewebplayer_meta + .summary,
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox {
+	overflow: hidden;
+	padding: 0px 10px;
+	margin-top: -1px;
+	font-size: 12px;
+	line-height: 1.5;
+	color: #fff;
+	background: #444;
+	border-left: 3px #444 solid;
+	border-right: 3px #444 solid;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.podlovewebplayer_meta .summary .summarydiv {
+	margin: 0px 5px;
+}
+
+.podlovewebplayer_meta .summary .summarydiv p a,
+.podlovewebplayer_meta .summary .summarydiv p a:focus
+.podlovewebplayer_meta .summary .summarydiv p a:hover
+.podlovewebplayer_meta .summary .summarydiv p a:active {
+	color: #8AB7E5;
+}
+
+.podlovewebplayer_video .podlovewebplayer_meta + .summary,
+.podlovewebplayer_video.podlovewebplayer_wrapper .podlovewebplayer_controlbox {
+	margin-top: 0px;
+}
+
+.podlovewebplayer_meta + .summary.active {
+	min-height: 35px;
+	height: auto;
+  padding: 25px 10px 35px;
+}
+
+.podlovewebplayer_wrapper .summary a:visited {
+	color: #8AB7E5;
+	font-weight: 700;
+}
+
+.podlovewebplayer_wrapper .summary.active a {
+	text-decoration: none;
+}
+
+.podlovewebplayer_wrapper .summary a:hover {
+	text-decoration: underline;
+}
+
+.podlovewebplayer_meta .togglers {
+	float: right;
+	position: relative;
+	text-align: right;
+	right: 9px;
+	top: -30px;
+	margin-bottom: -25px;
+	height: 30px;
+}
+
+.podlovewebplayer_wrapper.podlovewebplayer_video .podlovewebplayer_meta .togglers {
+	top: auto;
+	bottom: -10px;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox {
+	height: 0px;
+	font-size: 4px;
+	text-align: center;
+	background: #444;
+	border-left: 3px #444 solid;
+	border-right: 3px #444 solid;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox.active {
+	height: 25px;
+	padding: 3px 10px 28px 10px;
+	font-size: 8px;
+}
+
+.podlovewebplayer_meta .togglers .infobuttons,
+.podlovewebplayer_meta .togglers .infobuttons a,
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox .infobuttons,
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox .infobuttons a {
+	color: #fff;
+	background: transparent !important;
+	font-size: 1.75em;
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+	-o-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+	text-decoration: none;
+	speak: none;
+	display: inline;
+	text-decoration: none;
+}
+
+.podlovewebplayer_meta .togglers a.infobuttons {
+	display: inline-block !important;
+	height: 30px;
+	width: 30px;
+}
+
+.podlovewebplayer_wrapper .togglers a.pwp-icon-download { display: none !important; }
+
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox .infobuttons,
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox .infobuttons a {
+	position: relative;
+	margin: 4%;
+	padding: 0px;
+	z-index: 78;
+	font-size: 2.4em;
+	font-weight: bold;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_downloadbuttons .infobuttons,
+.podlovewebplayer_wrapper .podlovewebplayer_downloadbuttons .infobuttons a {
+	margin: 2%;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_downloadbuttons select {
+	outline: none;
+	vertical-align: top;
+	height: 22px;
+	font-size: 14px;
+	margin-right: 25px;
+	background: #000000;
+	color: #ffffff;
+	border: #222222 1px solid;
+	-webkit-box-shadow:  0px 0px 5px 1px #4B8CF7;
+	box-shadow:  0px 0px 5px 1px #4B8CF7;
+}
+
+.podlovewebplayer_meta .togglers .infobuttons:hover,
+.podlovewebplayer_meta .togglers .infobuttons a:hover,
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox .infobuttons:hover,
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox .infobuttons a:hover  {
+	text-shadow: 0px 0px 4px rgba(166, 201, 221, 0.7);
+	text-decoration: none;
+	filter: dropshadow(color=#FFFFFF, offx=0, offy=0);
+	cursor: pointer;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox .icon-twitter {
+	font-size: 2.1em;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox .icon-link,
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox .icon-twitter,
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox .icon-facebook {
+	font-weight: normal;
+}
+
+.podlovewebplayer_chapters * {
+	font-size: 11px;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_chapters tr td.starttime,
+.podlovewebplayer_wrapper .podlovewebplayer_chapters tr th.starttime {
+	width: 60px;
+	text-align: right;
+}
+
+.podlovewebplayer_chapters .chapterplay {
+	width: 25px;
+	padding-right: 0;
+}
+
+.podlovewebplayer_chapters .chapterplay > a {
+	display: block;
+	border: none;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+	width: 25px;
+	height: 25px;
+	background: #bbb;
+	cursor: pointer;
+	-webkit-transition: all 0.07s;
+	-moz-transition: all 0.07s;
+	-o-transition: all 0.07s;
+	transition: all 0.07s;
+}
+
+.podlovewebplayer_chapters .chapterplay > a.disabled {
+	cursor: wait;
+}
+
+.podlovewebplayer_chapters .loaded .chapterplay > a {
+	background: #000;
+}
+
+.podlovewebplayer_chapters .chapterplay > a:focus,
+.podlovewebplayer_chapters .chapterplay > a:hover,
+.podlovewebplayer_chapters .chapterplay > a:active,
+.podlovewebplayer_chapters .active .chapterplay > a,
+.podlovewebplayer_chapters .loaded .chapterplay > a:focus,
+.podlovewebplayer_chapters .loaded .chapterplay > a:hover,
+.podlovewebplayer_chapters .loaded .chapterplay > a:active {
+	background: #3a859a;
+	cursor: pointer;
+}
+
+.podlovewebplayer_chapters .chapterplay a.disabled:focus,
+.podlovewebplayer_chapters .chapterplay a.disabled:hover,
+.podlovewebplayer_chapters .chapterplay a.disabled:active {
+	background: #eee;
+	cursor: wait;
+}
+
+.podlovewebplayer_chapters .chapterplay a[rel=player] span {
+	display: block !important;
+	width: 14px;
+	height: 16px;
+	overflow: hidden;
+	position: relative;
+	top: 4px;
+	text-indent: -1000px;
+	margin: 0 0 0 6px;
+	background: transparent url(controls.png) no-repeat 0 0;
+	background-image: url(controls.svg);
+
+}
+
+.podlovewebplayer_chapters .paused .chapterplay a[rel=player] span {
+	background-position: 0 0 !important;
+}
+
+.podlovewebplayer_chapters tr.chaptertr:active {
+	color: #ffffff;
+	-webkit-text-shadow: 0px 0px 3px #111111;
+	-moz-text-shadow: 0px 0px 3px #111111;
+	text-shadow: 0px 0px 3px #111111;
+	background: #ffffff;
+}
+
+.podlovewebplayer_chapters td b {
+	color: #000;
+	font-weight: bolder;
+}
+
+.podlovewebplayer_chapters td a {
+	color:#3297ff;
+	text-decoration: none;
+	font-weight: 500;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_chapterbox {
+	display: block;
+	height: auto;
+	border: 3px #444 solid;
+	border-bottom: 0px #444 solid;
+	border-top: 0px;
+	overflow-y: hidden;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_chapterbox .podlovewebplayer_chapters tr td {
+	font-weight: bolder;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_chapterbox .podlovewebplayer_chapters tr td span {
+	font-weight: normal;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_chapterbox .timecode span,
+.podlovewebplayer_wrapper .podlovewebplayer_chapterbox .starttime span {
+	text-align: right;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_chapterbox .chaptername a::after {
+	content: "\f08e";
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_chapterbox .chapterimage {
+	width: 45px;
+	max-width: 45px;
+	text-align: center;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_chapterbox .chapterimage img {
+	max-width: 40px;
+	max-height: 32px;
+	margin-top: -8px;
+	margin-bottom: -7px;
+	display: block;
+}
+
+.podlovewebplayer_wrapper .podlovewebplayer_tableend {
+	position: initial;
+	display: block;
+	height: 2px;
+	left: 0px;
+	background: #444;
+	-webkit-box-shadow: 0px 1px #444;
+	-moz-box-shadow: 0px 1px #444;
+	box-shadow: 0px 1px #444;
+}
+
+.podlovewebplayer_wrapper.podlovewebplayer_video .podlovewebplayer_tableend,
+.podlovewebplayer_wrapper.podlovewebplayer_video .podlovewebplayer_controlbox,
+.podlovewebplayer_wrapper.podlovewebplayer_video .summary {
+	background: #252525;
+}
+
+.podlovewebplayer_wrapper.podlovewebplayer_video .podlovewebplayer_chapterbox,
+.podlovewebplayer_wrapper.podlovewebplayer_video .podlovewebplayer_chapters,
+.podlovewebplayer_wrapper.podlovewebplayer_video .podlovewebplayer_meta + .summary,
+.podlovewebplayer_wrapper.podlovewebplayer_video .podlovewebplayer_controlbox {
+	border-color: #252525;
+}
+
+.podlovewebplayer_wrapper.podlovewebplayer_video .podlovewebplayer_controlbox {
+	margin-top: 0px;
+}
+
+.podlovewebplayer_smallplayer .mejs-controls .mejs-time-rail .mejs-time-float {
+	z-index: 100;
+}
+
+.podlovewebplayer_smallplayer .podlovewebplayer_meta .bigplay {
+	font-size: 25px;
+	padding: 0 11px 19px 9px;
+	height: 40px;
+	width: 40px;
+	margin: 10px 10px 0px 10px;
+	border: 4px solid #ffffff !important;
+}
+
+.podlovewebplayer_smallplayer .podlovewebplayer_meta .bigplay.playing {
+	padding: 0 13px 19px 5px;
+}
+
+.podlovewebplayer_smallplayer .bigplay.playing:focus,
+.podlovewebplayer_smallplayer .bigplay.playing:hover,
+.podlovewebplayer_smallplayer .bigplay.playing:active {
+	border: 4px solid white !important;
+}
+
+.podlovewebplayer_smallplayer .podlovewebplayer_top,
+.podlovewebplayer_smallplayer .podlovewebplayer_meta {
+	min-height: 60px;
+}
+
+.podlovewebplayer_wrapper a {
+	box-shadow: none;
+}
+
+.mejs-controls div.mejs-time-rail {
+    padding-top: 7px;
+}
+
+@media only screen
+and (max-width : 500px) {
+	.podlovewebplayer_wrapper {
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+
+	.podlovewebplayer_meta .subtitle {
+		position: initial;
+		left: 10px;
+		right: 10px;
+	}
+
+	.podlovewebplayer_wrapper .podlovewebplayer_controlbox a.infobuttons {
+		margin: 4%;
+		white-space: nowrap;
+	}
+
+	.podlovewebplayer_wrapper .podlovewebplayer_controlbox.active {
+		height: auto !important;
+	}
+
+	.podlovewebplayer_wrapper .podlovewebplayer_controlbox .infobuttons span {
+		font-size: 13pt;
+	}
+}
+
+@media only screen
+and (max-width : 500px) {
+	.podlovewebplayer_wrapper div {
+		display: inherit;
+	}
+
+	.podlovewebplayer_wrapper .podlovewebplayer_meta {
+		display: flex;
+		flex-wrap: wrap;
+	    justify-content: center;
+	}
+
+	.podlovewebplayer_meta .bigplay {
+	    order: 2;
+	    margin: 42.5px 15px 37.5px 15px !important;
+	}
+
+	.podlovewebplayer_meta .coverart {
+		order: 1;
+	    margin: 30px 15px 25px 15px !important;
+	    height: 100px;
+	}
+
+	.podlovewebplayer_meta .coverart img {
+		margin: 0 !important;
+		float: none !important;
+		position: inherit !important;
+	    height: 100px !important;
+	}
+
+	.podlovewebplayer_meta .episodetitle {
+		order: 3;
+		margin: 15px auto;
+		padding: 0px;
+	    padding: 0px 20px;
+	    display: block;
+	    text-align: center;
+	}
+
+	.podlovewebplayer_meta .subtitle {
+		order: 4;
+		margin: 0;
+		padding: 0;
+	    padding: 10px 20px;
+	    text-align: center;
+	}
+
+	.podlovewebplayer_meta .togglers {
+		order: 5;
+		float: none;
+	    display: block;
+	    margin: 7px auto 0 auto;
+	    position: initial;
+	}
+
+	.podlovewebplayer_meta + .summary.active {
+	    padding: 5px 15px 5px 15px;
+	}
+
+	.podlovewebplayer_wrapper .podlovewebplayer_controlbox.active {
+		padding: 20px 10px 27px 10px;
+	}
+}

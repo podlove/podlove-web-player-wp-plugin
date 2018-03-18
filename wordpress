@@ -1,0 +1,65 @@
+#! /bin/bash
+COMMAND=$1
+shift
+
+# load colors functions
+export colors="./.resources/colors"
+
+# read the config
+source ./wordpress.config
+
+if [ -z "${production_domain}" ]; then
+  $colors --red --newline "Missing production domain in wordpress.config"
+  exit
+else
+  export production_domain="${production_domain}"
+fi
+
+if [ -z "${development_domain}" ]; then
+  $colors --red --newline "Missing development domain in wordpress.config"
+  exit
+else
+  export development_domain="${development_domain}"
+fi
+
+if [ -z "${database_password}" ]; then
+  $colors --red --newline "Missing database password in wordpress.config"
+  exit
+else
+  export database_password="${database_password}"
+fi
+
+export project=${PWD##*/}
+
+usage() {
+cat << EOF
+usage: wordpress [options] <argv>...
+
+Options:
+  -h, --help        Show help options.
+
+Arguments:
+  dev               Fire up development mode
+  prod              Fire up production mode
+  database          Backup and restore wordpress database
+  scm               Backup and restore files
+EOF
+}
+
+case $COMMAND in
+    dev)
+        sh ./.resources/dev "$@"
+    ;;
+    prod)
+        sh ./.resources/prod "$@"
+    ;;
+    database)
+        sh ./.resources/database "$@"
+    ;;
+    scm)
+        sh ./.resources/scm "$@"
+    ;;
+    *)
+        usage
+    ;;
+esac

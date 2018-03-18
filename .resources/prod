@@ -1,0 +1,64 @@
+#!/bin/sh
+compose_file="docker/prod.yml"
+
+up() {
+  $colors --yellow --newline "Starting project '${project}' production environment on '${production_domain}'"
+  docker-compose --file $compose_file up -d
+}
+
+down() {
+  $colors --yellow --newline "Stopping project '${project}' prododuction environment"
+  docker-compose --file $compose_file down
+}
+
+restart() {
+  $colors --yellow --newline "Restarting project '${project}' prododuction environment"
+  docker-compose --file $compose_file restart
+}
+
+usage() {
+cat << EOF
+usage: wordpress prod [options] <argv>...
+
+Options:
+  -h, --help          Show help options
+
+Arguments:
+  init                Initialises the prod environment, including a database restore
+  up                  Starts the prod environment
+  down                Saves the database and stops the prod environment
+  restart             Restart the prod environment
+EOF
+}
+
+for var in "$@"
+do
+    case $var in
+    init)
+      up
+      sleep 20
+      ./wordpress database replace_prod
+      ./wordpress database restore
+      exit
+    ;;
+    up)
+      up
+      exit
+    ;;
+    down)
+      ./wordpress database save
+      down
+      exit
+    ;;
+    restart)
+      restart
+      exit
+    ;;
+    *)
+      usage
+    ;;
+    esac
+done
+
+if [ -z ${1+x} ]; then usage; fi
+

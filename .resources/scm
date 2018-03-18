@@ -1,0 +1,47 @@
+#!/bin/sh
+timestamp=$(date)
+
+save() {
+  $colors --cyan --newline "Saving project"
+  git config user.name "wordpress" && git config user.email wordpress@backup
+  git add --all && git commit -m "backup ${timestamp}" && git push -u origin
+}
+
+pull() {
+  $colors --cyan --newline "Pulling latest project snapshot"
+  git pull
+}
+
+
+usage() {
+cat << EOF
+usage: wordpress scm [options] <argv>...
+
+Options:
+  -h, --help          Show help options
+
+Arguments:
+  save                Creates a snapshot of the current system
+  pull                Pulls the latest snapshot
+EOF
+}
+
+for var in "$@"
+do
+    case $var in
+    save)
+      ./wordpress database save
+      save
+      exit
+    ;;
+    pull)
+      pull
+      exit
+    ;;
+    *)
+      usage
+    ;;
+    esac
+done
+
+if [ -z ${1+x} ]; then usage; fi
