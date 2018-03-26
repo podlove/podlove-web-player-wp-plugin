@@ -13,7 +13,7 @@
  * @package           Podlove_Web_Player
  *
  * @wordpress-plugin
- * Plugin Name:       Podlove Web Player
+ * Plugin Name:       Podlove Web Player Beta
  * Plugin URI:        https://docs.podlove.org/podlove-web-player/
  * Description:       Audio First Podcast Web Player
  * Version:           1.0.0
@@ -71,7 +71,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-podlove-web-player.php';
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    1.0.0
+ * @since    4.0.0
  */
 function run_podlove_web_player() {
 	$plugin = new Podlove_Web_Player();

@@ -7,7 +7,7 @@ services:
     ports:
       - 8080:80
     volumes:
-      - ../src/plugin:/var/www/html/wp-content/plugins/podlove-web-player
+      - ../dist:/var/www/html/wp-content/plugins/podlove-web-player
     environment:
       WORDPRESS_DB_PASSWORD: "${database_password}"
 

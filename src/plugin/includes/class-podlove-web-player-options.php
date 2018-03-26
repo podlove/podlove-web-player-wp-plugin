@@ -14,20 +14,30 @@ class Podlove_Web_Player_Options {
   /**
 	 * The unique identifier of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    4.0.0
 	 * @access   protected
 	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
 	 */
 	protected $plugin_name;
 
+  /**
+	 * The default web player configuration
+	 *
+	 * @since    4.0.0
+	 * @access   protected
+	 * @var      array    $defaults        Default configuration values.
+	 */
   protected $defaults;
 
 	public function __construct( $plugin_name ) {
 
 		$this->plugin_name = $plugin_name;
 		$this->defaults = array(
+      'show' => array(
+        'poster' => null
+      ),
       'theme' => array(
-        'main' => null,
+        'main' => '#2B8AC6',
         'highlight' => null
       ),
       'tabs' => array(
@@ -43,14 +53,17 @@ class Podlove_Web_Player_Options {
         'tabAudio',
         'tabShare',
         'poster',
+        'tabInfo',
         'showTitle',
         'episodeTitle',
         'subtitle',
         'progressbar',
         'controlSteppers',
-        'controlChapters',
-        'controlChapters',
-        'tabInfo'
+        'controlChapters'
+      ),
+      'enclosure' => array(
+        'enabled' => false,
+        'bottom'  => false
       )
     );
 	}
@@ -83,7 +96,7 @@ class Podlove_Web_Player_Options {
 	public function read() {
     $value = get_option( $this->plugin_name, json_encode($this->defaults) );
 
-    return json_decode($value);
+    return json_decode( $value, true );
   }
 
   /**
@@ -122,6 +135,12 @@ class Podlove_Web_Player_Options {
 
       case 'visibleComponents':
         return is_array($value);
+
+      case 'enclosure':
+        return array_key_exists('enabled', $value) && array_key_exists('bottom', $value);
+
+      case 'show':
+        return array_key_exists('poster', $value);
 
       default:
         return false;

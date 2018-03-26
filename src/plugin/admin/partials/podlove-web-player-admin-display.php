@@ -13,7 +13,4 @@
  */
 ?>
 
-<!-- This file should primarily consist of HTML with a little bit of PHP. -->
-<script>
-  jQuery.get(PODLOVE.api, console.log)
-</script>
+<div id="configurator"></div>
