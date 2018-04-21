@@ -1,2 +1,4 @@
 # ignore themes
 dist/
+database.sql
+uploads.ini

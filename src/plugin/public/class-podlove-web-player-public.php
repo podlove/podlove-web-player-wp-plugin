@@ -74,7 +74,6 @@ class Podlove_Web_Player_Public {
 	 * @param      string    $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
-
 		$this->plugin_name = $plugin_name;
     $this->version = $version;
 
@@ -105,6 +104,7 @@ class Podlove_Web_Player_Public {
 	 */
 	public function register_shortcodes() {
 		add_shortcode( 'podlove-web-player', array( $this->shortcode, 'render' ) );
+		add_shortcode( 'podloveaudio', array( $this->shortcode, 'render' ) );
 	}
 
   /**

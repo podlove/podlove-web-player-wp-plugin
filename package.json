@@ -8,7 +8,9 @@
     "plugin:copy": "mkdir -p dist/ && cp -R src/plugin/* dist/",
     "plugin:dev": "nodemon --ext php --watch src/plugin --exec 'npm run plugin:copy'",
     "configurator:dev": "webpack --watch --config build/webpack.dev.conf.js",
-    "dev": "npm run dist:clean && concurrently 'npm run plugin:dev' 'npm run configurator:dev'"
+    "configurator:build": "webpack --config build/webpack.prod.conf.js",
+    "dev": "npm run dist:clean && concurrently 'npm run plugin:dev' 'npm run configurator:dev'",
+    "build": "npm run dist:clean && npm run plugin:copy && npm run configurator:build"
   },
   "dependencies": {
     "element-ui": "^1.4.4",

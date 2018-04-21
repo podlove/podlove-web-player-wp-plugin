@@ -16,7 +16,7 @@
  * Plugin Name:       Podlove Web Player Beta
  * Plugin URI:        https://docs.podlove.org/podlove-web-player/
  * Description:       Audio First Podcast Web Player
- * Version:           1.0.0
+ * Version:           4.0.0
  * Author:            Alexander Heimbuch
  * Author URI:        http://alexander.heimbu.ch
  * License:           MIT
@@ -30,12 +30,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-/**
- * Currently plugin version.
- * Start at version 1.0.0 and use SemVer - https://semver.org
- * Rename this for your plugin and update it as you release new versions.
- */
-define( 'PODLOVE_WEB_PLAYER_VERSION', '1.0.0' );
+define( 'PODLOVE_WEB_PLAYER_VERSION', '4.0.0' );
 
 /**
  * The code that runs during plugin activation.

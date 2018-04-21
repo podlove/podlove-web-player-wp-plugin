@@ -20,9 +20,10 @@ class Podlove_Web_Player_Shortcode {
 	 */
   private $options;
 
-  private $episodeAttributes = array( 'title', 'subtitle', 'poster', 'duration', 'link', 'summary', 'transcripts' );
+  private $episodeAttributes = array( 'title', 'subtitle', 'poster', 'duration', 'link', 'summary', 'transcripts', 'chapters' );
   private $showAttributes = array( 'showtitle', 'showlink', 'showlink', 'showsubtitle', 'showposter' );
   private $typeAttributes = array( 'src', 'mp3', 'mp4', 'ogg', 'opus' );
+  private $visibleAttributes = array( 'chapters', 'share', 'info', 'download', 'audio', 'transcripts' );
 
   /**
 	 * Initialize the class and set its properties.
@@ -52,7 +53,7 @@ class Podlove_Web_Player_Shortcode {
     } elseif ( array_key_exists( 'data', $attributes ) ) {
       $config = array_merge_recursive( $defaults, $attributes['data'] );
     } else {
-      $config = array_merge_recursive( $defaults, $attributes );
+      $config = $this->assingAttributes($defaults, $attributes);
     }
 
     return $this->template( $playerId, $config );
@@ -82,7 +83,7 @@ class Podlove_Web_Player_Shortcode {
     // type attributes
     foreach ($this->typeAttributes as $type ) {
       if ( array_key_exists( $type, $atts ) ) {
-        $info = $this->mimeType($atts[$type]);
+        $info = $this->mimeType( $atts[$type], $atts['size'] );
 
         $config['audio'][] = array(
           'url' => $atts[$type],
@@ -108,6 +109,11 @@ class Podlove_Web_Player_Shortcode {
       $config['chapters'] = json_decode( $customFields[$atts['chapters']][0] );
     }
 
+    // components
+    if ( $customFields && array_key_exists( 'components', $atts ) ) {
+      $config['visibleComponents'] = explode( ',', $atts['components'] );
+    }
+
     // episode attributes
     foreach( $this->episodeAttributes as $attribute ) {
       if ( array_key_exists( $attribute, $atts ) ) {
@@ -122,6 +128,36 @@ class Podlove_Web_Player_Shortcode {
       }
     }
 
+    // visible attributes
+    foreach( $this->visibleAttributes as $attribute ) {
+      if ( array_key_exists( $attribute . 'visible', $atts ) ) {
+        $config['tabs'] = array(
+          'info' => false,
+          'share' => false,
+          'chapters' => false,
+          'audio' => false,
+          'download' => false,
+          'transcripts' => false
+        );
+
+        $config['tabs'][$attribute] = true;
+      }
+    }
+
+    return $config;
+  }
+
+  private function assingAttributes ($defaults, $attributes) {
+    $overwriteAttributes = [ 'tabs', 'visibleComponents' ];
+
+    $config = array_merge_recursive( $defaults, $attributes );
+
+    foreach( $overwriteAttributes as $attribute ) {
+      if ( array_key_exists( $attribute, $attributes ) ) {
+        $config[$attribute] = $attributes[$attribute];
+      }
+    }
+
     return $config;
   }
 
@@ -131,14 +167,36 @@ class Podlove_Web_Player_Shortcode {
 	 * @since    4.0.0
    * @param    string    $url       Url to file.
 	 */
-  private function mimeType( $url ) {
-    $ch = curl_init( $url );
-    curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-    curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );
-    curl_setopt( $ch, CURLOPT_HEADER, 1 );
-    curl_setopt( $ch, CURLOPT_NOBODY, 1 );
-    curl_exec( $ch );
-    return array( 'mimeType' => curl_getinfo( $ch, CURLINFO_CONTENT_TYPE ), 'size' => curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD ) );
+  private function mimeType( $url, $fallbackSize = 0 ) {
+    if ( function_exists( 'curl_init' ) ) {
+      $ch = curl_init( $url );
+      curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+      curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );
+      curl_setopt( $ch, CURLOPT_HEADER, 1 );
+      curl_setopt( $ch, CURLOPT_NOBODY, 1 );
+      curl_exec( $ch );
+      return array( 'mimeType' => curl_getinfo( $ch, CURLINFO_CONTENT_TYPE ), 'size' => curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD ) );
+    }
+
+    // preferred way to get file headers
+    if ( function_exists( 'get_headers' ) ) {
+      $file = get_headers($url, 1);
+
+      return array( 'mimeType' => $file['Content-Type'][1], 'size' => $fallbackSize );
+    }
+
+    // fallback logic (╯°□°）╯︵ ┻━┻
+    $type = pathinfo( $url, PATHINFO_EXTENSION );
+
+    $types = array(
+      'mp4'  => 'audio/mp4',
+      'ogg'  => 'audio/ogg',
+      'mp3'  => 'audio/mpeg',
+      'opus' => 'audio/ogg',
+      'wmv'  => 'audio/wmv'
+    );
+
+    return array( 'mimeType' => $types[$type], 'size' => $fallbackSize );
   }
 
   /**
