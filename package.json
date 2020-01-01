@@ -9,6 +9,7 @@
     "plugin:dev": "nodemon --ext php --watch src/plugin --exec 'npm run plugin:copy'",
     "configurator:dev": "webpack --watch --config build/webpack.dev.conf.js",
     "configurator:build": "webpack --config build/webpack.prod.conf.js",
+    "dev:init": "./wordpress dev init",
     "dev": "npm run dist:clean && concurrently 'npm run plugin:dev' 'npm run configurator:dev'",
     "build": "npm run dist:clean && npm run plugin:copy && npm run configurator:build"
   },

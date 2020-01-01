@@ -1,4 +1,4 @@
-# ignore themes
 dist/
 database.sql
 uploads.ini
+node_modules

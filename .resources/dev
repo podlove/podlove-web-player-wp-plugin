@@ -26,6 +26,10 @@ restart() {
   docker-compose --file $compose_file restart
 }
 
+logs() {
+  docker-compose --file $compose_file logs
+}
+
 
 usage() {
 cat << EOF
@@ -38,6 +42,7 @@ Arguments:
   init                Initialises the dev environment, including a database restore
   up                  Starts the dev environment
   down                Saves the database and stops the dev environment
+  kill                Stops the network
   pause               Pause the dev environment
   unpause             Unpause the dev environment
   restart             Restart the dev environment
@@ -48,10 +53,8 @@ for var in "$@"
 do
     case $var in
     init)
-      up
-      sleep 20
       ./wordpress database replace_dev
-      ./wordpress database restore
+      up
       exit
     ;;
     up)
@@ -60,6 +63,10 @@ do
     ;;
     down)
       ./wordpress database save
+      down
+      exit
+    ;;
+    kill)
       down
       exit
     ;;
@@ -73,6 +80,10 @@ do
     ;;
     restart)
       restart
+      exit
+    ;;
+    logs)
+      logs
       exit
     ;;
     *)

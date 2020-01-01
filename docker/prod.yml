@@ -3,14 +3,16 @@ version: '2'
 services:
   wordpress:
     container_name: "${project}_wordpress"
-    image: wordpress
+    image: wordpress:5.2-php7.2
     ports:
-      - 80:80
-      - 443:443
+      - 8080:80
     volumes:
-      - ../content:/var/www/html/wp-content
+      - ../dist:/var/www/html/wp-content/plugins/podlove-web-player-beta
+      - ../uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     environment:
       WORDPRESS_DB_PASSWORD: "${database_password}"
+    depends_on:
+      - mysql
     restart: always
 
   mysql:
@@ -18,4 +20,7 @@ services:
     image: mariadb
     environment:
       MYSQL_ROOT_PASSWORD: "${database_password}"
+    volumes:
+      - ../config/database:/etc/mysql/conf.d
+      - ../database.sql:/docker-entrypoint-initdb.d/dump.sql
     restart: always

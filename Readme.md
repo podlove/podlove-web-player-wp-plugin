@@ -8,13 +8,13 @@
 ## Bootstrap
 
 ```bash
-$ yarn install
+$ npm install
 ```
 
 ## Build
 
 ```bash
-$ yarn build
+$ npm run build
 ```
 
 You will find all plugin assets in `/dist`
@@ -24,6 +24,6 @@ You will find all plugin assets in `/dist`
 To develop the Wordpress Plugin a dedicated wordress environment can be created by running:
 
 ```bash
-$ ./wordpress dev init # bootstraps a dockerized wordpress, see compose files in /docker
-$ ./yarn dev # file watchers that copies the php and javascript sources 
+$ npm run dev:init # bootstraps a dockerized wordpress, see compose files in /docker
+$ mpm run dev # file watchers that copies the php and javascript sources 
 ```

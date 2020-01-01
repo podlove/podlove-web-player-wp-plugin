@@ -30,8 +30,7 @@ for var in "$@"
 do
     case $var in
     save)
-      ./wordpress database save
-      save
+      for i in 1 2 3 4 5; do ./wordpress database save && save && break || sleep 60; done
       exit
     ;;
     pull)

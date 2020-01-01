@@ -19,12 +19,8 @@ restore() {
     restore_file=$1
   fi
 
-  if [ ! -f $restore_file ]; then
-    $colors --yellow --newline "Skipping restore step because '${restore_file}' does not exists"
-  else
-    $colors --magenta --newline "Restoring database from '${restore_file}'"
-    docker exec -i "${project}_database" sh -c "mysql -uroot -p${database_password}" < "${restore_file}"
-  fi
+  $colors --magenta --newline "Restoring database to '${restore_file}'"
+  # docker exec -i "${project}_database" sh -c "mysql -uroot -p${database_password}" < "${restore_file}"
 }
 
 replace_prod() {
@@ -36,12 +32,8 @@ replace_prod() {
     replace_file=$1
   fi
 
-  if [ ! -f $replace_file ]; then
-    $colors --yellow --newline "Skipping replace step because '${replace_file}' does not exists"
-  else
-    $colors --magenta --newline "Substituting '${development_domain}' to '${production_domain}' in '${replace_file}'"
-    sed -i.bak s/"${development_domain}"/"${production_domain}"/g $replace_file && rm -f "${replace_file}.bak"
-  fi
+  $colors --magenta --newline "Substituting '${development_domain}' to '${production_domain}' in '${replace_file}'"
+  sed -i.bak s/"${development_domain}"/"${production_domain}"/g $replace_file && rm -f "${replace_file}.bak"
 }
 
 replace_dev() {
@@ -53,12 +45,8 @@ replace_dev() {
     replace_file=$1
   fi
 
-  if [ ! -f $replace_file ]; then
-    $colors --yellow --newline "Skipping replace step because '${replace_file}' does not exists"
-  else
-    $colors --magenta --newline "Substituting '${production_domain}' to '${development_domain}' in '${replace_file}'"
-    sed -i.bak s/"${production_domain}"/"${development_domain}"/g $replace_file && rm -f "${replace_file}.bak"
-  fi
+  $colors --magenta --newline "Substituting '${production_domain}' to '${development_domain}' in '${replace_file}'"
+  sed -i.bak s/"${production_domain}"/"${development_domain}"/g $replace_file && rm -f "${replace_file}.bak"
 }
 
 

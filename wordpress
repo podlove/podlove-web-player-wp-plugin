@@ -6,24 +6,24 @@ shift
 export colors="./.resources/colors"
 
 # read the config
-source ./wordpress.config
+source ./config.wordpress
 
 if [ -z "${production_domain}" ]; then
-  $colors --red --newline "Missing production domain in wordpress.config"
+  $colors --red --newline "Missing production domain in config.wordpress"
   exit
 else
   export production_domain="${production_domain}"
 fi
 
 if [ -z "${development_domain}" ]; then
-  $colors --red --newline "Missing development domain in wordpress.config"
+  $colors --red --newline "Missing development domain in config.wordpress"
   exit
 else
   export development_domain="${development_domain}"
 fi
 
 if [ -z "${database_password}" ]; then
-  $colors --red --newline "Missing database password in wordpress.config"
+  $colors --red --newline "Missing database password in config.wordpress"
   exit
 else
   export database_password="${database_password}"
