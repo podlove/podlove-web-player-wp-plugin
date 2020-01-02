@@ -1,24 +1,40 @@
-const utils = require('./utils')
-const webpack = require('webpack')
-
-const merge = require('webpack-merge')
-const baseWebpackConfig = require('./webpack.base.conf')
+const merge = require("webpack-merge");
+const baseWebpackConfig = require("./webpack.base.conf");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const webpackConfig = merge(baseWebpackConfig, {
-  module: {
-    rules: utils.styleLoaders({
-      extract: true
-    })
-  },
   devtool: false,
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      sourceMap: true
-    })
-  ]
-})
+  optimization: {
+    runtimeChunk: {
+      name: "runtime"
+    },
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test(mod) {
 
-module.exports = webpackConfig
+            // Only node_modules are needed
+            if (mod.context && !mod.context.includes("node_modules")) {
+              return false;
+            }
+
+            return true;
+          },
+          name: "vendor",
+          chunks: "initial",
+          enforce: true
+        },
+        styles: {
+          name: "styles",
+          test: /\.(s?css|vue)$/,
+          chunks: "all",
+          enforce: true,
+          minChunks: 1
+        }
+      }
+    }
+  },
+  plugins: [new OptimizeCSSAssetsPlugin({})]
+});
+
+module.exports = webpackConfig;

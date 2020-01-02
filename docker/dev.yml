@@ -3,7 +3,7 @@ version: '2'
 services:
   wordpress:
     container_name: "${project}_wordpress"
-    image: wordpress:5.2-php7.2
+    image: wordpress:5.3-php7.2
     ports:
       - 8080:80
     volumes:
