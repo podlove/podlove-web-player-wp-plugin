@@ -1,0 +1,63 @@
+{
+  "tokens": {
+    "brand": "#E64415",
+    "brandDark": "#235973",
+    "brandDarkest": "#1A3A4A",
+    "brandLightest": "#E9F1F5",
+    "shadeDark": "#807E7C",
+    "shadeBase": "#807E7C",
+    "contrast": "#000",
+    "alt": "#fff"
+  },
+
+  "fonts": {
+    "ci": {
+      "name": "ci",
+      "family": [
+        "-apple-system",
+        "BlinkMacSystemFont",
+        "Segoe UI",
+        "Roboto",
+        "Helvetica",
+        "Arial",
+        "sans-serif",
+        "Apple Color Emoji",
+        "Segoe UI Emoji\", \"Segoe UI Symbol"
+      ],
+      "src": [],
+      "weight": 800
+    },
+    "regular": {
+      "name": "regular",
+      "family": [
+        "-apple-system",
+        "BlinkMacSystemFont",
+        "Segoe UI",
+        "Roboto",
+        "Helvetica",
+        "Arial",
+        "sans-serif",
+        "Apple Color Emoji",
+        "Segoe UI Emoji\", \"Segoe UI Symbol"
+      ],
+      "src": [],
+      "weight": 300
+    },
+    "bold": {
+      "name": "bold",
+      "family": [
+        "-apple-system",
+        "BlinkMacSystemFont",
+        "Segoe UI",
+        "Roboto",
+        "Helvetica",
+        "Arial",
+        "sans-serif",
+        "Apple Color Emoji",
+        "Segoe UI Emoji\", \"Segoe UI Symbol"
+      ],
+      "src": [],
+      "weight": 700
+    }
+  }
+}

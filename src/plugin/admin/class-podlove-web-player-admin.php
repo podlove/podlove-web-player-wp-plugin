@@ -129,34 +129,28 @@ class Podlove_Web_Player_Admin {
         'methods' => 'POST',
         'callback' => array( $this, 'api_save_config' ),
         'args' => array (
-          'theme' => array(
+          'configs' => array(
             'required' => true,
             'validate_callback' => function( $param, $request, $key ) {
-              return $this->options->validate( 'theme', $param );
+              return $this->options->validate( 'configs', $param );
             }
           ),
-          'tabs' => array(
+          'themes' => array(
             'required' => true,
             'validate_callback' => function( $param, $request, $key ) {
-              return $this->options->validate( 'tabs', $param );
+              return $this->options->validate( 'themes', $param );
             }
           ),
-          'visibleComponents' => array(
+          'templates' => array(
             'required' => true,
             'validate_callback' => function( $param, $request, $key ) {
-              return $this->options->validate( 'visibleComponents', $param );
+              return $this->options->validate( 'templates', $param );
             }
           ),
-          'enclosure' => array(
+          'settings' => array(
             'required' => true,
             'validate_callback' => function( $param, $request, $key ) {
-              return $this->options->validate( 'enclosure', $param );
-            }
-          ),
-          'show' => array(
-            'required' => true,
-            'validate_callback' => function( $param, $request, $key ) {
-              return $this->options->validate( 'show', $param );
+              return $this->options->validate( 'settings', $param );
             }
           )
         ),
@@ -181,11 +175,10 @@ class Podlove_Web_Player_Admin {
 	 */
   public function api_save_config( WP_REST_Request $request ) {
     $config = array(
-			'theme' => $request->get_param( 'theme' ),
-			'tabs' => $request->get_param( 'tabs' ),
-      'visibleComponents' => $request->get_param( 'visibleComponents' ),
-      'enclosure' => $request->get_param( 'enclosure' ),
-      'show' => $request->get_param( 'show' )
+			'configs' => $request->get_param( 'configs' ),
+			'themes' => $request->get_param( 'themes' ),
+      'templates' => $request->get_param( 'templates' ),
+      'settings' => $request->get_param( 'enclosure' )
     );
 
     $this->options->update( $config );

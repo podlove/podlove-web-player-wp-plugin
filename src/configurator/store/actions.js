@@ -4,7 +4,7 @@ import Vue from 'vue'
 import { get } from 'lodash'
 import { Loading, Notification } from 'element-ui'
 
-import { config } from './state'
+import state from './state'
 
 export default {
   boot ({ commit }) {
@@ -12,13 +12,14 @@ export default {
 
     Vue.http.get(PODLOVE.api)
       .then(({ data }) => commit('setState', data))
-      .catch(err => {
-        err.json().then(result => {
-          Notification.error({
-            offset: 30,
-            title: PODLOVE.i18n.error_load_config,
-            message: get(result, 'message', result)
-          })
+      .catch(async err => {
+        const error = err.json ? await err.json() : {}
+        console.warn(err)
+
+        Notification.error({
+          offset: 30,
+          title: PODLOVE.i18n.error_load_config,
+          message: get(error, 'message')
         })
       })
       .finally(() => {
@@ -28,13 +29,6 @@ export default {
   },
 
   save ({ getters }) {
-    const saving = Loading.service({ fullscreen: true, text: PODLOVE.i18n.message_saving })
-    const visibleComponents = get(getters, 'visibleComponents', config.visibleComponents)
-    const enclosure = get(getters, 'enclosure', config.enclosure)
-    const tabs = get(getters, 'tabs', config.tabs)
-    const theme = get(getters, 'theme', config.theme)
-    const show = get(getters, 'show', config.show)
-
     Vue.http.post(PODLOVE.api, { visibleComponents, tabs, theme, enclosure, show })
     .catch(err => {
       err.json().then(result => {

@@ -1,12 +1,20 @@
-import { get } from 'lodash/fp'
+import { compose, get, keys } from 'lodash/fp'
 
-import { config } from './state'
+const slices = {
+  configs: get('configs'),
+  themes: get('themes'),
+  templates: get('templates'),
+  episode: get('episode'),
+  settings: get('settings'),
+  router: get('route')
+}
 
 export default {
-  config: get('config'),
-  meta: get('meta'),
-  theme: get('config.theme'),
-  tabs: get('config.tabs'),
-  enclosure: get('config.enclosure'),
-  visibleComponents: state => Object.keys(config.visibleComponents).filter(key => state.config.visibleComponents[key])
+  ...slices,
+  loaded: get('loaded'),
+  configList: compose(keys, slices.configs),
+  themeList: compose(keys, slices.themes),
+  templateList: compose(keys, slices.templates),
+  routeName: compose(get('name'), slices.router),
+  routeId: compose(get('id'), get('params'), slices.router)
 }

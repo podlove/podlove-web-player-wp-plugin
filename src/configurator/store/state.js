@@ -1,6 +1,6 @@
 import poster from '../assets/cover.png'
 
-const meta = {
+const episode = {
   show: {
     title: 'Futurama',
     subtitle: `Intergalactic conspiracies and other strange stuff`,
@@ -65,49 +65,21 @@ const meta = {
   ]
 }
 
-const loaded = false
+const configs = {}
 
-const config = {
-  show: {
-    poster: null
-  },
+const templates = {}
 
-  theme: {
-    main: '#2B8AC6',
-    highlight: null
-  },
+const themes = {}
 
-  tabs: {
-    info: false,
-    chapters: false,
-    share: false,
-    download: false,
-    audio: false
-  },
-
-  visibleComponents: {
-    tabInfo: false,
-    tabChapters: false,
-    tabDownload: false,
-    tabAudio: false,
-    tabShare: false,
-    poster: false,
-    showTitle: false,
-    episodeTitle: false,
-    subtitle: false,
-    progressbar: false,
-    controlSteppers: false,
-    controlChapters: false
-  },
-
-  enclosure: {
-    enabled: false,
-    bottom: false
-  }
+const settings = {
+  version: 'local'
 }
 
-export {
-  loaded,
-  meta,
-  config
+export default {
+  episode,
+  settings,
+  configs,
+  templates,
+  themes,
+  loaded: false
 }

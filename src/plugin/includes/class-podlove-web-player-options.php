@@ -18,7 +18,16 @@ class Podlove_Web_Player_Options {
 	 * @access   protected
 	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
 	 */
-	protected $plugin_name;
+  protected $plugin_name;
+
+    /**
+	 * The plugin directory
+	 *
+	 * @since    4.0.0
+	 * @access   protected
+	 * @var      string    $plugin_directory    The plugin directory.
+	 */
+  protected $plugin_directory;
 
   /**
 	 * The default web player configuration
@@ -32,43 +41,16 @@ class Podlove_Web_Player_Options {
 	public function __construct( $plugin_name ) {
 
 		$this->plugin_name = $plugin_name;
+		$this->plugin_directory = plugin_dir_path( __DIR__ );
 		$this->defaults = array(
-      'show' => array(
-        'poster' => null
-      ),
-      'theme' => array(
-        'main' => '#2B8AC6',
-        'highlight' => null
-      ),
-      'tabs' => array(
-        'info'      => false,
-        'chapters'  => false,
-        'share'     => false,
-        'download'  => false,
-        'audio'     => false
-      ),
-      'visibleComponents' => array(
-        'tabChapters',
-        'tabDownload',
-        'tabAudio',
-        'tabShare',
-        'poster',
-        'tabInfo',
-        'showTitle',
-        'episodeTitle',
-        'subtitle',
-        'progressbar',
-        'controlSteppers',
-        'controlChapters'
-      ),
-      'enclosure' => array(
-        'enabled' => false,
-        'bottom'  => false
-      )
+      'configs' => $this->readFolder( $this->plugin_directory . 'defaults/configs/' , 'json'),
+      'themes' => $this->readFolder( $this->plugin_directory . 'defaults/themes/' , 'json'),
+      'templates' => $this->readFolder( $this->plugin_directory . 'defaults/templates/' , 'html'),
+      'settings' => array('version' => 'local')
     );
-	}
+  }
 
-    /**
+  /**
 	 * Serializes values with defaults
 	 *
 	 * @since     1.0.0
@@ -77,6 +59,34 @@ class Podlove_Web_Player_Options {
     $merged = (object) array_merge((array) $this->defaults, (array) $value);
 
     return json_encode($merged);
+  }
+
+  /**
+   * Reads files from the plugin
+   */
+  private function readFolder($path = null, $type = 'json') {
+    if (!$path || !is_dir($path)) {
+      return null;
+    }
+
+    $files = scandir($path);
+    $contents = array();
+
+    foreach ($files as &$file) {
+      $info = pathinfo($file);
+
+      if ($info['extension'] !== $type) {
+        continue;
+      }
+
+      $contents[$info['filename']] = file_get_contents( trailingslashit($path) . $file );
+
+      if ($info['extension'] === 'json') {
+        $contents[$info['filename']] = json_decode( $contents[$info['filename']], true );
+      }
+    }
+
+    return $contents;
   }
 
   /**
@@ -94,8 +104,8 @@ class Podlove_Web_Player_Options {
 	 * @since     1.0.0
 	 */
 	public function read() {
-    $value = get_option( $this->plugin_name, json_encode($this->defaults) );
-
+    // $value = get_option( $this->plugin_name, json_encode($this->defaults) );
+    $value = json_encode($this->defaults);
     return json_decode( $value, true );
   }
 
@@ -122,25 +132,14 @@ class Podlove_Web_Player_Options {
    */
   public function validate($type, $value) {
     switch ($type) {
-      case 'theme':
-        return array_key_exists('main', $value) && array_key_exists('highlight', $value);
-
-      case 'tabs':
-        return
-          array_key_exists('info', $value) &&
-          array_key_exists('chapters', $value) &&
-          array_key_exists('share', $value) &&
-          array_key_exists('download', $value) &&
-          array_key_exists('audio', $value);
-
-      case 'visibleComponents':
-        return is_array($value);
-
-      case 'enclosure':
-        return array_key_exists('enabled', $value) && array_key_exists('bottom', $value);
-
-      case 'show':
-        return array_key_exists('poster', $value);
+      case 'configs':
+        return array_key_exists('configs', $value) && array_key_exists('default', $value['config']);
+      case 'themes':
+        return array_key_exists('themes', $value) && array_key_exists('default', $value['themes']);
+      case 'templates':
+        return array_key_exists('templates', $value);
+      case 'settings':
+        return array_key_exists('settings', $value) && array_key_exists('version', $value);
 
       default:
         return false;

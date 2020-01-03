@@ -1,0 +1,18 @@
+{
+  "activeTab": "chapters",
+  "subscribe-button": {},
+  "share": {
+    "channels": [
+      "facebook",
+      "twitter",
+      "whats-app",
+      "linkedin",
+      "pinterest",
+      "xing",
+      "mail",
+      "link"
+    ],
+    "outlet": "/share.html",
+    "sharePlaytime": true
+  }
+}

@@ -14,3 +14,17 @@
 ?>
 
 <div id="configurator"></div>
+
+<style>
+#wpcontent {
+  padding-left: 0;
+}
+
+#wpbody-content {
+  padding-bottom: 0;
+}
+
+#wpfooter {
+  display: none;
+}
+</style>
