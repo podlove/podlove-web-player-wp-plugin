@@ -105,8 +105,7 @@ class Podlove_Web_Player_Options {
 	 */
 	public function read() {
     // $value = get_option( $this->plugin_name, json_encode($this->defaults) );
-    $value = json_encode($this->defaults);
-    return json_decode( $value, true );
+    return $this->defaults;
   }
 
   /**

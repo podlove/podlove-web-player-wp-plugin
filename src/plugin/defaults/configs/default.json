@@ -1,6 +1,9 @@
 {
   "activeTab": "chapters",
-  "subscribe-button": {},
+  "subscribe-button": {
+    "feed": null,
+    "clients": []
+  },
   "share": {
     "channels": [
       "facebook",
