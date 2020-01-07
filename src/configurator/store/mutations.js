@@ -1,4 +1,4 @@
-import { set } from 'lodash'
+import { set, head, keys, get } from 'lodash'
 import getters from './getters'
 
 export default {
@@ -7,9 +7,16 @@ export default {
   },
 
   setState (state, payload = {}) {
+    const screen = get(state, 'router.name')
+    const routeId = get(state, 'router.params.id')
+
     state.configs = getters.configs(payload) || getters.configs(state)
     state.themes = getters.themes(payload) || getters.themes(state)
     state.templates = getters.templates(payload) || getters.templates(state)
+
+    state.preview.config = screen === 'config' ? routeId : (state.preview.config || head(keys(state.configs)))
+    state.preview.theme = screen ===  'theme' ? routeId : (state.preview.theme || head(keys(state.themes)))
+    state.preview.template = screen ===  'template' ? routeId : (state.preview.template || head(keys(state.templates)))
   },
 
   updateChannels (state, { id, channels }) {
@@ -34,5 +41,13 @@ export default {
 
   updateFeed(state, { id, feed }) {
     set(state, ['configs', id, 'subscribe-button', 'feed'], feed)
+  },
+
+  setActiveTab(state, { id, tab }) {
+    set(state, ['configs', id, 'activeTab'], tab)
+  },
+
+  setPreviewOption(state, { option, value }) {
+    state.preview[option] = value
   }
 }

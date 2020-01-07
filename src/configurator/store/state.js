@@ -80,6 +80,8 @@ const templates = {};
 
 const themes = {};
 
+const tabs = [null, 'shownotes', 'chapters', 'transcripts', 'share', 'files', 'playlist']
+
 const clients = Object.values(
   podcastClients().reduce((result, item) => {
     const existing = get(result, item.id, {});
@@ -102,6 +104,13 @@ const settings = {
   version: "local"
 };
 
+const preview = {
+  config: null,
+  theme: null,
+  template: null,
+  size: 'desktop'
+}
+
 export default {
   episode,
   settings,
@@ -111,5 +120,7 @@ export default {
   channels,
   clients,
   stagedClient,
-  loaded: false
+  tabs,
+  loaded: false,
+  preview
 };

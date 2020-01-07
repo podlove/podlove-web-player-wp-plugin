@@ -16,10 +16,12 @@ export default {
   ...slices,
   loaded: get('loaded'),
   channels: get('channels'),
+  tabs: get('tabs'),
   stagedClient: get('stagedClient'),
   configList: compose(keys, slices.configs),
   themeList: compose(keys, slices.themes),
   templateList: compose(keys, slices.templates),
   routeName: compose(get('name'), slices.router),
+  preview: get('preview'),
   routeId
 }

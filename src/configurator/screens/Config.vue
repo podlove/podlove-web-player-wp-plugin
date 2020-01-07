@@ -1,17 +1,28 @@
 <template>
   <div class="config">
     <el-card class="config-card">
+      <h4 class="card-title" slot="header">Active Tab</h4>
+       <el-select
+            placeholder="Select Tab"
+            :value="activeTab"
+            size="small"
+            class="select input"
+            @change="selectActiveTab"
+          >
+            <el-option v-for="item in tabs" :key="item" :label="item" :value="item"></el-option>
+          </el-select>
+    </el-card>
+    <el-card class="config-card">
       <h4 class="card-title" slot="header">Share Tab</h4>
       <div class="card-content">
         <div class="item">
           <h4 class="item-title">Channels</h4>
           <el-select
             placeholder="Add"
-            value=""
-            :disabled="false"
+            :value="activeTab"
             size="small"
             class="select input"
-            @change="addChannel"
+            @change="selectActiveTab"
           >
             <el-option v-for="item in availableChannels" :key="item" :label="item" :value="item"></el-option>
           </el-select>
@@ -132,7 +143,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["routeId", "configs", "channels", "clients", "stagedClient"]),
+    ...mapGetters(["routeId", "configs", "channels", "clients", "stagedClient", "tabs"]),
 
     config() {
       return get(this.configs, this.routeId, {});
@@ -165,25 +176,29 @@ export default {
       }));
     },
 
+    activeTab() {
+      return get(this.config, 'activeTab')
+    },
+
     availableClients() {
       return (this.clients || []).filter(client => this.selectedClients.findIndex(selected => selected.id === client.id) === -1);
     }
   },
 
   methods: {
-    ...mapActions(["updateChannels", "removeChannel", "addChannel", "updateSharePlaytime", "updateEmbedPlayer", "addClient", "removeClient", "updateClients", "updateClientService", "stageClient", "updateFeed"])
+    ...mapActions(["updateChannels", "removeChannel", "addChannel", "updateSharePlaytime", "updateEmbedPlayer", "addClient", "removeClient", "updateClients", "updateClientService", "stageClient", "updateFeed", "selectActiveTab"])
   }
 };
 </script>
 
 <style lang="scss">
 .config-card {
+  width: 100%;
   margin-bottom: 2em;
-  width: 50%;
-}
 
-.card-title {
-  margin: 0;
+  .card-title {
+    margin: 0;
+  }
 }
 
 .card-content {

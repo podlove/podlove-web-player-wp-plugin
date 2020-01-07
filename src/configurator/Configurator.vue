@@ -2,14 +2,15 @@
   <div class="player-configurator">
     <el-container>
       <el-aside width="200px">
-        <navigation></navigation>
+        <navigation />
       </el-aside>
       <el-container>
         <el-header>
           <page-header></page-header>
         </el-header>
-        <el-main>
-          <router-view></router-view>
+        <el-main class="player-main">
+          <router-view class="player-col"></router-view>
+          <preview class="player-col" />
         </el-main>
       </el-container>
     </el-container>
@@ -19,7 +20,7 @@
 <script>
   import { mapState, mapMutations, mapActions } from 'vuex'
   import { get } from 'lodash/fp'
-  import { Navigation, PageHeader } from './components'
+  import { Preview, Navigation, PageHeader } from './components'
 
   export default {
     name: 'configurator',
@@ -32,7 +33,8 @@
 
     components: {
       PageHeader,
-      Navigation
+      Navigation,
+      Preview
     }
   }
 </script>
@@ -55,5 +57,17 @@
     height: calc(100vh - 32px);
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
     display: flex
+  }
+
+  .player-main {
+    display: flex;
+  }
+
+  .player-col {
+    margin-right: 2em;
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 </style>

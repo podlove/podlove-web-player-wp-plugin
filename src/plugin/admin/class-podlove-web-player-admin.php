@@ -74,7 +74,6 @@ class Podlove_Web_Player_Admin {
 	 * @since    4.0.0
 	 */
 	public function enqueue_scripts() {
-    wp_enqueue_script( $this->plugin_name . '-player', 'https://cdn.podlove.org/web-player/embed.js', array(), $this->version, true );
 		wp_enqueue_script( $this->plugin_name . '-configurator', plugin_dir_url( __FILE__ ) . 'js/app.js', array(), $this->version, true );
 
     wp_localize_script( $this->plugin_name . '-configurator', 'PODLOVE', array(

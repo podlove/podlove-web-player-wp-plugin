@@ -146,5 +146,17 @@ export default {
     }
 
     commit('updateFeed', { id: getters.routeId, feed })
+  },
+
+  selectActiveTab({ getters, commit }, tab) {
+    if (getters.routeName !== 'config') {
+      return
+    }
+
+    commit('setActiveTab', { id: getters.routeId, tab })
+  },
+  // Preview
+  updatePreviewOption({ commit }, { option, value }) {
+    commit('setPreviewOption', { option, value })
   }
 }
