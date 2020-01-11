@@ -18,6 +18,7 @@ export default {
   channels: get('channels'),
   tabs: get('tabs'),
   stagedClient: get('stagedClient'),
+  fonts: get('fonts'),
   configList: compose(keys, slices.configs),
   themeList: compose(keys, slices.themes),
   templateList: compose(keys, slices.templates),

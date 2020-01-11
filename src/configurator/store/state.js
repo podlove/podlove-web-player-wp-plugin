@@ -105,10 +105,29 @@ const settings = {
 };
 
 const preview = {
-  config: null,
-  theme: null,
-  template: null,
+  config: 'default',
+  theme: 'default',
+  template: 'default',
   size: 'desktop'
+}
+
+const fonts = {
+  selected: 'ci',
+  ci: {
+    src: null,
+    family: null,
+    error: null
+  },
+  regular: {
+    src: null,
+    family: null,
+    error: null
+  },
+  bold: {
+    src: null,
+    family: null,
+    error: null
+  },
 }
 
 export default {
@@ -122,5 +141,6 @@ export default {
   stagedClient,
   tabs,
   loaded: false,
-  preview
+  preview,
+  fonts
 };

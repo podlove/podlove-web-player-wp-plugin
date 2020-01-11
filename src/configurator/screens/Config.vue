@@ -1,87 +1,85 @@
 <template>
   <div class="config">
-    <el-card class="config-card">
-      <h4 class="card-title" slot="header">Active Tab</h4>
-       <el-select
-            placeholder="Select Tab"
-            :value="activeTab"
-            size="small"
-            class="select input"
-            @change="selectActiveTab"
-          >
-            <el-option v-for="item in tabs" :key="item" :label="item" :value="item"></el-option>
-          </el-select>
-    </el-card>
-    <el-card class="config-card">
-      <h4 class="card-title" slot="header">Share Tab</h4>
-      <div class="card-content">
-        <div class="item">
-          <h4 class="item-title">Channels</h4>
-          <el-select
-            placeholder="Add"
-            :value="activeTab"
-            size="small"
-            class="select input"
-            @change="selectActiveTab"
-          >
-            <el-option v-for="item in availableChannels" :key="item" :label="item" :value="item"></el-option>
-          </el-select>
-          <draggable
-            class="drag-list"
-            :list="selectedChannels"
-            group="channels"
-            @change="updateChannels(selectedChannels)"
-          >
-            <el-tag
-              class="draggable input"
-              v-for="element in selectedChannels"
-              :key="element"
-              closable
-              @close="removeChannel(element)"
-            >
-              {{ element }}
-            </el-tag>
-          </draggable>
+    <card title="Active Tab">
+      <form-element>
+        <el-select
+          placeholder="Select Tab"
+          :value="activeTab"
+          size="small"
+          @change="selectActiveTab"
+        >
+          <el-option v-for="item in tabs" :key="item" :label="item" :value="item"></el-option>
+        </el-select>
+      </form-element>
+    </card>
+
+    <card title="Share Tab">
+      <div class="column">
+        <div class="row">
+          <form-element label="Channels">
+            <el-select
+                placeholder="Add"
+                :value="activeTab"
+                size="small"
+                @change="selectActiveTab"
+              >
+                <el-option v-for="item in availableChannels" :key="item" :label="item" :value="item"></el-option>
+              </el-select>
+          </form-element>
+
+          <form-element>
+            <draggable
+                class="drag-list"
+                :list="selectedChannels"
+                group="channels"
+                @change="updateChannels(selectedChannels)"
+              >
+                <el-tag
+                  class="draggable"
+                  v-for="element in selectedChannels"
+                  :key="element"
+                  closable
+                  @close="removeChannel(element)"
+                >
+                  {{ element }}
+                </el-tag>
+            </draggable>
+          </form-element>
         </div>
-        <div class="item">
-          <h4 class="item-title">Options</h4>
-          <el-switch
-            class="input"
-            :value="sharePlaytime"
-            active-text="Share Playtime"
-            @change="updateSharePlaytime"
-          ></el-switch>
-          <el-switch
-            class="input"
-            :value="embedPlayer"
-            active-text="Embed Player"
-            @change="updateEmbedPlayer"
-          ></el-switch>
+        <div class="row">
+          <form-element label="Options">
+            <el-switch
+              :value="sharePlaytime"
+              active-text="Share Playtime"
+              @change="updateSharePlaytime"
+            ></el-switch>
+            <el-switch
+              :value="embedPlayer"
+              active-text="Embed Player"
+              @change="updateEmbedPlayer"
+            ></el-switch>
+          </form-element>
         </div>
       </div>
-    </el-card>
-    <el-card class="config-card">
-      <h4 class="card-title" slot="header">Subscribe Button</h4>
-      <div class="item-full">
-        <h4 class="item-title">Feed</h4>
+    </card>
+
+    <card title="Subscribe Button">
+      <form-element label="Feed" :full="true">
         <el-input
           size="small"
-          class="input"
           placeholder="Service Id"
           :value="feed"
           @input="updateFeed"
           clearable
         ></el-input>
-      </div>
-      <div class="card-content">
-        <div class="item">
-          <h4 class="item-title">Clients</h4>
-          <el-select
+      </form-element>
+
+      <form-element label="Clients">
+        <el-select
             placeholder="Add"
             value=""
             :disabled="false"
             size="small"
-            class="select input"
             @change="addClient"
           >
             <el-option v-for="item in availableClients" :key="item.id" :label="item.title" :value="item"></el-option>
@@ -93,7 +91,7 @@
             @change="updateClients(selectedClients)"
           >
             <el-tag
-              class="draggable input"
+              class="draggable"
               v-for="element in selectedClients"
               :key="element.id"
               closable
@@ -105,30 +103,28 @@
               {{ element.title }}
             </el-tag>
           </draggable>
-        </div>
-        <div class="item" v-if="stagedClient.id">
-          <h4 class="item-title">Supported Platforms</h4>
-          <div class="input">
-            <el-tag v-for="platform in stagedClient.platforms" :key="platform" size="small" type="info" class="platform">{{ platform }}</el-tag>
-          </div>
+      </form-element>
+      <div v-if="stagedClient.id">
+        <form-element label="Supported Platforms">
+          <el-tag v-for="platform in stagedClient.platforms" :key="platform" size="small" type="info" class="platform">{{ platform }}</el-tag>
+        </form-element>
 
-          <div v-if="stagedClient.serviceScheme">
-            <el-tooltip class="item" :content="stagedClient.serviceScheme('[service-id]')" placement="top-start">
-            <h4 class="item-title input"><span>Service Id</span><i class="el-icon-info" /></h4>
-            </el-tooltip>
-            <el-input
-              size="small"
-              class="input"
-              placeholder="Service Id"
-              :value="stagedClient.service"
-              @input="updateClientService"
-              clearable
-            >
-            </el-input>
-          </div>
-        </div>
+        <form-element>
+          <el-tooltip slot="label" :content="stagedClient.serviceScheme('[service-id]')" placement="top-start">
+            <h4 class="item-title"><span>Service Id</span><i class="el-icon-info" /></h4>
+          </el-tooltip>
+
+          <el-input
+            size="small"
+            placeholder="Service Id"
+            :value="stagedClient.service"
+            @input="updateClientService"
+            clearable
+          >
+          </el-input>
+        </form-element>
       </div>
-    </el-card>
+    </card>
   </div>
 </template>
 
@@ -136,10 +132,13 @@
 import Draggable from "vuedraggable";
 import { get } from "lodash";
 import { mapGetters, mapActions } from "vuex";
+import { Card, FormElement } from '../components';
 
 export default {
   components: {
-    Draggable
+    Draggable,
+    Card,
+    FormElement
   },
 
   computed: {
@@ -192,32 +191,12 @@ export default {
 </script>
 
 <style lang="scss">
-.config-card {
-  width: 100%;
-  margin-bottom: 2em;
-
-  .card-title {
-    margin: 0;
-  }
-}
-
-.card-content {
-  display: flex;
-}
-
-.item-title {
-  margin: 0 0 0.5em 0;
-
-  .el-icon-info {
-    margin-left: 0.25em;
-  }
-}
-
 .draggable {
   width: 100%;
   display: block;
   position: relative;
   cursor: move;
+  margin-bottom: 0.5em;
 
   .el-icon-close {
     position: absolute;
@@ -227,32 +206,15 @@ export default {
   }
 }
 
-.item {
-  width: 200px;
-  margin-right: 2em;
-}
-
-.item-full {
-  width: 400px;
-  margin-bottom: 2em;
-}
-
-.input {
-  margin-bottom: 0.5em;
-  width: 100%;
-  min-height: 32px;
+.column {
   display: flex;
-  align-items: center;
-}
-
-.select {
-  input {
-    background: #fff;
-    border: 1px solid #dcdfe6;
-  }
 }
 
 .platform {
   margin-right: 0.5em;
+}
+
+.drag-list {
+  width: 100%;
 }
 </style>

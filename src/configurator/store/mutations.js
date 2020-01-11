@@ -49,5 +49,49 @@ export default {
 
   setPreviewOption(state, { option, value }) {
     state.preview[option] = value
+  },
+
+  updateTokens(state, { id, tokens }) {
+    set(state, ['themes', id, 'tokens'], tokens)
+  },
+
+  selectFont(state, { font }) {
+    set(state, ['fonts', 'selected'], font)
+  },
+
+  stageFontSource(state, { font, value }) {
+    set(state, ['fonts', font, 'src'], value)
+  },
+
+  setFontSourceError(state, { font, value }) {
+    const eot = value.endsWith('.eot')
+    const woff = value.endsWith('.woff')
+    const woff2 = value.endsWith('.woff2')
+    const ttf = value.endsWith('.ttf')
+    const svg = value.endsWith('.svg')
+
+    if (!eot && !woff && !woff2 && !ttf && !svg) {
+      set(state, ['fonts', font, 'error'], 'Not a valid font source')
+    } else {
+      set(state, ['fonts', font, 'error'], null)
+    }
+  },
+
+  updateFontSource(state, { id, font, value }) {
+    set(state, ['themes', id, 'fonts', font, 'src'], value)
+    set(state, ['fonts', font, 'src'], null)
+  },
+
+  updateFontWeight(state, { id, font, value }) {
+    set(state, ['themes', id, 'fonts', font, 'weight'], value)
+  },
+
+  stageFontFamily(state, { font, value }) {
+    set(state, ['fonts', font, 'family'], value)
+  },
+
+  updateFontFamily(state, { id, font, value }) {
+    set(state, ['themes', id, 'fonts', font, 'family'], value)
+    set(state, ['fonts', font, 'family'], null)
   }
 }

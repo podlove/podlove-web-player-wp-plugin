@@ -26,15 +26,17 @@ export default {
       default: 'desktop'
     }
   },
+
   data() {
     return {
       width: {
-        mobile: 300,
+        mobile: 350,
         tablet: 600,
         desktop: 950,
       }
     }
   },
+
   computed: {
     ...mapGetters(['episode']),
     previewWidth() {
@@ -43,6 +45,7 @@ export default {
       return `${width}px`
     }
   },
+
   mounted() {
     const player = document.createElement('script')
     player.setAttribute('src', '/wp-content/plugins/podlove-web-player-beta/web-player/embed.js')
@@ -56,12 +59,14 @@ export default {
       window.podlovePlayer(this.$refs.player, this.episode, {
         ...this.config,
         theme: this.theme,
-        base: '/wp-content/plugins/podlove-web-player-beta/web-player/'
+        base: '/wp-content/plugins/podlove-web-player-beta/web-player/',
+        version: 5
       }).then(store => {
         this.$emit('ready', store)
       })
     }
-  }
+  },
+
 }
 </script>
 
