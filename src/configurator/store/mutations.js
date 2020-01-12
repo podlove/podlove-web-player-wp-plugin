@@ -93,5 +93,9 @@ export default {
   updateFontFamily(state, { id, font, value }) {
     set(state, ['themes', id, 'fonts', font, 'family'], value)
     set(state, ['fonts', font, 'family'], null)
+  },
+
+  updateTemplate(state, { id, value }) {
+    set(state, ['templates', id], value)
   }
 }

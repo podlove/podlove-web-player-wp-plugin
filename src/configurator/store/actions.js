@@ -308,6 +308,15 @@ export default {
     commit("updateFontFamily", { id: getters.routeId, font, value: family })
   },
 
+  // Template
+  updateTemplate({ getters, commit }, value) {
+    if (getters.routeName !== "template") {
+      return;
+    }
+
+    commit("updateTemplate", { id: getters.routeId, value })
+  },
+
   // Preview
   updatePreviewOption({ commit }, { option, value }) {
     commit("setPreviewOption", { option, value });

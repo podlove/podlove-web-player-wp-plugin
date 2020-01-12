@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="preview">
     <card title="Preview">
       <div class="preview-options">
         <form-element label="Config">
@@ -120,12 +120,19 @@ export default {
     routeName() {
       this.updatePreviewOption({ option: this.routeName, value: this.routeId });
     },
+    routeId() {
+      this.updatePreviewOption({ option: this.routeName, value: this.routeId });
+    },
     theme: {
       handler(val) {
         this.updateTheme(val);
       },
       deep: true
     }
+  },
+
+  mounted() {
+    this.updatePreviewOption({ option: this.routeName, value: this.routeId });
   },
 
   methods: {
