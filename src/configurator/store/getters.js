@@ -15,6 +15,7 @@ const routeId = compose(get('id'), get('params'), slices.router)
 export default {
   ...slices,
   loaded: get('loaded'),
+  modal: get('modal'),
   channels: get('channels'),
   tabs: get('tabs'),
   stagedClient: get('stagedClient'),

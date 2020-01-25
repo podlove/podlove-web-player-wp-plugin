@@ -11,6 +11,7 @@
     "configurator:build": "webpack --config build/webpack.prod.conf.js",
     "dev:init": "./wordpress dev init",
     "dev:save": "./wordpress dev down",
+    "dev:kill": "./wordpress dev kill",
     "dev": "npm run dist:clean && concurrently 'npm run plugin:dev' 'npm run configurator:dev'",
     "build": "npm run dist:clean && npm run plugin:copy && npm run configurator:build"
   },

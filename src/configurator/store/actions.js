@@ -1,48 +1,19 @@
 /* global PODLOVE */
-
-import Vue from "vue";
 import { get, pick } from "lodash";
-import { Loading, Notification } from "element-ui";
+import { request } from "../lib";
+import router from '../router'
 
 export default {
   boot({ commit }) {
-    const initializing = Loading.service({ fullscreen: true, text: PODLOVE.i18n.message_initializing });
-
-    Vue.http
-      .get(PODLOVE.api)
-      .then(({ data }) => commit("setState", data))
-      .catch(async err => {
-        const error = err.json ? await err.json() : {};
-        console.warn(err);
-
-        Notification.error({
-          offset: 30,
-          title: PODLOVE.i18n.error_load_config,
-          message: get(error, "message")
-        });
+    request
+      .read(PODLOVE.api.bootstrap, {
+        loading: PODLOVE.i18n.message_initializing,
+        error: PODLOVE.i18n.error_load_config
       })
-      .finally(() => {
-        initializing.close();
-        commit("loaded");
-      });
+      .then(data => commit("setState", data))
+      .finally(() => commit("loaded"));
   },
 
-  save({ getters }) {
-    Vue.http
-      .post(PODLOVE.api, { visibleComponents, tabs, theme, enclosure, show })
-      .catch(err => {
-        err.json().then(result => {
-          Notification.error({
-            offset: 30,
-            title: PODLOVE.i18n.error_save_config,
-            message: get(result, "message", err)
-          });
-        });
-      })
-      .finally(() => saving.close());
-  },
-
-  // Config
   updateChannels({ getters, commit }, payload) {
     if (getters.routeName !== "config") {
       return;
@@ -194,12 +165,12 @@ export default {
       return;
     }
 
-    const font = get(getters.fonts, ['selected'], 'ci')
+    const font = get(getters.fonts, ["selected"], "ci");
 
     commit("stageFontSource", {
       font,
       value
-    })
+    });
   },
 
   updateFontSource({ getters, commit }) {
@@ -207,28 +178,28 @@ export default {
       return;
     }
 
-    const font = get(getters.fonts, ['selected'], 'ci')
-    const payload = get(getters.fonts, [font, 'src'])
+    const font = get(getters.fonts, ["selected"], "ci");
+    const payload = get(getters.fonts, [font, "src"]);
 
     if (!payload) {
       return;
     }
 
-    commit("setFontSourceError", { font, value: payload })
+    commit("setFontSourceError", { font, value: payload });
 
-    const error = get(getters.fonts, [font, 'error'])
+    const error = get(getters.fonts, [font, "error"]);
 
     if (error) {
       return;
     }
 
-    const sources = get(getters.themes, [getters.routeId, 'fonts', font, 'src'], [])
+    const sources = get(getters.themes, [getters.routeId, "fonts", font, "src"], []);
 
     if (sources.includes(payload)) {
       return;
     }
 
-    commit("updateFontSource", { id: getters.routeId, font, value: [payload, ...sources] })
+    commit("updateFontSource", { id: getters.routeId, font, value: [payload, ...sources] });
   },
 
   removeFontSrc({ getters, commit }, { value }) {
@@ -236,11 +207,11 @@ export default {
       return;
     }
 
-    const font = get(getters.fonts, ['selected'], 'ci')
+    const font = get(getters.fonts, ["selected"], "ci");
 
-    const sources = get(getters.themes, [getters.routeId, 'fonts', font, 'src'], []).filter(src => src !== value)
+    const sources = get(getters.themes, [getters.routeId, "fonts", font, "src"], []).filter(src => src !== value);
 
-    commit("updateFontSource", { id: getters.routeId, font, value: sources })
+    commit("updateFontSource", { id: getters.routeId, font, value: sources });
   },
 
   updateFontWeight({ getters, commit }, { value }) {
@@ -248,9 +219,9 @@ export default {
       return;
     }
 
-    const font = get(getters.fonts, ['selected'], 'ci')
+    const font = get(getters.fonts, ["selected"], "ci");
 
-    commit("updateFontWeight", { id: getters.routeId, font, value })
+    commit("updateFontWeight", { id: getters.routeId, font, value });
   },
 
   addFontFamily({ getters, commit }) {
@@ -258,20 +229,20 @@ export default {
       return;
     }
 
-    const font = get(getters.fonts, ['selected'], 'ci')
-    const payload = get(getters.fonts, [font, 'family'])
+    const font = get(getters.fonts, ["selected"], "ci");
+    const payload = get(getters.fonts, [font, "family"]);
 
     if (!payload) {
       return;
     }
 
-    const family = get(getters.themes, [getters.routeId, 'fonts', font, 'family'], [])
+    const family = get(getters.themes, [getters.routeId, "fonts", font, "family"], []);
 
     if (family.includes(payload)) {
       return;
     }
 
-    commit("updateFontFamily", { id: getters.routeId, font, value: [payload, ...family] })
+    commit("updateFontFamily", { id: getters.routeId, font, value: [payload, ...family] });
   },
 
   stageFontFamily({ getters, commit }, { value }) {
@@ -279,12 +250,12 @@ export default {
       return;
     }
 
-    const font = get(getters.fonts, ['selected'], 'ci')
+    const font = get(getters.fonts, ["selected"], "ci");
 
     commit("stageFontFamily", {
       font,
       value
-    })
+    });
   },
 
   updateFontFamily({ getters, commit }, { value }) {
@@ -292,9 +263,9 @@ export default {
       return;
     }
 
-    const font = get(getters.fonts, ['selected'], 'ci')
+    const font = get(getters.fonts, ["selected"], "ci");
 
-    commit("updateFontFamily", { id: getters.routeId, font, value })
+    commit("updateFontFamily", { id: getters.routeId, font, value });
   },
 
   removeFontFamily({ getters, commit }, { value }) {
@@ -302,10 +273,10 @@ export default {
       return;
     }
 
-    const font = get(getters.fonts, ['selected'], 'ci')
-    const family = get(getters.themes, [getters.routeId, 'fonts', font, 'family'], []).filter(item => item !== value)
+    const font = get(getters.fonts, ["selected"], "ci");
+    const family = get(getters.themes, [getters.routeId, "fonts", font, "family"], []).filter(item => item !== value);
 
-    commit("updateFontFamily", { id: getters.routeId, font, value: family })
+    commit("updateFontFamily", { id: getters.routeId, font, value: family });
   },
 
   // Template
@@ -314,11 +285,195 @@ export default {
       return;
     }
 
-    commit("updateTemplate", { id: getters.routeId, value })
+    commit("updateTemplate", { id: getters.routeId, value });
   },
 
   // Preview
   updatePreviewOption({ commit }, { option, value }) {
     commit("setPreviewOption", { option, value });
+  },
+
+  // Create Modal
+  updateCreateModalValue({ commit }, value) {
+    commit("updateModalValue", { value });
+  },
+
+  closeModal({ commit }) {
+    commit("updateModalVisibility", { value: false, type: null, target: null });
+  },
+
+  showCreateModal({ commit }, target) {
+    commit("updateModalVisibility", { value: true, target, type: 'create' });
+  },
+
+  confirmCreateModal({ commit, getters }) {
+    const target = getters.modal.target;
+    const id = getters.modal.value;
+
+    switch (target) {
+      case "config": {
+        const copy = get(getters.configs, "default", {});
+
+        request
+          .create(`${PODLOVE.api.config}/${id}`, copy, {
+            loading: PODLOVE.i18n.message_creating,
+            error: PODLOVE.i18n.error_save_config
+          })
+          .catch(console.warn)
+          .then(config => {
+            commit("updateConfig", { id, config });
+            commit("updateModalVisibility", { value: false, type: null, target: null });
+            router.push({ name: 'config', params: { id } })
+          })
+
+        break
+      }
+
+      case "theme": {
+        const copy = get(getters.themes, "default", {});
+
+        request
+          .create(`${PODLOVE.api.theme}/${id}`, copy, {
+            loading: PODLOVE.i18n.message_creating,
+            error: PODLOVE.i18n.error_save_theme
+          })
+          .catch(console.warn)
+          .then(theme => {
+            commit("updateTheme", { id, theme });
+            commit("updateModalVisibility", { value: false, type: null, target: null });
+            router.push({ name: 'theme', params: { id } })
+          })
+
+          break
+      }
+
+      case "template": {
+        const template = get(getters.templates, "default", {});
+
+        request
+          .create(`${PODLOVE.api.template}/${id}`, { template }, {
+            loading: PODLOVE.i18n.message_creating,
+            error: PODLOVE.i18n.error_save_template
+          })
+          .catch(console.warn)
+          .then(template => {
+            commit("updateTemplate", { id, template });
+            commit("updateModalVisibility", { value: false, type: null, target: null });
+            router.push({ name: 'template', params: { id } })
+          })
+
+        break
+      }
+    }
+  },
+
+  // Delete Modal
+  showDeleteModal({ commit }, { target, id }) {
+    commit("updateModalVisibility", { value: true, target, type: 'delete', id });
+  },
+
+
+  // Save Handling
+  save({ commit, getters }) {
+    const id = getters.routeId;
+    const type = getters.routeName;
+
+    switch (type) {
+      case "config": {
+        const payload = get(getters.configs, id, {});
+
+        request
+          .create(`${PODLOVE.api.config}/${id}`, payload, {
+            loading: PODLOVE.i18n.message_saving,
+            error: PODLOVE.i18n.error_save_config
+          })
+          .catch(console.warn)
+          .then(config => {
+            commit("updateConfig", { id, config });
+          })
+
+          break
+      }
+
+      case "theme": {
+        const payload = get(getters.themes, id, {});
+
+        request
+          .create(`${PODLOVE.api.theme}/${id}`, payload, {
+            loading: PODLOVE.i18n.message_saving,
+            error: PODLOVE.i18n.error_save_theme
+          })
+          .catch(console.warn)
+          .then(theme => {
+            commit("updateTheme", { id, theme });
+          })
+
+        break
+      }
+
+      case "template": {
+        const payload = get(getters.templates, id, {});
+
+        request
+          .create(`${PODLOVE.api.template}/${id}`, payload, {
+            loading: PODLOVE.i18n.message_saving,
+            error: PODLOVE.i18n.error_save_template
+          })
+          .catch(console.warn)
+          .then(template => {
+            commit("updateTemplate", { id, template });
+          })
+
+          break
+      }
+    }
+  },
+
+  // Delete
+  remove({ commit }, { type, id }) {
+    switch (type) {
+      case "config": {
+        request
+          .remove(`${PODLOVE.api.template}/${id}`, {
+            loading: PODLOVE.i18n.message_saving,
+            error: PODLOVE.i18n.error_delete_config
+          })
+          .catch(console.warn)
+          .then(() => {
+            commit("removeConfig", { id });
+            commit("updateModalVisibility", { value: false, type: null, target: null });
+            router.push({ name: 'config', params: { id: 'default' } })
+          })
+        break
+      }
+      case "theme": {
+        request
+          .remove(`${PODLOVE.api.theme}/${id}`, {
+            loading: PODLOVE.i18n.message_saving,
+            error: PODLOVE.i18n.error_delete_theme
+          })
+          .catch(console.warn)
+          .then(() => {
+            commit("removeTheme", { id });
+            commit("updateModalVisibility", { value: false, type: null, target: null });
+            router.push({ name: 'theme', params: { id: 'default' } })
+          })
+        break
+      }
+      case "template": {
+        request
+          .remove(`${PODLOVE.api.template}/${id}`, {
+            loading: PODLOVE.i18n.message_saving,
+            error: PODLOVE.i18n.error_delete_template
+          })
+          .catch(console.warn)
+          .then(() => {
+            commit("removeTemplate", { id });
+            commit("updateModalVisibility", { value: false, type: null, target: null });
+            router.push({ name: 'template', params: { id: 'default' } })
+          })
+        break
+      }
+    }
   }
 };

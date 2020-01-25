@@ -1,4 +1,3 @@
-
 import { get } from "lodash";
 import podcastClients from "@podlove/clients";
 import poster from "../assets/cover.png";
@@ -80,7 +79,7 @@ const templates = {};
 
 const themes = {};
 
-const tabs = [null, 'shownotes', 'chapters', 'transcripts', 'share', 'files', 'playlist']
+const tabs = [null, "shownotes", "chapters", "transcripts", "share", "files", "playlist"];
 
 const clients = Object.values(
   podcastClients().reduce((result, item) => {
@@ -105,14 +104,14 @@ const settings = {
 };
 
 const preview = {
-  config: 'default',
-  theme: 'default',
-  template: 'default',
-  size: 'desktop'
-}
+  config: "default",
+  theme: "default",
+  template: "default",
+  size: "desktop"
+};
 
 const fonts = {
-  selected: 'ci',
+  selected: "ci",
   ci: {
     src: null,
     family: null,
@@ -127,8 +126,16 @@ const fonts = {
     src: null,
     family: null,
     error: null
-  },
-}
+  }
+};
+
+const modal = {
+  visible: false,
+  target: null,
+  value: null,
+  error: null,
+  id: null
+};
 
 export default {
   episode,
@@ -141,6 +148,7 @@ export default {
   stagedClient,
   tabs,
   loaded: false,
+  modal,
   preview,
   fonts
 };

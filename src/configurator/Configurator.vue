@@ -14,13 +14,15 @@
         </el-main>
       </el-container>
     </el-container>
+    <create-modal />
+    <delete-modal />
   </div>
 </template>
 
 <script>
   import { mapState, mapMutations, mapActions } from 'vuex'
   import { get } from 'lodash/fp'
-  import { Preview, Navigation, PageHeader } from './components'
+  import { Preview, Navigation, PageHeader, CreateModal, DeleteModal } from './components'
 
   export default {
     name: 'configurator',
@@ -34,7 +36,9 @@
     components: {
       PageHeader,
       Navigation,
-      Preview
+      Preview,
+      CreateModal,
+      DeleteModal
     }
   }
 </script>
@@ -70,4 +74,11 @@
       margin-right: 0;
     }
   }
+
+//   <style lang="postcss">
+//   @tailwind base;
+//   @tailwind components;
+//   @tailwind utilities;
+// </style>
+
 </style>

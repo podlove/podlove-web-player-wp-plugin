@@ -25,6 +25,7 @@ const routes = [
     path: "/settings",
     component: screens.Settings
   },
+  { path: '*', redirect: '/config/default' }
 ];
 
 export default new VueRouter({

@@ -1,6 +1,7 @@
 const path = require("path");
 const cssClean = require("postcss-clean");
 const autoprefixer = require("autoprefixer");
+const tailwind = require('tailwindcss');
 const { VueLoaderPlugin } = require("vue-loader");
 
 function resolve(dir) {
@@ -80,6 +81,29 @@ module.exports = {
           },
           {
             loader: "sass-loader"
+          }
+        ]
+      }, {
+        test: /\.postcss$/,
+        use: [
+          {
+            loader: "vue-style-loader"
+          },
+          {
+            loader: "css-loader"
+          },
+          {
+            loader: "postcss-loader",
+            options: {
+              ident: "postcss",
+              plugins: [
+                cssClean({
+                  inline: ["none"]
+                }),
+                autoprefixer,
+                tailwind()
+              ]
+            }
           }
         ]
       }

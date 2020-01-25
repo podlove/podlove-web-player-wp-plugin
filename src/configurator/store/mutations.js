@@ -1,4 +1,4 @@
-import { set, head, keys, get } from 'lodash'
+import { set, head, keys, get, cloneDeep, unset } from 'lodash'
 import getters from './getters'
 
 export default {
@@ -97,5 +97,92 @@ export default {
 
   updateTemplate(state, { id, value }) {
     set(state, ['templates', id], value)
+  },
+
+  // Modal
+  updateModalValue(state, { value }) {
+    let existing = []
+    let error = false
+
+    switch (state.modal.type) {
+      case 'config':
+        existing = keys(state.configs) || []
+        break;
+      case 'theme':
+        existing = keys(state.themes) || []
+        break;
+      case 'template':
+        existing = keys(state.templates) || []
+        break;
+    }
+
+    if (existing.includes(value)) {
+      state.modal.error = 'Id already exists'
+      error = true
+    }
+
+    if (!/^[a-z]+$/.test(value)) {
+      state.modal.error = 'Only lower cased characters are allowed'
+      error = true
+    }
+
+    if (!error) {
+      state.modal.error = null
+    }
+
+    state.modal.value = value
+  },
+
+  updateModalVisibility(state, { value, type, target, id }) {
+    state.modal.visible = value
+    state.modal.error = null
+    state.modal.value = null
+    state.modal.type = type
+    state.modal.id = id
+    state.modal.target = target
+  },
+
+  // Updates
+
+  updateConfig(state, { id, config }) {
+    state.configs = {
+      ...state.configs,
+      [id]: config
+    }
+  },
+
+  updateTheme(state, { id, theme }) {
+    state.themes = {
+      ...state.themes,
+      [id]: theme
+    }
+  },
+
+  updateTemplate(state, { id, template }) {
+    state.templates = {
+      ...state.templates,
+      [id]: template
+    }
+  },
+
+  removeConfig(state, { id }) {
+    const data = cloneDeep(state.configs)
+    unset(data, id)
+
+    state.configs = data
+  },
+
+  removeTheme(state, { id }) {
+    const data = cloneDeep(state.themes)
+    unset(data, id)
+
+    state.themes = data
+  },
+
+  removeTemplate(state, { id }) {
+    const data = cloneDeep(state.templates)
+    unset(data, id)
+
+    state.templates = data
   }
 }

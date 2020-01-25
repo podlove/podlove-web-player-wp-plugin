@@ -2,15 +2,15 @@
   <div class="page-header">
     <h2>{{ title }}</h2>
     <el-row>
-      <el-button icon="el-icon-check" type="primary">Save</el-button>
-      <el-button type="danger" icon="el-icon-delete" plain v-if="this.routeName !== 'settings'"> Delete</el-button>
+      <el-button icon="el-icon-check" type="primary" @click="save">Save</el-button>
+      <el-button type="danger" icon="el-icon-delete" plain v-if="this.routeName !== 'settings'" :disabled="this.routeId === 'default'" @click="showDeleteModal({ target: routeName, id: routeId })">Delete</el-button>
     </el-row>
   </div>
 </template>
 
 <script>
 import { get } from 'lodash'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions} from 'vuex'
 
 export default {
   computed: {
@@ -33,7 +33,8 @@ export default {
           return null
       }
     }
-  }
+  },
+  methods: mapActions(['save', 'showDeleteModal'])
 }
 </script>
 

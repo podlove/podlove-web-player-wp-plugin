@@ -52,38 +52,25 @@ class Podlove_Web_Player_i18n {
 
       'message_initializing' => __( 'Initializing' , 'podlove-web-player' ),
       'message_saving' => __( 'Saving' , 'podlove-web-player' ),
+      'message_creating' => _( 'Creating', 'podlove-web-player' ),
 
       'config' => __( 'Config' , 'podlove-web-player' ),
       'error_load_config' => __( 'Error Loading Config' , 'podlove-web-player' ),
       'error_save_config' => __( 'Error Saving Config' , 'podlove-web-player' ),
+      'error_remove_config' => __( 'Error Removing Config' , 'podlove-web-player' ),
 
       'controls' => __( 'Controls' , 'podlove-web-player' ),
       'components' => __( 'Components' , 'podlove-web-player' ),
 
       'theme' => __( 'Theme' , 'podlove-web-player' ),
-      'theme_main' => __( 'Main', 'podlove-web-player' ),
-      'theme_highlight' => __( 'Highlight', 'podlove-web-player' ),
+      'error_save_theme' => __( 'Error Saving Theme', 'podlove-web-player' ),
+      'error_remove_theme' => __( 'Error Removing Theme' , 'podlove-web-player' ),
+
+      'template' => __( 'Template', 'podlove-web-player' ),
+      'error_save_template' => __( 'Error Saving Template', 'podlove-web-player' ),
+      'error_remove_template' => __( 'Error Removing Template' , 'podlove-web-player' ),
 
       'preview' => __( 'Preview' , 'podlove-web-player' ),
-
-      'tabs' => __( 'Tabs' , 'podlove-web-player' ),
-      'tabs_available' => __( 'Available', 'podlove-web-player' ),
-      'tabs_default_active' => __( 'Default Active', 'podlove-web-player' ),
-      'tab_info' => __( 'Info Tab' , 'podlove-web-player' ),
-      'tab_chapters' => __( 'Chapters Tab' , 'podlove-web-player' ),
-      'tab_share' => __( 'Share Tab' , 'podlove-web-player' ),
-      'tab_download' => __( 'Download Tab' , 'podlove-web-player' ),
-      'tab_audio' => __( 'Audio Tab' , 'podlove-web-player' ),
-
-      'components_poster' => __( 'Poster' , 'podlove-web-player' ),
-      'components_show_title' => __( 'Show Title' , 'podlove-web-player' ),
-      'components_episode_title' => __( 'Episode Title' , 'podlove-web-player' ),
-      'components_subtitle' => __( 'Subtitle' , 'podlove-web-player' ),
-      'components_progressbar' => __( 'Progressbar' , 'podlove-web-player' ),
-
-      'controls' => __( 'Controls' , 'podlove-web-player' ),
-      'controls_chapters' => __( 'Chapters' , 'podlove-web-player' ),
-      'controls_steppers' => __( 'Steppers' , 'podlove-web-player' ),
 
       'enclosures' => __( 'WordPress "enclosures"' , 'podlove-web-player' ),
       'enclosures_tooltip' => __( 'WordPress automatically creates an "enclosure" custom field whenever it detects an URL to a media fiel in the post text. Use this option to turn these enclosures into Podlove Web Player instances' , 'podlove-web-player' ),
@@ -91,5 +78,4 @@ class Podlove_Web_Player_i18n {
       'enclosures_bottom' => __( 'Put player to bottom of post', 'podlove-web-player' )
     );
   }
-
 }

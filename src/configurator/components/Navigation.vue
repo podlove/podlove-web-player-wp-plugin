@@ -6,7 +6,7 @@
         <span slot="title">Configuration</span>
       </template>
       <el-menu-item v-for="(config, index) in configList" :key="`config-${index}`" @click="navigate({ name: 'config', params: { id: config } })" :index="`1-${index + 1}`">{{ config }}</el-menu-item>
-      <el-menu-item index="1-add">
+      <el-menu-item index="1-add" @click="showCreateModal('config')">
         <i class="el-icon-circle-plus-outline"></i>
         <span slot="title">Add</span>
       </el-menu-item>
@@ -17,7 +17,7 @@
         <span slot="title">Themes</span>
       </template>
       <el-menu-item v-for="(theme, index) in themeList" :key="`theme-${index}`" @click="navigate({ name: 'theme', params: { id: theme } })" :index="`2-${index + 1}`">{{ theme }}</el-menu-item>
-      <el-menu-item index="2-add">
+      <el-menu-item index="2-add" @click="showCreateModal('theme')">
         <i class="el-icon-circle-plus-outline"></i>
         <span slot="title">Add</span>
       </el-menu-item>
@@ -28,7 +28,7 @@
         <span slot="title">Templates</span>
       </template>
       <el-menu-item v-for="(template, index) in templateList" :key="`template-${index}`" @click="navigate({ name: 'template', params: { id: template } })" :index="`3-${index + 1}`">{{ template }}</el-menu-item>
-      <el-menu-item index="3-add">
+      <el-menu-item index="3-add" @click="showCreateModal('template')">
         <i class="el-icon-circle-plus-outline"></i>
         <span slot="title">Add</span>
       </el-menu-item>
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
@@ -60,6 +60,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['showCreateModal']),
     navigate(param) {
       this.$router.push(param).catch(err => {})
     }
