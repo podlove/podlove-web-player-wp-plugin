@@ -38,7 +38,8 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['episode']),
+    ...mapGetters(['episode', 'source']),
+
     previewWidth() {
       const width = this.width[this.size];
 
@@ -48,7 +49,7 @@ export default {
 
   mounted() {
     const player = document.createElement('script')
-    player.setAttribute('src', '/wp-content/plugins/podlove-web-player-beta/web-player/embed.js')
+    player.setAttribute('src', this.source)
     document.head.appendChild(player)
 
     player.addEventListener('load', this.bootstrap.bind(this))

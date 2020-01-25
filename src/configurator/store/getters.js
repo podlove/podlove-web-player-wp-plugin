@@ -7,7 +7,8 @@ const slices = {
   episode: get('episode'),
   settings: get('settings'),
   router: get('route'),
-  clients: get('clients')
+  clients: get('clients'),
+  settings: get('settings')
 }
 
 const routeId = compose(get('id'), get('params'), slices.router)
@@ -25,5 +26,6 @@ export default {
   templateList: compose(keys, slices.templates),
   routeName: compose(get('name'), slices.router),
   preview: get('preview'),
+  source: compose(get('source'), slices.settings),
   routeId
 }

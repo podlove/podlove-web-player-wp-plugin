@@ -48,7 +48,7 @@ class Podlove_Web_Player_Options
       'configs' => $this->readFolder($this->plugin_directory . 'defaults/configs/', 'json'),
       'themes' => $this->readFolder($this->plugin_directory . 'defaults/themes/', 'json'),
       'templates' => $this->readFolder($this->plugin_directory . 'defaults/templates/', 'html'),
-      'settings' => array('version' => 'local')
+      'settings' => array('source' => '/wp-content/plugins/podlove-web-player-beta/web-player/embed.js')
     );
   }
 

@@ -18,13 +18,12 @@
         </div>
         <div class="el-message-box__content">
           <div class="el-message-box__container" v-if="message">
-            <!---->
             <div class="el-message-box__message">{{ message }}</div>
           </div>
         </div>
         <div class="el-message-box__btns">
           <el-button size="small" @click="closeModal">Cancel</el-button>
-          <el-button type="danger" icon="el-icon-delete" size="small" @click="remove({ type: modal.target, id: modal.id })">Delete</el-button>
+          <el-button ref="delete" type="danger" icon="el-icon-delete" size="small" @click="remove({ type: modal.target, id: modal.id })">Delete</el-button>
         </div>
       </div>
     </div>
@@ -69,8 +68,16 @@ export default {
     }
   },
 
+  watch: {
+    visible() {
+      setTimeout(() => {
+        this.visible && this.$refs.delete.$el.focus()
+      }, 10)
+    }
+  },
+
   created() {
-    document.addEventListener('keyup', evt => evt.keyCode === 27 && this.modal.visible && this.closeModal())
+    document.addEventListener('keyup', evt => evt.keyCode === 27 && this.visible && this.closeModal())
   },
 
   methods: mapActions(['closeModal', 'remove'])

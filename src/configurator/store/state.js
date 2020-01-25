@@ -99,10 +99,6 @@ const clients = Object.values(
   }, {})
 );
 
-const settings = {
-  version: "local"
-};
-
 const preview = {
   config: "default",
   theme: "default",
@@ -137,6 +133,10 @@ const modal = {
   id: null
 };
 
+const settings = {
+  source: '/wp-content/plugins/podlove-web-player-beta/web-player/embed.js'
+}
+
 export default {
   episode,
   settings,
@@ -150,5 +150,6 @@ export default {
   loaded: false,
   modal,
   preview,
-  fonts
+  fonts,
+  settings
 };

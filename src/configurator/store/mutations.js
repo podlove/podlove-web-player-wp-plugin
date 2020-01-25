@@ -13,6 +13,7 @@ export default {
     state.configs = getters.configs(payload) || getters.configs(state)
     state.themes = getters.themes(payload) || getters.themes(state)
     state.templates = getters.templates(payload) || getters.templates(state)
+    state.settings = getters.settings(payload) || getters.settings(state)
 
     state.preview.config = screen === 'config' ? routeId : (state.preview.config || head(keys(state.configs)))
     state.preview.theme = screen ===  'theme' ? routeId : (state.preview.theme || head(keys(state.themes)))
@@ -143,7 +144,6 @@ export default {
   },
 
   // Updates
-
   updateConfig(state, { id, config }) {
     state.configs = {
       ...state.configs,
@@ -165,6 +165,15 @@ export default {
     }
   },
 
+  updateSource(state, source) {
+    set(state, 'settings.source', source)
+  },
+
+  updateSettings(state, settings) {
+    state.settings = settings
+  },
+
+  // Remove
   removeConfig(state, { id }) {
     const data = cloneDeep(state.configs)
     unset(data, id)

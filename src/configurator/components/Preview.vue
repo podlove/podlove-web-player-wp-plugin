@@ -100,7 +100,8 @@ export default {
       "routeId",
       "configs",
       "templates",
-      "themes"
+      "themes",
+      "source"
     ]),
     config() {
       return get(this.configs, this.preview.config, {});
@@ -112,7 +113,7 @@ export default {
       return get(this.themes, this.preview.theme, {});
     },
     configHash() {
-      return hash({ ...this.config, template: this.template, size: this.preview.size });
+      return hash({ ...this.config, template: this.template, size: this.preview.size, source: this.source });
     }
   },
 

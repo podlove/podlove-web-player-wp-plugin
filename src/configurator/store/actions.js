@@ -426,6 +426,22 @@ export default {
 
           break
       }
+
+      case "settings": {
+        const payload = getters.settings || {};
+
+        request
+          .create(PODLOVE.api.settings, payload, {
+            loading: PODLOVE.i18n.message_saving,
+            error: PODLOVE.i18n.error_save_settings
+          })
+          .catch(console.warn)
+          .then(settings => {
+            commit("updateSettings", settings);
+          })
+
+        break
+      }
     }
   },
 
@@ -475,5 +491,10 @@ export default {
         break
       }
     }
+  },
+
+  // Settings
+  updateSource({ commit }, source) {
+    commit('updateSource', source)
   }
 };

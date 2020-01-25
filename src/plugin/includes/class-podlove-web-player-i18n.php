@@ -75,7 +75,9 @@ class Podlove_Web_Player_i18n {
       'enclosures' => __( 'WordPress "enclosures"' , 'podlove-web-player' ),
       'enclosures_tooltip' => __( 'WordPress automatically creates an "enclosure" custom field whenever it detects an URL to a media fiel in the post text. Use this option to turn these enclosures into Podlove Web Player instances' , 'podlove-web-player' ),
       'enclosures_enabled' => __( 'Turn enclosures to players', 'podlove-web-player' ),
-      'enclosures_bottom' => __( 'Put player to bottom of post', 'podlove-web-player' )
+      'enclosures_bottom' => __( 'Put player to bottom of post', 'podlove-web-player' ),
+
+      'error_save_settings' => __( 'Error Saving Settings', 'podlove-web-player' )
     );
   }
 }

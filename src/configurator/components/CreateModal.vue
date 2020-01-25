@@ -9,34 +9,38 @@
       class="el-message-box__wrapper"
       style="z-index: 999;"
     >
-      <div class="el-message-box">
-        <div class="el-message-box__header" v-if="title">
-          <div class="el-message-box__title">{{ title }}</div>
-          <button type="button" aria-label="Close" class="el-message-box__headerbtn" @click="closeModal">
-            <i class="el-message-box__close el-icon-close"></i>
-          </button>
-        </div>
-        <div class="el-message-box__content">
-          <div class="el-message-box__container" v-if="message">
-            <!---->
-            <div class="el-message-box__message">{{ message }}</div>
+
+        <div class="el-message-box">
+          <div class="el-message-box__header" v-if="title">
+            <div class="el-message-box__title">{{ title }}</div>
+            <button type="button" aria-label="Close" class="el-message-box__headerbtn" @click="closeModal">
+              <i class="el-message-box__close el-icon-close"></i>
+            </button>
           </div>
-          <div class="el-message-box__input">
-            <el-input :value="modal.value" size="small" :class="{ invalid: modal.error }" @input="updateCreateModalValue"></el-input>
-            <div class="error-message" v-if="modal.error">{{ modal.error }}</div>
+          <div class="el-message-box__content">
+            <div class="el-message-box__container" v-if="message">
+              <div class="el-message-box__message">{{ message }}</div>
+            </div>
+            <div class="el-message-box__input">
+              <el-form @submit.native="submit">
+                <el-input ref="input" :value="modal.value" size="small" :class="{ invalid: modal.error }" @input="updateCreateModalValue"></el-input>
+                <div class="error-message" v-if="modal.error">{{ modal.error }}</div>
+              </el-form>
+            </div>
+          </div>
+          <div class="el-message-box__btns">
+            <el-button size="small" @click="closeModal">Cancel</el-button>
+            <el-button ref="submit" size="small" type="primary" :disabled="!modal.value || !!modal.error" @click="confirmCreateModal">Add</el-button>
           </div>
         </div>
-        <div class="el-message-box__btns">
-          <el-button size="small" @click="closeModal">Cancel</el-button>
-          <el-button size="small" type="primary" :disabled="!modal.value || !!modal.error" @click="confirmCreateModal">Add</el-button>
-        </div>
-      </div>
+      </el-form>
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import { get } from 'lodash'
 
 export default {
   computed: {
@@ -74,10 +78,26 @@ export default {
   },
 
   created() {
-    document.addEventListener('keyup', evt => evt.keyCode === 27 && this.modal.visible && this.closeModal())
+    document.addEventListener('keyup', evt => evt.keyCode === 27 && this.visible && this.closeModal())
   },
 
-  methods: mapActions(['updateCreateModalValue', 'closeModal', 'confirmCreateModal'])
+  watch: {
+    visible() {
+      setTimeout(() => {
+        const input = get(this.$refs, 'input.$el')
+        this.visible && input && this.$refs.input.$el.querySelector('input').focus()
+      }, 10)
+    }
+  },
+
+  methods: {
+    ...mapActions(['updateCreateModalValue', 'closeModal', 'confirmCreateModal']),
+
+    submit(event) {
+      event.preventDefault()
+      this.confirmCreateModal()
+    }
+  }
 };
 </script>
 

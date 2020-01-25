@@ -82,7 +82,8 @@ class Podlove_Web_Player_Admin {
           'bootstrap' => esc_url_raw( rest_url( $this->plugin_name . '/' . $this->version . '/' . 'bootstrap' ) ),
           'config' => esc_url_raw( rest_url( $this->plugin_name . '/' . $this->version . '/' . 'config' ) ),
           'theme' => esc_url_raw( rest_url( $this->plugin_name . '/' . $this->version . '/' . 'theme' ) ),
-          'template' => esc_url_raw( rest_url( $this->plugin_name . '/' . $this->version . '/' . 'template' ) )
+          'template' => esc_url_raw( rest_url( $this->plugin_name . '/' . $this->version . '/' . 'template' ) ),
+          'settings' => esc_url_raw( rest_url( $this->plugin_name . '/' . $this->version . '/' . 'settings' ) )
         )
       )
     );
@@ -245,6 +246,19 @@ class Podlove_Web_Player_Admin {
       )
     );
 
+    register_rest_route( $this->plugin_name . '/' . $this->version, 'settings',
+      array(
+        'methods' => 'POST',
+        'callback' => array( $this, 'api_save_settings' ),
+        'args' => array (
+          'source' => array(
+            'required' => true
+          )
+        ),
+        'permissions_callback' => array( $this, 'api_permissions' )
+      )
+    );
+
   }
 
   /**
@@ -365,6 +379,23 @@ class Podlove_Web_Player_Admin {
 
     $this->options->update($options);
     return rest_ensure_response( true );
+  }
+
+  /**
+	 * Delete API template
+	 *
+	 * @since    4.0.0
+	 */
+  public function api_save_settings( WP_REST_Request $request ) {
+    $options = $this->options->read();
+    $source = $request->get_param( 'source' );
+
+    $options['settings']['source'] = $source;
+
+    $this->options->update($options);
+    $options = $this->options->read();
+
+    return rest_ensure_response( $options['settings'] );
   }
 
   /**
