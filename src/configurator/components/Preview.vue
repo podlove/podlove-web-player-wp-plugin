@@ -54,6 +54,7 @@
         </form-element>
       </div>
       <player
+        v-if="source"
         ref="player"
         :config="config"
         :template="template"

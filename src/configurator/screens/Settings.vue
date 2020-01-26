@@ -8,8 +8,7 @@
           size="small"
           @change="updateSource"
         >
-          <el-option label="CDN" value="https://cdn.podlove.org/web-player/5.x/embed.js"></el-option>
-          <el-option label="Local" value="/wp-content/plugins/podlove-web-player-beta/web-player/embed.js"></el-option>
+          <el-option v-for="(item, index) in sources" :label="item.label" :value="item.value" :key="`source-${index}`"></el-option>
         </el-select>
       </form-element>
     </card>
@@ -17,11 +16,18 @@
 </template>
 
 <script>
+import { reduce, get } from 'lodash'
 import { mapGetters, mapActions } from 'vuex'
-import { Card, FormElement } from '../components';
+import { Card, FormElement } from '../components'
 
 export default {
-  computed: mapGetters(['source']),
+  computed: {
+    ...mapGetters(['source', 'settings']),
+
+    sources() {
+      return reduce(get(this.settings, 'source.items', {}), (result, value, label) => [...result, { label, value }], [])
+    }
+  },
 
   components: {
     Card,

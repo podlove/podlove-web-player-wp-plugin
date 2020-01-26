@@ -1,5 +1,5 @@
 /* global PODLOVE */
-import { get, pick } from "lodash";
+import { get, pick, reduce } from "lodash";
 import { request } from "../lib";
 import router from '../router'
 
@@ -428,10 +428,10 @@ export default {
       }
 
       case "settings": {
-        const payload = getters.settings || {};
+        const source = get(getters.settings, 'source.selected');
 
         request
-          .create(PODLOVE.api.settings, payload, {
+          .create(PODLOVE.api.settings, { source }, {
             loading: PODLOVE.i18n.message_saving,
             error: PODLOVE.i18n.error_save_settings
           })
@@ -494,7 +494,9 @@ export default {
   },
 
   // Settings
-  updateSource({ commit }, source) {
+  updateSource({ commit, getters }, value) {
+    const source = reduce(get(getters.settings, 'source.items', {}), (result, item, key) => item === value ? key : result, null)
+    console.log(source)
     commit('updateSource', source)
   }
 };

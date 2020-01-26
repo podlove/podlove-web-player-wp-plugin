@@ -134,12 +134,17 @@ const modal = {
 };
 
 const settings = {
-  source: '/wp-content/plugins/podlove-web-player-beta/web-player/embed.js'
-}
+  source: {
+    selected: null,
+    items: {
+      cdn: null,
+      local: null
+    }
+  }
+};
 
 export default {
   episode,
-  settings,
   configs,
   templates,
   themes,

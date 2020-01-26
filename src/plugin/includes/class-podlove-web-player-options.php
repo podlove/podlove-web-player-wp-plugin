@@ -48,7 +48,15 @@ class Podlove_Web_Player_Options
       'configs' => $this->readFolder($this->plugin_directory . 'defaults/configs/', 'json'),
       'themes' => $this->readFolder($this->plugin_directory . 'defaults/themes/', 'json'),
       'templates' => $this->readFolder($this->plugin_directory . 'defaults/templates/', 'html'),
-      'settings' => array('source' => '/wp-content/plugins/podlove-web-player-beta/web-player/embed.js')
+      'settings' => array(
+        'source' => array(
+          'selected' => 'cdn',
+          'items' => array(
+            'cdn' => 'https://cdn.podlove.org/web-player/5.x/embed.js',
+            'local' => '/wp-content/plugins/podlove-web-player-beta/web-player/embed.js'
+          )
+        )
+      )
     );
   }
 
@@ -170,6 +178,9 @@ class Podlove_Web_Player_Options
 
       case 'delete/id':
         return $value !== 'default';
+
+      case 'settings/source':
+        return $value === 'local' || $value === 'cdn';
 
       default:
         return false;

@@ -166,7 +166,7 @@ export default {
   },
 
   updateSource(state, source) {
-    set(state, 'settings.source', source)
+    set(state, 'settings.source.selected', source)
   },
 
   updateSettings(state, settings) {

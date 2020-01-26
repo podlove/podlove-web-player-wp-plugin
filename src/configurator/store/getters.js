@@ -13,6 +13,15 @@ const slices = {
 
 const routeId = compose(get('id'), get('params'), slices.router)
 
+const source = state => {
+  const data = get('source', slices.settings(state))
+
+  const items = get('items', data)
+  const selected = get('selected', data)
+
+  return get(selected, items)
+}
+
 export default {
   ...slices,
   loaded: get('loaded'),
@@ -26,6 +35,6 @@ export default {
   templateList: compose(keys, slices.templates),
   routeName: compose(get('name'), slices.router),
   preview: get('preview'),
-  source: compose(get('source'), slices.settings),
+  source,
   routeId
 }

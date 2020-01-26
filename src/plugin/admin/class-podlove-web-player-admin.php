@@ -252,7 +252,10 @@ class Podlove_Web_Player_Admin {
         'callback' => array( $this, 'api_save_settings' ),
         'args' => array (
           'source' => array(
-            'required' => true
+            'required' => true,
+            'validate_callback' => function( $param ) {
+              return $this->options->validate( 'settings/source', $param );
+            }
           )
         ),
         'permissions_callback' => array( $this, 'api_permissions' )
@@ -390,7 +393,7 @@ class Podlove_Web_Player_Admin {
     $options = $this->options->read();
     $source = $request->get_param( 'source' );
 
-    $options['settings']['source'] = $source;
+    $options['settings']['source']['selected'] = $source;
 
     $this->options->update($options);
     $options = $this->options->read();
