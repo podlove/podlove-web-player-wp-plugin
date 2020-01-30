@@ -10,7 +10,6 @@ export default {
     const screen = get(state, 'router.name')
     const routeId = get(state, 'router.params.id')
 
-    state.configs = getters.configs(payload) || getters.configs(state)
     state.themes = getters.themes(payload) || getters.themes(state)
     state.templates = getters.templates(payload) || getters.templates(state)
     state.settings = getters.settings(payload) || getters.settings(state)
@@ -18,34 +17,6 @@ export default {
     state.preview.config = screen === 'config' ? routeId : (state.preview.config || head(keys(state.configs)))
     state.preview.theme = screen ===  'theme' ? routeId : (state.preview.theme || head(keys(state.themes)))
     state.preview.template = screen ===  'template' ? routeId : (state.preview.template || head(keys(state.templates)))
-  },
-
-  updateChannels (state, { id, channels }) {
-    set(state, ['configs', id, 'share', 'channels'], channels)
-  },
-
-  updateSharePlaytime (state, { id, sharePlaytime }) {
-    set(state, ['configs', id, 'share', 'sharePlaytime'], sharePlaytime)
-  },
-
-  updateEmbedPlayer (state, { id, embed }) {
-    set(state, ['configs', id, 'share', 'outlet'], embed ? '/share.html' : null)
-  },
-
-  updateClients (state, { id, clients }) {
-    set(state, ['configs', id, 'subscribe-button', 'clients'], clients)
-  },
-
-  stageClient(state, client) {
-    state.stagedClient = client
-  },
-
-  updateFeed(state, { id, feed }) {
-    set(state, ['configs', id, 'subscribe-button', 'feed'], feed)
-  },
-
-  setActiveTab(state, { id, tab }) {
-    set(state, ['configs', id, 'activeTab'], tab)
   },
 
   setPreviewOption(state, { option, value }) {
@@ -144,13 +115,6 @@ export default {
   },
 
   // Updates
-  updateConfig(state, { id, config }) {
-    state.configs = {
-      ...state.configs,
-      [id]: config
-    }
-  },
-
   updateTheme(state, { id, theme }) {
     state.themes = {
       ...state.themes,
@@ -174,13 +138,6 @@ export default {
   },
 
   // Remove
-  removeConfig(state, { id }) {
-    const data = cloneDeep(state.configs)
-    unset(data, id)
-
-    state.configs = data
-  },
-
   removeTheme(state, { id }) {
     const data = cloneDeep(state.themes)
     unset(data, id)

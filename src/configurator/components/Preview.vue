@@ -68,96 +68,94 @@
 </template>
 
 <script>
-import Player from "./Player";
-import { get } from "lodash";
-import { mapGetters, mapActions } from "vuex";
-import hash from "object-hash";
-import { setTheme } from "@podlove/player-actions/theme";
-import Card from "./Card";
-import FormElement from "./FormElement";
+import Player from './Player'
+import { get } from 'lodash'
+import { mapGetters, mapActions } from 'vuex'
+import hash from 'object-hash'
+import { setTheme } from '@podlove/player-actions/theme'
+import Card from './Card'
+import FormElement from './FormElement'
 
 export default {
   components: {
     Player,
     Card,
-    FormElement
+    FormElement,
   },
 
   data() {
     return {
       store: {},
-      sizes: ["mobile", "tablet", "desktop"]
-    };
+      sizes: ['mobile', 'tablet', 'desktop'],
+    }
   },
 
   computed: {
+    ...mapGetters('configs', ['configList', 'configs']),
     ...mapGetters([
-      "routeName",
-      "configList",
-      "themeList",
-      "templateList",
-      "preview",
-      "routeName",
-      "routeId",
-      "configs",
-      "templates",
-      "themes",
-      "source"
+      'themeList',
+      'templateList',
+      'preview',
+      'routeName',
+      'routeId',
+      'templates',
+      'themes',
+      'source',
     ]),
     config() {
-      return get(this.configs, this.preview.config, {});
+      return get(this.configs, this.preview.config, {})
     },
     template() {
-      return get(this.templates, this.preview.template, "");
+      return get(this.templates, this.preview.template, '')
     },
     theme() {
-      return get(this.themes, this.preview.theme, {});
+      return get(this.themes, this.preview.theme, {})
     },
     configHash() {
-      return hash({ ...this.config, template: this.template, size: this.preview.size, source: this.source });
-    }
+      return hash({ ...this.config, template: this.template, size: this.preview.size, source: this.source })
+    },
   },
 
   watch: {
     routeName() {
-      this.updatePreviewOption({ option: this.routeName, value: this.routeId });
+      this.updatePreviewOption({ option: this.routeName, value: this.routeId })
     },
     routeId() {
-      this.updatePreviewOption({ option: this.routeName, value: this.routeId });
+      this.updatePreviewOption({ option: this.routeName, value: this.routeId })
     },
     theme: {
       handler(val) {
-        this.updateTheme(val);
+        this.updateTheme(val)
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
 
   mounted() {
-    this.updatePreviewOption({ option: this.routeName, value: this.routeId });
+    this.updatePreviewOption({ option: this.routeName, value: this.routeId })
   },
 
   methods: {
-    ...mapActions(["updatePreviewOption"]),
+    ...mapActions(['updatePreviewOption']),
 
     connectPlayerStore(store) {
-      this.store = store;
+      this.store = store
     },
 
     updateTheme(theme) {
       if (!this.store.dispatch) {
-        return;
+        return
       }
 
       this.store.dispatch(
         setTheme({
           version: 5,
-          theme
+          theme,
         })
-      );
-    }
-  }
-};
+      )
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>

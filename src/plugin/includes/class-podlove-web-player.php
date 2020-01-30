@@ -139,6 +139,11 @@ class Podlove_Web_Player {
 		 */
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-podlove-web-player-options.php';
 
+    /**
+     * The class responsible for defining the REST API
+     */
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-podlove-web-player-api.php';
+
     $this->loader = new Podlove_Web_Player_Loader();
 
 	}

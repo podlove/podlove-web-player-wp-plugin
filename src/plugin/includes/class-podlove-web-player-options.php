@@ -141,49 +141,4 @@ class Podlove_Web_Player_Options
   {
     delete_option($this->plugin_name);
   }
-
-  /**
-   * Validates the plugin options
-   */
-  public function validate($type, $value)
-  {
-    switch ($type) {
-      case 'config/subscribe-button':
-        return
-          array_key_exists('feed', $value) &&
-          array_key_exists('clients', $value);
-
-      case 'config/share':
-        return
-          array_key_exists('channels', $value) &&
-          array_key_exists('outlet', $value) &&
-          array_key_exists('sharePlaytime', $value);
-
-      case 'theme/tokens':
-        return
-          array_key_exists('brand', $value) &&
-          array_key_exists('brandDark', $value) &&
-          array_key_exists('brandDarkest', $value) &&
-          array_key_exists('brandLightest', $value) &&
-          array_key_exists('shadeDark', $value) &&
-          array_key_exists('shadeBase', $value) &&
-          array_key_exists('contrast', $value) &&
-          array_key_exists('alt', $value);
-
-      case 'theme/fonts':
-        return
-          array_key_exists('ci', $value) &&
-          array_key_exists('regular', $value) &&
-          array_key_exists('bold', $value);
-
-      case 'delete/id':
-        return $value !== 'default';
-
-      case 'settings/source':
-        return $value === 'local' || $value === 'cdn';
-
-      default:
-        return false;
-    }
-  }
 }

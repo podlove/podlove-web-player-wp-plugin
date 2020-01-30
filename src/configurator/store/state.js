@@ -1,5 +1,5 @@
 import { get } from "lodash";
-import podcastClients from "@podlove/clients";
+
 import poster from "../assets/cover.png";
 
 const episode = {
@@ -67,37 +67,10 @@ const episode = {
   ]
 };
 
-const channels = ["facebook", "twitter", "whats-app", "linkedin", "pinterest", "xing", "mail", "link"];
-
-const configs = {};
-
-const stagedClient = {
-  id: null
-};
-
 const templates = {};
 
 const themes = {};
 
-const tabs = [null, "shownotes", "chapters", "transcripts", "share", "files", "playlist"];
-
-const clients = Object.values(
-  podcastClients().reduce((result, item) => {
-    const existing = get(result, item.id, {});
-
-    return {
-      ...result,
-      [item.id]: {
-        id: item.id,
-        icon: item.icon,
-        platforms: [...(existing.platforms ? existing.platforms : []), item.platform],
-        title: item.title,
-        serviceScheme: existing.serviceScheme || item.type === "service" ? item.scheme : null,
-        service: null
-      }
-    };
-  }, {})
-);
 
 const preview = {
   config: "default",
@@ -145,13 +118,8 @@ const settings = {
 
 export default {
   episode,
-  configs,
   templates,
   themes,
-  channels,
-  clients,
-  stagedClient,
-  tabs,
   loaded: false,
   modal,
   preview,

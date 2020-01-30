@@ -27,10 +27,10 @@
   export default {
     name: 'configurator',
 
-    methods: mapActions(['boot']),
+    methods: mapActions(['bootstrap']),
 
     mounted () {
-      this.boot()
+      this.bootstrap()
     },
 
     components: {

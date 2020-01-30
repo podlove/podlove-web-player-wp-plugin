@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { cloneDeep } from 'lodash'
 
+import configs from './configs'
+
 import state from './state'
 import getters from './getters'
 import actions from './actions'
@@ -15,5 +17,9 @@ export default new Vuex.Store({
   getters: cloneDeep(getters),
   actions,
   mutations,
-  plugins
+  plugins,
+
+  modules: {
+    configs
+  }
 })
