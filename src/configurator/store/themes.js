@@ -2,6 +2,8 @@ import { get, set, cloneDeep, unset } from 'lodash'
 import { request } from '../lib'
 
 export default {
+  namespaced: true,
+
   state: {
     themes: {},
     fonts: {
@@ -23,8 +25,6 @@ export default {
       },
     },
   },
-
-  namespaced: true,
 
   getters: {
     themes(state) {
@@ -212,7 +212,6 @@ export default {
           loading: PODLOVE.i18n.message_saving,
           error: PODLOVE.i18n.error_save_theme,
         })
-        .catch(console.warn)
         .then(theme => {
           commit('updateTheme', { id: getters.id, theme })
         })
@@ -226,7 +225,6 @@ export default {
           loading: PODLOVE.i18n.message_creating,
           error: PODLOVE.i18n.error_save_theme,
         })
-        .catch(console.warn)
         .then(theme => {
           commit('updateTheme', { id, theme })
         })
@@ -238,7 +236,6 @@ export default {
           loading: PODLOVE.i18n.message_saving,
           error: PODLOVE.i18n.error_delete_theme,
         })
-        .catch(console.warn)
         .then(() => {
           commit('removeTheme', { id })
         })

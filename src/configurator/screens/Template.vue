@@ -1,7 +1,7 @@
 <template>
   <div class="template">
     <card title="Markup" class="fit">
-      <prism-editor :code="markup" language="html" :lineNumbers="true" @change="updateTemplate"></prism-editor>
+      <prism-editor :code="current" language="html" :lineNumbers="true" @change="updateTemplate"></prism-editor>
     </card>
   </div>
 </template>
@@ -14,12 +14,7 @@ import { mapGetters, mapActions } from 'vuex'
 import { Card } from '../components';
 
 export default {
-  computed: {
-    ...mapGetters(['templates', 'routeId']),
-    markup() {
-      return get(this.templates, [this.routeId], '')
-    }
-  },
+  computed: mapGetters('templates', ['current']),
 
   components: {
     PrismEditor,

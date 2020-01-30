@@ -47,7 +47,8 @@ export default {
   computed: {
     ...mapGetters('configs', ['configList']),
     ...mapGetters('themes', ['themeList']),
-    ...mapGetters(['templateList', 'routeName', 'routeId']),
+    ...mapGetters('templates', ['templateList']),
+    ...mapGetters(['routeName', 'routeId']),
     active() {
       switch (this.routeName) {
         case 'config':

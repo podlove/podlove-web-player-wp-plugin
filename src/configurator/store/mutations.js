@@ -10,7 +10,6 @@ export default {
     const screen = get(state, 'router.name')
     const routeId = get(state, 'router.params.id')
 
-    state.templates = getters.templates(payload) || getters.templates(state)
     state.settings = getters.settings(payload) || getters.settings(state)
 
     state.preview.config = screen === 'config' ? routeId : (state.preview.config || head(keys(state.configs)))
@@ -66,13 +65,6 @@ export default {
   },
 
   // Updates
-  updateTemplate(state, { id, template }) {
-    state.templates = {
-      ...state.templates,
-      [id]: template
-    }
-  },
-
   updateSource(state, source) {
     set(state, 'settings.source.selected', source)
   },
@@ -80,13 +72,4 @@ export default {
   updateSettings(state, settings) {
     state.settings = settings
   },
-
-
-  // Remove
-  removeTemplate(state, { id }) {
-    const data = cloneDeep(state.templates)
-    unset(data, id)
-
-    state.templates = data
-  }
 }

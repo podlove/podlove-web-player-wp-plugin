@@ -210,7 +210,6 @@ export default {
           loading: PODLOVE.i18n.message_saving,
           error: PODLOVE.i18n.error_save_config,
         })
-        .catch(console.warn)
         .then(config => {
           commit('updateConfig', { id: getters.id, config })
         })
@@ -224,7 +223,6 @@ export default {
           loading: PODLOVE.i18n.message_creating,
           error: PODLOVE.i18n.error_save_config
         })
-        .catch(console.warn)
         .then(config => {
           commit("updateConfig", { id, config });
         })
@@ -236,7 +234,6 @@ export default {
           loading: PODLOVE.i18n.message_saving,
           error: PODLOVE.i18n.error_delete_config,
         })
-        .catch(console.warn)
         .then(() => {
           commit('removeConfig', { id })
         })

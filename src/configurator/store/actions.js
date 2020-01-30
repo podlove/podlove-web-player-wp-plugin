@@ -14,17 +14,9 @@ export default {
         commit('setState', data)
         commit('configs/bootstrap', get(data, 'configs'))
         commit('themes/bootstrap', get(data, 'themes'))
+        commit('templates/bootstrap', get(data, 'templates'))
       })
       .finally(() => commit('loaded'))
-  },
-
-  // Template
-  updateTemplate({ getters, commit }, value) {
-    if (getters.routeName !== 'template') {
-      return
-    }
-
-    commit('updateTemplate', { id: getters.routeId, value })
   },
 
   // Preview
@@ -67,24 +59,10 @@ export default {
       }
 
       case 'template': {
-        const template = get(getters.templates, 'default', {})
-
-        request
-          .create(
-            `${PODLOVE.api.template}/${id}`,
-            { template },
-            {
-              loading: PODLOVE.i18n.message_creating,
-              error: PODLOVE.i18n.error_save_template,
-            }
-          )
-          .catch(console.warn)
-          .then(template => {
-            commit('updateTemplate', { id, template })
-            commit('updateModalVisibility', { value: false, type: null, target: null })
-            router.push({ name: 'template', params: { id } })
-          })
-
+        dispatch('templates/add', id).then(() => {
+          commit('updateModalVisibility', { value: false, type: null, target: null })
+          router.push({ name: 'template', params: { id } })
+        })
         break
       }
     }
@@ -112,18 +90,7 @@ export default {
       }
 
       case 'template': {
-        const payload = get(getters.templates, id, {})
-
-        request
-          .create(`${PODLOVE.api.template}/${id}`, payload, {
-            loading: PODLOVE.i18n.message_saving,
-            error: PODLOVE.i18n.error_save_template,
-          })
-          .catch(console.warn)
-          .then(template => {
-            commit('updateTemplate', { id, template })
-          })
-
+        dispatch('templates/save')
         break
       }
 
@@ -139,7 +106,6 @@ export default {
               error: PODLOVE.i18n.error_save_settings,
             }
           )
-          .catch(console.warn)
           .then(settings => {
             commit('updateSettings', settings)
           })
@@ -167,17 +133,10 @@ export default {
         break
       }
       case 'template': {
-        request
-          .remove(`${PODLOVE.api.template}/${id}`, {
-            loading: PODLOVE.i18n.message_saving,
-            error: PODLOVE.i18n.error_delete_template,
-          })
-          .catch(console.warn)
-          .then(() => {
-            commit('removeTemplate', { id })
-            commit('updateModalVisibility', { value: false, type: null, target: null })
-            router.push({ name: 'template', params: { id: 'default' } })
-          })
+        dispatch('templates/remove', id).then(() => {
+          commit('updateModalVisibility', { value: false, type: null, target: null })
+          router.push({ name: 'template', params: { id: 'default' } })
+        })
         break
       }
     }
