@@ -113,7 +113,7 @@
 
     <card title="Fonts">
       <form-element full>
-        <el-select placeholder="Add" :value="fonts.selected" size="small" @change="selectFont">
+        <el-select :value="selected" size="small" @change="selectFont">
           <el-option v-for="item in clients" :key="item" :label="item" :value="item"></el-option>
         </el-select>
       </form-element>
@@ -188,73 +188,73 @@
 </template>
 
 <script>
-import { get, values, uniq, clone } from "lodash";
-import { mapGetters, mapActions } from "vuex";
-import Draggable from "vuedraggable";
-import { Card, FormElement } from "../components";
+import { get, values, uniq, clone } from 'lodash'
+import { mapGetters, mapActions } from 'vuex'
+import Draggable from 'vuedraggable'
+import { Card, FormElement } from '../components'
 
 export default {
   data() {
     return {
-      clients: ["ci", "regular", "bold"]
-    };
+      clients: ['ci', 'regular', 'bold'],
+    }
   },
 
   components: {
     Card,
     FormElement,
-    Draggable
+    Draggable,
   },
 
   computed: {
-    ...mapGetters(["themes", "routeId", "fonts"]),
+    ...mapGetters('themes', ['current', 'fonts']),
 
-    theme() {
-      return get(this.themes, this.routeId);
+    selected() {
+      return get(this.fonts, 'selected', null)
     },
 
     tokens() {
-      return get(this.theme, "tokens", {});
+      return get(this.current, 'tokens', {})
     },
 
     fontSources() {
-      return get(this.theme, ["fonts", this.fonts.selected, "src"], 300);
+      return get(this.current, ['fonts', this.selected, 'src'], 300)
     },
 
     fontWeight() {
-      return get(this.theme, ["fonts", this.fonts.selected, "weight"], 300);
+      return get(this.current, ['fonts', this.selected, 'weight'], 300)
     },
 
     fontFamily() {
-      return clone(get(this.theme, ["fonts", this.fonts.selected, "family"], []));
+      return clone(get(this.current, ['fonts', this.selected, 'family'], []))
     },
 
     predefinedColors() {
-      const colors = get(this.theme, "tokens");
+      const colors = get(this.current, 'tokens')
 
-      return uniq(values(colors) || []);
-    }
+      return uniq(values(colors) || [])
+    },
   },
 
   methods: {
-    ...mapActions([
-      "updateToken",
-      "stageFontSource",
-      "updateFontSource",
-      "removeFontSrc",
-      "updateFontWeight",
-      "addFontFamily",
-      "stageFontFamily",
-      "updateFontFamily",
-      "removeFontFamily",
-      "selectFont"
+    ...mapActions('themes', [
+      'updateToken',
+      'stageFontSource',
+      'updateFontSource',
+      'removeFontSrc',
+      'updateFontWeight',
+      'addFontFamily',
+      'stageFontFamily',
+      'updateFontFamily',
+      'removeFontFamily',
+      'selectFont',
     ]),
 
     color(id) {
-      return get(this.tokens, id);
-    }
-  }
-};
+      return get(this.tokens, id)
+    },
+  },
+}
 </script>
 
 <style lang="scss">

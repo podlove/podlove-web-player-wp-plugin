@@ -46,7 +46,8 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapGetters('configs', ['configList']),
-    ...mapGetters(['themeList', 'templateList', 'routeName', 'routeId']),
+    ...mapGetters('themes', ['themeList']),
+    ...mapGetters(['templateList', 'routeName', 'routeId']),
     active() {
       switch (this.routeName) {
         case 'config':

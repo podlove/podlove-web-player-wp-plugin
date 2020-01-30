@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import { cloneDeep } from 'lodash'
 
 import configs from './configs'
+import themes from './themes'
 
 import state from './state'
 import getters from './getters'
@@ -20,6 +21,7 @@ export default new Vuex.Store({
   plugins,
 
   modules: {
-    configs
+    configs,
+    themes
   }
 })
