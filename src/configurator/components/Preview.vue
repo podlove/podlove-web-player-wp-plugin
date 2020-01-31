@@ -2,51 +2,51 @@
   <div class="preview">
     <card title="Preview">
       <div class="flex mb-6">
-        <form-element label="Config">
+        <form-element :label="$i18n(['preview', 'config'])">
           <el-select
             class="select"
             :disabled="name === 'config'"
             :value="preview.config"
             @change="updatePreviewOption({ option: 'config', value: $value })"
-            placeholder="Select Config"
+            :placeholder="$i18n(['preview', 'config-placeholder'])"
             size="small"
           >
             <el-option v-for="item in configList" :key="`config-${item}`" :label="item" :value="item"> </el-option>
           </el-select>
         </form-element>
 
-        <form-element label="Theme">
+        <form-element :label="$i18n(['preview', 'theme'])">
           <el-select
             class="select"
             :disabled="name === 'theme'"
             :value="preview.theme"
             @change="updatePreviewOption({ option: 'theme', value: $value })"
-            placeholder="Select Theme"
+            :placeholder="$i18n(['preview', 'theme-placeholder'])"
             size="small"
           >
             <el-option v-for="item in themeList" :key="`theme-${item}`" :label="item" :value="item"> </el-option>
           </el-select>
         </form-element>
 
-        <form-element label="Templates">
+        <form-element :label="$i18n(['preview', 'template'])">
           <el-select
             class="select"
             :disabled="name === 'template'"
             :value="preview.template"
             @change="updatePreviewOption({ option: 'template', value: $event })"
-            placeholder="Select Template"
+            :placeholder="$i18n(['preview', 'template-placeholder'])"
             size="small"
           >
             <el-option v-for="item in templateList" :key="`template-${item}`" :label="item" :value="item"> </el-option>
           </el-select>
         </form-element>
 
-        <form-element label="Sizes">
+        <form-element :label="$i18n(['preview', 'size'])">
           <el-select
             class="select"
             :value="preview.size"
             @change="updatePreviewOption({ option: 'size', value: $event })"
-            placeholder="Select Template"
+            :placeholder="$i18n(['preview', 'size-placeholder'])"
             size="small"
           >
             <el-option v-for="item in sizes" :key="`size-${item}`" :label="item" :value="item"> </el-option>

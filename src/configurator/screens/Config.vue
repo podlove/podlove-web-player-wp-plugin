@@ -1,19 +1,19 @@
 <template>
   <div class="config">
-    <card title="Active Tab">
+    <card :title="$i18n(['config', 'active-tab'])">
       <form-element>
-        <el-select placeholder="Select Tab" :value="activeTab" size="small" @change="selectActiveTab">
+        <el-select :placeholder="$i18n(['config', 'select-tab'])" :value="activeTab" size="small" @change="selectActiveTab">
           <el-option v-for="item in tabs" :key="`tab-${item}`" :label="item" :value="item"></el-option>
         </el-select>
       </form-element>
     </card>
 
-    <card title="Share Tab">
+    <card :title="$i18n(['config', 'share-tab'])">
       <div class="flex">
         <div class="row">
-          <form-element label="Channels">
+          <form-element :label="$i18n(['config', 'channels'])">
             <el-select
-              placeholder="Add"
+              :placeholder="$i18n(['config', 'channels-add'])"
               value=""
               size="small"
               @change="addChannel"
@@ -33,22 +33,22 @@
           </form-element>
         </div>
         <div class="row">
-          <form-element label="Options">
-            <el-switch :value="sharePlaytime" active-text="Share Playtime" @change="updateSharePlaytime"></el-switch>
-            <el-switch :value="embedPlayer" active-text="Embed Player" @change="updateEmbedPlayer"></el-switch>
+          <form-element :label="$i18n(['config', 'share-options'])">
+            <el-switch :value="sharePlaytime" :active-text="$i18n(['config', 'share-playtime'])" @change="updateSharePlaytime"></el-switch>
+            <el-switch :value="embedPlayer" :active-text="$i18n(['config', 'embed-player'])" @change="updateEmbedPlayer"></el-switch>
           </form-element>
         </div>
       </div>
     </card>
 
-    <card title="Subscribe Button">
-      <form-element label="Feed" :full="true">
-        <el-input size="small" placeholder="RSS Feed" :value="feed" @input="updateFeed" clearable></el-input>
+    <card :title="$i18n(['config', 'subscribe-button'])">
+      <form-element :label="$i18n(['config', 'feed'])" :full="true">
+        <el-input size="small" :placeholder="$i18n(['config', 'rss-feed'])" :value="feed" @input="updateFeed" clearable></el-input>
       </form-element>
 
       <div class="flex">
-        <form-element label="Clients">
-          <el-select placeholder="Add" value="" :disabled="false" size="small" @change="addClient">
+        <form-element :label="$i18n(['config', 'clients'])">
+          <el-select :placeholder="$i18n(['config', 'client-add'])" value="" :disabled="false" size="small" @change="addClient">
             <el-option v-for="item in availableClients" :key="item.id" :label="item.title" :value="item"></el-option>
           </el-select>
           <draggable
@@ -63,7 +63,7 @@
           />
         </form-element>
         <div v-if="stagedClient.id">
-          <form-element label="Supported Platforms" class="h-16">
+          <form-element :label="$i18n(['config', 'client-supported-plattforms'])" class="h-16">
             <el-tag
               v-for="platform in stagedClient.platforms"
               :key="platform"
@@ -76,12 +76,12 @@
 
           <form-element>
             <el-tooltip slot="label" :content="stagedClient.serviceScheme('[service-id]')" placement="top-start">
-              <h4 class="item-title"><span>Service Id</span><i class="el-icon-info ml-1" /></h4>
+              <h4 class="item-title"><span>{{ $i18n(['config', 'client-service-id']) }}</span><i class="el-icon-info ml-1" /></h4>
             </el-tooltip>
 
             <el-input
               size="small"
-              placeholder="Service Id"
+              :placeholder="$i18n(['config', 'client-service-id'])"
               :value="stagedClient.service"
               @input="updateClientService"
               clearable

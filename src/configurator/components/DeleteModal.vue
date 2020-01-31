@@ -5,7 +5,6 @@
       tabindex="-1"
       role="dialog"
       aria-modal="true"
-      aria-label="Tip"
       class="el-message-box__wrapper z-50"
     >
       <div class="el-message-box">
@@ -37,29 +36,11 @@ export default {
     ...mapGetters('modal', ['target', 'id', 'type', 'visible']),
 
     title() {
-      switch (this.target) {
-        case 'config':
-          return 'Delete Config'
-        case 'theme':
-          return 'Delete Theme'
-        case 'template':
-          return 'Delete Template'
-        default:
-          return null
-      }
+      return this.$i18n([this.target, 'delete'])
     },
 
     message() {
-      switch (this.target) {
-        case 'config':
-          return `Do you really want to delete the config ${this.id}`;
-        case 'theme':
-          return `Do you really want to delete the theme ${this.id}`;
-        case 'template':
-          return `Do you really want to delete the template ${this.id}`;
-        default:
-          return null
-      }
+      return this.$i18n([this.target, 'delete-message'], { id: this.id })
     },
 
     open() {

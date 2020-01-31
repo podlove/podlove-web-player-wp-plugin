@@ -1,9 +1,9 @@
 <template>
   <div class="template">
-    <card title="Source">
+    <card :title="$i18n(['setting', 'source'])">
       <form-element>
        <el-select
-          placeholder="Select Source"
+          :placeholder="$i18n(['setting', 'select-source'])"
           :value="source"
           size="small"
           @change="updateSource"

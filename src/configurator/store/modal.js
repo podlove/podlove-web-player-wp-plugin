@@ -75,12 +75,12 @@ export default {
       let error = false
 
       if (existing.includes(value)) {
-        state.error = 'Id already exists'
+        state.error = window.PODLOVE.i18n.modal['id-exists']
         error = true
       }
 
       if (!/^[a-z]+$/.test(value)) {
-        state.error = 'Only lower cased characters are allowed'
+        state.error = window.PODLOVE.i18n.modal['id-invalid']
         error = true
       }
 

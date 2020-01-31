@@ -1,9 +1,9 @@
 <template>
   <div class="theme">
-    <card title="Colors">
+    <card :title="$i18n(['theme', 'colors'])">
       <div class="flex">
         <div>
-          <form-element label="Brand">
+          <form-element :label="$i18n(['theme', 'color-brand'])">
             <div class="color-picker">
               <el-color-picker
                 :value="color('brand')"
@@ -16,7 +16,7 @@
             </div>
           </form-element>
 
-          <form-element label="Brand Dark">
+          <form-element :label="$i18n(['theme', 'color-brand-dark'])">
             <div class="color-picker">
               <el-color-picker
                 :value="color('brandDark')"
@@ -29,7 +29,7 @@
             </div>
           </form-element>
 
-          <form-element label="Brand Darkest">
+          <form-element :label="$i18n(['theme', 'color-brand-darkest'])">
             <div class="color-picker">
               <el-color-picker
                 :value="color('brandDarkest')"
@@ -42,7 +42,7 @@
             </div>
           </form-element>
 
-          <form-element label="Brand Lightest">
+          <form-element :label="$i18n(['theme', 'color-brand-lightest'])">
             <div class="color-picker">
               <el-color-picker
                 :value="color('brandLightest')"
@@ -56,7 +56,7 @@
           </form-element>
         </div>
         <div>
-          <form-element label="Shade Base">
+          <form-element :label="$i18n(['theme', 'color-shade-base'])">
             <div class="color-picker">
               <el-color-picker
                 :value="color('shadeBase')"
@@ -69,7 +69,7 @@
             </div>
           </form-element>
 
-          <form-element label="Shade Dark">
+          <form-element :label="$i18n(['theme', 'color-shade-dark'])">
             <div class="color-picker">
               <el-color-picker
                 :value="color('shadeDark')"
@@ -82,7 +82,7 @@
             </div>
           </form-element>
 
-          <form-element label="Contrast">
+          <form-element :label="$i18n(['theme', 'color-contrast'])">
             <div class="color-picker">
               <el-color-picker
                 :value="color('contrast')"
@@ -95,7 +95,7 @@
             </div>
           </form-element>
 
-          <form-element label="Alt">
+          <form-element :label="$i18n(['theme', 'color-alt'])">
             <div class="color-picker">
               <el-color-picker
                 :value="color('alt')"
@@ -111,17 +111,17 @@
       </div>
     </card>
 
-    <card title="Fonts">
+    <card :title="$i18n(['theme', 'fonts'])">
       <form-element full>
         <el-select :value="selected" size="small" @change="selectFont">
           <el-option v-for="item in clients" :key="item" :label="item" :value="item"></el-option>
         </el-select>
       </form-element>
-      <div class="font-selector">
-        <form-element label="Font Sources" full>
-          <div class="font-input">
+      <div class="mb-4">
+        <form-element :label="$i18n(['theme', 'font-sources'])" full>
+          <div class="font-input mb-2">
             <el-input
-              placeholder="Add source"
+              :placeholder="$i18n(['theme', 'add-source'])"
               size="small"
               @keyup.enter.native="updateFontSource"
               :class="{ invalid: fonts.ci.error }"
@@ -130,7 +130,7 @@
             >
               <el-button slot="append" icon="el-icon-plus" @click="updateFontSource"></el-button>
             </el-input>
-            <div class="error-message" v-if="fonts.ci.error">{{ fonts.ci.error }}</div>
+            <div class="mt-1 mr-0 mb-2 ml-0 text-sm text-red-600" v-if="fonts.ci.error">{{ fonts.ci.error }}</div>
           </div>
 
           <div class="sources">
@@ -141,7 +141,7 @@
         </form-element>
       </div>
 
-      <form-element label="Font Weight" class="font-input">
+      <form-element :label="$i18n(['theme', 'font-weight'])" class="font-input mb-2">
         <el-input-number
           :value="fontWeight"
           size="small"
@@ -153,10 +153,10 @@
         ></el-input-number>
       </form-element>
 
-      <form-element label="Font Family" full>
-        <div class="font-input">
+      <form-element :label="$i18n(['theme', 'font-family'])" full>
+        <div class="font-input mb-2">
           <el-input
-            placeholder="Add source"
+            :placeholder="$i18n(['theme', 'font-add'])"
             size="small"
             @keyup.enter.native="addFontFamily"
             :value="fonts.ci.family"
@@ -250,52 +250,38 @@ export default {
 </script>
 
 <style lang="scss">
-.flex {
-  display: flex;
-}
+.theme {
+  .color-picker {
+    display: flex;
+    margin-bottom: 1em;
 
-.color-picker {
-  display: flex;
-  margin-bottom: 1em;
-
-  .el-color-picker {
-    margin-right: 1em;
-  }
-}
-
-.font-selector {
-  margin-bottom: 1em;
-}
-
-.font-input {
-  margin-bottom: 0.5em;
-
-  .invalid {
-    input,
-    .el-input-group__append {
-      border-color: #f56c6c !important;
+    .el-color-picker {
+      margin-right: 1em;
     }
   }
 
-  .error-message {
-    margin: 0.25em 0 0 0.5em;
-    color: #f56c6c;
-    font-size: 0.8em;
+  .font-input mb-2 {
+    .invalid {
+      input,
+      .el-input-group__append {
+        border-color: #f56c6c !important;
+      }
+    }
   }
-}
 
-.sources {
-  .el-tag {
-    display: block;
-    position: relative;
-    cursor: move;
-    margin-bottom: 0.25em;
+  .sources {
+    .el-tag {
+      display: block;
+      position: relative;
+      cursor: move;
+      margin-bottom: 0.25em;
 
-    .el-icon-close {
-      position: absolute;
-      right: 5px;
-      top: 50%;
-      margin-top: -8px;
+      .el-icon-close {
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        margin-top: -8px;
+      }
     }
   }
 }

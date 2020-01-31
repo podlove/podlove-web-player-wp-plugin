@@ -1,6 +1,6 @@
 <template>
   <div class="template">
-    <card title="Markup" class="fit">
+    <card :title="$i18n(['template', 'markup'])" class="fit">
       <prism-editor :code="current" language="html" :lineNumbers="true" @change="updateTemplate"></prism-editor>
     </card>
   </div>

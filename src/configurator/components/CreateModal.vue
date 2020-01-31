@@ -46,29 +46,11 @@ export default {
     ...mapGetters('modal', ['target', 'type', 'visible', 'error', 'value']),
 
     title() {
-      switch (this.target) {
-        case 'config':
-          return 'Add Config'
-        case 'theme':
-          return 'Add Theme'
-        case 'template':
-          return 'Add Template'
-        default:
-          return null
-      }
+      return this.$i18n([this.target, 'create'])
     },
 
     message() {
-      switch (this.target) {
-        case 'config':
-          return 'Please set a config id'
-        case 'theme':
-          return 'Please set a theme id'
-        case 'template':
-          return 'Please set a template id'
-        default:
-          return null
-      }
+      return this.$i18n([this.target, 'create-message'])
     },
 
     open() {
