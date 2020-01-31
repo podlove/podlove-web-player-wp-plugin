@@ -1,13 +1,12 @@
 <template>
   <div v-if="open">
-    <div class="v-modal" tabindex="0" style="z-index: 998;" @click="closeModal"></div>
+    <div class="v-modal z-40" tabindex="0" @click="closeModal"></div>
     <div
       tabindex="-1"
       role="dialog"
       aria-modal="true"
       aria-label="Tip"
-      class="el-message-box__wrapper"
-      style="z-index: 999;"
+      class="el-message-box__wrapper z-50"
     >
       <div class="el-message-box">
         <div class="el-message-box__header" v-if="title">
@@ -86,18 +85,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-  .invalid {
-    input,
-    .el-input-group__append {
-      border-color: #f56c6c !important;
-    }
-  }
-
-  .error-message {
-    margin: 0.25em 0 0 0.5em;
-    color: #f56c6c;
-    font-size: 0.8em;
-  }
-</style>

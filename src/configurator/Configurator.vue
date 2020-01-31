@@ -1,5 +1,5 @@
 <template>
-  <div class="player-configurator">
+  <div class="flex">
     <el-container>
       <el-aside width="200px">
         <navigation />
@@ -8,9 +8,9 @@
         <el-header>
           <page-header></page-header>
         </el-header>
-        <el-main class="player-main">
-          <router-view class="player-col"></router-view>
-          <preview class="player-col" />
+        <el-main class="flex configurator">
+          <router-view class="mr-6"></router-view>
+          <preview class="mr-6" />
         </el-main>
       </el-container>
     </el-container>
@@ -43,42 +43,14 @@
   }
 </script>
 
-<style lang="scss">
-  @import '~normalize.css';
+<style lang="postcss">
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
   @import '~element-ui/lib/theme-chalk/index.css';
-  @import '~styles/variables';
-  @import '~styles/form';
-  @import '~styles/fixes';
 
-  html {
-    box-sizing: border-box;
-  }
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }
-
-  .player-configurator {
+  .configurator {
     height: calc(100vh - 32px);
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
-    display: flex
   }
-
-  .player-main {
-    display: flex;
-  }
-
-  .player-col {
-    margin-right: 2em;
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-
-//   <style lang="postcss">
-//   @tailwind base;
-//   @tailwind components;
-//   @tailwind utilities;
-// </style>
-
 </style>

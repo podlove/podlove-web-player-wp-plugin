@@ -9,31 +9,27 @@
     </card>
 
     <card title="Share Tab">
-      <div class="column">
+      <div class="flex">
         <div class="row">
           <form-element label="Channels">
-            <el-select placeholder="Add" value="" size="small" @change="addChannel" :disabled="availableChannels.length === 0">
-              <el-option v-for="item in availableChannels" :key="`channel-${item}`" :label="item" :value="item"></el-option>
+            <el-select
+              placeholder="Add"
+              value=""
+              size="small"
+              @change="addChannel"
+              :disabled="availableChannels.length === 0"
+            >
+              <el-option
+                v-for="item in availableChannels"
+                :key="`channel-${item}`"
+                :label="item"
+                :value="item"
+              ></el-option>
             </el-select>
           </form-element>
 
           <form-element>
-            <draggable
-              class="drag-list"
-              :list="selectedChannels"
-              group="channels"
-              @change="updateChannels(selectedChannels)"
-            >
-              <el-tag
-                class="draggable"
-                v-for="element in selectedChannels"
-                :key="element"
-                closable
-                @close="removeChannel(element)"
-              >
-                {{ element }}
-              </el-tag>
-            </draggable>
+            <draggable :list="selectedChannels" @change="updateChannels" @remove="removeChannel" />
           </form-element>
         </div>
         <div class="row">
@@ -47,64 +43,61 @@
 
     <card title="Subscribe Button">
       <form-element label="Feed" :full="true">
-        <el-input size="small" placeholder="Service Id" :value="feed" @input="updateFeed" clearable></el-input>
+        <el-input size="small" placeholder="RSS Feed" :value="feed" @input="updateFeed" clearable></el-input>
       </form-element>
 
-      <form-element label="Clients">
-        <el-select placeholder="Add" value="" :disabled="false" size="small" @change="addClient">
-          <el-option v-for="item in availableClients" :key="item.id" :label="item.title" :value="item"></el-option>
-        </el-select>
-        <draggable class="drag-list" :list="selectedClients" group="channels" @change="updateClients(selectedClients)">
-          <el-tag
-            class="draggable"
-            v-for="element in selectedClients"
-            :key="element.id"
-            closable
-            :hit="stagedClient.id === element.id"
-            :type="element.serviceScheme ? 'success' : ''"
-            @click="stageClient(element)"
-            @close="removeClient(element)"
-          >
-            {{ element.title }}
-          </el-tag>
-        </draggable>
-      </form-element>
-      <div v-if="stagedClient.id">
-        <form-element label="Supported Platforms">
-          <el-tag
-            v-for="platform in stagedClient.platforms"
-            :key="platform"
-            size="small"
-            type="info"
-            class="platform"
-            >{{ platform }}</el-tag
-          >
+      <div class="flex">
+        <form-element label="Clients">
+          <el-select placeholder="Add" value="" :disabled="false" size="small" @change="addClient">
+            <el-option v-for="item in availableClients" :key="item.id" :label="item.title" :value="item"></el-option>
+          </el-select>
+          <draggable
+            :list="selectedClients"
+            @change="updateClients"
+            :selected="stagedClient.id"
+            @click="stageClient"
+            @remove="removeClient"
+            :type="element => (element.serviceScheme ? 'success' : '')"
+            :title="element => element.title"
+            :id="element => element.id"
+          />
         </form-element>
+        <div v-if="stagedClient.id">
+          <form-element label="Supported Platforms" class="h-16">
+            <el-tag
+              v-for="platform in stagedClient.platforms"
+              :key="platform"
+              size="small"
+              type="info"
+              class="mr-2"
+              >{{ platform }}</el-tag
+            >
+          </form-element>
 
-        <form-element>
-          <el-tooltip slot="label" :content="stagedClient.serviceScheme('[service-id]')" placement="top-start">
-            <h4 class="item-title"><span>Service Id</span><i class="el-icon-info" /></h4>
-          </el-tooltip>
+          <form-element>
+            <el-tooltip slot="label" :content="stagedClient.serviceScheme('[service-id]')" placement="top-start">
+              <h4 class="item-title"><span>Service Id</span><i class="el-icon-info ml-1" /></h4>
+            </el-tooltip>
 
-          <el-input
-            size="small"
-            placeholder="Service Id"
-            :value="stagedClient.service"
-            @input="updateClientService"
-            clearable
-          >
-          </el-input>
-        </form-element>
+            <el-input
+              size="small"
+              placeholder="Service Id"
+              :value="stagedClient.service"
+              @input="updateClientService"
+              clearable
+            >
+            </el-input>
+          </form-element>
+        </div>
       </div>
     </card>
   </div>
 </template>
 
 <script>
-import Draggable from 'vuedraggable'
 import { get } from 'lodash'
 import { mapGetters, mapActions } from 'vuex'
-import { Card, FormElement } from '../components'
+import { Card, FormElement, Draggable } from '../components'
 
 export default {
   components: {
@@ -173,31 +166,4 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.draggable {
-  width: 100%;
-  display: block;
-  position: relative;
-  cursor: move;
-  margin-bottom: 0.5em;
-
-  .el-icon-close {
-    position: absolute;
-    right: 5px;
-    top: 50%;
-    margin-top: -8px;
-  }
-}
-
-.column {
-  display: flex;
-}
-
-.platform {
-  margin-right: 0.5em;
-}
-
-.drag-list {
-  width: 100%;
-}
-</style>
+<style lang="scss"></style>

@@ -1,6 +1,6 @@
 <template>
-  <div class="form-element" :class="{ full }">
-    <h4 class="title" v-if="label">{{ label }}</h4>
+  <div class="form-element w-48 mr-6" :class="{ full }">
+    <h4 class="mb-2" v-if="label">{{ label }}</h4>
     <div class="input">
       <slot></slot>
     </div>
@@ -24,17 +24,6 @@ export default {
 
 <style lang="scss">
 .form-element {
-  width: 200px;
-  margin-right: 2em;
-
-  .title {
-    margin: 0 0 0.5em 0;
-
-    .el-icon-info {
-      margin-left: 0.25em;
-    }
-  }
-
   &.full {
     width: 400px;
     margin-bottom: 1em;

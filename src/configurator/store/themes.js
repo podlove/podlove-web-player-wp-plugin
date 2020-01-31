@@ -191,7 +191,7 @@ export default {
       })
     },
 
-    updateFontFamily({ getters, commit }, { value }) {
+    updateFontFamily({ getters, commit }, value) {
       if(!getters.isActive) {
         return
       }
@@ -201,7 +201,7 @@ export default {
       commit('updateFontFamily', { id: getters.id, font, value })
     },
 
-    removeFontFamily({ getters, commit }, { value }) {
+    removeFontFamily({ getters, commit }, value) {
       if(!getters.isActive) {
         return
       }

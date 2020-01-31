@@ -1,5 +1,5 @@
 <template>
-  <div class="player">
+  <div class="overflow-auto">
     <div ref="player" v-html="template" :style="{ width: previewWidth }"></div>
   </div>
 </template>
@@ -138,9 +138,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped>
-.player {
-  overflow: auto;
-}
-</style>

@@ -1,7 +1,7 @@
 <template>
   <div class="theme">
     <card title="Colors">
-      <div class="color-row">
+      <div class="flex">
         <div>
           <form-element label="Brand">
             <div class="color-picker">
@@ -167,21 +167,10 @@
         </div>
 
         <draggable
-          class="drag-list"
           :list="fontFamily"
-          group="channels"
-          @change="updateFontFamily({ value: fontFamily })"
-        >
-          <el-tag
-            class="draggable-family"
-            v-for="element in fontFamily"
-            :key="element"
-            closable
-            @close="removeFontFamily({ value: element })"
-          >
-            {{ element }}
-          </el-tag>
-        </draggable>
+          @change="updateFontFamily"
+          @remove="removeFontFamily"
+        />
       </form-element>
     </card>
   </div>
@@ -190,8 +179,7 @@
 <script>
 import { get, values, uniq, clone } from 'lodash'
 import { mapGetters, mapActions } from 'vuex'
-import Draggable from 'vuedraggable'
-import { Card, FormElement } from '../components'
+import { Card, FormElement, Draggable } from '../components'
 
 export default {
   data() {
@@ -253,12 +241,16 @@ export default {
     color(id) {
       return get(this.tokens, id)
     },
+
+    updateFont(element) {
+      this.updateFontFamily({ value: element })
+    }
   },
 }
 </script>
 
 <style lang="scss">
-.color-row {
+.flex {
   display: flex;
 }
 
@@ -305,21 +297,6 @@ export default {
       top: 50%;
       margin-top: -8px;
     }
-  }
-}
-
-.draggable-family {
-  width: 100%;
-  display: block;
-  position: relative;
-  cursor: move;
-  margin-bottom: 0.5em;
-
-  .el-icon-close {
-    position: absolute;
-    right: 5px;
-    top: 50%;
-    margin-top: -8px;
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <el-card class="config-card">
-    <h4 class="card-title" slot="header" v-if="title">{{ title }}</h4>
+  <el-card class="w-full mb-6" style="min-width: 450px;">
+    <h4 class="m-0 font-bold" slot="header" v-if="title">{{ title }}</h4>
     <slot></slot>
   </el-card>
 </template>
@@ -15,20 +15,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.config-card {
-  width: 100%;
-  min-width: 500px;
-  margin-bottom: 2em;
-
-  .card-title {
-    margin: 0;
-  }
-
-  .card-content {
-    display: flex;
-  }
-}
-
-</style>

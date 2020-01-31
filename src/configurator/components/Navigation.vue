@@ -1,5 +1,5 @@
 <template>
-  <el-menu :default-active="active" class="navigation">
+  <el-menu :default-active="active" class="h-full">
     <el-submenu index="1">
       <template slot="title">
         <i class="el-icon-c-scale-to-original"></i>
@@ -70,9 +70,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-  .navigation {
-    height: 100%;
-  }
-</style>

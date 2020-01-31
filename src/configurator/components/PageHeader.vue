@@ -1,6 +1,6 @@
 <template>
-  <div class="page-header">
-    <h2>{{ title }}</h2>
+  <div class="pb-2 pt-2 w-full flex items-center justify-between">
+    <h2 class="text-xl font-bold">{{ title }}</h2>
     <el-row>
       <el-button icon="el-icon-check" type="primary" @click="save">Save</el-button>
       <el-button type="danger" icon="el-icon-delete" plain v-if="this.name !== 'settings'" :disabled="this.id === 'default'" @click="showDeleteModal({ target: name, id })">Delete</el-button>
@@ -40,13 +40,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.page-header {
-  padding: 0.5em 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-</style>

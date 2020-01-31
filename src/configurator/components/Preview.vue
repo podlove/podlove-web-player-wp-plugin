@@ -1,7 +1,7 @@
 <template>
   <div class="preview">
     <card title="Preview">
-      <div class="preview-options">
+      <div class="flex mb-6">
         <form-element label="Config">
           <el-select
             class="select"
@@ -152,10 +152,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped>
-.preview-options {
-  display: flex;
-  margin-bottom: 2em;
-}
-</style>
