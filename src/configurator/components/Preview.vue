@@ -92,15 +92,13 @@ export default {
 
   computed: {
     ...mapGetters('configs', ['configList', 'configs']),
+    ...mapGetters('themes', ['themes', 'themeList']),
+    ...mapGetters('templates', ['templates', 'templateList']),
+    ...mapGetters('settings', ['source']),
+    ...mapGetters('preview', ['preview']),
     ...mapGetters([
-      'themeList',
-      'templateList',
-      'preview',
       'routeName',
       'routeId',
-      'templates',
-      'themes',
-      'source',
     ]),
     config() {
       return get(this.configs, this.preview.config, {})
@@ -136,7 +134,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['updatePreviewOption']),
+    ...mapActions('preview', ['updatePreviewOption']),
 
     connectPlayerStore(store) {
       this.store = store

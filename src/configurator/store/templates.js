@@ -41,6 +41,10 @@ export default {
   },
 
   actions: {
+    bootstrap({ commit }, payload) {
+      commit('bootstrap', get(payload, 'templates'))
+    },
+
     updateTemplate({ getters, commit }, value) {
       const id = getters.id
 
@@ -53,7 +57,6 @@ export default {
 
     add({ getters, commit }, id) {
       const template = get(getters.templates, 'default', {})
-      console.log(template)
       request
         .create(
           `${PODLOVE.api.template}/${id}`,

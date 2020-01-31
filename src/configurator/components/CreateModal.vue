@@ -1,5 +1,5 @@
 <template>
-  <div v-if="visible">
+  <div v-if="open">
     <div class="v-modal" tabindex="0" style="z-index: 998;" @click="closeModal"></div>
     <div
       tabindex="-1"
@@ -23,14 +23,14 @@
             </div>
             <div class="el-message-box__input">
               <el-form @submit.native="submit">
-                <el-input ref="input" :value="modal.value" size="small" :class="{ invalid: modal.error }" @input="updateCreateModalValue"></el-input>
-                <div class="error-message" v-if="modal.error">{{ modal.error }}</div>
+                <el-input ref="input" :value="value" size="small" :class="{ invalid: error }" @input="updateCreateModalValue"></el-input>
+                <div class="error-message" v-if="error">{{ error }}</div>
               </el-form>
             </div>
           </div>
           <div class="el-message-box__btns">
             <el-button size="small" @click="closeModal">Cancel</el-button>
-            <el-button ref="submit" size="small" type="primary" :disabled="!modal.value || !!modal.error" @click="confirmCreateModal">Add</el-button>
+            <el-button ref="submit" size="small" type="primary" :disabled="!value || !!error" @click="create">Add</el-button>
           </div>
         </div>
       </el-form>
@@ -44,10 +44,10 @@ import { get } from 'lodash'
 
 export default {
   computed: {
-    ...mapGetters(['modal']),
+    ...mapGetters('modal', ['target', 'type', 'visible', 'error', 'value']),
 
     title() {
-      switch (this.modal.target) {
+      switch (this.target) {
         case 'config':
           return 'Add Config'
         case 'theme':
@@ -60,7 +60,7 @@ export default {
     },
 
     message() {
-      switch (this.modal.target) {
+      switch (this.target) {
         case 'config':
           return 'Please set a config id'
         case 'theme':
@@ -72,8 +72,8 @@ export default {
       }
     },
 
-    visible() {
-      return this.modal.visible && this.modal.type === 'create'
+    open() {
+      return this.visible && this.type === 'create'
     }
   },
 
@@ -85,17 +85,18 @@ export default {
     visible() {
       setTimeout(() => {
         const input = get(this.$refs, 'input.$el')
-        this.visible && input && this.$refs.input.$el.querySelector('input').focus()
+        this.open && input && this.$refs.input.$el.querySelector('input').focus()
       }, 10)
     }
   },
 
   methods: {
-    ...mapActions(['updateCreateModalValue', 'closeModal', 'confirmCreateModal']),
+    ...mapActions('modal', ['updateCreateModalValue', 'closeModal']),
+    ...mapActions(['create']),
 
     submit(event) {
       event.preventDefault()
-      this.confirmCreateModal()
+      this.create()
     }
   }
 };

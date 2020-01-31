@@ -1,5 +1,5 @@
 <template>
-  <div v-if="visible">
+  <div v-if="open">
     <div class="v-modal" tabindex="0" style="z-index: 998;" @click="closeModal"></div>
     <div
       tabindex="-1"
@@ -23,7 +23,7 @@
         </div>
         <div class="el-message-box__btns">
           <el-button size="small" @click="closeModal">Cancel</el-button>
-          <el-button ref="delete" type="danger" icon="el-icon-delete" size="small" @click="remove({ type: modal.target, id: modal.id })">Delete</el-button>
+          <el-button ref="delete" type="danger" icon="el-icon-delete" size="small" @click="remove({ target, id })">Delete</el-button>
         </div>
       </div>
     </div>
@@ -35,10 +35,10 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters(['modal']),
+    ...mapGetters('modal', ['target', 'id', 'type', 'visible']),
 
     title() {
-      switch (this.modal.target) {
+      switch (this.target) {
         case 'config':
           return 'Delete Config'
         case 'theme':
@@ -51,27 +51,27 @@ export default {
     },
 
     message() {
-      switch (this.modal.target) {
+      switch (this.target) {
         case 'config':
-          return `Do you really want to delete the config ${this.modal.id}`;
+          return `Do you really want to delete the config ${this.id}`;
         case 'theme':
-          return `Do you really want to delete the theme ${this.modal.id}`;
+          return `Do you really want to delete the theme ${this.id}`;
         case 'template':
-          return `Do you really want to delete the template ${this.modal.id}`;
+          return `Do you really want to delete the template ${this.id}`;
         default:
           return null
       }
     },
 
-    visible() {
-      return this.modal.visible && this.modal.type === 'delete'
+    open() {
+      return this.visible && this.type === 'delete'
     }
   },
 
   watch: {
     visible() {
       setTimeout(() => {
-        this.visible && this.$refs.delete.$el.focus()
+        this.open && this.$refs.delete.$el.focus()
       }, 10)
     }
   },
@@ -80,7 +80,10 @@ export default {
     document.addEventListener('keyup', evt => evt.keyCode === 27 && this.visible && this.closeModal())
   },
 
-  methods: mapActions(['closeModal', 'remove'])
+  methods: {
+    ...mapActions(['remove']),
+    ...mapActions('modal', ['closeModal'])
+  }
 };
 </script>
 

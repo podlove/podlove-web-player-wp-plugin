@@ -178,7 +178,7 @@ class Podlove_Web_Player_API
     register_rest_route( $this->plugin_name . '/' . $this->version, 'template/(?P<id>\w+)',
       array(
         'methods' => 'DELETE',
-        'callback' => array( $this, 'deleteConfig' ),
+        'callback' => array( $this, 'deleteTemplate' ),
         'args' => array (
           'id' => array(
             'required' => true,

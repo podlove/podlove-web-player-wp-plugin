@@ -63,6 +63,10 @@ export default {
   },
 
   actions: {
+    bootstrap({ commit }, payload) {
+      commit('bootstrap', get(payload, 'themes'))
+    },
+
     updateToken({ getters, commit }, { token, color }) {
       if(!getters.isActive) {
         return

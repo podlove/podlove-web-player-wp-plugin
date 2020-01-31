@@ -22,7 +22,7 @@ import { Card, FormElement } from '../components'
 
 export default {
   computed: {
-    ...mapGetters(['source', 'settings']),
+    ...mapGetters('settings', ['source', 'settings']),
 
     sources() {
       return reduce(get(this.settings, 'source.items', {}), (result, value, label) => [...result, { label, value }], [])
@@ -34,7 +34,7 @@ export default {
     FormElement
   },
 
-  methods: mapActions(['updateSource'])
+  methods: mapActions('settings', ['updateSource'])
 }
 </script>
 

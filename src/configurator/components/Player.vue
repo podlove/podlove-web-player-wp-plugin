@@ -38,7 +38,8 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['episode', 'source']),
+    ...mapGetters(['episode']),
+    ...mapGetters('settings', ['source']),
 
     previewWidth() {
       const width = this.width[this.size];

@@ -34,7 +34,10 @@ export default {
       }
     }
   },
-  methods: mapActions(['save', 'showDeleteModal'])
+  methods: {
+    ...mapActions(['save']),
+    ...mapActions('modal', ['showDeleteModal'])
+  }
 }
 </script>
 

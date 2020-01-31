@@ -5,6 +5,9 @@ import { cloneDeep } from 'lodash'
 import configs from './configs'
 import themes from './themes'
 import templates from './templates'
+import settings from './settings'
+import preview from './preview'
+import modal from './modal'
 
 import state from './state'
 import getters from './getters'
@@ -24,6 +27,9 @@ export default new Vuex.Store({
   modules: {
     configs,
     themes,
-    templates
+    templates,
+    settings,
+    preview,
+    modal
   }
 })

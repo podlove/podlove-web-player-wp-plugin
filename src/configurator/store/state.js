@@ -65,38 +65,8 @@ const episode = {
   ],
 }
 
-const templates = {}
-
-const preview = {
-  config: 'default',
-  theme: 'default',
-  template: 'default',
-  size: 'desktop',
-}
-
-const modal = {
-  visible: false,
-  target: null,
-  value: null,
-  error: null,
-  id: null,
-}
-
-const settings = {
-  source: {
-    selected: null,
-    items: {
-      cdn: null,
-      local: null,
-    },
-  },
-}
 
 export default {
   episode,
-  templates,
-  loaded: false,
-  modal,
-  preview,
-  settings,
+  loaded: false
 }

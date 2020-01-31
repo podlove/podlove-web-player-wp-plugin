@@ -81,6 +81,10 @@ export default {
   },
 
   actions: {
+    bootstrap({ commit }, payload) {
+      commit('bootstrap', get(payload, 'configs'))
+    },
+
     updateChannels({ getters, commit }, payload) {
       if (!getters.id) {
         return

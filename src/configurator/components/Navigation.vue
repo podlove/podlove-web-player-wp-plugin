@@ -63,7 +63,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['showCreateModal']),
+    ...mapActions('modal', ['showCreateModal']),
     navigate(param) {
       this.$router.push(param).catch(err => {})
     }
