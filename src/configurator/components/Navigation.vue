@@ -48,15 +48,15 @@ export default {
     ...mapGetters('configs', ['configList']),
     ...mapGetters('themes', ['themeList']),
     ...mapGetters('templates', ['templateList']),
-    ...mapGetters(['routeName', 'routeId']),
+    ...mapGetters('router', ['name', 'id']),
     active() {
-      switch (this.routeName) {
+      switch (this.name) {
         case 'config':
-          return `1-${this.configList.findIndex(id => id === this.routeId) + 1}`
+          return `1-${this.configList.findIndex(id => id === this.id) + 1}`
         case 'theme':
-          return `2-${this.themeList.findIndex(id => id === this.routeId) + 1}`
+          return `2-${this.themeList.findIndex(id => id === this.id) + 1}`
         case 'template':
-          return `3-${this.templateList.findIndex(id => id === this.routeId) + 1}`
+          return `3-${this.templateList.findIndex(id => id === this.id) + 1}`
         case 'settings':
           return '4'
       }

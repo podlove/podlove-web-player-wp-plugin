@@ -5,7 +5,7 @@
         <form-element label="Config">
           <el-select
             class="select"
-            :disabled="routeName === 'config'"
+            :disabled="name === 'config'"
             :value="preview.config"
             @change="updatePreviewOption({ option: 'config', value: $value })"
             placeholder="Select Config"
@@ -18,7 +18,7 @@
         <form-element label="Theme">
           <el-select
             class="select"
-            :disabled="routeName === 'theme'"
+            :disabled="name === 'theme'"
             :value="preview.theme"
             @change="updatePreviewOption({ option: 'theme', value: $value })"
             placeholder="Select Theme"
@@ -31,7 +31,7 @@
         <form-element label="Templates">
           <el-select
             class="select"
-            :disabled="routeName === 'template'"
+            :disabled="name === 'template'"
             :value="preview.template"
             @change="updatePreviewOption({ option: 'template', value: $event })"
             placeholder="Select Template"
@@ -96,10 +96,7 @@ export default {
     ...mapGetters('templates', ['templates', 'templateList']),
     ...mapGetters('settings', ['source']),
     ...mapGetters('preview', ['preview']),
-    ...mapGetters([
-      'routeName',
-      'routeId',
-    ]),
+    ...mapGetters('router', ['name', 'id']),
     config() {
       return get(this.configs, this.preview.config, {})
     },
@@ -115,11 +112,11 @@ export default {
   },
 
   watch: {
-    routeName() {
-      this.updatePreviewOption({ option: this.routeName, value: this.routeId })
+    name() {
+      this.updatePreviewOption({ option: this.name, value: this.id })
     },
-    routeId() {
-      this.updatePreviewOption({ option: this.routeName, value: this.routeId })
+    id() {
+      this.updatePreviewOption({ option: this.name, value: this.id })
     },
     theme: {
       handler(val) {
@@ -130,7 +127,7 @@ export default {
   },
 
   mounted() {
-    this.updatePreviewOption({ option: this.routeName, value: this.routeId })
+    this.updatePreviewOption({ option: this.name, value: this.id })
   },
 
   methods: {

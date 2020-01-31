@@ -27,7 +27,7 @@
   export default {
     name: 'configurator',
 
-    methods: mapActions(['bootstrap']),
+    methods: mapActions('lifecycle', ['bootstrap']),
 
     mounted () {
       this.bootstrap()

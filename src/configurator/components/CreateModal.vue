@@ -92,7 +92,7 @@ export default {
 
   methods: {
     ...mapActions('modal', ['updateCreateModalValue', 'closeModal']),
-    ...mapActions(['create']),
+    ...mapActions('lifecycle', ['create']),
 
     submit(event) {
       event.preventDefault()

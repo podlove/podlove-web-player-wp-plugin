@@ -28,12 +28,12 @@ export default {
 
   actions: {
     bootstrap({ commit, getters, rootGetters }) {
-      const screen = rootGetters.routeName
-      const routeId = rootGetters.routeId
+      const name = rootGetters['router/name']
+      const id = rootGetters['router/id']
 
-      commit('setPreviewOption', { option: 'config', value: screen === 'config' ? routeId : (getters.config || head(rootGetters['configs/configList'])) })
-      commit('setPreviewOption', { option: 'theme', value: screen === 'theme' ? routeId : (getters.theme || head(rootGetters['themes/themeList'])) })
-      commit('setPreviewOption', { option: 'template', value: screen === 'config' ? routeId : (getters.template || head(rootGetters['templates/templateList'])) })
+      commit('setPreviewOption', { option: 'config', value: name === 'config' ? id : (getters.config || head(rootGetters['configs/configList'])) })
+      commit('setPreviewOption', { option: 'theme', value: name === 'theme' ? id : (getters.theme || head(rootGetters['themes/themeList'])) })
+      commit('setPreviewOption', { option: 'template', value: name === 'config' ? id : (getters.template || head(rootGetters['templates/templateList'])) })
     },
 
     updatePreviewOption({ commit }, { option, value }) {

@@ -40,15 +40,17 @@ export default {
     },
 
     isActive(state, getters, rootState, rootGetters) {
-      return rootGetters.routeName === 'theme'
+      return rootGetters['router/name'] === 'theme'
     },
 
     id(state, getters, rootState, rootGetters) {
-      if (!getters.isActive || !rootGetters.routeId) {
+      const id = rootGetters['router/id']
+
+      if (!getters.isActive || !id) {
         return null
       }
 
-      return rootGetters.routeId
+      return id
     },
 
     current(state, getters) {

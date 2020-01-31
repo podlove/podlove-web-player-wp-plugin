@@ -81,7 +81,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['remove']),
+    ...mapActions('lifecycle', ['remove']),
     ...mapActions('modal', ['closeModal'])
   }
 };

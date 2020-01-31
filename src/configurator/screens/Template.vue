@@ -21,7 +21,7 @@ export default {
     Card
   },
 
-  methods: mapActions(['updateTemplate'])
+  methods: mapActions('templates', ['updateTemplate'])
 }
 </script>
 
