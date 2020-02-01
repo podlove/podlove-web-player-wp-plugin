@@ -42,7 +42,6 @@ class Podlove_Web_Player_API
 	 * @param      string    $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
-
 		$this->plugin_name = $plugin_name;
     $this->version = $version;
     $this->options = new Podlove_Web_Player_Options($plugin_name);

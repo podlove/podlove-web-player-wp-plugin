@@ -12,6 +12,24 @@
 class Podlove_Web_Player_Shortcode {
 
   /**
+	 * The ID of this plugin.
+	 *
+	 * @since    4.0.0
+	 * @access   private
+	 * @var      string    $plugin_name    The ID of this plugin.
+	 */
+	private $plugin_name;
+
+	/**
+	 * The version of this plugin.
+	 *
+	 * @since    4.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	private $version;
+
+  /**
 	 * Web Player options
 	 *
 	 * @since    4.0.0
@@ -20,10 +38,14 @@ class Podlove_Web_Player_Shortcode {
 	 */
   private $options;
 
-  private $episodeAttributes = array( 'title', 'subtitle', 'poster', 'duration', 'link', 'summary', 'transcripts', 'chapters' );
-  private $showAttributes = array( 'showtitle', 'showlink', 'showlink', 'showsubtitle', 'showposter' );
-  private $typeAttributes = array( 'src', 'mp3', 'mp4', 'ogg', 'opus' );
-  private $visibleAttributes = array( 'chapters', 'share', 'info', 'download', 'audio', 'transcripts' );
+  /**
+	 * Shortcode APIs
+	 *
+	 * @since    4.0.0
+	 * @access   private
+	 * @var      array    $api    The shortcode apis.
+	 */
+  private $api;
 
   /**
 	 * Initialize the class and set its properties.
@@ -31,33 +53,68 @@ class Podlove_Web_Player_Shortcode {
 	 * @since    4.0.0
 	 * @param    string    $plugin_name       The name of the plugin.
 	 */
-	public function __construct( $plugin_name ) {
-    $this->options = new Podlove_Web_Player_Options( $plugin_name );
+	public function __construct( $plugin_name, $version ) {
+    $this->plugin_name = $plugin_name;
+    $this->version = $version;
+
+    $this->options = new Podlove_Web_Player_Options( $this->plugin_name );
+    $this->registerApis();
   }
 
   /**
 	 * Shortcode Renderer
 	 *
 	 * @since    4.0.0
-   * @param    array    $atts       Shortcode attributes.
+   * @param    array    $atts          Shortcode attributes.
+   * @param    array    $content       Shortcode content.
 	 */
   public function render( $atts, $content ) {
-    $playerId = uniqid('player-');
+    $id = uniqid('player-');
 
-    $defaults = $this->options->read();
     $attributes = $this->parseAttributes( $atts );
+    $episode = $this->episode( $content );
 
-    // In case a config url is provided, ignore others
-    if ( array_key_exists( 'config', $attributes ) ) {
-      $config = $attributes['config'];
-    } elseif ( array_key_exists( 'data', $attributes ) ) {
-      $config = array_merge_recursive( $defaults, $attributes['data'] );
-    } else {
-      $config = $this->assingAttributes($defaults, $attributes);
+    return $this->template( $id, $episode, $config );
+  }
+
+  /**
+	 * Episode data
+	 *
+	 * @since    4.0.0
+   * @param    array    $atts           Shortcode attributes.
+	 */
+  private function episode( $content ) {
+    // check if $content is defined and a valid object -> shortcode contains a configuration object
+    if ( trim($content) ) {
+      return json_decode( $content );
     }
 
-    return $this->template( $playerId, $config );
+    // check if a post context is available call return the api with the matching endpoint
+    global $post;
+
+    if ( $post ) {
+      return $this->apis['episode'] . '?post=' . $post->ID;
+    }
+
+    // TODO @ericteuber: publisher episode metadata here?
   }
+
+  /**
+	 * Template
+	 *
+	 * @since    4.0.0
+   * @param    array    $atts           Shortcode attributes.
+   * @param    array    $options        Plugin Options.
+	 */
+
+  /**
+	 * Configuration
+	 *
+	 * @since    4.0.0
+   * @param    array    $atts           Shortcode attributes.
+   * @param    array    $options        Plugin Options.
+	 */
+
 
   /**
 	 * Shortcode Attribute Parser
@@ -74,7 +131,6 @@ class Podlove_Web_Player_Shortcode {
 
     $config = array();
 
-    $simpleAttributes = array(  );
     $atts = array_change_key_case($atts, CASE_LOWER);
 
     $config['audio'] = array();
@@ -109,11 +165,6 @@ class Podlove_Web_Player_Shortcode {
       $config['chapters'] = json_decode( $customFields[$atts['chapters']][0] );
     }
 
-    // components
-    if ( $customFields && array_key_exists( 'components', $atts ) ) {
-      $config['visibleComponents'] = explode( ',', $atts['components'] );
-    }
-
     // episode attributes
     foreach( $this->episodeAttributes as $attribute ) {
       if ( array_key_exists( $attribute, $atts ) ) {
@@ -128,92 +179,131 @@ class Podlove_Web_Player_Shortcode {
       }
     }
 
-    // visible attributes
-    foreach( $this->visibleAttributes as $attribute ) {
-      if ( array_key_exists( $attribute . 'visible', $atts ) ) {
-        $config['tabs'] = array(
-          'info' => false,
-          'share' => false,
-          'chapters' => false,
-          'audio' => false,
-          'download' => false,
-          'transcripts' => false
-        );
-
-        $config['tabs'][$attribute] = true;
-      }
-    }
-
     return $config;
-  }
-
-  private function assingAttributes ($defaults, $attributes) {
-    $overwriteAttributes = [ 'tabs', 'visibleComponents' ];
-
-    $config = array_merge_recursive( $defaults, $attributes );
-
-    foreach( $overwriteAttributes as $attribute ) {
-      if ( array_key_exists( $attribute, $attributes ) ) {
-        $config[$attribute] = $attributes[$attribute];
-      }
-    }
-
-    return $config;
-  }
-
-  /**
-	 * Url mimeType detector
-	 *
-	 * @since    4.0.0
-   * @param    string    $url       Url to file.
-	 */
-  private function mimeType( $url, $fallbackSize = 0 ) {
-    if ( function_exists( 'curl_init' ) ) {
-      $ch = curl_init( $url );
-      curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-      curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );
-      curl_setopt( $ch, CURLOPT_HEADER, 1 );
-      curl_setopt( $ch, CURLOPT_NOBODY, 1 );
-      curl_exec( $ch );
-      return array( 'mimeType' => curl_getinfo( $ch, CURLINFO_CONTENT_TYPE ), 'size' => curl_getinfo($ch, CURLINFO_CONTENT_LENGTH_DOWNLOAD ) );
-    }
-
-    // preferred way to get file headers
-    if ( function_exists( 'get_headers' ) ) {
-      $file = get_headers($url, 1);
-
-      return array( 'mimeType' => $file['Content-Type'][1], 'size' => $fallbackSize );
-    }
-
-    // fallback logic (╯°□°）╯︵ ┻━┻
-    $type = pathinfo( $url, PATHINFO_EXTENSION );
-
-    $types = array(
-      'mp4'  => 'audio/mp4',
-      'ogg'  => 'audio/ogg',
-      'mp3'  => 'audio/mpeg',
-      'opus' => 'audio/ogg',
-      'wmv'  => 'audio/wmv'
-    );
-
-    return array( 'mimeType' => $types[$type], 'size' => $fallbackSize );
   }
 
   /**
 	 * Template string generator
 	 *
 	 * @since    4.0.0
-   * @param    string    $playerId       Unique player id.
-   * @param    array     $config         Player configuration.
+   * @param    string         $id             Unique player id.
+   * @param    string/array   $episode        Url/object with configuration.
+   * @param    string         $config         Url to player configuration.
+   * @param    string         $template       Url to template
 	 */
-  private function template( $playerId, $config ) {
-    $config = json_encode( $config );
+  private function template( $id, $episode, $config, $template ) {
+    $embed = '
+      <div class="podlove-web-player" id="$id" data-template="$template"></div>
+      <script>
+        podlovePlayer("$id", "$episode", "$config");
+      </script>
+    ';
 
-    $template = array(
-      '<div class="podlove-web-player" id="', $playerId, '"></div>',
-      '<script>', 'podlovePlayer("#', $playerId, '" ,', $config, ')', '</script>'
+    return strtr($embed, array(
+      '$id' => $id,
+      '$episode' => $episode,
+      '$config' => $config,
+      '$template' => $template
+    ));
+  }
+
+  private function registerApis () {
+    $this->apis = array(
+      'episode' => esc_url_raw( rest_url( $this->plugin_name . '/' . 'shortcode' . '/' . $this->version . '/' . 'episode' ) ),
+      'config' => esc_url_raw( rest_url( $this->plugin_name . '/' . 'shortcode' . '/' . $this->version . '/' . 'config' ) ),
+      'template' => esc_url_raw( rest_url( $this->plugin_name . '/' . 'shortcode' . '/' . $this->version . '/' . 'template' ) )
     );
 
-    return join('', $template);
+    register_rest_route( $this->apis['episode'],
+      array(
+        'methods' => 'GET',
+        'callback' => array( $this, 'episodeApi' ),
+        'args' => array (
+          'post' => array(
+            'required' => true
+          )
+        )
+      )
+    );
+  }
+
+  public function episodeApi ( WP_REST_Request $request ) {
+    $postId = $request->get_param( 'post' );
+    $post = get_post( $postId );
+
+    $episode = array(
+      'audio' => $this->postAudioFiles( $post ),
+      'chapters' => $this->postChapters( $post ),
+      'show' => $this->postShow(),
+
+      'title' => $post['post_title'],
+      'summary' => $post['post_excerpt'],
+      'publicationDate' => $post['post_date'],
+      'poster' => get_the_post_thumbnail( $postId, 'thumbnail' ),
+      'link' => get_permalink( $postId )
+    );
+
+    return rest_ensure_response( $episode );
+  }
+
+  private function postAudioFiles( $post ) {
+    if ( !$post || $post->post_type != 'post' || $post->post_status != 'publish' ) {
+      return array();
+    }
+
+    $audio = array();
+
+    $attachments = get_posts(
+      array(
+      'post_type' => 'attachment',
+      'posts_per_page' => -1,
+      'post_parent' => $postId,
+      'post_mime_type' => 'audio',
+      'exclude'=> get_post_thumbnail_id( $post )
+      )
+    );
+
+    if ( !$attachments ) {
+      return array();
+    }
+
+    // type attributes
+    foreach ( $attachments as $attachment ) {
+      $url = wp_get_attachment_url( $attachment );
+      $mimeType = $attachment->post_mime_type;
+
+      if ( !$url || !$mimeType ) {
+        continue;
+      }
+
+      $audio[] = array(
+        'url' => $url,
+        'mimeType' => $mimeType,
+        'title' => strtoupper( $mimeType ),
+        'size' => filesize( $url )
+      );
+    }
+
+    return $audio;
+  }
+
+  private function postChapters( $post ) {
+    $customFields = get_post_custom( $post->ID );
+
+    if ( !$customFields || !$customFields['chapters'] ) {
+      return array();
+    }
+
+    return json_decode( $customFields['chapters'][0] );
+  }
+
+  private function postShow( ) {
+    $blog = bloginfo();
+
+    return array(
+      'title' => $blog['name'],
+      'subtitle' => $blog['description'],
+      'link' => $blog['wpurl']
+    );
   }
 }
