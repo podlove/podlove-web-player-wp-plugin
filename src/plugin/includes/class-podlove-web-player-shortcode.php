@@ -39,13 +39,13 @@ class Podlove_Web_Player_Shortcode {
   private $options;
 
   /**
-	 * Shortcode APIs
+	 * Shortcode API Routes
 	 *
 	 * @since    4.0.0
 	 * @access   private
 	 * @var      array    $api    The shortcode apis.
 	 */
-  private $api;
+  private $routes;
 
   /**
 	 * Initialize the class and set its properties.
@@ -58,7 +58,8 @@ class Podlove_Web_Player_Shortcode {
     $this->version = $version;
 
     $this->options = new Podlove_Web_Player_Options( $this->plugin_name );
-    $this->registerApis();
+    $api = new Podlove_Web_Player_Embed_API( $this->plugin_name );
+    $this->routes = $api->routes();
   }
 
   /**
@@ -71,115 +72,53 @@ class Podlove_Web_Player_Shortcode {
   public function render( $atts, $content ) {
     $id = uniqid('player-');
 
-    $attributes = $this->parseAttributes( $atts );
-    $episode = $this->episode( $content );
+    $attributes = array_change_key_case($atts, CASE_LOWER);
+    $episode = $this->episode( $attributes );
+    $template = $this->template( $attributes );
+    $config = $this->config( $attributes );
 
-    return $this->template( $id, $episode, $config );
+    return $this->html( $id, $episode, $config, $template );
   }
 
   /**
 	 * Episode data
 	 *
 	 * @since    4.0.0
-   * @param    array    $atts           Shortcode attributes.
+   * @param    array    $attributes      Shortcode attributes.
 	 */
-  private function episode( $content ) {
-    // check if $content is defined and a valid object -> shortcode contains a configuration object
-    if ( trim($content) ) {
-      return json_decode( $content );
-    }
-
-    // check if a post context is available call return the api with the matching endpoint
-    global $post;
-
-    if ( $post ) {
-      return $this->apis['episode'] . '?post=' . $post->ID;
+  private function episode( $attributes ) {
+    if ( $attributes['post'] ) {
+      return $this->routes['post'] . '/' . $attributes['post'];
     }
 
     // TODO @ericteuber: publisher episode metadata here?
+    return null;
   }
 
   /**
 	 * Template
 	 *
 	 * @since    4.0.0
-   * @param    array    $atts           Shortcode attributes.
-   * @param    array    $options        Plugin Options.
+   * @param    array    $attributes      Shortcode attributes.
 	 */
+  private function template( $attributes ) {
+    $template = $attributes['template'] ? $attributes['template'] : 'default';
+    $options = $this->options->read();
+
+    return $options['templates'][$template];
+  }
 
   /**
 	 * Configuration
 	 *
 	 * @since    4.0.0
-   * @param    array    $atts           Shortcode attributes.
-   * @param    array    $options        Plugin Options.
+   * @param    array    $attributes           Shortcode attributes.
 	 */
+  private function config( $attributes ) {
+    $config = $attributes['config'] ? $attributes['config'] : 'default';
+    $theme = $attributes['theme'] ? $attributes['theme'] : 'default';
 
-
-  /**
-	 * Shortcode Attribute Parser
-	 *
-	 * @since    4.0.0
-   * @param    array    $atts       Shortcode attributes.
-	 */
-  private function parseAttributes( $atts = [] ) {
-    global $post;
-
-    if ( $post ) {
-      $customFields = get_post_custom( $post->ID );
-    }
-
-    $config = array();
-
-    $atts = array_change_key_case($atts, CASE_LOWER);
-
-    $config['audio'] = array();
-    $config['show'] = array();
-
-    // type attributes
-    foreach ($this->typeAttributes as $type ) {
-      if ( array_key_exists( $type, $atts ) ) {
-        $info = $this->mimeType( $atts[$type], $atts['size'] );
-
-        $config['audio'][] = array(
-          'url' => $atts[$type],
-          'mimeType' => $info['mimeType'],
-          'title' => strtoupper( $info['mimeType'] ),
-          'size' => $info['size']
-        );
-      }
-    }
-
-    // data => bas64 encoded json string
-    if ( array_key_exists( 'data', $atts ) ) {
-      $config['data'] = unserialize( base64_decode( $atts['data'] ) );
-    }
-
-    // config url that replaces all other configs
-    if ( array_key_exists( 'config', $atts ) && filter_var($atts['config'], FILTER_VALIDATE_URL) ) {
-      $config['config'] = $atts['config'];
-    }
-
-    // chapters
-    if ( $customFields && array_key_exists( 'chapters', $atts ) ) {
-      $config['chapters'] = json_decode( $customFields[$atts['chapters']][0] );
-    }
-
-    // episode attributes
-    foreach( $this->episodeAttributes as $attribute ) {
-      if ( array_key_exists( $attribute, $atts ) ) {
-        $config[$attribute] = $atts[$attribute];
-      }
-    }
-
-    // show attributes
-    foreach( $this->showAttributes as $attribute ) {
-      if ( array_key_exists( $attribute, $atts ) ) {
-        $config['show'][str_replace( 'show', '', $attribute)] = $atts[$attribute];
-      }
-    }
-
-    return $config;
+    return $this->routes['config'] . '/' . $config . '/' . 'theme' . '/' . $theme;
   }
 
   /**
@@ -191,11 +130,11 @@ class Podlove_Web_Player_Shortcode {
    * @param    string         $config         Url to player configuration.
    * @param    string         $template       Url to template
 	 */
-  private function template( $id, $episode, $config, $template ) {
+  private function html( $id, $episode, $config, $template ) {
     $embed = '
-      <div class="podlove-web-player" id="$id" data-template="$template"></div>
+      <div class="podlove-web-player" id="$id">$template</div>
       <script>
-        podlovePlayer("$id", "$episode", "$config");
+        podlovePlayer("#$id", "$episode", "$config");
       </script>
     ';
 
@@ -205,105 +144,5 @@ class Podlove_Web_Player_Shortcode {
       '$config' => $config,
       '$template' => $template
     ));
-  }
-
-  private function registerApis () {
-    $this->apis = array(
-      'episode' => esc_url_raw( rest_url( $this->plugin_name . '/' . 'shortcode' . '/' . $this->version . '/' . 'episode' ) ),
-      'config' => esc_url_raw( rest_url( $this->plugin_name . '/' . 'shortcode' . '/' . $this->version . '/' . 'config' ) ),
-      'template' => esc_url_raw( rest_url( $this->plugin_name . '/' . 'shortcode' . '/' . $this->version . '/' . 'template' ) )
-    );
-
-    register_rest_route( $this->apis['episode'],
-      array(
-        'methods' => 'GET',
-        'callback' => array( $this, 'episodeApi' ),
-        'args' => array (
-          'post' => array(
-            'required' => true
-          )
-        )
-      )
-    );
-  }
-
-  public function episodeApi ( WP_REST_Request $request ) {
-    $postId = $request->get_param( 'post' );
-    $post = get_post( $postId );
-
-    $episode = array(
-      'audio' => $this->postAudioFiles( $post ),
-      'chapters' => $this->postChapters( $post ),
-      'show' => $this->postShow(),
-
-      'title' => $post['post_title'],
-      'summary' => $post['post_excerpt'],
-      'publicationDate' => $post['post_date'],
-      'poster' => get_the_post_thumbnail( $postId, 'thumbnail' ),
-      'link' => get_permalink( $postId )
-    );
-
-    return rest_ensure_response( $episode );
-  }
-
-  private function postAudioFiles( $post ) {
-    if ( !$post || $post->post_type != 'post' || $post->post_status != 'publish' ) {
-      return array();
-    }
-
-    $audio = array();
-
-    $attachments = get_posts(
-      array(
-      'post_type' => 'attachment',
-      'posts_per_page' => -1,
-      'post_parent' => $postId,
-      'post_mime_type' => 'audio',
-      'exclude'=> get_post_thumbnail_id( $post )
-      )
-    );
-
-    if ( !$attachments ) {
-      return array();
-    }
-
-    // type attributes
-    foreach ( $attachments as $attachment ) {
-      $url = wp_get_attachment_url( $attachment );
-      $mimeType = $attachment->post_mime_type;
-
-      if ( !$url || !$mimeType ) {
-        continue;
-      }
-
-      $audio[] = array(
-        'url' => $url,
-        'mimeType' => $mimeType,
-        'title' => strtoupper( $mimeType ),
-        'size' => filesize( $url )
-      );
-    }
-
-    return $audio;
-  }
-
-  private function postChapters( $post ) {
-    $customFields = get_post_custom( $post->ID );
-
-    if ( !$customFields || !$customFields['chapters'] ) {
-      return array();
-    }
-
-    return json_decode( $customFields['chapters'][0] );
-  }
-
-  private function postShow( ) {
-    $blog = bloginfo();
-
-    return array(
-      'title' => $blog['name'],
-      'subtitle' => $blog['description'],
-      'link' => $blog['wpurl']
-    );
   }
 }

@@ -56,7 +56,7 @@ class Podlove_Web_Player_Admin {
 
 		$this->plugin_name = $plugin_name;
     $this->version = $version;
-    $this->api = new Podlove_Web_Player_API($plugin_name, $version);
+    $this->api = new Podlove_Web_Player_Admin_API($plugin_name, $version);
 	}
 
 	/**

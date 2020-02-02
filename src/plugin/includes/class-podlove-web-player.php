@@ -140,9 +140,14 @@ class Podlove_Web_Player {
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-podlove-web-player-options.php';
 
     /**
-     * The class responsible for defining the REST API
+     * The class responsible for defining the Admin REST API
      */
-    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-podlove-web-player-api.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-podlove-web-player-admin-api.php';
+
+    /**
+     * The class responsible for defining the Public Embed REST API
+     */
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-podlove-web-player-embed-api.php';
 
     $this->loader = new Podlove_Web_Player_Loader();
 
@@ -190,10 +195,10 @@ class Podlove_Web_Player {
 	 * @access   private
 	 */
 	private function define_public_hooks() {
-
-		$plugin_public = new Podlove_Web_Player_Public( $this->get_plugin_name(), $this->get_version() );
+    $plugin_public = new Podlove_Web_Player_Public( $this->get_plugin_name(), $this->get_version() );
 
     $this->loader->add_action( 'init', $plugin_public, 'register_shortcodes' );
+    $this->loader->add_action( 'init', $plugin_public, 'add_routes' );
     $this->loader->add_action( 'wp', $plugin_public, 'register_enclosure' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
     $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );

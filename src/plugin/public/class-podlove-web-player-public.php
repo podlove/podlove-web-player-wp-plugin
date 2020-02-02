@@ -64,7 +64,9 @@ class Podlove_Web_Player_Public {
 	 * @access   private
 	 * @var      string    $enclosure    enclosure rendering class.
 	 */
-	private $enclosure;
+  private $enclosure;
+
+  private $api;
 
   /**
 	 * Initialize the class and set its properties.
@@ -77,8 +79,9 @@ class Podlove_Web_Player_Public {
 		$this->plugin_name = $plugin_name;
     $this->version = $version;
 
-    $this->shortcode = new Podlove_Web_Player_Shortcode( $plugin_name );
+    $this->shortcode = new Podlove_Web_Player_Shortcode( $plugin_name, $version );
     $this->enclosure = new Podlove_Web_Player_Enclosure( $plugin_name );
+    $this->api = new Podlove_Web_Player_Embed_API( $plugin_name );
 
     $this->options = new Podlove_Web_Player_Options( $plugin_name );
 	}
@@ -96,7 +99,11 @@ class Podlove_Web_Player_Public {
 	 * @since    4.0.0
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_script( $this->plugin_name . '-player', 'https://cdn.podlove.org/web-player/embed.js', array(), $this->version, false );
+    $options = $this->options->read();
+    $sources = $options['settings']['source']['items'];
+    $selected = $options['settings']['source']['selected'];
+
+		wp_enqueue_script( $this->plugin_name . '-player', $sources[$selected], array(), $this->version, false );
   }
 
   /**
@@ -113,11 +120,15 @@ class Podlove_Web_Player_Public {
 	public function register_enclosure() {
     $options = $this->options->read();
 
-    if( !$options['enclosure']['enabled'] && !is_feed() ) {
+    if( !$options['settings']['enclosure'] && !is_feed() ) {
       return;
     }
 
     add_filter( 'the_content',  array( $this->enclosure, 'render' ), 10 );
 	}
 
+
+  public function add_routes() {
+    $this->api->registerRoutes();
+  }
 }

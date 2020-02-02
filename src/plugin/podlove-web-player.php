@@ -71,7 +71,6 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-podlove-web-player.php';
 function run_podlove_web_player() {
 	$plugin = new Podlove_Web_Player();
 	$plugin->run();
-
 }
 
 run_podlove_web_player();

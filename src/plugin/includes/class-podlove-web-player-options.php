@@ -55,7 +55,8 @@ class Podlove_Web_Player_Options
             'cdn' => 'https://cdn.podlove.org/web-player/5.x/embed.js',
             'local' => '/wp-content/plugins/podlove-web-player-beta/web-player/embed.js'
           )
-        )
+        ),
+        'enclosure' => 'bottom'
       )
     );
   }

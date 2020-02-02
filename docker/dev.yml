@@ -8,6 +8,7 @@ services:
       - 8080:80
     volumes:
       - ../dist:/var/www/html/wp-content/plugins/podlove-web-player-beta
+      - ../content:/var/www/html/wp-content
       - ../uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     environment:
       WORDPRESS_DB_PASSWORD: "${database_password}"

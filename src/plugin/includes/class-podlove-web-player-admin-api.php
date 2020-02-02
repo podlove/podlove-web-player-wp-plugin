@@ -1,7 +1,7 @@
 <?php
 
 /**
- * REST interface for the podlove client
+ * REST interface for the podlove web player configurator
  *
  *
  * @since      1.0.0
@@ -9,7 +9,7 @@
  * @subpackage Podlove_Web_Player/includes
  * @author     Alexander Heimbuch <podlove@heimbu.ch>
  */
-class Podlove_Web_Player_API
+class Podlove_Web_Player_Admin_API
 {
   	/**
 	 * The ID of this plugin.
