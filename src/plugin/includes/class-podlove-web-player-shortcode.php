@@ -91,8 +91,44 @@ class Podlove_Web_Player_Shortcode {
       return $this->routes['post'] . '/' . $attributes['post'];
     }
 
+    if ( $attributes['src'] ) {
+      return $this->fromAttributes( $attributes );
+    }
+
     // TODO @ericteuber: publisher episode metadata here?
     return null;
+  }
+
+  private function fromAttributes ($attributes) {
+    global $post;
+    $customFields = get_post_custom( $post->ID );
+
+    $chapters = json_decode($customFields[$attributes['chapters']][0]);
+    $transcripts = json_decode($customFields[$attributes['transcripts']][0]);
+
+    return array(
+      'title' => $attributes['title'] ? $attributes['title'] : null,
+      'duration' => $attributes['duration'] ? $attributes['duration'] : null,
+      'poster' => $attributes['poster'] ? $attributes['poster'] : null,
+      'chapters' => $chapters ? $chapters : array(),
+      'transcripts' => $transcripts ? $transcripts : array(),
+      'audio' => array(
+        array(
+          'src' => $attributes['src'],
+          'mimeType' => $this->mimeType($attributes['src']),
+          'title' => strtoupper($this->mimeType($attributes['src'])),
+          'size' => $attributes['filesize'] ? $attributes['filesize'] : 0
+        )
+      )
+    );
+  }
+
+  private function mimeType ($src) {
+    $file = pathinfo( $src );
+    switch ( $file['extension'] ) {
+      case 'mp3':
+        return 'audio/mpeg';
+    }
   }
 
   /**
@@ -134,13 +170,13 @@ class Podlove_Web_Player_Shortcode {
     $embed = '
       <div class="podlove-web-player" id="$id">$template</div>
       <script>
-        podlovePlayer("#$id", "$episode", "$config");
+        podlovePlayer("#$id", $episode, "$config");
       </script>
     ';
 
     return strtr($embed, array(
       '$id' => $id,
-      '$episode' => $episode,
+      '$episode' => is_string($episode) ? '"' . $episode . '"' : json_encode( $episode ),
       '$config' => $config,
       '$template' => $template
     ));

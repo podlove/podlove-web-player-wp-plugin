@@ -53,7 +53,6 @@ class Podlove_Web_Player_Admin {
 	 * @param      string    $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
-
 		$this->plugin_name = $plugin_name;
     $this->version = $version;
     $this->api = new Podlove_Web_Player_Admin_API($plugin_name, $version);
@@ -65,7 +64,6 @@ class Podlove_Web_Player_Admin {
 	 * @since    4.0.0
 	 */
 	public function enqueue_styles() {
-		// wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/podlove-web-player-admin.css', array(), $this->version, 'all' );
 	}
 
 	/**
@@ -73,9 +71,12 @@ class Podlove_Web_Player_Admin {
 	 *
 	 * @since    4.0.0
 	 */
-	public function enqueue_scripts() {
-		wp_enqueue_script( $this->plugin_name . '-configurator', plugin_dir_url( __FILE__ ) . 'js/app.js', array(), $this->version, true );
+	public function enqueue_scripts($hook) {
+    if ($hook != $this->register_menu_page()) {
+      return null;
+    }
 
+		wp_enqueue_script( $this->plugin_name . '-configurator', plugin_dir_url( __FILE__ ) . 'js/app.js', array(), $this->version, true );
     wp_localize_script( $this->plugin_name . '-configurator', 'PODLOVE', array(
         'i18n' => Podlove_Web_Player_i18n::translations(),
         'api' => $this->api->routes()
@@ -99,7 +100,7 @@ class Podlove_Web_Player_Admin {
 	 * @since    4.0.0
 	 */
   public function register_menu_page() {
-    add_submenu_page(
+    return add_submenu_page(
 			'options-general.php',
       'Podlove Web Player Configuration',
       'Podlove Web Player',

@@ -43,7 +43,7 @@ class Podlove_Web_Player_Enclosure {
     global $post;
 
     $options = $this->options->read();
-    $customFields = get_post_custom( $post );
+    $customFields = get_post_custom( $post->ID );
 
     $enclosure = $customFields['enclosure'][0];
 
