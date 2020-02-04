@@ -69,7 +69,7 @@ class Podlove_Web_Player_Shortcode {
    * @param    array    $atts          Shortcode attributes.
    * @param    array    $content       Shortcode content.
 	 */
-  public function render( $atts, $content ) {
+  public function render( $atts ) {
     $id = uniqid('player-');
 
     $attributes = array_change_key_case($atts, CASE_LOWER);
@@ -87,15 +87,22 @@ class Podlove_Web_Player_Shortcode {
    * @param    array    $attributes      Shortcode attributes.
 	 */
   private function episode( $attributes ) {
+    // if a post is provided
     if ( $attributes['post'] ) {
       return $this->routes['post'] . '/' . $attributes['post'];
     }
 
+    // if attributes are provided
     if ( $attributes['src'] ) {
       return $this->fromAttributes( $attributes );
     }
 
-    // TODO @ericteuber: publisher episode metadata here?
+    // if episode data is directly provided
+    if ( $attributes['episode'] ) {
+      return json_decode ( base64_decode( $attributes['episode'] ) );
+    }
+
+    // if is publisher post (@ericteuber)
     return null;
   }
 
@@ -128,6 +135,16 @@ class Podlove_Web_Player_Shortcode {
     switch ( $file['extension'] ) {
       case 'mp3':
         return 'audio/mpeg';
+      case 'm4a':
+        return 'audio/m4a';
+      case 'oga':
+        return 'audio/ogg';
+      case 'opus':
+        return 'audio/opus';
+      case 'wav':
+        return 'audio/wav';
+      default:
+        return null;
     }
   }
 
