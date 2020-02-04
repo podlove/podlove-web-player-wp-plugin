@@ -106,7 +106,7 @@ class Podlove_Web_Player_i18n {
         'delete-message' => static::i18n( 'Do you really want to delete the theme <%= id %>' )
       ),
 
-      'setting' => array (
+      'settings' => array (
         'title' => static::i18n( 'Settings' ),
         'source' => static::i18n( 'Source' ),
         'select-source' => static::i18n( 'Select Source' )

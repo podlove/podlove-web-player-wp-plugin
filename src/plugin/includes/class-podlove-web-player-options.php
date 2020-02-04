@@ -52,8 +52,8 @@ class Podlove_Web_Player_Options
         'source' => array(
           'selected' => 'cdn',
           'items' => array(
-            'cdn' => 'https://cdn.podlove.org/web-player/5.x/embed.js',
-            'local' => '/wp-content/plugins/podlove-web-player-beta/web-player/embed.js'
+            'cdn' => 'https://cdn.podlove.org/web-player/5.x/',
+            'local' => get_site_url(null, '/wp-content/plugins/podlove-web-player-beta/web-player/')
           )
         ),
         'enclosure' => 'bottom'

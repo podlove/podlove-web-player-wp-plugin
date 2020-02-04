@@ -157,8 +157,19 @@ class Podlove_Web_Player_Embed_API
     $options = $this->options->read();
 
     $config = $options['configs'][$configId];
-    $theme = array('theme' => $options['themes'][$themeId]);
+    $theme = array(
+      'theme' => $options['themes'][$themeId]
+    );
 
-    return rest_ensure_response(array_merge($config, $theme));
+    $sources = $options['settings']['source']['items'];
+    $selected = $options['settings']['source']['selected'];
+
+    $share = array(
+      'base' => $sources[$selected],
+    );
+
+    $config['share']['outlet'] = $sources[$selected] . 'share.html';
+
+    return rest_ensure_response(array_merge($config, $theme, $share));
   }
 }

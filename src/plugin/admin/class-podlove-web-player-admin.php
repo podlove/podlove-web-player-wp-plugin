@@ -72,9 +72,9 @@ class Podlove_Web_Player_Admin {
 	 * @since    5.0.0
 	 */
 	public function enqueue_scripts($hook) {
-    // if ($hook != $this->register_menu_page()) {
-    //   return null;
-    // }
+    if ($hook != 'settings_page_' . $this->plugin_name . '-settings') {
+      return null;
+    }
 
 		wp_enqueue_script( $this->plugin_name . '-configurator', plugin_dir_url( __FILE__ ) . 'js/app.js', array(), $this->version, true );
     wp_localize_script( $this->plugin_name . '-configurator', 'PODLOVE', array(

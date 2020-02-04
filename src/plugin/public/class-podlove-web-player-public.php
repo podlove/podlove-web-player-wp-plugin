@@ -103,7 +103,7 @@ class Podlove_Web_Player_Public {
     $sources = $options['settings']['source']['items'];
     $selected = $options['settings']['source']['selected'];
 
-		wp_enqueue_script( $this->plugin_name . '-player', $sources[$selected], array(), $this->version, false );
+		wp_enqueue_script( $this->plugin_name . '-player', $sources[$selected] . 'embed.js', array(), $this->version, false );
   }
 
   /**
