@@ -15,7 +15,7 @@ class Podlove_Web_Player_Options
   /**
    * The unique identifier of this plugin.
    *
-   * @since    4.0.0
+   * @since    5.0.0
    * @access   protected
    * @var      string    $plugin_name    The string used to uniquely identify this plugin.
    */
@@ -24,7 +24,7 @@ class Podlove_Web_Player_Options
   /**
    * The plugin directory
    *
-   * @since    4.0.0
+   * @since    5.0.0
    * @access   protected
    * @var      string    $plugin_directory    The plugin directory.
    */
@@ -33,7 +33,7 @@ class Podlove_Web_Player_Options
   /**
    * The default web player configuration
    *
-   * @since    4.0.0
+   * @since    5.0.0
    * @access   protected
    * @var      array    $defaults        Default configuration values.
    */

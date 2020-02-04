@@ -14,7 +14,7 @@ class Podlove_Web_Player_Admin_API
   	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 * @access   private
 	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
@@ -23,7 +23,7 @@ class Podlove_Web_Player_Admin_API
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 * @access   private
 	 * @var      string    $version    The current version of this plugin.
 	 */
@@ -37,7 +37,7 @@ class Podlove_Web_Player_Admin_API
   /**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
@@ -50,7 +50,7 @@ class Podlove_Web_Player_Admin_API
   /**
 	 * Define API paths
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 */
   public function routes() {
     return array(
@@ -65,7 +65,7 @@ class Podlove_Web_Player_Admin_API
   /**
 	 * Register the API routes
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 */
   public function registerRoutes() {
     register_rest_route( $this->plugin_name . '/' . $this->version, 'bootstrap',
@@ -210,7 +210,7 @@ class Podlove_Web_Player_Admin_API
   /**
 	 * Validates the API payload
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 */
   public function validate($type, $value)
   {
@@ -257,7 +257,7 @@ class Podlove_Web_Player_Admin_API
   /**
 	 * Check API permissions
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 */
   public function api_permissions()
   {
@@ -267,7 +267,7 @@ class Podlove_Web_Player_Admin_API
   /**
 	 * Save API config
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 */
   public function api_save_config( WP_REST_Request $request )
   {
@@ -292,7 +292,7 @@ class Podlove_Web_Player_Admin_API
   /**
 	 * Save API theme
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 */
   public function api_save_theme( WP_REST_Request $request )
   {
@@ -315,7 +315,7 @@ class Podlove_Web_Player_Admin_API
   /**
 	 * Save API template
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 */
   public function saveTheme( WP_REST_Request $request )
   {
@@ -336,7 +336,7 @@ class Podlove_Web_Player_Admin_API
   /**
 	 * Delete API config
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 */
   public function deleteConfig( WP_REST_Request $request )
   {
@@ -352,7 +352,7 @@ class Podlove_Web_Player_Admin_API
   /**
 	 * Delete API theme
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 */
   public function deleteTheme( WP_REST_Request $request )
   {
@@ -368,7 +368,7 @@ class Podlove_Web_Player_Admin_API
   /**
 	 * Delete API template
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 */
   public function deleteTemplate( WP_REST_Request $request )
   {
@@ -384,7 +384,7 @@ class Podlove_Web_Player_Admin_API
   /**
 	 * Save settings
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 */
   public function saveSettings( WP_REST_Request $request )
   {
@@ -402,7 +402,7 @@ class Podlove_Web_Player_Admin_API
   /**
 	 * Load initial data
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 */
   public function bootstrap()
   {

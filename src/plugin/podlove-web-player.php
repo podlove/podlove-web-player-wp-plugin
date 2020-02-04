@@ -66,7 +66,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-podlove-web-player.php';
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    4.0.0
+ * @since    5.0.0
  */
 function run_podlove_web_player() {
 	$plugin = new Podlove_Web_Player();

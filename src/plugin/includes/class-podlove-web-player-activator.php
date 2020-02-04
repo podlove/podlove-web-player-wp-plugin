@@ -26,7 +26,7 @@ class Podlove_Web_Player_Activator {
 	/**
 	 * Podlove Web Player activator
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 */
 	public static function activate($plugin_name) {
     $options = new Podlove_Web_Player_Options($plugin_name);

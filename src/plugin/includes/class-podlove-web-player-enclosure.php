@@ -14,7 +14,7 @@ class Podlove_Web_Player_Enclosure {
   /**
 	 * Web Player options
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 * @access   private
 	 * @var      array    $options    The current player configuration.
 	 */
@@ -25,7 +25,7 @@ class Podlove_Web_Player_Enclosure {
   /**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 * @param    string    $plugin_name       The name of the plugin.
 	 */
 	public function __construct( $plugin_name ) {
@@ -36,7 +36,7 @@ class Podlove_Web_Player_Enclosure {
   /**
 	 * Enclosure Renderer
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
    * @param    array    $content       post content.
 	 */
   public function render( $content ) {

@@ -14,7 +14,7 @@ class Podlove_Web_Player_Shortcode {
   /**
 	 * The ID of this plugin.
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 * @access   private
 	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
@@ -23,7 +23,7 @@ class Podlove_Web_Player_Shortcode {
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 * @access   private
 	 * @var      string    $version    The current version of this plugin.
 	 */
@@ -32,7 +32,7 @@ class Podlove_Web_Player_Shortcode {
   /**
 	 * Web Player options
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 * @access   private
 	 * @var      array    $options    The current player configuration.
 	 */
@@ -41,7 +41,7 @@ class Podlove_Web_Player_Shortcode {
   /**
 	 * Shortcode API Routes
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 * @access   private
 	 * @var      array    $api    The shortcode apis.
 	 */
@@ -50,7 +50,7 @@ class Podlove_Web_Player_Shortcode {
   /**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 * @param    string    $plugin_name       The name of the plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
@@ -65,7 +65,7 @@ class Podlove_Web_Player_Shortcode {
   /**
 	 * Shortcode Renderer
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
    * @param    array    $atts          Shortcode attributes.
    * @param    array    $content       Shortcode content.
 	 */
@@ -83,7 +83,7 @@ class Podlove_Web_Player_Shortcode {
   /**
 	 * Episode data
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
    * @param    array    $attributes      Shortcode attributes.
 	 */
   private function episode( $attributes ) {
@@ -151,7 +151,7 @@ class Podlove_Web_Player_Shortcode {
   /**
 	 * Template
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
    * @param    array    $attributes      Shortcode attributes.
 	 */
   private function template( $attributes ) {
@@ -164,7 +164,7 @@ class Podlove_Web_Player_Shortcode {
   /**
 	 * Configuration
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
    * @param    array    $attributes           Shortcode attributes.
 	 */
   private function config( $attributes ) {
@@ -177,7 +177,7 @@ class Podlove_Web_Player_Shortcode {
   /**
 	 * Template string generator
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
    * @param    string         $id             Unique player id.
    * @param    string/array   $episode        Url/object with configuration.
    * @param    string         $config         Url to player configuration.

@@ -25,7 +25,7 @@ class Podlove_Web_Player_Admin {
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 * @access   private
 	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
@@ -34,7 +34,7 @@ class Podlove_Web_Player_Admin {
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 * @access   private
 	 * @var      string    $version    The current version of this plugin.
 	 */
@@ -48,7 +48,7 @@ class Podlove_Web_Player_Admin {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
@@ -61,7 +61,7 @@ class Podlove_Web_Player_Admin {
 	/**
 	 * Register the stylesheets for the admin area.
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 */
 	public function enqueue_styles() {
 	}
@@ -69,12 +69,12 @@ class Podlove_Web_Player_Admin {
 	/**
 	 * Register the JavaScript for the admin area.
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 */
 	public function enqueue_scripts($hook) {
-    if ($hook != $this->register_menu_page()) {
-      return null;
-    }
+    // if ($hook != $this->register_menu_page()) {
+    //   return null;
+    // }
 
 		wp_enqueue_script( $this->plugin_name . '-configurator', plugin_dir_url( __FILE__ ) . 'js/app.js', array(), $this->version, true );
     wp_localize_script( $this->plugin_name . '-configurator', 'PODLOVE', array(
@@ -97,7 +97,7 @@ class Podlove_Web_Player_Admin {
   /**
 	 * Register the menu link
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 */
   public function register_menu_page() {
     return add_submenu_page(
@@ -113,7 +113,7 @@ class Podlove_Web_Player_Admin {
   /**
 	 * Register api routes
 	 *
-	 * @since    4.0.0
+	 * @since    5.0.0
 	 */
   public function add_routes() {
     $this->api->registerRoutes();
