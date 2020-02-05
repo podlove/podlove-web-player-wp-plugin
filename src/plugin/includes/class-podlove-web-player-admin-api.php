@@ -79,7 +79,7 @@ class Podlove_Web_Player_Admin_API
     register_rest_route( $this->plugin_name . '/' . $this->version, 'config/(?P<id>\w+)',
       array(
         'methods' => 'POST',
-        'callback' => array( $this, 'api_save_config' ),
+        'callback' => array( $this, 'saveConfig' ),
         'args' => array (
           'id' => array(
             'required' => true
@@ -104,7 +104,7 @@ class Podlove_Web_Player_Admin_API
     register_rest_route( $this->plugin_name . '/' . $this->version, 'theme/(?P<id>\w+)',
       array(
         'methods' => 'POST',
-        'callback' => array( $this, 'api_save_theme' ),
+        'callback' => array( $this, 'saveTheme' ),
         'args' => array (
           'id' => array(
             'required' => true
@@ -129,7 +129,7 @@ class Podlove_Web_Player_Admin_API
     register_rest_route( $this->plugin_name . '/' . $this->version, 'template/(?P<id>\w+)',
       array(
         'methods' => 'POST',
-        'callback' => array( $this, 'saveTheme' ),
+        'callback' => array( $this, 'saveTemplate' ),
         'args' => array (
           'id' => array(
             'required' => true
@@ -200,6 +200,9 @@ class Podlove_Web_Player_Admin_API
             'validate_callback' => function( $param ) {
               return $this->validate( 'settings/source', $param );
             }
+          ),
+          'enclosure' => array(
+            'required' => true
           )
         ),
         'permissions_callback' => array( $this, 'api_permissions' )
@@ -269,7 +272,7 @@ class Podlove_Web_Player_Admin_API
 	 *
 	 * @since    5.0.0
 	 */
-  public function api_save_config( WP_REST_Request $request )
+  public function saveConfig( WP_REST_Request $request )
   {
     $options = $this->options->read();
     $configId = $request->get_param( 'id' );
@@ -294,7 +297,7 @@ class Podlove_Web_Player_Admin_API
 	 *
 	 * @since    5.0.0
 	 */
-  public function api_save_theme( WP_REST_Request $request )
+  public function saveTheme( WP_REST_Request $request )
   {
     $options = $this->options->read();
     $themeId = $request->get_param( 'id' );
@@ -317,7 +320,7 @@ class Podlove_Web_Player_Admin_API
 	 *
 	 * @since    5.0.0
 	 */
-  public function saveTheme( WP_REST_Request $request )
+  public function saveTemplate( WP_REST_Request $request )
   {
     $options = $this->options->read();
     $templateId = $request->get_param( 'id' );
@@ -390,8 +393,10 @@ class Podlove_Web_Player_Admin_API
   {
     $options = $this->options->read();
     $source = $request->get_param( 'source' );
+    $enclosure = $request->get_param( 'enclosure' );
 
     $options['settings']['source']['selected'] = $source;
+    $options['settings']['enclosure'] = $enclosure;
 
     $this->options->update($options);
     $options = $this->options->read();

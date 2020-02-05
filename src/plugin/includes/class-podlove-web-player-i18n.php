@@ -109,7 +109,11 @@ class Podlove_Web_Player_i18n {
       'settings' => array (
         'title' => static::i18n( 'Settings' ),
         'source' => static::i18n( 'Source' ),
-        'select-source' => static::i18n( 'Select Source' )
+        'select-source' => static::i18n( 'Select Source' ),
+        'enclosure' => static::i18n( 'Transform Post Enclosure' ),
+        'enclosure-disabled' => static::i18n( 'disable automatic enclosure' ),
+        'enclosure-top' => static::i18n( 'insert player at the top of the post' ),
+        'enclosure-bottom' => static::i18n( 'insert player at the end of the post' ),
       ),
 
       'navigation' => array(

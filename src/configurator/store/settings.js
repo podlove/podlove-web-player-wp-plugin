@@ -12,6 +12,7 @@ export default {
         local: null,
       },
     },
+    enclosure: null
   },
 
   getters: {
@@ -25,6 +26,10 @@ export default {
       const selected = get(data, 'selected')
 
       return get(items, selected)
+    },
+
+    enclosure(state) {
+      return state.enclosure
     }
   },
 
@@ -43,13 +48,18 @@ export default {
       commit('updateSource', source)
     },
 
+    updateEnclosure({ commit }, value) {
+      commit('updateEnclosure', value)
+    },
+
     save({ getters, commit }) {
       const source = get(getters.settings, 'source.selected')
+      const enclosure = getters.enclosure
 
         request
           .create(
             PODLOVE.api.settings,
-            { source },
+            { source, enclosure },
             {
               loading: PODLOVE.i18n.message_saving,
               error: PODLOVE.i18n.error_save_settings,
@@ -64,10 +74,15 @@ export default {
   mutations: {
     bootstrap(state, payload = {}) {
       state.source = payload.source
+      state.enclosure = payload.enclosure
     },
 
     updateSource(state, source) {
       set(state, 'source.selected', source)
+    },
+
+    updateEnclosure(state, enclosure) {
+      set(state, 'enclosure', enclosure)
     },
 
     updateSettings(state, settings) {
