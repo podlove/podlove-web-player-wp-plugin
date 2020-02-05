@@ -59,7 +59,9 @@ class Podlove_Web_Player_Shortcode {
 
     $this->options = new Podlove_Web_Player_Options( $this->plugin_name );
     $api = new Podlove_Web_Player_Embed_API( $this->plugin_name );
-    $this->routes = $api->routes();
+    add_action('rest_api_init', function() use ($api) {
+      $this->routes = $api->routes();
+    });
   }
 
   /**
