@@ -2,7 +2,7 @@
 save() {
   backup_dir=""
   if [ -z "$1" ]; then
-    backup_file="./database.sql";
+    backup_file="./database/dump.sql";
   else
     backup_file=$1
   fi
