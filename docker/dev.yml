@@ -17,7 +17,7 @@ services:
 
   mysql:
     container_name: "${project}_database"
-    image: mariadb
+    image: mariadb:10.4
     environment:
       MYSQL_ROOT_PASSWORD: "${database_password}"
     volumes:
