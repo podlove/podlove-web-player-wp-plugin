@@ -1,5 +1,5 @@
 dist/
-database.sql
+database/
 uploads.ini
 content
 node_modules
