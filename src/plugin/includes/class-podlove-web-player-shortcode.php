@@ -59,9 +59,7 @@ class Podlove_Web_Player_Shortcode {
 
     $this->options = new Podlove_Web_Player_Options( $this->plugin_name );
     $api = new Podlove_Web_Player_Embed_API( $this->plugin_name );
-    add_action('rest_api_init', function() use ($api) {
-      $this->routes = $api->routes();
-    });
+    $this->routes = $api->routes();
   }
 
   /**
@@ -103,7 +101,7 @@ class Podlove_Web_Player_Shortcode {
     if ( $attributes['episode'] ) {
       return json_decode ( base64_decode( $attributes['episode'] ) );
     }
-    
+
     // filter for plugins (like Podlove Publisher) to provide their own episode config
     return apply_filters('podlove_web_player_shortcode_episode_attributes', $attributes);;
   }
