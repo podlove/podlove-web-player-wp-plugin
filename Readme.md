@@ -25,7 +25,7 @@ To develop the Wordpress Plugin a dedicated wordress environment can be created 
 
 ```bash
 $ npm run dev:init # bootstraps a dockerized wordpress, see compose files in /docker
-$ mpm run dev # file watchers that copies the php and javascript sources 
+$ npm run dev # file watchers that copies the php and javascript sources 
 ```
 
 Afterwards you should be able to access the development instance at `http://localhost:8080`. If you need to change the route you can configure the development environment in a docker-compose file located at `docker/dev.yml`. Login credentials for administration area:

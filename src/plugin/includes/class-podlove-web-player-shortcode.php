@@ -103,9 +103,9 @@ class Podlove_Web_Player_Shortcode {
     if ( $attributes['episode'] ) {
       return json_decode ( base64_decode( $attributes['episode'] ) );
     }
-
-    // if is publisher post (@ericteuber)
-    return null;
+    
+    // filter for plugins (like Podlove Publisher) to provide their own episode config
+    return apply_filters('podlove_web_player_shortcode_episode_attributes', $attributes);;
   }
 
   private function fromAttributes ($attributes) {
