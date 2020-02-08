@@ -105,10 +105,10 @@ export default {
       state.templates = payload
     },
 
-    updateTemplate(state, { id, template }) {
+    updateTemplate(state, { id, value }) {
       state.templates = {
         ...state.templates,
-        [id]: template,
+        [id]: value,
       }
     },
 
