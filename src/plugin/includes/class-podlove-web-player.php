@@ -198,7 +198,7 @@ class Podlove_Web_Player {
     $plugin_public = new Podlove_Web_Player_Public( $this->get_plugin_name(), $this->get_version() );
 
     $this->loader->add_action( 'init', $plugin_public, 'register_shortcodes' );
-    $this->loader->add_action( 'init', $plugin_public, 'add_routes' );
+    $this->loader->add_action( 'rest_api_init', $plugin_public, 'add_routes' );
     $this->loader->add_action( 'wp', $plugin_public, 'register_enclosure' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
     $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
