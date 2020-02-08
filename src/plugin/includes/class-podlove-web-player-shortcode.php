@@ -59,6 +59,12 @@ class Podlove_Web_Player_Shortcode {
 
     $this->options = new Podlove_Web_Player_Options( $this->plugin_name );
     $api = new Podlove_Web_Player_Embed_API( $this->plugin_name );
+    add_action('init', [$this, 'set_routes']);
+  }
+
+  public function set_routes()
+  {
+    $api = new Podlove_Web_Player_Embed_API($this->plugin_name);
     $this->routes = $api->routes();
   }
 
@@ -88,22 +94,22 @@ class Podlove_Web_Player_Shortcode {
 	 */
   private function episode( $attributes ) {
     // if a post is provided
-    if ( $attributes['post'] ) {
+    if ( isset( $attributes['post'] ) ) {
       return $this->routes['post'] . '/' . $attributes['post'];
     }
 
     // if attributes are provided
-    if ( $attributes['src'] ) {
+    if ( isset( $attributes['src'] ) ) {
       return $this->fromAttributes( $attributes );
     }
 
     // if episode data is directly provided
-    if ( $attributes['episode'] ) {
+    if ( isset( $attributes['episode'] ) ) {
       return json_decode ( base64_decode( $attributes['episode'] ) );
     }
 
     // filter for plugins (like Podlove Publisher) to provide their own episode config
-    return apply_filters('podlove_web_player_shortcode_episode_attributes', $attributes);;
+    return apply_filters( 'podlove_web_player_shortcode_episode_attributes', $attributes );
   }
 
   private function fromAttributes ($attributes) {
@@ -114,17 +120,17 @@ class Podlove_Web_Player_Shortcode {
     $transcripts = json_decode($customFields[$attributes['transcripts']][0]);
 
     return array(
-      'title' => $attributes['title'] ? $attributes['title'] : null,
-      'duration' => $attributes['duration'] ? $attributes['duration'] : null,
-      'poster' => $attributes['poster'] ? $attributes['poster'] : null,
-      'chapters' => $chapters ? $chapters : array(),
-      'transcripts' => $transcripts ? $transcripts : array(),
+      'title' => $attributes['title'] ?? null,
+      'duration' => $attributes['duration'] ?? null,
+      'poster' => $attributes['poster'] ?? null,
+      'chapters' => $chapters ?? array(),
+      'transcripts' => $transcripts ?? array(),
       'audio' => array(
         array(
           'src' => $attributes['src'],
           'mimeType' => $this->mimeType($attributes['src']),
           'title' => strtoupper($this->mimeType($attributes['src'])),
-          'size' => $attributes['filesize'] ? $attributes['filesize'] : 0
+          'size' => $attributes['filesize'] ?? 0
         )
       )
     );
@@ -155,7 +161,7 @@ class Podlove_Web_Player_Shortcode {
    * @param    array    $attributes      Shortcode attributes.
 	 */
   private function template( $attributes ) {
-    $template = $attributes['template'] ? $attributes['template'] : 'default';
+    $template = $attributes['template'] ?? 'default';
     $options = $this->options->read();
 
     return $options['templates'][$template];
@@ -168,8 +174,8 @@ class Podlove_Web_Player_Shortcode {
    * @param    array    $attributes           Shortcode attributes.
 	 */
   private function config( $attributes ) {
-    $config = $attributes['config'] ? $attributes['config'] : 'default';
-    $theme = $attributes['theme'] ? $attributes['theme'] : 'default';
+    $config = $attributes['config'] ?? 'default';
+    $theme = $attributes['theme'] ?? 'default';
 
     return $this->routes['config'] . '/' . $config . '/' . 'theme' . '/' . $theme;
   }
