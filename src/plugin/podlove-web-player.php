@@ -9,7 +9,7 @@
  * that starts the plugin.
  *
  * @link              https://docs.podlove.org/podlove-web-player/
- * @since             1.0.0
+ * @since             5.0.0
  * @package           Podlove_Web_Player
  *
  * @wordpress-plugin
@@ -30,7 +30,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'PODLOVE_WEB_PLAYER_VERSION', '4.0.0' );
+define( 'PODLOVE_WEB_PLAYER_VERSION', '5.0.0' );
 
 /**
  * The code that runs during plugin activation.

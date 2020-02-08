@@ -1,0 +1,33 @@
+.podlove-web-player--preview {
+  min-height: 100px;
+  position: relative;
+
+  pointer-events: none;
+
+  iframe {
+    border: 1px solid rgb(233, 241, 245);
+  }
+
+  .logo {
+    width: 100%;
+    min-height: 100px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 0;
+    flex-direction: column;
+  }
+
+  .title {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  }
+
+  .player {
+    position: relative;
+    z-index: 10;
+  }
+}

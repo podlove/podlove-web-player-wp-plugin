@@ -1,0 +1,26 @@
+.podlove-web-player--source {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .source-select {
+    margin: 1em;
+    display: flex;
+    width: 150px;
+    height: 150px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e2e4e7;
+    border-radius: 2px;
+
+    &:hover {
+      box-shadow: 0 8px 6px -6px #e2e4e7;
+    }
+  }
+
+  .source-name {
+    margin-top: 0.25em;
+    font-size: 1.5em;
+  }
+}
