@@ -10,10 +10,11 @@ function resolve(dir) {
 
 module.exports = {
   entry: {
-    app: "./src/configurator/main.js"
+    "admin/js/app": "./src/configurator/main.js",
+    "block/js/block": "./src/block/block.js"
   },
   output: {
-    path: resolve("dist/admin/js"),
+    path: resolve("dist"),
     filename: "[name].js"
   },
   resolve: {
@@ -31,9 +32,9 @@ module.exports = {
         use: "vue-loader"
       },
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         loader: "babel-loader",
-        include: [resolve("src/configurator")]
+        include: [resolve("src/configurator"), resolve("src/block")]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

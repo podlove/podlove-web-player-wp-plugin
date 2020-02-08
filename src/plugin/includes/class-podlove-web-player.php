@@ -80,6 +80,7 @@ class Podlove_Web_Player {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+		$this->define_block_hooks();
 
 	}
 
@@ -149,6 +150,11 @@ class Podlove_Web_Player {
      */
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-podlove-web-player-embed-api.php';
 
+    /**
+     * The class responsible for defining the block
+     */
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'block/class-podlove-web-player-block.php';
+
     $this->loader = new Podlove_Web_Player_Loader();
 
 	}
@@ -163,11 +169,9 @@ class Podlove_Web_Player {
 	 * @access   private
 	 */
 	private function set_locale() {
-
 		$plugin_i18n = new Podlove_Web_Player_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
 	}
 
 	/**
@@ -178,7 +182,6 @@ class Podlove_Web_Player {
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
-
 		$plugin_admin = new Podlove_Web_Player_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
@@ -196,14 +199,28 @@ class Podlove_Web_Player {
 	 */
 	private function define_public_hooks() {
     $plugin_public = new Podlove_Web_Player_Public( $this->get_plugin_name(), $this->get_version() );
+    $plugin_block = new Podlove_Web_Player_Block( $this->get_plugin_name(), $this->get_version() );
 
     $this->loader->add_action( 'init', $plugin_public, 'register_shortcodes' );
+    $this->loader->add_action( 'init', $plugin_block, 'register_block' );
     $this->loader->add_action( 'init', $plugin_public, 'add_routes' );
     $this->loader->add_action( 'wp', $plugin_public, 'register_enclosure' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
     $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+  }
 
-	}
+	/**
+	 * Register all of the hooks related to the block functionality
+	 * of the plugin.
+	 *
+	 * @since    5.0.0
+	 * @access   private
+	 */
+  private function define_block_hooks() {
+    $plugin_block = new Podlove_Web_Player_Block( $this->get_plugin_name(), $this->get_version() );
+
+    $this->loader->add_action( 'enqueue_block_editor_assets', $plugin_block, 'enqueue_scripts' );
+  }
 
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
