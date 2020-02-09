@@ -83,8 +83,8 @@ export default {
             error: PODLOVE.i18n.error_save_template,
           }
         )
-        .then(template => {
-          commit('updateTemplate', { id: getters.id, template })
+        .then(value => {
+          commit('updateTemplate', { id: getters.id, value })
         })
     },
 
