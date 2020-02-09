@@ -9,32 +9,22 @@ registerBlockType( 'podlove-web-player/shortcode', {
 	category: 'embed',
 
   attributes: {
-    source: {
-      type: 'string',
-      source: 'attribute'
-    },
-
     post: {
-      type: 'number',
-      source: 'attribute'
+      type: 'number'
     },
 
     publisher: {
-      type: 'number',
-      source: 'attribute'
+      type: 'number'
     },
 
     data: {
-      type: 'object',
-      source: 'attribute'
+      type: 'object'
     }
   },
 
 	edit: edit,
 
-	save( props ) {
-		return (
-			<p className={ props.className }>Hello World! — from the frontend (02 Basic Block ESNext).</p>
-		);
+	save() {
+		return null
 	},
 } );
