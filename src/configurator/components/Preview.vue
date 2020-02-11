@@ -7,7 +7,7 @@
             class="select"
             :disabled="name === 'config'"
             :value="preview.config"
-            @change="updatePreviewOption({ option: 'config', value: $value })"
+            @change="updatePreviewOption({ option: 'config', value: $event })"
             :placeholder="$i18n(['preview', 'config-placeholder'])"
             size="small"
           >
@@ -20,7 +20,7 @@
             class="select"
             :disabled="name === 'theme'"
             :value="preview.theme"
-            @change="updatePreviewOption({ option: 'theme', value: $value })"
+            @change="updatePreviewOption({ option: 'theme', value: $event })"
             :placeholder="$i18n(['preview', 'theme-placeholder'])"
             size="small"
           >
