@@ -1,20 +1,20 @@
-import edit from './edit'
+import Edit from './components/edit';
 
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
 
-registerBlockType( 'podlove-web-player/shortcode', {
+registerBlockType('podlove-web-player/shortcode', {
 	title: __( 'Podlove Web Player', 'podlove-web-player' ),
 	icon: 'format-audio',
 	category: 'embed',
 
   attributes: {
     post: {
-      type: 'number'
+      type: 'string'
     },
 
     publisher: {
-      type: 'number'
+      type: 'string'
     },
 
     data: {
@@ -22,9 +22,13 @@ registerBlockType( 'podlove-web-player/shortcode', {
     }
   },
 
-	edit: edit,
+	edit(props) {
+    return <div className={props.className}>
+      <Edit { ...props }/>
+    </div>
+  },
 
 	save() {
 		return null
 	},
-} );
+});
