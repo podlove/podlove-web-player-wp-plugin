@@ -1,0 +1,21 @@
+.podlove-web-player--settings {
+  .controls {
+    display: flex;
+    justify-content: space-between;
+
+    .components-base-control {
+      width: 30%;
+    }
+  }
+
+  span.components-base-control__label {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+
+  label.components-base-control__label {
+    font-size: 1em;
+    font-weight: bold;
+    display: block;
+  }
+}

@@ -1,46 +1,72 @@
-import './post.scss'
-import { isUndefined, pickBy } from 'lodash'
+import './inspector.scss'
+import { keys } from 'lodash'
 
 const { Component } = wp.element
 const { compose } = wp.compose
-const { withSelect } = wp.data;
-const { withSpokenMessages, SelectControl } = wp.components
+const { withSpokenMessages, Button, SelectControl, PanelBody, PanelRow } = wp.components
+const { InspectorControls } = wp.editor
 const { __ } = wp.i18n
 
-class Post extends Component {
+class Settings extends Component {
+  constructor(props) {
+		super(...arguments);
+    this.props = props;
+    this.state = {
+      configs: [],
+      themes: [],
+      templates: []
+    }
+  }
+
+  async componentDidMount() {
+    const data = await fetch(window.PODLOVE.api.bootstrap).then(result => result.json())
+
+    this.setState({
+      configs: keys(data.configs).map(data => ({ value: data, label: data })),
+      themes: keys(data.themes).map(data => ({ value: data, label: data })),
+      templates: keys(data.templates).map(data => ({ value: data, label: data }))
+    })
+  }
+
   render() {
 		const {
-      posts,
       setAttributes,
       attributes,
     } = this.props
 
-    const select = post => console.log({ post }) || setAttributes({ post })
-    const options = [{ id: null, title: { label: null } }].concat(posts || []).map(({ id, title }) => ({ value: id, label: title.rendered }))
+    const select = prop => value => setAttributes({ [prop]: value })
 
-    return <div className="podlove-web-player--post">
-      <SelectControl
-        label={ __('Select Episode', 'podlove-web-player') }
-        value={ attributes.post }
-        options={ options }
-        onChange={ select }
-      />
-    </div>
+    return <InspectorControls>
+      <PanelBody title={ __( 'Settings', 'podlove-web-player' ) } >
+        <PanelRow className="podlove-web-player--row">
+          <SelectControl
+            label={__('Config', 'podlove-web-player')}
+            value={ attributes.config }
+            options={ this.state.configs }
+            onChange={ select('config') }
+          />
+        </PanelRow>
+        <PanelRow className="podlove-web-player--row">
+          <SelectControl
+            label={__('Config', 'podlove-web-player')}
+            value={ attributes.config }
+            options={ this.state.configs }
+            onChange={ select('config') }
+          />
+        </PanelRow>
+        <PanelRow className="podlove-web-player--row">
+        <SelectControl
+            label={__('Templates', 'podlove-web-player')}
+            value={ attributes.template }
+            options={ this.state.templates }
+            onChange={ select('template') }
+          />
+        </PanelRow>
+      </PanelBody>
+    </InspectorControls>
   }
 }
 
 export default compose([
-	withSelect(select => {
-		const { getEntityRecords } = select( 'core' );
-
-		const postsListQuery = pickBy( {
-			per_page: -1,
-			exclude: [ select( 'core/editor' ).getCurrentPostId() ],
-		}, ( value ) => ! isUndefined( value ) );
-
-		return {
-			posts: getEntityRecords( 'postType', 'post', postsListQuery ),
-		};
-	}),
 	withSpokenMessages
-])(Post)
+])(Settings)

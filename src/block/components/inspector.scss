@@ -1,0 +1,50 @@
+// .podlove-web-player--custom {
+//   display: flex;
+//   justify-content: space-between;
+
+//   .controls {
+//     width: 45%;
+//   }
+
+//   .section-label {
+//     font-size: 1.5em;
+//     font-weight: bold;
+//   }
+
+//   .input-label {
+//     display: block;
+//   }
+
+//   .input-control {
+//     width: 100%;
+//   }
+
+//   .combo {
+//     display: flex;
+
+//     input {
+//       width: 85%;
+//     }
+
+//     button {
+//       width: 15%;
+//       text-align: center;
+//     }
+//   }
+// }
+.podlove-web-player--row {
+  input {
+    display: block;
+    width: 100%;
+    height: 16px;
+  }
+
+  .components-base-control {
+    width: 100%;
+    margin-bottom: 0 !important;
+  }
+
+  .upload-button {
+    margin-top: 20px;
+  }
+}

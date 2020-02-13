@@ -19,6 +19,21 @@ registerBlockType('podlove-web-player/shortcode', {
 
     data: {
       type: 'object'
+    },
+
+    config: {
+      type: 'string',
+      default: 'default'
+    },
+
+    theme: {
+      type: 'string',
+      default: 'default'
+    },
+
+    theme: {
+      type: 'string',
+      default: 'default'
     }
   },
 
