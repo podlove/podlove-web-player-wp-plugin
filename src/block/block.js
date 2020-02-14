@@ -1,4 +1,5 @@
-import Edit from './components/edit';
+import Inspector from './components/inspector'
+import Source from './components/source'
 
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
@@ -39,7 +40,8 @@ registerBlockType('podlove-web-player/shortcode', {
 
 	edit(props) {
     return <div className={props.className}>
-      <Edit { ...props }/>
+      <Inspector { ...props } />
+      <Source {...props} />
     </div>
   },
 

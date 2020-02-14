@@ -3,7 +3,7 @@ import { keys } from 'lodash'
 
 const { Component } = wp.element
 const { compose } = wp.compose
-const { withSpokenMessages, Button, SelectControl, PanelBody, PanelRow } = wp.components
+const { withSpokenMessages, SelectControl, PanelBody, PanelRow } = wp.components
 const { InspectorControls } = wp.editor
 const { __ } = wp.i18n
 
