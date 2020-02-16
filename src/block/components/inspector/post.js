@@ -11,7 +11,7 @@ class Post extends Component {
   render() {
     const { posts, setAttributes, attributes } = this.props
 
-    const select = post => console.log({ post }) || setAttributes({ post })
+    const select = post => setAttributes({ post })
     const options = [{ id: null, title: { label: null } }]
       .concat(posts || [])
       .map(({ id, title }) => ({ value: id, label: title.rendered }))
