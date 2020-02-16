@@ -3,6 +3,8 @@ import Source from './components/source'
 import Player from './components/player'
 import logo from './components/logo'
 
+import { type } from './components/utils'
+
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
 
@@ -21,7 +23,7 @@ registerBlockType('podlove-web-player/shortcode', {
       type: 'string',
     },
 
-    data: {
+    episode: {
       type: 'object',
     },
 
@@ -45,7 +47,7 @@ registerBlockType('podlove-web-player/shortcode', {
     <div className={props.className}>
       <Inspector {...props} />
       <Source {...props} />
-      <Player {...props} />
+      {type(props.attributes) && <Player {...props} />}
     </div>
   ),
 

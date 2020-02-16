@@ -101,7 +101,7 @@ class Podlove_Web_Player_Shortcode {
 
     // if episode data is directly provided
     if ( $attributes['episode'] ) {
-      return json_decode ( base64_decode( $attributes['episode'] ) );
+      return $attributes['episode'];
     }
 
     // if is publisher post (@ericteuber)

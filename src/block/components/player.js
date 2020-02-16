@@ -16,12 +16,7 @@ class Player extends Component {
     this.plugin = null
     this.type = null
     this.mountIframe = debounce(({ node, episode, config, template }) => {
-      // clear existing dom
-      while (node.firstChild) {
-        node.removeChild(node.firstChild);
-      }
-
-      node.innerHtml = template
+      node.innerHTML = template
       window.podlovePlayer(node, episode, config)
     }, 600)
   }
@@ -41,7 +36,7 @@ class Player extends Component {
         break;
 
       case 'custom':
-        episode = attributes.data
+        episode = attributes.episode
         break;
     }
 
@@ -50,12 +45,11 @@ class Player extends Component {
 
 
   async componentDidMount() {
-    const plugin = await fetch(window.PODLOVE.api.bootstrap).then(result => result.json())
-    const base = get(get(plugin, 'settings.source.items'), get(plugin, 'settings.source.selected'))
+    this.plugin = await fetch(window.PODLOVE.api.bootstrap).then(result => result.json())
+    const base = get(get(this.plugin, 'settings.source.items'), get(this.plugin, 'settings.source.selected'))
     await loadScript(base + 'embed.js', 'podlovePlayer')
 
     this.type = type(this.props.attributes)
-    this.plugin = plugin
     this.renderPlayer(this.props.attributes)
   }
 

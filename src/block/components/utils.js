@@ -42,7 +42,7 @@ export const type = (attributes = {}) => {
     return 'publisher'
   }
 
-  if (!isUndefined(attributes.data)) {
+  if (!isUndefined(attributes.episode)) {
     return 'custom'
   }
 

@@ -28,7 +28,7 @@ class Source extends Component {
         <Dashicon icon="media-audio" size="40"/>
         <span className="source-name">{ __( 'Publisher', 'podlove-web-player' ) }</span>
       </Button>
-      <Button onClick={select({ data: {} })} className="source-select">
+      <Button onClick={select({ episode: {} })} className="source-select">
         <Dashicon icon="media-code" size="40"/>
         <span className="source-name">{ __( 'Custom', 'podlove-web-player' ) }</span>
       </Button>
