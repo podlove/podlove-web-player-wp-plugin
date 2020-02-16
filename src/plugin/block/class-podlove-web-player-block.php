@@ -45,6 +45,11 @@ class Podlove_Web_Player_Block {
   private $api;
 
   /**
+   * Plugin api
+   */
+  private $embed;
+
+  /**
    * Plugin shortcode
    */
   private $shortcode;
@@ -61,12 +66,14 @@ class Podlove_Web_Player_Block {
     $this->version = $version;
     $this->shortcode = new Podlove_Web_Player_Shortcode( $this->plugin_name, $this->version );
     $this->api = new Podlove_Web_Player_Admin_API( $this->plugin_name, $this->version );
+    $this->embed = new Podlove_Web_Player_Embed_API( $this->plugin_name, $this->version );
   }
 
   public function enqueue_scripts() {
     wp_enqueue_script( $this->plugin_name . '-block', plugin_dir_url( __FILE__ ) . '/js/block.js', array( 'wp-blocks', 'wp-i18n', 'wp-element' ), $this->version, true );
     wp_localize_script( $this->plugin_name . '-block', 'PODLOVE', array(
-      'api' => $this->api->routes()
+      'api' => $this->api->routes(),
+      'embed' => $this->embed->routes()
     )
   );
   }

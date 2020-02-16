@@ -49,7 +49,6 @@ class Podlove_Web_Player_Embed_API
   {
     return array(
       'post' => esc_url_raw(rest_url($this->plugin_name . '/' . 'shortcode' . '/' . 'post')),
-      'media' => esc_url_raw(rest_url($this->plugin_name . '/' . 'shortcode' . '/' . 'media')),
       'config' => esc_url_raw(rest_url($this->plugin_name . '/' . 'shortcode' . '/' . 'config'))
     );
   }

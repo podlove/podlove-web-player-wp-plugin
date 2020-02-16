@@ -21,7 +21,7 @@ class Custom extends Component {
     }
 
     const value = attr => get(attributes, ['data'].concat(attr))
-    const event = event => event.target.value
+    const event = event => get(event, 'target.value', data)
     const url = media => media.url
 
     return <InspectorControls>

@@ -1,51 +1,55 @@
 import Inspector from './components/inspector'
 import Source from './components/source'
+import Player from './components/player'
+import logo from './components/logo'
 
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
 
 registerBlockType('podlove-web-player/shortcode', {
-	title: __( 'Podlove Web Player', 'podlove-web-player' ),
-	icon: 'format-audio',
-	category: 'embed',
+  title: __('Podlove Web Player', 'podlove-web-player'),
+  description: __('HTML 5 Podcast Player', 'podlove-web-player'),
+  icon: logo(),
+  category: 'embed',
 
   attributes: {
     post: {
-      type: 'string'
+      type: 'string',
     },
 
     publisher: {
-      type: 'string'
+      type: 'string',
     },
 
     data: {
-      type: 'object'
+      type: 'object',
     },
 
     config: {
       type: 'string',
-      default: 'default'
+      default: 'default',
     },
 
     theme: {
       type: 'string',
-      default: 'default'
+      default: 'default',
     },
 
-    theme: {
+    template: {
       type: 'string',
-      default: 'default'
-    }
+      default: 'default',
+    },
   },
 
-	edit(props) {
-    return <div className={props.className}>
-      <Inspector { ...props } />
+  edit: props => (
+    <div className={props.className}>
+      <Inspector {...props} />
       <Source {...props} />
+      <Player {...props} />
     </div>
-  },
+  ),
 
-	save() {
-		return null
-	},
-});
+  save() {
+    return null
+  },
+})

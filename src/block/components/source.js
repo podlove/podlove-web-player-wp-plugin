@@ -1,6 +1,7 @@
 import './source.scss'
+import { type } from './utils'
 
-const { Component } = wp.element
+const { Component, Fragment } = wp.element
 const { compose } = wp.compose
 const { withSpokenMessages, Button, Dashicon } = wp.components
 const { __ } = wp.i18n
@@ -8,10 +9,15 @@ const { __ } = wp.i18n
 class Source extends Component {
   render() {
 		const {
+      attributes,
 			setAttributes,
     } = this.props;
 
     const select = data => () => setAttributes(data)
+
+    if (type(attributes)) {
+      return <Fragment />
+    }
 
     return <div className="podlove-web-player--source">
       <Button onClick={select({ post: null })} className="source-select">
