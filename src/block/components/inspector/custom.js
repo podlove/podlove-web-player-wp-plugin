@@ -4,7 +4,7 @@ import { get, set, cloneDeep } from 'lodash'
 const { Component } = wp.element
 const { compose } = wp.compose
 const { withSpokenMessages, Button, SelectControl, PanelBody, PanelRow, TextControl, Dashicon, TextareaControl } = wp.components
-const { MediaUpload, MediaUploadCheck, InspectorControls } = wp.editor
+const { MediaUpload, MediaUploadCheck, InspectorControls } = wp.blockEditor
 const { __ } = wp.i18n
 
 class Custom extends Component {
@@ -145,9 +145,9 @@ class Custom extends Component {
           <PanelRow className="podlove-web-player--row">
             <SelectControl
               label={__('Type', 'podlove-web-player')}
-              value={value(['audio', 0, 'type'])}
-              options={ [{ value: 'audio/mpeg', label: 'mp3' }, { value: 'audio/m4a', label: 'mp4' }, {value: 'audio/ogg', label: 'ogg' }, { value: 'audio/opus', label: 'opus'}, { value: 'audio/wav', label: 'wav' }] }
-              onSelect={ compose(select(['audio', 0, 'type']), event)}
+              value={value(['audio', 0, 'mimeType'])}
+              options={ [{ value: null, label: null }, { value: 'audio/mpeg', label: 'mp3' }, { value: 'audio/m4a', label: 'mp4' }, {value: 'audio/ogg', label: 'ogg' }, { value: 'audio/opus', label: 'opus'}, { value: 'audio/wav', label: 'wav' }] }
+              onChange={ compose(select(['audio', 0, 'type']), event)}
             />
           </PanelRow>
           <PanelRow className="podlove-web-player--row">

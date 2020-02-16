@@ -1,10 +1,12 @@
 import './player.scss'
 import { get, isEqual, debounce } from 'lodash'
 import { type, loadScript } from './utils'
+import logo from './logo'
 
 const { Component, createRef } = wp.element
 const { compose } = wp.compose
 const { withSpokenMessages } = wp.components
+const { __ } = wp.i18n
 
 class Player extends Component {
   constructor(props) {
@@ -71,7 +73,13 @@ class Player extends Component {
   }
 
   render() {
-    return <div className="podlove-web-player--preview" ref={this.playerRef}></div>
+    return <div className="podlove-web-player--preview">
+      <div className="logo">
+        { logo(50) }
+        <span class="title">{ __('Podlove Web Player', 'podlove-web-player') }</span>
+      </div>
+      <div className="player" ref={this.playerRef}></div>
+    </div>
   }
 }
 

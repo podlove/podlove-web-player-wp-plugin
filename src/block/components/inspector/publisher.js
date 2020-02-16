@@ -1,6 +1,6 @@
 const { Component } = wp.element
 const { compose } = wp.compose
-const { withSpokenMessages, Button, Dashicon } = wp.components
+const { withSpokenMessages } = wp.components
 const { __ } = wp.i18n
 
 class Publisher extends Component {

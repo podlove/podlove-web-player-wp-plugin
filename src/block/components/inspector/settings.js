@@ -4,7 +4,7 @@ import { keys } from 'lodash'
 const { Component } = wp.element
 const { compose } = wp.compose
 const { withSpokenMessages, SelectControl, PanelBody, PanelRow } = wp.components
-const { InspectorControls } = wp.editor
+const { InspectorControls } = wp.blockEditor
 const { __ } = wp.i18n
 
 class Settings extends Component {
@@ -48,10 +48,10 @@ class Settings extends Component {
         </PanelRow>
         <PanelRow className="podlove-web-player--row">
           <SelectControl
-            label={__('Config', 'podlove-web-player')}
-            value={ attributes.config }
-            options={ this.state.configs }
-            onChange={ select('config') }
+            label={__('Theme', 'podlove-web-player')}
+            value={ attributes.theme }
+            options={ this.state.themes }
+            onChange={ select('theme') }
           />
         </PanelRow>
         <PanelRow className="podlove-web-player--row">

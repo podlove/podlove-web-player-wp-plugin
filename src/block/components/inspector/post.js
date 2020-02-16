@@ -4,7 +4,7 @@ const { Component } = wp.element
 const { compose } = wp.compose
 const { withSelect } = wp.data
 const { withSpokenMessages, SelectControl, PanelBody, PanelRow } = wp.components
-const { InspectorControls } = wp.editor
+const { InspectorControls } = wp.blockEditor
 const { __ } = wp.i18n
 
 class Post extends Component {

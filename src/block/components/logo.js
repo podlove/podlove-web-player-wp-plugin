@@ -1,15 +1,13 @@
-export default (size = 20) => `
-<svg
+export default (size = 20) => (
+  <svg
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
     x="0"
     y="0"
-    width="${size}"
-    height="${size}"
+    width={size}
+    height={size}
     viewBox="0 0 160.472 160.81"
     enable-background="new 0 0 160.472 160.81"
-    xml:space="preserve"
   >
     <g>
       <g>
@@ -77,4 +75,5 @@ export default (size = 20) => `
         />
       </g>
     </g>
-  </svg>`
+  </svg>
+)
