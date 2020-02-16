@@ -32,8 +32,7 @@
     "@podlove/player-actions": "5.0.1-beta.1",
     "object-hash": "2.0.1",
     "vue-prism-editor": "0.3.0",
-    "prismjs": "1.18.0",
-    "@wordpress/block-editor": "3.7.0"
+    "prismjs": "1.18.0"
   },
   "devDependencies": {
     "@babel/core": "7.6.4",

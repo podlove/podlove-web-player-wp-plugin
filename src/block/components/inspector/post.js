@@ -36,8 +36,7 @@ export default compose([
 
     const postsListQuery = pickBy(
       {
-        per_page: -1,
-        exclude: [select('core/editor').getCurrentPostId()],
+        per_page: -1
       },
       value => !isUndefined(value)
     )
