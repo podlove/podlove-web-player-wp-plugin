@@ -77,6 +77,10 @@ class Podlove_Web_Player_Shortcode {
   public function render( $atts ) {
     $id = uniqid('player-');
 
+    if ( !is_array( $atts ) ) {
+      $atts = [];
+    }    
+    
     $attributes = array_change_key_case($atts, CASE_LOWER);
     $episode = $this->episode( $attributes );
     $template = $this->template( $attributes );
