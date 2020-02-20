@@ -12,7 +12,7 @@ class Post extends Component {
     const { posts, setAttributes, attributes } = this.props
 
     const select = post => setAttributes({ post })
-    const options = [{ id: null, title: { label: null } }]
+    const options = [{ id: null, title: { label: __('Select', 'podlove-web-player') } }]
       .concat(posts || [])
       .map(({ id, title }) => ({ value: id, label: title.rendered }))
 
@@ -34,15 +34,10 @@ export default compose([
   withSelect(select => {
     const { getEntityRecords } = select('core')
 
-    const postsListQuery = pickBy(
-      {
-        per_page: -1
-      },
-      value => !isUndefined(value)
-    )
-
     return {
-      posts: getEntityRecords('postType', 'post', postsListQuery),
+      posts: getEntityRecords('postType', 'post', {
+        per_page: -1
+      }),
     }
   }),
   withSpokenMessages,

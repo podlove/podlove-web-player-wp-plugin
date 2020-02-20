@@ -1,5 +1,3 @@
-import { isUndefined, pickBy } from 'lodash'
-
 const { Component } = wp.element
 const { compose } = wp.compose
 const { withSelect } = wp.data
@@ -9,18 +7,18 @@ const { __ } = wp.i18n
 
 class Publisher extends Component {
   render() {
-    const { posts, setAttributes, attributes } = this.props
+    const { episodes, setAttributes, attributes } = this.props
 
     const select = publisher => setAttributes({ publisher })
-    const options = [{ id: null, title: { label: null } }]
-      .concat(posts || [])
+    const options = [{ id: null, title: { label: __('Select', 'podlove-web-player') } }]
+      .concat(episodes || [])
       .map(({ id, title }) => ({ value: id, label: title.rendered }))
 
     return <InspectorControls>
         <PanelBody title={__('Publisher', 'podlove-web-player')}>
           <PanelRow>
             <SelectControl
-              value={attributes.post}
+              value={attributes.publisher}
               options={options}
               onChange={select}
             />
@@ -34,15 +32,10 @@ export default compose([
   withSelect(select => {
     const { getEntityRecords } = select('core')
 
-    const postsListQuery = pickBy(
-      {
-        per_page: -1,
-      },
-      value => !isUndefined(value)
-    )
-
     return {
-      posts: getEntityRecords('postType', 'podcasts', postsListQuery),
+      episodes: getEntityRecords('postType', 'podcast', {
+        per_page: -1,
+      }),
     }
   }),
   withSpokenMessages,

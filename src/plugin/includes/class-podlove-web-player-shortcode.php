@@ -107,7 +107,7 @@ class Podlove_Web_Player_Shortcode {
     }
 
     // if episode data is directly provided
-    if ( $attributes['episode'] ) {
+    if ( isset( $attributes['episode'] ) ) {
       return $attributes['episode'];
     }
 

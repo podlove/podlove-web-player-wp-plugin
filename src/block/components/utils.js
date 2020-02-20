@@ -1,7 +1,13 @@
 import { isUndefined } from 'lodash'
 
-export const loadScript = (src, prop) =>
+const resolver = {}
+
+export const loadScript = (src, prop) => resolver[prop] ? resolver[prop] :
   new Promise((resolve, reject) => {
+    if (!resolver[prop]) {
+      resolver[prop] = resolve
+    }
+
     // Function already loaded
     if (prop && window[prop]) {
       return resolve()

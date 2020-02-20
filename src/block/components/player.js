@@ -50,7 +50,7 @@ class Player extends Component {
     await loadScript(base + 'embed.js', 'podlovePlayer')
 
     this.type = type(this.props.attributes)
-    this.renderPlayer(this.props.attributes)
+    this.renderPlayer()
   }
 
   shouldComponentUpdate() {
