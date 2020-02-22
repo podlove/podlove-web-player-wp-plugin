@@ -33,11 +33,15 @@ class Player extends Component {
     switch (this.type) {
       case 'post':
         episode = [routes.post, attributes.post].join('/')
-        break;
+        break
+
+      case 'publisher':
+        episode = [routes.publisher, attributes.publisher].join('/')
+        break
 
       case 'custom':
         episode = attributes.episode
-        break;
+        break
     }
 
     this.mountIframe({ node, config, episode, template })

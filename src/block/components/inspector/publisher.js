@@ -10,7 +10,7 @@ class Publisher extends Component {
     const { episodes, setAttributes, attributes } = this.props
 
     const select = publisher => setAttributes({ publisher })
-    const options = [{ id: null, title: { label: __('Select', 'podlove-web-player') } }]
+    const options = [{ id: null, title: { rendered: __('Select', 'podlove-web-player') } }]
       .concat(episodes || [])
       .map(({ id, title }) => ({ value: id, label: title.rendered }))
 

@@ -39,24 +39,31 @@ class Podlove_Web_Player_Enclosure {
 	 * @since    5.0.0
    * @param    array    $content       post content.
 	 */
-  public function render( $content ) {
-    global $post;
+  public function render($content)
+  {
+      global $post;
 
-    $options = $this->options->read();
-    $customFields = get_post_custom( $post->ID );
+      $options      = $this->options->read();
+      $customFields = get_post_custom($post->ID);
 
-    $enclosure = $customFields['enclosure'][0] ?? null;
+      // Publisher ❤️
+      if (get_post_type() == 'podcast') {
+          return $content;
+      }
 
-    if ( !$enclosure ) {
-      return $content;
+      // Legacy Blubörry? Blueberry??? 💩
+      $enclosure = $customFields['enclosure'][0] ?? null;
+
+      if (!$enclosure) {
+          return $content;
+      }
+
+      $shortcode = do_shortcode('[podlove-web-player post="' . $post->ID . '"]');
+
+      if ($options['settings']['enclosure'] == 'bottom') {
+          return $content . $shortcode;
+      }
+
+      return $shortcode . $content;
     }
-
-    $shortcode = do_shortcode( '[podlove-web-player post="' . $post->ID . '"]' );
-
-    if ( $options['settings']['enclosure'] == 'bottom' ) {
-      return $content . $shortcode;
-    }
-
-    return $shortcode . $content;
-  }
 }

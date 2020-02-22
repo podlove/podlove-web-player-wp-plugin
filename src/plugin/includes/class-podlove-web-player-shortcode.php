@@ -79,8 +79,8 @@ class Podlove_Web_Player_Shortcode {
 
     if ( !is_array( $atts ) ) {
       $atts = [];
-    }    
-    
+    }
+
     $attributes = array_change_key_case($atts, CASE_LOWER);
     $episode = $this->episode( $attributes );
     $template = $this->template( $attributes );
@@ -111,8 +111,9 @@ class Podlove_Web_Player_Shortcode {
       return $attributes['episode'];
     }
 
-    // filter for plugins (like Podlove Publisher) to provide their own episode config
-    return apply_filters( 'podlove_web_player_shortcode_episode_attributes', $attributes );
+    if ( isset( $attributes['publisher'] ) ) {
+      return $this->routes['publisher'] . '/' . $attributes['publisher'];
+    }
   }
 
   private function fromAttributes ($attributes) {

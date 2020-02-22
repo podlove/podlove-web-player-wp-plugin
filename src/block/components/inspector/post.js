@@ -1,5 +1,3 @@
-import { isUndefined, pickBy } from 'lodash'
-
 const { Component } = wp.element
 const { compose } = wp.compose
 const { withSelect } = wp.data
@@ -12,7 +10,7 @@ class Post extends Component {
     const { posts, setAttributes, attributes } = this.props
 
     const select = post => setAttributes({ post })
-    const options = [{ id: null, title: { label: __('Select', 'podlove-web-player') } }]
+    const options = [{ id: null, title: { rendered: __('Select', 'podlove-web-player') } }]
       .concat(posts || [])
       .map(({ id, title }) => ({ value: id, label: title.rendered }))
 
