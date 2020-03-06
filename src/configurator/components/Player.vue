@@ -116,7 +116,7 @@ export default {
 
   mounted() {
     const player = document.createElement('script')
-    player.setAttribute('src', this.source + '/embed.js')
+    player.setAttribute('src', this.source + 'embed.js')
     document.head.appendChild(player)
 
     player.addEventListener('load', this.bootstrap.bind(this))
