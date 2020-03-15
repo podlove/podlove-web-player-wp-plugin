@@ -27,4 +27,8 @@
 #wpfooter {
   display: none;
 }
+
+#adminmenuwrap {
+  z-index: 1000;
+}
 </style>

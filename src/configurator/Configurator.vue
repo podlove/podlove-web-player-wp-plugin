@@ -1,12 +1,10 @@
 <template>
   <div class="flex">
     <el-container>
-      <el-aside width="200px">
-        <navigation />
-      </el-aside>
       <el-container>
-        <el-header>
-          <page-header></page-header>
+        <el-header class="p-0 flex">
+          <navigation />
+          <global-actions class="el-menu el-menu--horizontal" />
         </el-header>
         <el-main class="flex configurator">
           <router-view class="mr-6"></router-view>
@@ -22,7 +20,7 @@
 <script>
   import { mapState, mapMutations, mapActions } from 'vuex'
   import { get } from 'lodash/fp'
-  import { Preview, Navigation, PageHeader, CreateModal, DeleteModal } from './components'
+  import { Preview, Navigation, GlobalActions, CreateModal, DeleteModal } from './components'
 
   export default {
     name: 'configurator',
@@ -34,7 +32,7 @@
     },
 
     components: {
-      PageHeader,
+      GlobalActions,
       Navigation,
       Preview,
       CreateModal,
@@ -48,9 +46,14 @@
   @tailwind components;
   @tailwind utilities;
 
-  @import '~element-ui/lib/theme-chalk/index.css';
+  @import './theme/index.css';
 
   .configurator {
     height: calc(100vh - 32px);
+    z-idex: 9999;
+  }
+
+  .el-menu.el-menu--horizontal {
+    border-bottom: 1px solid #82878C;
   }
 </style>

@@ -1,5 +1,5 @@
 import NavigationComponent from './Navigation'
-import PageHeaderComponent from './PageHeader'
+import GlobalActionsComponent from './GlobalActions'
 import PreviewComponent from './Preview'
 import CardComponent from './Card'
 import FormElementComponent from './FormElement'
@@ -8,7 +8,7 @@ import DeleteModalComponent from './DeleteModal'
 import DraggableComponent from './Draggable'
 
 export const Navigation = NavigationComponent
-export const PageHeader = PageHeaderComponent
+export const GlobalActions = GlobalActionsComponent
 export const Preview = PreviewComponent
 export const Card = CardComponent
 export const FormElement = FormElementComponent

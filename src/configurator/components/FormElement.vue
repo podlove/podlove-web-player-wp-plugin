@@ -41,7 +41,6 @@ export default {
     .el-select, .el-input {
       input {
         background: #fff;
-        border: 1px solid #dcdfe6;
       }
     }
   }

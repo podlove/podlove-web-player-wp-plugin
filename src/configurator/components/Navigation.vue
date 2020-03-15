@@ -1,5 +1,5 @@
 <template>
-  <el-menu :default-active="active" class="h-full">
+  <el-menu :default-active="active" class="w-full" mode="horizontal">
     <el-submenu index="1">
       <template slot="title">
         <i class="el-icon-c-scale-to-original"></i>
