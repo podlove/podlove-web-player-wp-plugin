@@ -24,19 +24,13 @@ export default {
       default: '',
     },
     size: {
-      type: String,
-      default: 'desktop',
+      type: Number,
+      default: 950,
     },
   },
 
   data() {
     return {
-      width: {
-        mobile: 350,
-        tablet: 600,
-        desktop: 950,
-      },
-
       episode: {
         show: {
           title: 'Futurama',
@@ -108,9 +102,7 @@ export default {
     ...mapGetters('settings', ['source']),
 
     previewWidth() {
-      const width = this.width[this.size]
-
-      return `${width}px`
+      return `${this.size}px`
     },
   },
 

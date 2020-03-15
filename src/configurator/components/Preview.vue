@@ -49,7 +49,7 @@
             :placeholder="$i18n(['preview', 'size-placeholder'])"
             size="small"
           >
-            <el-option v-for="item in sizes" :key="`size-${item}`" :label="item" :value="item"> </el-option>
+            <el-option v-for="item in Object.keys(sizes)" :key="`size-${item}`" :label="item" :value="item"> </el-option>
           </el-select>
         </form-element>
       </div>
@@ -59,7 +59,7 @@
         :config="config"
         :template="template"
         :theme="theme"
-        :size="preview.size"
+        :size="sizes[preview.size]"
         :key="configHash"
         @ready="connectPlayerStore"
       />
@@ -85,8 +85,7 @@ export default {
 
   data() {
     return {
-      store: {},
-      sizes: ['mobile', 'tablet', 'desktop'],
+      store: {}
     }
   },
 
@@ -95,8 +94,9 @@ export default {
     ...mapGetters('themes', ['themes', 'themeList']),
     ...mapGetters('templates', ['templates', 'templateList']),
     ...mapGetters('settings', ['source']),
-    ...mapGetters('preview', ['preview']),
+    ...mapGetters('preview', ['preview', 'contentWidth']),
     ...mapGetters('router', ['name', 'id']),
+
     config() {
       return get(this.configs, this.preview.config, {})
     },
@@ -108,6 +108,14 @@ export default {
     },
     configHash() {
       return hash({ ...this.config, template: this.template, size: this.preview.size, source: this.source })
+    },
+    sizes() {
+      return {
+        ...(this.contentWidth ? { content: this.contentWidth } : {}),
+        mobile: 350,
+        tablet: 600,
+        desktop: 950
+      }
     },
   },
 
