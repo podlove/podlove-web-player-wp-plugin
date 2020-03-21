@@ -119,7 +119,7 @@ class Podlove_Web_Player_Embed_API
     {
         switch ($type) {
             default:
-                return false;
+              return false;
         }
     }
 
@@ -191,6 +191,10 @@ class Podlove_Web_Player_Embed_API
         );
 
         $config['share']['outlet'] = $sources[$selected] . 'share.html';
+
+        // Disable subscribe when no clients are available
+        $availableClients = $config['subscribe-button']['clients'];
+        $config['subscribe-button'] = count($availableClients) > 0 ? $config['subscribe-button'] : null;
 
         return rest_ensure_response(array_merge($config, $theme, $share));
     }

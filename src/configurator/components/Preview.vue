@@ -98,7 +98,13 @@ export default {
     ...mapGetters('router', ['name', 'id']),
 
     config() {
-      return get(this.configs, this.preview.config, {})
+      const config = get(this.configs, this.preview.config, {})
+      const clients = get(config, ['subscribe-button', 'clients'], [])
+
+      return {
+        ...config,
+        ['subscribe-button']: clients.length > 0 ? get(config, 'subscribe-button') : null
+      }
     },
     template() {
       return get(this.templates, this.preview.template, '')
