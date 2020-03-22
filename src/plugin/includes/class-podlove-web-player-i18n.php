@@ -114,6 +114,8 @@ class Podlove_Web_Player_i18n {
         'enclosure-disabled' => static::i18n( 'disable automatic enclosure' ),
         'enclosure-top' => static::i18n( 'insert player at the top of the post' ),
         'enclosure-bottom' => static::i18n( 'insert player at the end of the post' ),
+        'legacy' => static::i18n( 'Legacy' ),
+        'legacy-browser' => static::i18n( 'enable support for legacy browsers (increases loading time)' )
       ),
 
       'navigation' => array(

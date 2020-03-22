@@ -52,7 +52,8 @@ class Podlove_Web_Player_Options
         'source' => array(
           'selected' => 'cdn'
         ),
-        'enclosure' => 'bottom'
+        'enclosure' => 'bottom',
+        'legacy' => false
       )
     );
   }

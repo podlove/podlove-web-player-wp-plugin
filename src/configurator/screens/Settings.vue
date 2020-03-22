@@ -26,6 +26,18 @@
         </el-select>
       </form-element>
     </card>
+
+     <card :title="$i18n(['settings', 'legacy'])">
+      <form-element full>
+       <el-checkbox
+          :value="legacy"
+          size="small"
+          @change="updateLegacy"
+        >
+        {{ $i18n(['settings', 'legacy-browser']) }}
+        </el-checkbox>
+      </form-element>
+    </card>
   </div>
 </template>
 
@@ -36,7 +48,7 @@ import { Card, FormElement } from '../components'
 
 export default {
   computed: {
-    ...mapGetters('settings', ['source', 'settings', 'enclosure']),
+    ...mapGetters('settings', ['source', 'settings', 'enclosure', 'legacy']),
 
     sources() {
       return reduce(get(this.settings, 'source.items', {}), (result, value, label) => [...result, { label, value }], [])
@@ -48,7 +60,7 @@ export default {
     FormElement
   },
 
-  methods: mapActions('settings', ['updateSource', 'updateEnclosure'])
+  methods: mapActions('settings', ['updateSource', 'updateEnclosure', 'updateLegacy'])
 }
 </script>
 

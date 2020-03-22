@@ -102,6 +102,11 @@ class Podlove_Web_Player_Public {
     $options = $this->options->read();
     $sources = $options['settings']['source']['items'];
     $selected = $options['settings']['source']['selected'];
+    $legacy = $options['settings']['legacy'];
+
+    if ($legacy) {
+      wp_enqueue_script( $this->plugin_name . '-polyfills', $sources[$selected] . 'polyfills.js', array(), $this->version, false );
+    }
 
 		wp_enqueue_script( $this->plugin_name . '-player', $sources[$selected] . 'embed.js', array(), $this->version, false );
   }

@@ -12,7 +12,8 @@ export default {
         local: null,
       },
     },
-    enclosure: null
+    enclosure: null,
+    legacy: null
   },
 
   getters: {
@@ -30,6 +31,10 @@ export default {
 
     enclosure(state) {
       return state.enclosure
+    },
+
+    legacy(state) {
+      return state.legacy
     }
   },
 
@@ -52,14 +57,19 @@ export default {
       commit('updateEnclosure', value)
     },
 
+    updateLegacy({ commit }, value) {
+      commit('updateLegacy', value)
+    },
+
     save({ getters, commit }) {
       const source = get(getters.settings, 'source.selected')
       const enclosure = getters.enclosure
+      const legacy = getters.legacy
 
         request
           .create(
             PODLOVE.api.settings,
-            { source, enclosure },
+            { source, enclosure, legacy },
             {
               loading: PODLOVE.i18n.message_saving,
               error: PODLOVE.i18n.error_save_settings,
@@ -75,6 +85,7 @@ export default {
     bootstrap(state, payload = {}) {
       state.source = payload.source
       state.enclosure = payload.enclosure
+      state.legacy = payload.legacy
     },
 
     updateSource(state, source) {
@@ -88,5 +99,9 @@ export default {
     updateSettings(state, settings) {
       state.settings = settings
     },
+
+    updateLegacy(state, legacy) {
+      state.legacy = legacy
+    }
   },
 }
