@@ -131,8 +131,8 @@ class Podlove_Web_Player_Shortcode
         global $post;
         $customFields = get_post_custom($post->ID);
 
-        $chapters = $this->chapters(trim($customFields[$attributes['chapters']][0]));
-        $transcripts = json_decode($customFields[$attributes['transcripts']][0]);
+        $chapters = $this->chapters(trim($attributes['chapters']), trim($customFields[$attributes['chapters']][0]));
+        $transcripts = $this->transcripts(trim($attributes['transcripts']), trim($customFields[$attributes['transcripts']][0]));
 
         return array(
             'title' => $attributes['title'] ?? null,
@@ -214,10 +214,19 @@ class Podlove_Web_Player_Shortcode
      * Creates the chapters list
      *
      * @since    5.0.0
+     * @param    string    $attribute     provided attribute as string.
      * @param    string    $chapters      provided chapters as string.
      */
-    private function chapters($chapters)
+    private function chapters($attribute, $chapters)
     {
+        if (!isset($attribute)) {
+            return array();
+        }
+
+        if ($chapters === '') {
+            return $attribute;
+        }
+
         $result = json_decode($chapters);
 
         if ($result === '') {
@@ -243,6 +252,34 @@ class Podlove_Web_Player_Shortcode
         }
 
         return $chapterArray;
+    }
+
+    /**
+     * Creates the transcripts list
+     *
+     * @since   5.0.0
+     * @param    string    $attribute     provided attribute as string.
+     * @param    string    $transcripts   provided transcripts as string.
+     */
+    private function transcripts($attribute, $transcripts)
+    {
+      if (!isset($attribute)) {
+        return array();
+      }
+
+      if ($transcripts === '') {
+        return $attribute;
+      }
+
+      $result = json_decode($transcripts);
+
+      if ($result === '') {
+          return array();
+      }
+
+      if ($result !== null) {
+          return $result;
+      }
     }
 
     /**
