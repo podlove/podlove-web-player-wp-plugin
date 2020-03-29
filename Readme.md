@@ -1,4 +1,4 @@
-# Podlove Web Player 4 Wordpress Plugin
+# Podlove Web Player 5 Wordpress Plugin
 
 ## Requirements
 
@@ -18,6 +18,14 @@ $ npm run build
 ```
 
 You will find all plugin assets in `/dist`
+
+## Packaging
+
+```bash
+$ nmp run packate
+```
+
+A zipped version of the Wordpress Plugin is located in `/dist`
 
 ## Development
 
