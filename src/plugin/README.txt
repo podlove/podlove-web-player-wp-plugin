@@ -24,7 +24,6 @@ It has a native integration with [Podlove Publisher](https://wordpress.org/plugi
 * Supports multiple audio file formats
 * Supports live streams
 
-
 ### Theming & Templating
 
 The Player is fully customizable in terms of
@@ -37,6 +36,61 @@ The Player is fully customizable in terms of
 
 * Customizable Podcast Clients
 * Integration in the Player
+
+### Usage
+
+There are basically four ways to use the Podlove Web Player:
+
+#### 1 Manual Wordpress Shortcode
+
+Use a simple shortcode in your posts and pages, and the Podlove Web Player will appear, playing any media file you want to assign. Basic usage:
+
+```
+[podlove-web-player
+  theme="default"
+  config="default"
+  title="My episode title"
+  subtitle="Episode Subtitle"
+  poster="/files/path/to/poster.png"
+  chapters="/files/path/to/chapters.json"
+  transcripts="/files/path/to/transcripts.json"
+  src="http://mysite.com/mymedia.mp3"
+  duration="03:33"
+]
+```
+
+Use an existing post with a media enclosure that is provided from plugins like Blubrry:
+
+```
+[podlove-web-player
+  theme="default"
+  config="default"
+  episode="1234"
+]
+```
+
+Or in case you have our [Podlove Publisher](https://wordpress.org/plugins/podlove-podcasting-plugin-for-wordpress/) installed:
+
+```
+[podlove-web-player
+  theme="default"
+  config="default"
+  publisher="1234"
+]
+```
+
+#### 2 Using Wordpress Gutenberg Blocks
+
+You can choose between different references, like Podlove Publisher, Blocks or you can add the meta data manually. Right now the latter option is limited to a limited set of attributes, this will be expanded in further releases.
+
+#### 3 Automatic Integration with Podcasting Engines
+
+If you are using Podlove Publisher you should be able to select it in the Publisher Player settings.
+In case you are still using Blubrry you can simply enable the automatic insertions on enclosures in the settings and choose the position.
+
+### Help & Support
+
+If you encounter any issue with the plugin or want to request a specific feature please reach out to our [Podlove Community](https://community.podlove.org/).
 
 == Installation ==
 

@@ -121,7 +121,7 @@ class Podlove_Web_Player_Options
 
     $options['settings']['source']['items'] = array(
       'cdn' => 'https://cdn.podlove.org/web-player/5.x/',
-      'local' => get_site_url(null, '/wp-content/plugins/podlove-web-player-beta/web-player/')
+      'local' => get_site_url(null, '/wp-content/plugins/podlove-web-player/web-player/')
     );
 
     $options['settings']['contentWidth'] = $content_width;

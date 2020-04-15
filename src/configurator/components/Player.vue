@@ -120,7 +120,7 @@ export default {
         .podlovePlayer(this.$refs.player, this.episode, {
           ...this.config,
           theme: this.theme,
-          base: '/wp-content/plugins/podlove-web-player-beta/web-player/',
+          base: '/wp-content/plugins/podlove-web-player/web-player/',
           version: 5,
         })
         .then(store => {

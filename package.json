@@ -4,7 +4,7 @@
   "description": "Podlove Web Player Configurator",
   "author": "Alexander Heimbuch <github@heimbu.ch>",
   "scripts": {
-    "dist:clean": "rm -rf dist/*",
+    "dist:clean": "rm -rf dist/",
     "plugin:copy": "mkdir -p dist/ && cp -R src/plugin/* dist/ && cp -R node_modules/@podlove/web-player dist/",
     "plugin:dev": "nodemon --ext php --watch src/plugin --exec 'npm run plugin:copy'",
     "configurator:dev": "webpack --watch --config build/webpack.dev.conf.js",
@@ -14,7 +14,8 @@
     "dev:kill": "./wordpress dev kill",
     "dev": "npm run dist:clean && concurrently 'npm run plugin:dev' 'npm run configurator:dev'",
     "build": "npm run dist:clean && npm run plugin:copy && npm run configurator:build",
-    "package": "npm run build && cd dist && zip -r -X podlove-web-player-beta.zip ."
+    "package": "npm run build && cd dist && zip -r -X podlove-web-player-beta.zip .",
+    "publish:prepare": "npm run build && cp -R ./src/assets ./dist/.wordpress-org && cp -R .git dist/ && cp .distignore dist/"
   },
   "dependencies": {
     "element-ui": "2.13.0",
