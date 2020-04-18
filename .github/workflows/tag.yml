@@ -11,7 +11,7 @@ jobs:
     - uses: actions/checkout@master
     - name: Build
       run: |
-        npm ci
+        npm install
         npm run publish:prepare
         npm run publish:workspace
     - name: WordPress Plugin Deploy

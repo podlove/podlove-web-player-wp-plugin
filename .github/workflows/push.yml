@@ -8,5 +8,5 @@ jobs:
     - uses: actions/checkout@master
     - name: Build
       run: |
-        npm ci
+        npm install
         npm run build
