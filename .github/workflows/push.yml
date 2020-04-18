@@ -1,0 +1,12 @@
+name: Qualify Branch
+on: push
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Build
+      run: |
+        npm ci
+        npm run build
