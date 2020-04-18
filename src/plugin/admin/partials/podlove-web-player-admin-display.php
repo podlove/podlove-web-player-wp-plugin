@@ -6,7 +6,7 @@
  * This file is used to markup the admin-facing aspects of the plugin.
  *
  * @link       http://example.com
- * @since      5.0.1
+ * @since      5.0.2
  *
  * @package    Podlove_Web_Player
  * @subpackage Podlove_Web_Player/admin/partials
