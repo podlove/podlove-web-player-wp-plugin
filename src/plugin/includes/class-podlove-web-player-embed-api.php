@@ -7,7 +7,7 @@
  * @since      5.0.0
  * @package    Podlove_Web_Player
  * @subpackage Podlove_Web_Player/includes
- * @author     Alexander Heimbuch <podlove@heimbu.ch>
+ * @author     Alexander Heimbuch <github@heimbu.ch>
  */
 class Podlove_Web_Player_Embed_API
 {

@@ -1,19 +1,6 @@
 <?php
 
 /**
- * The file that defines the core plugin class
- *
- * A class definition that includes attributes and functions used across both the
- * public-facing side of the site and the admin area.
- *
- * @link       http://example.com
- * @since      1.0.0
- *
- * @package    Podlove_Web_Player
- * @subpackage Podlove_Web_Player/includes
- */
-
-/**
  * The core plugin class.
  *
  * This is used to define internationalization, admin-specific hooks, and
@@ -22,7 +9,7 @@
  * Also maintains the unique identifier of this plugin as well as the current
  * version of the plugin.
  *
- * @since      1.0.0
+ * @since      5.0.0
  * @package    Podlove_Web_Player
  * @subpackage Podlove_Web_Player/includes
  * @author     Alexander Heimbuch <github@heimbu.ch>
@@ -72,7 +59,7 @@ class Podlove_Web_Player {
 		if ( defined( 'PLUGIN_NAME_VERSION' ) ) {
 			$this->version = PLUGIN_NAME_VERSION;
 		} else {
-			$this->version = '1.0.0';
+			$this->version = '5.0.0';
 		}
 		$this->plugin_name = 'podlove-web-player';
 
@@ -235,7 +222,7 @@ class Podlove_Web_Player {
 	 * The name of the plugin used to uniquely identify it within the context of
 	 * WordPress and to define internationalization functionality.
 	 *
-	 * @since     1.0.0
+	 * @since     5.0.0
 	 * @return    string    The name of the plugin.
 	 */
 	public function get_plugin_name() {
@@ -245,7 +232,7 @@ class Podlove_Web_Player {
 	/**
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
-	 * @since     1.0.0
+	 * @since     5.0.0
 	 * @return    Podlove_Web_Player_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
@@ -255,7 +242,7 @@ class Podlove_Web_Player {
 	/**
 	 * Retrieve the version number of the plugin.
 	 *
-	 * @since     1.0.0
+	 * @since     5.0.0
 	 * @return    string    The version number of the plugin.
 	 */
 	public function get_version() {

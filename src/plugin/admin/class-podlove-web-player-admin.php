@@ -4,7 +4,7 @@
  * The admin-specific functionality of the plugin.
  *
  * @link       http://example.com
- * @since      1.0.0
+ * @since      5.0.0
  *
  * @package    Podlove_Web_Player
  * @subpackage Podlove_Web_Player/admin
@@ -87,7 +87,7 @@ class Podlove_Web_Player_Admin {
   /**
 	 * Creates the configuration page
 	 *
-	 * @since 		1.0.0
+	 * @since 		5.0.0
 	 * @return 		void
 	 */
 	public function page_settings() {

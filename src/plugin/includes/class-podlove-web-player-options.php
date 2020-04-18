@@ -4,10 +4,10 @@
  * Modify podlove web player settings
  *
  *
- * @since      1.0.0
+ * @since      5.0.0
  * @package    Podlove_Web_Player
  * @subpackage Podlove_Web_Player/includes
- * @author     Alexander Heimbuch <podlove@heimbu.ch>
+ * @author     Alexander Heimbuch <github@heimbu.ch>
  */
 class Podlove_Web_Player_Options
 {
@@ -61,7 +61,7 @@ class Podlove_Web_Player_Options
   /**
    * Serializes values with defaults
    *
-   * @since     1.0.0
+   * @since     5.0.0
    */
   private function serializer($value = [])
   {
@@ -102,7 +102,7 @@ class Podlove_Web_Player_Options
   /**
    * Creates the plugin options
    *
-   * @since     1.0.0
+   * @since     5.0.0
    */
   public function create()
   {
@@ -112,7 +112,7 @@ class Podlove_Web_Player_Options
   /**
    * Reads the plugin options
    *
-   * @since     1.0.0
+   * @since     5.0.0
    */
   public function read()
   {
@@ -131,7 +131,7 @@ class Podlove_Web_Player_Options
   /**
    * Updates the plugin options
    *
-   * @since     1.0.0
+   * @since     5.0.0
    */
   public function update($value = array())
   {
@@ -141,7 +141,7 @@ class Podlove_Web_Player_Options
   /**
    * Updates the plugin options
    *
-   * @since     1.0.0
+   * @since     5.0.0
    */
   public function delete()
   {

@@ -3,8 +3,8 @@
 /**
  * Register all actions and filters for the plugin
  *
- * @link       http://example.com
- * @since      1.0.0
+ * @link       https://docs.podlove.org/podlove-web-player
+ * @since      5.0.0
  *
  * @package    Podlove_Web_Player
  * @subpackage Podlove_Web_Player/includes
