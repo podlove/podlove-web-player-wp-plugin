@@ -4,7 +4,7 @@
  * REST interface for the podlove web player embed
  *
  *
- * @since      5.0.0
+ * @since      5.0.1
  * @package    Podlove_Web_Player
  * @subpackage Podlove_Web_Player/includes
  * @author     Alexander Heimbuch <github@heimbu.ch>
@@ -14,7 +14,7 @@ class Podlove_Web_Player_Embed_API
     /**
      * The ID of this plugin.
 
-     * @since    5.0.0
+     * @since    5.0.1
      * @access   private
      * @var      string    $plugin_name    The ID of this plugin.
      */
@@ -22,7 +22,7 @@ class Podlove_Web_Player_Embed_API
 
     /**
      * Plugin options
-     * @since    5.0.0
+     * @since    5.0.1
      * @param    array    $options       The plugin options.
      */
     private $options;
@@ -30,7 +30,7 @@ class Podlove_Web_Player_Embed_API
     /**
      * Initialize the class and set its properties.
      *
-     * @since    5.0.0
+     * @since    5.0.1
      * @param      string    $plugin_name       The name of this plugin.
      * @param      string    $version           The version of this plugin.
      */
@@ -43,7 +43,7 @@ class Podlove_Web_Player_Embed_API
     /**
      * Define API paths
      *
-     * @since    5.0.0
+     * @since    5.0.1
      */
     public function routes()
     {
@@ -57,7 +57,7 @@ class Podlove_Web_Player_Embed_API
     /**
      * Register the API routes
      *
-     * @since    5.0.0
+     * @since    5.0.1
      */
     public function registerRoutes()
     {
@@ -113,7 +113,7 @@ class Podlove_Web_Player_Embed_API
     /**
      * Validates the API payload
      *
-     * @since    5.0.0
+     * @since    5.0.1
      */
     public function validate($type, $value)
     {

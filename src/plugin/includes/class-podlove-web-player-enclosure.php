@@ -4,7 +4,7 @@
  * Podlove web player Enclosure
  *
  *
- * @since      5.0.0
+ * @since      5.0.1
  * @package    Podlove_Web_Player
  * @subpackage Podlove_Web_Player/includes
  * @author     Alexander Heimbuch <github@heimbu.ch>
@@ -14,7 +14,7 @@ class Podlove_Web_Player_Enclosure {
   /**
 	 * Web Player options
 	 *
-	 * @since    5.0.0
+	 * @since    5.0.1
 	 * @access   private
 	 * @var      array    $options    The current player configuration.
 	 */
@@ -25,7 +25,7 @@ class Podlove_Web_Player_Enclosure {
   /**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    5.0.0
+	 * @since    5.0.1
 	 * @param    string    $plugin_name       The name of the plugin.
 	 */
 	public function __construct( $plugin_name ) {
@@ -36,7 +36,7 @@ class Podlove_Web_Player_Enclosure {
   /**
 	 * Enclosure Renderer
 	 *
-	 * @since    5.0.0
+	 * @since    5.0.1
    * @param    array    $content       post content.
 	 */
   public function render($content)

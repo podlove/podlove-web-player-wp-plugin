@@ -4,7 +4,7 @@
  * Modify podlove web player settings
  *
  *
- * @since      5.0.0
+ * @since      5.0.1
  * @package    Podlove_Web_Player
  * @subpackage Podlove_Web_Player/includes
  * @author     Alexander Heimbuch <github@heimbu.ch>
@@ -15,7 +15,7 @@ class Podlove_Web_Player_Options
   /**
    * The unique identifier of this plugin.
    *
-   * @since    5.0.0
+   * @since    5.0.1
    * @access   protected
    * @var      string    $plugin_name    The string used to uniquely identify this plugin.
    */
@@ -24,7 +24,7 @@ class Podlove_Web_Player_Options
   /**
    * The plugin directory
    *
-   * @since    5.0.0
+   * @since    5.0.1
    * @access   protected
    * @var      string    $plugin_directory    The plugin directory.
    */
@@ -33,7 +33,7 @@ class Podlove_Web_Player_Options
   /**
    * The default web player configuration
    *
-   * @since    5.0.0
+   * @since    5.0.1
    * @access   protected
    * @var      array    $defaults        Default configuration values.
    */
@@ -61,7 +61,7 @@ class Podlove_Web_Player_Options
   /**
    * Serializes values with defaults
    *
-   * @since     5.0.0
+   * @since     5.0.1
    */
   private function serializer($value = [])
   {
@@ -102,7 +102,7 @@ class Podlove_Web_Player_Options
   /**
    * Creates the plugin options
    *
-   * @since     5.0.0
+   * @since     5.0.1
    */
   public function create()
   {
@@ -112,7 +112,7 @@ class Podlove_Web_Player_Options
   /**
    * Reads the plugin options
    *
-   * @since     5.0.0
+   * @since     5.0.1
    */
   public function read()
   {
@@ -131,7 +131,7 @@ class Podlove_Web_Player_Options
   /**
    * Updates the plugin options
    *
-   * @since     5.0.0
+   * @since     5.0.1
    */
   public function update($value = array())
   {
@@ -141,7 +141,7 @@ class Podlove_Web_Player_Options
   /**
    * Updates the plugin options
    *
-   * @since     5.0.0
+   * @since     5.0.1
    */
   public function delete()
   {

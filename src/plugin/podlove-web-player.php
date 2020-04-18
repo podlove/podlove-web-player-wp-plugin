@@ -9,14 +9,14 @@
  * that starts the plugin.
  *
  * @link              https://docs.podlove.org/podlove-web-player/
- * @since             5.0.0
+ * @since             5.0.1
  * @package           Podlove_Web_Player
  *
  * @wordpress-plugin
  * Plugin Name:       Podlove Web Player Beta
  * Plugin URI:        https://docs.podlove.org/podlove-web-player/
  * Description:       Audio First Podcast Web Player
- * Version:           5.0.0
+ * Version:           5.0.1
  * Author:            Alexander Heimbuch
  * Author URI:        http://alexander.heimbu.ch
  * License:           MIT
@@ -30,7 +30,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'PODLOVE_WEB_PLAYER_VERSION', '5.0.0' );
+define( 'PODLOVE_WEB_PLAYER_VERSION', '5.0.1' );
 
 /**
  * The code that runs during plugin activation.
@@ -66,7 +66,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-podlove-web-player.php';
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    5.0.0
+ * @since    5.0.1
  */
 function run_podlove_web_player() {
 	$plugin = new Podlove_Web_Player();
