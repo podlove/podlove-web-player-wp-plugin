@@ -4,7 +4,7 @@
  * Modify podlove web player shortcode
  *
  *
- * @since      5.0.0
+ * @since      5.0.1
  * @package    Podlove_Web_Player
  * @subpackage Podlove_Web_Player/includes
  * @author     Alexander Heimbuch <github@heimbu.ch>
@@ -15,7 +15,7 @@ class Podlove_Web_Player_Shortcode
     /**
      * The ID of this plugin.
      *
-     * @since    5.0.0
+     * @since    5.0.1
      * @access   private
      * @var      string    $plugin_name    The ID of this plugin.
      */
@@ -24,7 +24,7 @@ class Podlove_Web_Player_Shortcode
     /**
      * The version of this plugin.
      *
-     * @since    5.0.0
+     * @since    5.0.1
      * @access   private
      * @var      string    $version    The current version of this plugin.
      */
@@ -33,7 +33,7 @@ class Podlove_Web_Player_Shortcode
     /**
      * Web Player options
      *
-     * @since    5.0.0
+     * @since    5.0.1
      * @access   private
      * @var      array    $options    The current player configuration.
      */
@@ -42,7 +42,7 @@ class Podlove_Web_Player_Shortcode
     /**
      * Shortcode API Routes
      *
-     * @since    5.0.0
+     * @since    5.0.1
      * @access   private
      * @var      array    $api    The shortcode apis.
      */
@@ -51,7 +51,7 @@ class Podlove_Web_Player_Shortcode
     /**
      * Initialize the class and set its properties.
      *
-     * @since    5.0.0
+     * @since    5.0.1
      * @param    string    $plugin_name       The name of the plugin.
      */
     public function __construct($plugin_name, $version)
@@ -72,7 +72,7 @@ class Podlove_Web_Player_Shortcode
     /**
      * Shortcode Renderer
      *
-     * @since    5.0.0
+     * @since    5.0.1
      * @param    array    $atts          Shortcode attributes.
      * @param    array    $content       Shortcode content.
      */
@@ -95,7 +95,7 @@ class Podlove_Web_Player_Shortcode
     /**
      * Episode data
      *
-     * @since    5.0.0
+     * @since    5.0.1
      * @param    array    $attributes      Shortcode attributes.
      */
     private function episode($attributes)
@@ -123,7 +123,7 @@ class Podlove_Web_Player_Shortcode
     /**
      * Generates attributes for the attribute mode
      *
-     * @since    5.0.0
+     * @since    5.0.1
      * @param    array    $attributes      Shortcode attributes.
      */
     private function fromAttributes($attributes)
@@ -149,7 +149,7 @@ class Podlove_Web_Player_Shortcode
     /**
      * Creates the audio list
      *
-     * @since    5.0.0
+     * @since    5.0.1
      * @param    array    $attributes      Shortcode attributes.
      */
     private function audio($attributes)
@@ -182,7 +182,7 @@ class Podlove_Web_Player_Shortcode
     /**
      * Cheap mimeType detector
      *
-     * @since    5.0.0
+     * @since    5.0.1
      * @param    string    $src      audio src url.
      */
     private function mimeType($src)
@@ -213,7 +213,7 @@ class Podlove_Web_Player_Shortcode
     /**
      * Creates the chapters list
      *
-     * @since    5.0.0
+     * @since    5.0.1
      * @param    string    $attribute     provided attribute as string.
      * @param    string    $chapters      provided chapters as string.
      */
@@ -257,7 +257,7 @@ class Podlove_Web_Player_Shortcode
     /**
      * Creates the transcripts list
      *
-     * @since   5.0.0
+     * @since   5.0.1
      * @param    string    $attribute     provided attribute as string.
      * @param    string    $transcripts   provided transcripts as string.
      */
@@ -285,7 +285,7 @@ class Podlove_Web_Player_Shortcode
     /**
      * Template
      *
-     * @since    5.0.0
+     * @since    5.0.1
      * @param    array    $attributes      Shortcode attributes.
      */
     private function template($attributes)
@@ -299,7 +299,7 @@ class Podlove_Web_Player_Shortcode
     /**
      * Configuration
      *
-     * @since    5.0.0
+     * @since    5.0.1
      * @param    array    $attributes           Shortcode attributes.
      */
     private function config($attributes)
@@ -313,7 +313,7 @@ class Podlove_Web_Player_Shortcode
     /**
      * Template string generator
      *
-     * @since    5.0.0
+     * @since    5.0.1
      * @param    string         $id             Unique player id.
      * @param    string/array   $episode        Url/object with configuration.
      * @param    string         $config         Url to player configuration.
@@ -339,7 +339,7 @@ class Podlove_Web_Player_Shortcode
     /**
      * Helpers
      *
-     * @since    5.0.0
+     * @since    5.0.1
      * @param    string    $haystack           Input string
      * @param    string    $needle             String to search for
      */

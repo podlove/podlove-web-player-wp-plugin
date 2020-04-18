@@ -6,7 +6,7 @@ require_once plugin_dir_path( __FILE__ ) . '/class-podlove-web-player-options.ph
  *
  * This class defines all code necessary to run during the plugin's deactivation.
  *
- * @since      1.0.0
+ * @since      5.0.1
  * @package    Podlove_Web_Player
  * @subpackage Podlove_Web_Player/includes
  * @author     Alexander Heimbuch <github@heimbu.ch>

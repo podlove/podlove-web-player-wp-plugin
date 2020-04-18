@@ -2,8 +2,7 @@
 
 ## Requirements
 
-- NodeJS 8
-- Yarn
+- Node >= 12
 
 ## Bootstrap
 

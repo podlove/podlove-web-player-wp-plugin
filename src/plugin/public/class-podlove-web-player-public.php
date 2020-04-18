@@ -3,7 +3,7 @@
  * The public-facing functionality of the plugin.
  *
  * @link       https://docs.podlove.org/podlove-web-player/
- * @since      5.0.0
+ * @since      5.0.1
  *
  * @package    Podlove_Web_Player
  * @subpackage Podlove_Web_Player/public
@@ -24,7 +24,7 @@ class Podlove_Web_Player_Public {
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    5.0.0
+	 * @since    5.0.1
 	 * @access   private
 	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
@@ -33,7 +33,7 @@ class Podlove_Web_Player_Public {
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since    5.0.0
+	 * @since    5.0.1
 	 * @access   private
 	 * @var      string    $version    The current version of this plugin.
 	 */
@@ -42,7 +42,7 @@ class Podlove_Web_Player_Public {
   /**
 	 * Web Player options
 	 *
-	 * @since    5.0.0
+	 * @since    5.0.1
 	 * @access   private
 	 * @var      array    $options    The current player configuration.
 	 */
@@ -51,7 +51,7 @@ class Podlove_Web_Player_Public {
   /**
 	 * Shortcode renderer instance
 	 *
-	 * @since    5.0.0
+	 * @since    5.0.1
 	 * @access   private
 	 * @var      string    $shortcode    Shortcode rendering class.
 	 */
@@ -60,7 +60,7 @@ class Podlove_Web_Player_Public {
   /**
 	 * Enclosure renderer instance
 	 *
-	 * @since    5.0.0
+	 * @since    5.0.1
 	 * @access   private
 	 * @var      string    $enclosure    enclosure rendering class.
 	 */
@@ -71,7 +71,7 @@ class Podlove_Web_Player_Public {
   /**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    5.0.0
+	 * @since    5.0.1
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
@@ -89,14 +89,14 @@ class Podlove_Web_Player_Public {
 	/**
 	 * Register the stylesheets for the public-facing side of the site.
 	 *
-	 * @since    5.0.0
+	 * @since    5.0.1
 	 */
 	public function enqueue_styles() {}
 
 	/**
 	 * Register the JavaScript for the public-facing side of the site.
 	 *
-	 * @since    5.0.0
+	 * @since    5.0.1
 	 */
 	public function enqueue_scripts() {
     $options = $this->options->read();

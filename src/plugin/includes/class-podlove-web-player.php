@@ -9,7 +9,7 @@
  * Also maintains the unique identifier of this plugin as well as the current
  * version of the plugin.
  *
- * @since      5.0.0
+ * @since      5.0.1
  * @package    Podlove_Web_Player
  * @subpackage Podlove_Web_Player/includes
  * @author     Alexander Heimbuch <github@heimbu.ch>
@@ -20,7 +20,7 @@ class Podlove_Web_Player {
 	 * The loader that's responsible for maintaining and registering all hooks that power
 	 * the plugin.
 	 *
-	 * @since    5.0.0
+	 * @since    5.0.1
 	 * @access   protected
 	 * @var      Podlove_Web_Player_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
@@ -29,7 +29,7 @@ class Podlove_Web_Player {
 	/**
 	 * The unique identifier of this plugin.
 	 *
-	 * @since    5.0.0
+	 * @since    5.0.1
 	 * @access   protected
 	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
 	 */
@@ -38,7 +38,7 @@ class Podlove_Web_Player {
 	/**
 	 * The current version of the plugin.
 	 *
-	 * @since    5.0.0
+	 * @since    5.0.1
 	 * @access   protected
 	 * @var      string    $version    The current version of the plugin.
 	 */
@@ -53,13 +53,13 @@ class Podlove_Web_Player {
 	 * Load the dependencies, define the locale, and set the hooks for the admin area and
 	 * the public-facing side of the site.
 	 *
-	 * @since    5.0.0
+	 * @since    5.0.1
 	 */
 	public function __construct() {
 		if ( defined( 'PLUGIN_NAME_VERSION' ) ) {
 			$this->version = PLUGIN_NAME_VERSION;
 		} else {
-			$this->version = '5.0.0';
+			$this->version = '5.0.1';
 		}
 		$this->plugin_name = 'podlove-web-player';
 
@@ -84,7 +84,7 @@ class Podlove_Web_Player {
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
 	 *
-	 * @since    5.0.0
+	 * @since    5.0.1
 	 * @access   private
 	 */
 	private function load_dependencies() {
@@ -152,7 +152,7 @@ class Podlove_Web_Player {
 	 * Uses the Podlove_Web_Player_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
-	 * @since    5.0.0
+	 * @since    5.0.1
 	 * @access   private
 	 */
 	private function set_locale() {
@@ -165,7 +165,7 @@ class Podlove_Web_Player {
 	 * Register all of the hooks related to the admin area functionality
 	 * of the plugin.
 	 *
-	 * @since    5.0.0
+	 * @since    5.0.1
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
@@ -181,7 +181,7 @@ class Podlove_Web_Player {
 	 * Register all of the hooks related to the public-facing functionality
 	 * of the plugin.
 	 *
-	 * @since    5.0.0
+	 * @since    5.0.1
 	 * @access   private
 	 */
 	private function define_public_hooks() {
@@ -200,7 +200,7 @@ class Podlove_Web_Player {
 	 * Register all of the hooks related to the block functionality
 	 * of the plugin.
 	 *
-	 * @since    5.0.0
+	 * @since    5.0.1
 	 * @access   private
 	 */
   private function define_block_hooks() {
@@ -212,7 +212,7 @@ class Podlove_Web_Player {
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
 	 *
-	 * @since    5.0.0
+	 * @since    5.0.1
 	 */
 	public function run() {
 		$this->loader->run();
@@ -222,7 +222,7 @@ class Podlove_Web_Player {
 	 * The name of the plugin used to uniquely identify it within the context of
 	 * WordPress and to define internationalization functionality.
 	 *
-	 * @since     5.0.0
+	 * @since     5.0.1
 	 * @return    string    The name of the plugin.
 	 */
 	public function get_plugin_name() {
@@ -232,7 +232,7 @@ class Podlove_Web_Player {
 	/**
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
-	 * @since     5.0.0
+	 * @since     5.0.1
 	 * @return    Podlove_Web_Player_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
@@ -242,7 +242,7 @@ class Podlove_Web_Player {
 	/**
 	 * Retrieve the version number of the plugin.
 	 *
-	 * @since     5.0.0
+	 * @since     5.0.1
 	 * @return    string    The version number of the plugin.
 	 */
 	public function get_version() {
