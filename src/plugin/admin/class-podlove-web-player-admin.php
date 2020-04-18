@@ -4,7 +4,7 @@
  * The admin-specific functionality of the plugin.
  *
  * @link       http://example.com
- * @since      5.0.1
+ * @since      5.0.2
  *
  * @package    Podlove_Web_Player
  * @subpackage Podlove_Web_Player/admin
@@ -25,7 +25,7 @@ class Podlove_Web_Player_Admin {
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    5.0.1
+	 * @since    5.0.2
 	 * @access   private
 	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
@@ -34,7 +34,7 @@ class Podlove_Web_Player_Admin {
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since    5.0.1
+	 * @since    5.0.2
 	 * @access   private
 	 * @var      string    $version    The current version of this plugin.
 	 */
@@ -48,7 +48,7 @@ class Podlove_Web_Player_Admin {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    5.0.1
+	 * @since    5.0.2
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
@@ -61,7 +61,7 @@ class Podlove_Web_Player_Admin {
 	/**
 	 * Register the stylesheets for the admin area.
 	 *
-	 * @since    5.0.1
+	 * @since    5.0.2
 	 */
 	public function enqueue_styles() {
 	}
@@ -69,7 +69,7 @@ class Podlove_Web_Player_Admin {
 	/**
 	 * Register the JavaScript for the admin area.
 	 *
-	 * @since    5.0.1
+	 * @since    5.0.2
 	 */
 	public function enqueue_scripts($hook) {
     if ($hook != 'settings_page_' . $this->plugin_name . '-settings') {
@@ -87,7 +87,7 @@ class Podlove_Web_Player_Admin {
   /**
 	 * Creates the configuration page
 	 *
-	 * @since 		5.0.1
+	 * @since 		5.0.2
 	 * @return 		void
 	 */
 	public function page_settings() {
@@ -97,7 +97,7 @@ class Podlove_Web_Player_Admin {
   /**
 	 * Register the menu link
 	 *
-	 * @since    5.0.1
+	 * @since    5.0.2
 	 */
   public function register_menu_page() {
     return add_submenu_page(
@@ -113,7 +113,7 @@ class Podlove_Web_Player_Admin {
   /**
 	 * Register api routes
 	 *
-	 * @since    5.0.1
+	 * @since    5.0.2
 	 */
   public function add_routes() {
     $this->api->registerRoutes();

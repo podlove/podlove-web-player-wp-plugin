@@ -5,7 +5,7 @@
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @since      5.0.1
+ * @since      5.0.2
  * @package    Podlove_Web_Player
  * @subpackage Podlove_Web_Player/includes
  * @author     Alexander Heimbuch <github@heimbu.ch>
@@ -15,7 +15,7 @@ class Podlove_Web_Player_i18n {
 	/**
 	 * Load the plugin text domain for translation.
 	 *
-	 * @since    5.0.1
+	 * @since    5.0.2
 	 */
 	public function load_plugin_textdomain() {
 
