@@ -18,14 +18,6 @@ $ npm run build
 
 You will find all plugin assets in `/dist`
 
-## Packaging
-
-```bash
-$ nmp run packate
-```
-
-A zipped version of the Wordpress Plugin is located in `/dist`
-
 ## Development
 
 To develop the Wordpress Plugin a dedicated wordress environment can be created by running:
