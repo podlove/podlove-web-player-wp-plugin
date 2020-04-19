@@ -50,7 +50,7 @@ class Podlove_Web_Player_Options
       'templates' => $this->readFolder($this->plugin_directory . 'defaults/templates/', 'html'),
       'settings' => array(
         'source' => array(
-          'selected' => 'cdn'
+          'selected' => 'local'
         ),
         'enclosure' => 'bottom',
         'legacy' => false
@@ -120,8 +120,8 @@ class Podlove_Web_Player_Options
     $options = json_decode(get_option($this->plugin_name), true);
 
     $options['settings']['source']['items'] = array(
-      'cdn' => 'https://cdn.podlove.org/web-player/5.x/',
-      'local' => get_site_url(null, '/wp-content/plugins/podlove-web-player/web-player/')
+      'local' => get_site_url(null, '/wp-content/plugins/podlove-web-player/web-player/'),
+      'cdn' => 'https://cdn.podlove.org/web-player/5.x/'
     );
 
     $options['settings']['contentWidth'] = $content_width;

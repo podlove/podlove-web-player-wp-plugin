@@ -200,9 +200,6 @@ class Podlove_Web_Player_Admin_API
             'validate_callback' => function( $param ) {
               return $this->validate( 'settings/source', $param );
             }
-          ),
-          'enclosure' => array(
-            'required' => true
           )
         ),
         'permissions_callback' => array( $this, 'api_permissions' )
