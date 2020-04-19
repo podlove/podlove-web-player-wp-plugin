@@ -103,6 +103,11 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.0.3 =
+
+- Fixes a bug that prevents resetting the "transform post enclosure" option
+- Set "local" as the default source for the player
+
 = 5.0.2 =
 
 - Update to Podlove Web Player 5.1.1

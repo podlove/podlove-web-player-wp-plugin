@@ -24,7 +24,7 @@
   padding-bottom: 0;
 }
 
-#wpfooter {
+#wpfooter, .update-nag {
   display: none;
 }
 
