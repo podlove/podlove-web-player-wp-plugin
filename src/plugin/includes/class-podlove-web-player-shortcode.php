@@ -192,7 +192,7 @@ class Podlove_Web_Player_Shortcode
         }
 
         if ($this->endsWith($src, 'm4a')) {
-            return 'audio/m4a';
+            return 'audio/mp4';
         }
 
         if ($this->endsWith($src, 'oga')) {

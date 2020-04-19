@@ -103,6 +103,10 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.0.4 =
+
+- Fixes a bug with the mimeType detection for m4a audio files
+
 = 5.0.3 =
 
 - Fixes a bug that prevents resetting the "transform post enclosure" option
