@@ -1,10 +1,10 @@
 {
   "name": "@podlove/web-player-configurator",
-  "version": "5.0.3",
+  "version": "5.0.4",
   "description": "Podlove Web Player Configurator",
   "author": "Alexander Heimbuch <github@heimbu.ch>",
   "scripts": {
-    "dist:clean": "rm -rf dist/",
+    "dist:clean": "rm -rf dist/*",
     "plugin:copy": "mkdir -p dist/ && cp -R src/plugin/* dist/ && cp -R node_modules/@podlove/web-player dist/",
     "plugin:dev": "nodemon --ext php --watch src/plugin --exec 'npm run plugin:copy'",
     "configurator:dev": "webpack --watch --config build/webpack.dev.conf.js",

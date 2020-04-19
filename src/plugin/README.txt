@@ -3,7 +3,7 @@ Contributors: alexander-heimbuch,ericteuber
 Donate link: https://podlove.org/donations
 Tags: podcasting, audio
 Requires at least: 5.3
-Tested up to: 5.3
+Tested up to: 5.4
 Requires PHP: 7.2
 Stable tag: 5.0
 License: MIT
@@ -102,6 +102,10 @@ If you encounter any issue with the plugin or want to request a specific feature
 4. Gutenberg Block
 
 == Changelog ==
+
+= 5.0.4 =
+
+- Fixes a bug with the mimeType detection for m4a audio files
 
 = 5.0.3 =
 
