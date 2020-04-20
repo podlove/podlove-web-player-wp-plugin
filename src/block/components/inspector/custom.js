@@ -106,8 +106,6 @@ class Custom extends Component {
               label={__('Duration', 'podlove-web-player')}
               value={value('duration')}
               onChange={compose(select('duration'), event)}
-              type="time"
-              step="2"
             />
           </PanelRow>
           <PanelRow className="podlove-web-player--row">

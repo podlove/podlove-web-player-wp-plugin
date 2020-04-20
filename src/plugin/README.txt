@@ -103,6 +103,10 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.0.5 =
+
+- Change input type for the custom gutenberg duration block
+
 = 5.0.4 =
 
 - Fixes a bug with the mimeType detection for m4a audio files

@@ -9,7 +9,7 @@
  * that starts the plugin.
  *
  * @link              https://docs.podlove.org/podlove-web-player/
- * @since             5.0.2
+ * @since             5.0.5
  * @package           Podlove_Web_Player
  *
  * @wordpress-plugin
