@@ -9,14 +9,14 @@
  * that starts the plugin.
  *
  * @link              https://docs.podlove.org/podlove-web-player/
- * @since             5.0.5
+ * @since             5.0.2
  * @package           Podlove_Web_Player
  *
  * @wordpress-plugin
  * Plugin Name:       Podlove Web Player
  * Plugin URI:        https://docs.podlove.org/podlove-web-player/
  * Description:       Audio First Podcast Web Player
- * Version:           5.0.2
+ * Version:           5.0.6
  * Author:            Alexander Heimbuch
  * Author URI:        http://alexander.heimbu.ch
  * License:           MIT
