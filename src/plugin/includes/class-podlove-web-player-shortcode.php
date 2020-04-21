@@ -118,6 +118,10 @@ class Podlove_Web_Player_Shortcode
         if (isset($attributes['publisher'])) {
             return $this->routes['publisher'] . '/' . $attributes['publisher'];
         }
+
+        if (isset($attributes['post_id'])) {
+            return $this->routes['publisher'] . '/' . $attributes['post_id'];
+        }
     }
 
     /**
@@ -154,13 +158,23 @@ class Podlove_Web_Player_Shortcode
      */
     private function audio($attributes)
     {
+        $size = 0;
+
+        if (isset($attributes['size'])) {
+          $size = $attributes['size'];
+        }
+
+        if (isset($attributes['filesize'])) {
+          $size = $attributes['filesize'];
+        }
+
         if (isset($attributes['mp3'])) {
             return array(
                 array(
                     'url' => $attributes['mp3'],
                     'mimeType' => 'audio/mpeg',
                     'title' => 'MP3',
-                    'size' => $attributes['filesize'] ?? 0,
+                    'size' => $size,
                 ),
             );
         }
@@ -171,7 +185,7 @@ class Podlove_Web_Player_Shortcode
                     'url' => $attributes['src'],
                     'mimeType' => $this->mimeType($attributes['src']),
                     'title' => strtoupper($this->mimeType($attributes['src'])),
-                    'size' => $attributes['filesize'] ?? 0,
+                    'size' => $size,
                 ),
             );
         }

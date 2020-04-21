@@ -116,7 +116,12 @@ class Podlove_Web_Player_Public {
 	 */
 	public function register_shortcodes() {
 		add_shortcode( 'podlove-web-player', array( $this->shortcode, 'render' ) );
-		add_shortcode( 'podloveaudio', array( $this->shortcode, 'render' ) );
+    add_shortcode( 'podloveaudio', array( $this->shortcode, 'render' ) );
+
+    // only if the publisher plugin is installed and pwp5 attributes parsing is available
+    if (function_exists('podlove_pwp5_attributes')) {
+      add_shortcode( 'podlove-episode-web-player', array( $this->shortcode, 'render' ) );
+    }
 	}
 
   /**
