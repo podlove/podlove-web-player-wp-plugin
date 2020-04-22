@@ -66,6 +66,22 @@ class Podlove_Web_Player_Public {
 	 */
   private $enclosure;
 
+  /**
+   * Interoperability Object
+   *
+   * @since    5.0.6
+   * @access   private
+   * @var      object   $interoperability   The player interoperability.
+   */
+  private $interoperability;
+
+  /**
+   * Shortcode API
+   *
+   * @since    5.0.2
+   * @access   private
+   * @var      array    $api    The shortcode apis.
+   */
   private $api;
 
   /**
@@ -82,6 +98,7 @@ class Podlove_Web_Player_Public {
     $this->shortcode = new Podlove_Web_Player_Shortcode( $plugin_name, $version );
     $this->enclosure = new Podlove_Web_Player_Enclosure( $plugin_name );
     $this->api = new Podlove_Web_Player_Embed_API( $plugin_name );
+    $this->interoperability = new Podlove_Web_Player_Interoperability($this->plugin_name);
 
     $this->options = new Podlove_Web_Player_Options( $plugin_name );
 	}
@@ -118,8 +135,7 @@ class Podlove_Web_Player_Public {
 		add_shortcode( 'podlove-web-player', array( $this->shortcode, 'render' ) );
     add_shortcode( 'podloveaudio', array( $this->shortcode, 'render' ) );
 
-    // only if the publisher plugin is installed and pwp5 attributes parsing is available
-    if (function_exists('podlove_pwp5_attributes')) {
+    if ($this->interoperability->isPublisherActive()) {
       add_shortcode( 'podlove-episode-web-player', array( $this->shortcode, 'render' ) );
     }
 	}
