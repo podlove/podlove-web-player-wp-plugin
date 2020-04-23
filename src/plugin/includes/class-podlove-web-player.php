@@ -59,7 +59,7 @@ class Podlove_Web_Player {
 		if ( defined( 'PLUGIN_NAME_VERSION' ) ) {
 			$this->version = PLUGIN_NAME_VERSION;
 		} else {
-			$this->version = '5.0.2';
+			$this->version = '5.0.8';
 		}
 		$this->plugin_name = 'podlove-web-player';
 
@@ -138,14 +138,14 @@ class Podlove_Web_Player {
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-podlove-web-player-embed-api.php';
 
     /**
-     * The class responsible for defining the block
+     * The class responsible for plugin interoperability
      */
-    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'block/class-podlove-web-player-block.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-podlove-web-player-interoperability.php';
 
     /**
      * The class responsible for defining the block
      */
-    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'block/class-podlove-web-player-interoperability.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'block/class-podlove-web-player-block.php';
 
     $this->loader = new Podlove_Web_Player_Loader();
 

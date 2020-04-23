@@ -16,7 +16,7 @@
  * Plugin Name:       Podlove Web Player
  * Plugin URI:        https://docs.podlove.org/podlove-web-player/
  * Description:       Audio First Podcast Web Player
- * Version:           5.0.7
+ * Version:           5.0.8
  * Author:            Alexander Heimbuch
  * Author URI:        http://alexander.heimbu.ch
  * License:           MIT
