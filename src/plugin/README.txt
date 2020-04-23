@@ -104,6 +104,10 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.0.8 =
+
+- Fix broken import path
+
 = 5.0.7 =
 
 - Prepare Podlove Publisher compatability
