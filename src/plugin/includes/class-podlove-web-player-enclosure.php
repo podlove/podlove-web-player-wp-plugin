@@ -20,8 +20,6 @@ class Podlove_Web_Player_Enclosure {
 	 */
   private $options;
 
-  private $api;
-
   /**
 	 * Initialize the class and set its properties.
 	 *
@@ -30,7 +28,6 @@ class Podlove_Web_Player_Enclosure {
 	 */
 	public function __construct( $plugin_name ) {
     $this->options = new Podlove_Web_Player_Options( $plugin_name );
-    $this->api = new Podlove_Web_Player_Embed_API( $plugin_name );
   }
 
   /**

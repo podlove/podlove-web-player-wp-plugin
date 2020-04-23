@@ -54,6 +54,7 @@ Use a simple shortcode in your posts and pages, and the Podlove Web Player will 
   chapters="/files/path/to/chapters.json"
   transcripts="/files/path/to/transcripts.json"
   src="http://mysite.com/mymedia.mp3"
+  size="1337"
   duration="03:33"
 ]
 
@@ -62,7 +63,7 @@ Use an existing post with a media enclosure that is provided from plugins like B
 [podlove-web-player
   theme="default"
   config="default"
-  episode="1234"
+  post="1234"
 ]
 
 Or in case you have our [Podlove Publisher](https://wordpress.org/plugins/podlove-podcasting-plugin-for-wordpress/) installed:
