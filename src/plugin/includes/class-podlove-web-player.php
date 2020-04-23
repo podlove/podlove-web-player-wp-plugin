@@ -142,6 +142,11 @@ class Podlove_Web_Player {
      */
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'block/class-podlove-web-player-block.php';
 
+    /**
+     * The class responsible for defining the block
+     */
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'block/class-podlove-web-player-interoperability.php';
+
     $this->loader = new Podlove_Web_Player_Loader();
 
 	}
