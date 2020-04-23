@@ -44,9 +44,18 @@ class Podlove_Web_Player_Shortcode
      *
      * @since    5.0.2
      * @access   private
-     * @var      array    $api    The shortcode apis.
+     * @var      array    $routes    The shortcode routes.
      */
     private $routes;
+
+    /**
+     * Interoperability Object
+     *
+     * @since    5.0.6
+     * @access   private
+     * @var      object   $interoperability   The player interoperability.
+     */
+    private $interoperability;
 
     /**
      * Initialize the class and set its properties.
@@ -60,6 +69,7 @@ class Podlove_Web_Player_Shortcode
         $this->version = $version;
 
         $this->options = new Podlove_Web_Player_Options($this->plugin_name);
+        $this->interoperability = new Podlove_Web_Player_Interoperability($this->plugin_name);
         add_action('init', [$this, 'set_routes']);
     }
 
@@ -115,8 +125,20 @@ class Podlove_Web_Player_Shortcode
             return $attributes['episode'];
         }
 
-        if (isset($attributes['publisher'])) {
-            return $this->routes['publisher'] . '/' . $attributes['publisher'];
+        if ($this->interoperability->isPublisherActive()) {
+          if (isset($attributes['publisher'])) {
+              return $this->routes['publisher'] . '/' . $attributes['publisher'];
+          }
+
+          if (isset($attributes['post_id'])) {
+              return $this->routes['publisher'] . '/' . $attributes['post_id'];
+          }
+
+          $id = get_the_ID();
+
+          if (isset($id)) {
+              return $this->routes['publisher'] . '/' . $id;
+          }
         }
     }
 
@@ -154,13 +176,23 @@ class Podlove_Web_Player_Shortcode
      */
     private function audio($attributes)
     {
+        $size = 0;
+
+        if (isset($attributes['size'])) {
+          $size = $attributes['size'];
+        }
+
+        if (isset($attributes['filesize'])) {
+          $size = $attributes['filesize'];
+        }
+
         if (isset($attributes['mp3'])) {
             return array(
                 array(
                     'url' => $attributes['mp3'],
                     'mimeType' => 'audio/mpeg',
                     'title' => 'MP3',
-                    'size' => $attributes['filesize'] ?? 0,
+                    'size' => $size,
                 ),
             );
         }
@@ -171,7 +203,7 @@ class Podlove_Web_Player_Shortcode
                     'url' => $attributes['src'],
                     'mimeType' => $this->mimeType($attributes['src']),
                     'title' => strtoupper($this->mimeType($attributes['src'])),
-                    'size' => $attributes['filesize'] ?? 0,
+                    'size' => $size,
                 ),
             );
         }

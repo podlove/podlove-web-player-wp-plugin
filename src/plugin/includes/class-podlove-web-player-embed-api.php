@@ -28,6 +28,16 @@ class Podlove_Web_Player_Embed_API
     private $options;
 
     /**
+     * Interoperability Object
+     *
+     * @since    5.0.6
+     * @access   private
+     * @var      object   $interoperability   The player interoperability.
+     */
+    private $interoperability;
+
+
+    /**
      * Initialize the class and set its properties.
      *
      * @since    5.0.2
@@ -38,6 +48,7 @@ class Podlove_Web_Player_Embed_API
     {
         $this->plugin_name = $plugin_name;
         $this->options     = new Podlove_Web_Player_Options($plugin_name);
+        $this->interoperability = new Podlove_Web_Player_Interoperability($this->plugin_name);
     }
 
     /**
@@ -75,21 +86,20 @@ class Podlove_Web_Player_Embed_API
             )
         );
 
-        // only if the publisher plugin is installed and pwp5 attributes parsing is available
-        if (function_exists('podlove_pwp5_attributes')) {
-            register_rest_route(
-                $this->plugin_name . '/' . 'shortcode',
-                'publisher/(?P<id>\d+)',
-                array(
-                    'methods'  => 'GET',
-                    'callback' => array($this, 'publisher'),
-                    'args'     => array(
-                        'id' => array(
-                            'required' => true,
-                        ),
-                    ),
-                )
-            );
+        if ($this->interoperability->isPublisherActive()) {
+          register_rest_route(
+              $this->plugin_name . '/' . 'shortcode',
+              'publisher/(?P<id>\d+)',
+              array(
+                  'methods'  => 'GET',
+                  'callback' => array($this, 'publisher'),
+                  'args'     => array(
+                      'id' => array(
+                          'required' => true,
+                      ),
+                  ),
+              )
+          );
         }
 
         register_rest_route(
