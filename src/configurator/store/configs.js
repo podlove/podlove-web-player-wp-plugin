@@ -212,9 +212,9 @@ export default {
         return
       }
       request
-        .create(`${PODLOVE.api.config}/${getters.id}`, getters.current, {
-          loading: PODLOVE.i18n.message_saving,
-          error: PODLOVE.i18n.error_save_config,
+        .create(`${PODLOVE_WEB_PLAYER.api.config}/${getters.id}`, getters.current, {
+          loading: PODLOVE_WEB_PLAYER.i18n.message_saving,
+          error: PODLOVE_WEB_PLAYER.i18n.error_save_config,
         })
         .then(config => {
           commit('updateConfig', { id: getters.id, config })
@@ -225,9 +225,9 @@ export default {
       const copy = get(getters.configs, "default", {});
 
       return request
-        .create(`${PODLOVE.api.config}/${id}`, copy, {
-          loading: PODLOVE.i18n.message_creating,
-          error: PODLOVE.i18n.error_save_config
+        .create(`${PODLOVE_WEB_PLAYER.api.config}/${id}`, copy, {
+          loading: PODLOVE_WEB_PLAYER.i18n.message_creating,
+          error: PODLOVE_WEB_PLAYER.i18n.error_save_config
         })
         .then(config => {
           commit("updateConfig", { id, config });
@@ -236,9 +236,9 @@ export default {
 
     remove({ commit }, id) {
       return request
-        .remove(`${PODLOVE.api.template}/${id}`, {
-          loading: PODLOVE.i18n.message_saving,
-          error: PODLOVE.i18n.error_delete_config,
+        .remove(`${PODLOVE_WEB_PLAYER.api.template}/${id}`, {
+          loading: PODLOVE_WEB_PLAYER.i18n.message_saving,
+          error: PODLOVE_WEB_PLAYER.i18n.error_delete_config,
         })
         .then(() => {
           commit('removeConfig', { id })

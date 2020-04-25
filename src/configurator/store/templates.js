@@ -61,11 +61,11 @@ export default {
       const template = get(getters.templates, 'default', {})
       request
         .create(
-          `${PODLOVE.api.template}/${id}`,
+          `${PODLOVE_WEB_PLAYER.api.template}/${id}`,
           { template },
           {
-            loading: PODLOVE.i18n.message_creating,
-            error: PODLOVE.i18n.error_save_template,
+            loading: PODLOVE_WEB_PLAYER.i18n.message_creating,
+            error: PODLOVE_WEB_PLAYER.i18n.error_save_template,
           }
         )
         .then(template => {
@@ -76,11 +76,11 @@ export default {
     save({ getters, commit }) {
       return request
         .create(
-          `${PODLOVE.api.template}/${getters.id}`,
+          `${PODLOVE_WEB_PLAYER.api.template}/${getters.id}`,
           { template: getters.current },
           {
-            loading: PODLOVE.i18n.message_saving,
-            error: PODLOVE.i18n.error_save_template,
+            loading: PODLOVE_WEB_PLAYER.i18n.message_saving,
+            error: PODLOVE_WEB_PLAYER.i18n.error_save_template,
           }
         )
         .then(value => {
@@ -90,9 +90,9 @@ export default {
 
     remove({ commit }, id) {
       return request
-        .remove(`${PODLOVE.api.template}/${id}`, {
-          loading: PODLOVE.i18n.message_saving,
-          error: PODLOVE.i18n.error_delete_template,
+        .remove(`${PODLOVE_WEB_PLAYER.api.template}/${id}`, {
+          loading: PODLOVE_WEB_PLAYER.i18n.message_saving,
+          error: PODLOVE_WEB_PLAYER.i18n.error_delete_template,
         })
         .then(() => {
           commit('removeTemplate', { id })

@@ -71,7 +71,7 @@ class Podlove_Web_Player_Block {
 
   public function enqueue_scripts() {
     wp_enqueue_script( $this->plugin_name . '-block', plugin_dir_url( __FILE__ ) . '/js/block.js', array( 'wp-blocks', 'wp-i18n', 'wp-element' ), $this->version, true );
-    wp_localize_script( $this->plugin_name . '-block', 'PODLOVE', array(
+    wp_localize_script( $this->plugin_name . '-block', 'PODLOVE_WEB_PLAYER', array(
       'api' => $this->api->routes(),
       'embed' => $this->embed->routes()
     )

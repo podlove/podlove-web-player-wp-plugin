@@ -24,7 +24,7 @@ class Player extends Component {
   renderPlayer() {
     const { attributes } = this.props
     const node = this.playerRef.current
-    const routes = window.PODLOVE.embed
+    const routes = window.PODLOVE_WEB_PLAYER.embed
 
     let episode
     const config = [routes.config, attributes.config, 'theme', attributes.theme].join('/')
@@ -49,7 +49,7 @@ class Player extends Component {
 
 
   async componentDidMount() {
-    this.plugin = await fetch(window.PODLOVE.api.bootstrap).then(result => result.json())
+    this.plugin = await fetch(window.PODLOVE_WEB_PLAYER.api.bootstrap).then(result => result.json())
     const base = get(get(this.plugin, 'settings.source.items'), get(this.plugin, 'settings.source.selected'))
     await loadScript(base + 'embed.js', 'podlovePlayer')
 

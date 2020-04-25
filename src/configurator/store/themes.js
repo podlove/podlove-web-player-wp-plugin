@@ -214,9 +214,9 @@ export default {
 
     save({ getters, commit }) {
       return request
-        .create(`${PODLOVE.api.theme}/${getters.id}`, getters.current, {
-          loading: PODLOVE.i18n.message_saving,
-          error: PODLOVE.i18n.error_save_theme,
+        .create(`${PODLOVE_WEB_PLAYER.api.theme}/${getters.id}`, getters.current, {
+          loading: PODLOVE_WEB_PLAYER.i18n.message_saving,
+          error: PODLOVE_WEB_PLAYER.i18n.error_save_theme,
         })
         .then(theme => {
           commit('updateTheme', { id: getters.id, theme })
@@ -227,9 +227,9 @@ export default {
       const copy = get(getters.themes, 'default', {})
 
       return request
-        .create(`${PODLOVE.api.theme}/${id}`, copy, {
-          loading: PODLOVE.i18n.message_creating,
-          error: PODLOVE.i18n.error_save_theme,
+        .create(`${PODLOVE_WEB_PLAYER.api.theme}/${id}`, copy, {
+          loading: PODLOVE_WEB_PLAYER.i18n.message_creating,
+          error: PODLOVE_WEB_PLAYER.i18n.error_save_theme,
         })
         .then(theme => {
           commit('updateTheme', { id, theme })
@@ -238,9 +238,9 @@ export default {
 
     remove({ commit }, id) {
       return request
-        .remove(`${PODLOVE.api.theme}/${id}`, {
-          loading: PODLOVE.i18n.message_saving,
-          error: PODLOVE.i18n.error_delete_theme,
+        .remove(`${PODLOVE_WEB_PLAYER.api.theme}/${id}`, {
+          loading: PODLOVE_WEB_PLAYER.i18n.message_saving,
+          error: PODLOVE_WEB_PLAYER.i18n.error_delete_theme,
         })
         .then(() => {
           commit('removeTheme', { id })
