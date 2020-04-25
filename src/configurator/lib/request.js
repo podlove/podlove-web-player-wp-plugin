@@ -1,4 +1,4 @@
-/* global PODLOVE */
+/* global PODLOVE_WEB_PLAYER */
 
 import Vue from "vue";
 import { get } from "lodash";

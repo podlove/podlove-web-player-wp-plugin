@@ -75,12 +75,12 @@ export default {
       let error = false
 
       if (existing.includes(value)) {
-        state.error = window.PODLOVE.i18n.modal['id-exists']
+        state.error = window.PODLOVE_WEB_PLAYER.i18n.modal['id-exists']
         error = true
       }
 
       if (!/^[a-z]+$/.test(value)) {
-        state.error = window.PODLOVE.i18n.modal['id-invalid']
+        state.error = window.PODLOVE_WEB_PLAYER.i18n.modal['id-invalid']
         error = true
       }
 

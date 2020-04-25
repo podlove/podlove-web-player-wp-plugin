@@ -77,7 +77,7 @@ class Podlove_Web_Player_Admin {
     }
 
 		wp_enqueue_script( $this->plugin_name . '-configurator', plugin_dir_url( __FILE__ ) . 'js/app.js', array(), $this->version, true );
-    wp_localize_script( $this->plugin_name . '-configurator', 'PODLOVE', array(
+    wp_localize_script( $this->plugin_name . '-configurator', 'PODLOVE_WEB_PLAYER', array(
         'i18n' => Podlove_Web_Player_i18n::translations(),
         'api' => $this->api->routes()
       )

@@ -17,9 +17,9 @@ export default {
   actions: {
     bootstrap({ commit, dispatch }) {
       request
-        .read(PODLOVE.api.bootstrap, {
-          loading: PODLOVE.i18n.message_initializing,
-          error: PODLOVE.i18n.error_load_config,
+        .read(PODLOVE_WEB_PLAYER.api.bootstrap, {
+          loading: PODLOVE_WEB_PLAYER.i18n.message_initializing,
+          error: PODLOVE_WEB_PLAYER.i18n.error_load_config,
         })
         .then(data => {
           dispatch('preview/bootstrap', data, { root: true })

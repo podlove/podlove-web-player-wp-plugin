@@ -19,7 +19,7 @@ class Settings extends Component {
   }
 
   async componentDidMount() {
-    const data = await fetch(window.PODLOVE.api.bootstrap).then(result => result.json())
+    const data = await fetch(window.PODLOVE_WEB_PLAYER.api.bootstrap).then(result => result.json())
 
     this.setState({
       configs: keys(data.configs).map(data => ({ value: data, label: data })),

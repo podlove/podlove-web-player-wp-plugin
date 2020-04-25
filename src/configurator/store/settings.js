@@ -68,11 +68,11 @@ export default {
 
         request
           .create(
-            PODLOVE.api.settings,
+            PODLOVE_WEB_PLAYER.api.settings,
             { source, enclosure, legacy },
             {
-              loading: PODLOVE.i18n.message_saving,
-              error: PODLOVE.i18n.error_save_settings,
+              loading: PODLOVE_WEB_PLAYER.i18n.message_saving,
+              error: PODLOVE_WEB_PLAYER.i18n.error_save_settings,
             }
           )
           .then(settings => {

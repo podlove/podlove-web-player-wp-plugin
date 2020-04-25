@@ -56,4 +56,8 @@
   .el-menu.el-menu--horizontal {
     border-bottom: 1px solid #82878C;
   }
+
+  .el-loading-spinner .circular {
+    display: inline;
+  }
 </style>
