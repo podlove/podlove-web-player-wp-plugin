@@ -44,7 +44,7 @@ export default {
 
   methods: {
     change() {
-      this.$emit('change', list)
+      this.$emit('change', this.list)
     },
     click(element) {
       this.$emit('click', element)
