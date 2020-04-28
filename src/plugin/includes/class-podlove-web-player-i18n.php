@@ -46,7 +46,7 @@ class Podlove_Web_Player_i18n {
         'share-playtime' => static::i18n( 'Share Playtime' ),
         'embed-player' => static::i18n( 'Embed Player' ),
         'subscribe-button' => static::i18n( 'Subscribe Button' ),
-        'feed' => static::i18n( 'Feed' ),
+        'feed' => static::i18n( 'Feed URL' ),
         'rss-feed' => static::i18n( 'RSS Feed' ),
         'clients' => static::i18n( 'Clients' ),
         'client-add' => static::i18n( 'Add' ),

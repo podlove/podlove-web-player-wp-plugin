@@ -104,6 +104,13 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.0.10 =
+
+- Fix list ordering
+- Improve theme color selection
+- Fix theme configuration
+- Bump player version
+
 = 5.0.9 =
 
 - Fix variable collision with Podlove Publisher

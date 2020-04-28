@@ -189,6 +189,7 @@ class Podlove_Web_Player_Embed_API
         $options = $this->options->read();
 
         $config = $options['configs'][$configId];
+        $config['version'] = 5;
         $theme  = array(
             'theme' => $options['themes'][$themeId],
         );

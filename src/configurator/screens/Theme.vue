@@ -9,10 +9,10 @@
                 :value="color('brand')"
                 size="small"
                 :predefine="predefinedColors"
-                show-alpha
+                color-format="hex"
                 @change="updateToken({ token: 'brand', color: $event })"
               ></el-color-picker>
-              <el-input :value="color('brand')" size="small"></el-input>
+              <el-input :value="color('brand')" size="small" @input="updateToken({ token: 'brand', color: $event })"></el-input>
             </div>
           </form-element>
 
@@ -22,10 +22,10 @@
                 :value="color('brandDark')"
                 size="small"
                 :predefine="predefinedColors"
-                show-alpha
+                color-format="hex"
                 @change="updateToken({ token: 'brandDark', color: $event })"
               ></el-color-picker>
-              <el-input :value="color('brandDark')" size="small"></el-input>
+              <el-input :value="color('brandDark')" size="small" @input="updateToken({ token: 'brandDark', color: $event })"></el-input>
             </div>
           </form-element>
 
@@ -35,10 +35,10 @@
                 :value="color('brandDarkest')"
                 size="small"
                 :predefine="predefinedColors"
-                show-alpha
+                color-format="hex"
                 @change="updateToken({ token: 'brandDarkest', color: $event })"
               ></el-color-picker>
-              <el-input :value="color('brandDarkest')" size="small"></el-input>
+              <el-input :value="color('brandDarkest')" size="small" @input="updateToken({ token: 'brandDarkest', color: $event })"></el-input>
             </div>
           </form-element>
 
@@ -48,10 +48,10 @@
                 :value="color('brandLightest')"
                 size="small"
                 :predefine="predefinedColors"
-                show-alpha
+                color-format="hex"
                 @change="updateToken({ token: 'brandLightest', color: $event })"
               ></el-color-picker>
-              <el-input :value="color('brandLightest')" size="small"></el-input>
+              <el-input :value="color('brandLightest')" size="small" @input="updateToken({ token: 'brandLightest', color: $event })"></el-input>
             </div>
           </form-element>
         </div>
@@ -62,10 +62,10 @@
                 :value="color('shadeBase')"
                 size="small"
                 :predefine="predefinedColors"
-                show-alpha
+                color-format="hex"
                 @change="updateToken({ token: 'shadeBase', color: $event })"
               ></el-color-picker>
-              <el-input :value="color('shadeBase')" size="small"></el-input>
+              <el-input :value="color('shadeBase')" size="small" @input="updateToken({ token: 'shadeBase', color: $event })"></el-input>
             </div>
           </form-element>
 
@@ -75,10 +75,10 @@
                 :value="color('shadeDark')"
                 size="small"
                 :predefine="predefinedColors"
-                show-alpha
+                color-format="hex"
                 @change="updateToken({ token: 'shadeDark', color: $event })"
               ></el-color-picker>
-              <el-input :value="color('shadeDark')" size="small"></el-input>
+              <el-input :value="color('shadeDark')" size="small" @input="updateToken({ token: 'shadeDark', color: $event })"></el-input>
             </div>
           </form-element>
 
@@ -88,10 +88,10 @@
                 :value="color('contrast')"
                 size="small"
                 :predefine="predefinedColors"
-                show-alpha
+                color-format="hex"
                 @change="updateToken({ token: 'contrast', color: $event })"
               ></el-color-picker>
-              <el-input :value="color('contrast')" size="small"></el-input>
+              <el-input :value="color('contrast')" size="small" @input="updateToken({ token: 'contrast', color: $event })"></el-input>
             </div>
           </form-element>
 
@@ -101,10 +101,10 @@
                 :value="color('alt')"
                 size="small"
                 :predefine="predefinedColors"
-                show-alpha
+                color-format="hex"
                 @change="updateToken({ token: 'alt', color: $event })"
               ></el-color-picker>
-              <el-input :value="color('alt')" size="small"></el-input>
+              <el-input :value="color('alt')" size="small" @input="updateToken({ token: 'alt', color: $event })"></el-input>
             </div>
           </form-element>
         </div>
