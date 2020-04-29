@@ -354,17 +354,17 @@ class Podlove_Web_Player_Shortcode
     private function html($id, $episode, $config, $template)
     {
         $embed = '
-      <div class="podlove-web-player" id="$id">$template</div>
+      <div class="podlove-web-player intrinsic-ignore" id="$id">$template</div>
       <script>
         podlovePlayer("#$id", $episode, "$config");
       </script>
     ';
 
         return strtr($embed, array(
-            '$id' => $id,
-            '$episode' => is_string($episode) ? '"' . $episode . '"' : json_encode($episode),
-            '$config' => $config,
-            '$template' => $template,
+          '$id' => $id,
+          '$episode' => is_string($episode) ? '"' . $episode . '"' : json_encode($episode),
+          '$config' => $config,
+          '$template' => $template,
         ));
     }
 
