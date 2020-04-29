@@ -104,6 +104,12 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.0.11 =
+
+- Fix a bug that prevented removing configurations
+- Add a compatability class to support Wordpress theme TwentyTwenty
+- Relocated the delete button in the configurator
+
 = 5.0.10 =
 
 - Fix list ordering
