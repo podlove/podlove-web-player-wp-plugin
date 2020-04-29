@@ -236,7 +236,7 @@ export default {
 
     remove({ commit }, id) {
       return request
-        .remove(`${PODLOVE_WEB_PLAYER.api.template}/${id}`, {
+        .remove(`${PODLOVE_WEB_PLAYER.api.config}/${id}`, {
           loading: PODLOVE_WEB_PLAYER.i18n.message_saving,
           error: PODLOVE_WEB_PLAYER.i18n.error_delete_config,
         })
