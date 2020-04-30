@@ -75,7 +75,7 @@
           </form-element>
 
           <form-element>
-            <el-tooltip slot="label" :content="stagedClient.serviceScheme('[service-id]')" placement="top-start">
+            <el-tooltip :content="stagedClient.serviceScheme('[service id]')" placement="top-start">
               <h4 class="item-title"><span>{{ $i18n(['config', 'client-service-id']) }}</span><i class="el-icon-info ml-1" /></h4>
             </el-tooltip>
 
