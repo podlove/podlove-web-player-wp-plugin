@@ -8,6 +8,9 @@
 import { mapGetters } from 'vuex'
 
 import poster from '../assets/cover.png'
+import fry from '../assets/fry.png'
+import bender from '../assets/bender.png'
+import professor from '../assets/professor.png'
 
 export default {
   props: {
@@ -32,6 +35,7 @@ export default {
   data() {
     return {
       episode: {
+        version: 5,
         show: {
           title: 'Futurama',
           subtitle: `Intergalactic conspiracies and other strange stuff`,
@@ -40,26 +44,32 @@ export default {
           url: 'http://fillerama.io/',
         },
 
-        episode: {
-          title: 'Five hours?',
-          subtitle: `Why am I sticky and naked? Did I miss something fun? In your time, yes, but nowadays shut up! Besides, these are adult stemcells, harvested from perfectly healthy adults whom I killed for their stemcells.`,
-          summary: `Ah, computer dating. It's like pimping, but you rarely have to use the phrase "upside your head." Who am I making this out to? Okay, I like a challenge. As an interesting side note, as a head without a body, I envy the dead.`,
-          publicationDate: '2016-02-11T03:13:55+00:00',
-          duration: '01:30:32',
-        },
+
+        title: 'Five hours?',
+        subtitle: `Why am I sticky and naked? Did I miss something fun? In your time, yes, but nowadays shut up! Besides, these are adult stemcells, harvested from perfectly healthy adults whom I killed for their stemcells.`,
+        summary: `Ah, computer dating. It's like pimping, but you rarely have to use the phrase "upside your head." Who am I making this out to? Okay, I like a challenge. As an interesting side note, as a head without a body, I envy the dead.`,
+        publicationDate: '2016-02-11T03:13:55+00:00',
+        duration: '01:30:32',
+
 
         contributors: [
           {
-            avatar: 'static/example/fry.jpg',
+            id: 'fry',
+            avatar: fry,
             name: 'Philip J. Fry',
+             group: { id: "1", slug: "planet-express", title: "Planet Express" }
           },
           {
-            avatar: 'static/example/farnsworth.png',
+            id: 'farnsworth',
+            avatar: professor,
             name: 'Professor Farnsworth',
+            group: { id: "1", slug: "planet-express", title: "Planet Express" }
           },
           {
-            avatar: 'static/example/leela.jpg',
-            name: 'Turanga Leela',
+            id: 'bender',
+            avatar: bender,
+            name: 'Bender Bending Rodríguez',
+             group: { id: "1", slug: "planet-express", title: "Planet Express" }
           },
         ],
 

@@ -5,7 +5,7 @@
       v-for="element in list"
       :key="id(element)"
       closable
-      :hit="selected === element"
+      :hit="selected === element.id"
       :type="type(element)"
       @click="click(element)"
       @close="remove(element)"

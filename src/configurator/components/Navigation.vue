@@ -5,10 +5,21 @@
         <i class="el-icon-c-scale-to-original"></i>
         <span slot="title">{{ $i18n(['navigation', 'configuration']) }}</span>
       </template>
-      <el-menu-item v-for="(config, index) in configList" :key="`config-${index}`" @click="navigate({ name: 'config', params: { id: config } })" :index="`1-${index + 1}`">
+      <el-menu-item
+        v-for="(config, index) in order(configList)"
+        :key="`config-${index}`"
+        @click="navigate({ name: 'config', params: { id: config } })"
+        :index="`1-${index + 1}`"
+      >
         <div class="flex w-full items-center justify-between">
           <span>{{ config }}</span>
-          <button @click="showDeleteModal({ target: 'config', id: config })" class="p-0 -mr-2" v-if="config !== 'default'"><i class="el-icon-close"></i></button>
+          <button
+            @click="showDeleteModal({ target: 'config', id: config })"
+            class="p-0 -mr-2"
+            v-if="config !== 'default'"
+          >
+            <i class="el-icon-close"></i>
+          </button>
         </div>
       </el-menu-item>
       <el-menu-item index="1-add" @click="showCreateModal('config')">
@@ -21,10 +32,17 @@
         <i class="el-icon-view"></i>
         <span slot="title">{{ $i18n(['navigation', 'themes']) }}</span>
       </template>
-      <el-menu-item v-for="(theme, index) in themeList" :key="`theme-${index}`" @click="navigate({ name: 'theme', params: { id: theme } })" :index="`2-${index + 1}`">
+      <el-menu-item
+        v-for="(theme, index) in order(themeList)"
+        :key="`theme-${index}`"
+        @click="navigate({ name: 'theme', params: { id: theme } })"
+        :index="`2-${index + 1}`"
+      >
         <div class="flex w-full items-center justify-between">
           <span>{{ theme }}</span>
-          <button @click="showDeleteModal({ target: 'theme', id: theme })" class="p-0 -mr-2" v-if="theme !== 'default'"><i class="el-icon-close"></i></button>
+          <button @click="showDeleteModal({ target: 'theme', id: theme })" class="p-0 -mr-2" v-if="theme !== 'default'">
+            <i class="el-icon-close"></i>
+          </button>
         </div>
       </el-menu-item>
       <el-menu-item index="2-add" @click="showCreateModal('theme')">
@@ -37,10 +55,21 @@
         <i class="el-icon-document"></i>
         <span slot="title">{{ $i18n(['navigation', 'templates']) }}</span>
       </template>
-      <el-menu-item v-for="(template, index) in templateList" :key="`template-${index}`" @click="navigate({ name: 'template', params: { id: template } })" :index="`3-${index + 1}`">
+      <el-menu-item
+        v-for="(template, index) in order(templateList)"
+        :key="`template-${index}`"
+        @click="navigate({ name: 'template', params: { id: template } })"
+        :index="`3-${index + 1}`"
+      >
         <div class="flex w-full items-center justify-between">
           <span>{{ template }}</span>
-          <button @click="showDeleteModal({ target: 'template', id: template })" class="p-0 -mr-2" v-if="template !== 'default'"><i class="el-icon-close"></i></button>
+          <button
+            @click="showDeleteModal({ target: 'template', id: template })"
+            class="p-0 -mr-2"
+            v-if="template !== 'default'"
+          >
+            <i class="el-icon-close"></i>
+          </button>
         </div>
       </el-menu-item>
       <el-menu-item index="3-add" @click="showCreateModal('template')">
@@ -75,13 +104,27 @@ export default {
         case 'settings':
           return '4'
       }
-    }
+    },
   },
   methods: {
     ...mapActions('modal', ['showCreateModal', 'showDeleteModal']),
     navigate(param) {
       this.$router.push(param).catch(err => {})
-    }
-  }
-};
+    },
+    order(list) {
+      return list.sort((a, b) => {
+        if (a === 'default') {
+          return -1
+        }
+        if (a < b) {
+          return -1
+        }
+        if (a > b) {
+          return 1
+        }
+        return 0
+      })
+    },
+  },
+}
 </script>

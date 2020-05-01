@@ -3,7 +3,7 @@
     <card :title="$i18n(['config', 'active-tab'])">
       <form-element>
         <el-select :placeholder="$i18n(['config', 'select-tab'])" :value="activeTab" size="small" @change="selectActiveTab">
-          <el-option v-for="item in tabs" :key="`tab-${item}`" :label="item" :value="item"></el-option>
+          <el-option v-for="item in tabs" :key="`tab-${item}`" :label="item === null ? $i18n(['config', 'no-default-tab']) : item" :value="item"></el-option>
         </el-select>
       </form-element>
     </card>
@@ -75,7 +75,7 @@
           </form-element>
 
           <form-element>
-            <el-tooltip slot="label" :content="stagedClient.serviceScheme('[service-id]')" placement="top-start">
+            <el-tooltip :content="stagedClient.serviceScheme('[service id]')" placement="top-start">
               <h4 class="item-title"><span>{{ $i18n(['config', 'client-service-id']) }}</span><i class="el-icon-info ml-1" /></h4>
             </el-tooltip>
 

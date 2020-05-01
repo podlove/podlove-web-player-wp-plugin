@@ -184,7 +184,7 @@ export default {
     },
 
     stageClient({ getters, commit }, client) {
-      if (!getters.id) {
+      if (!getters.id || !client.serviceScheme) {
         return
       }
 
