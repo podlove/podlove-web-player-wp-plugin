@@ -56,10 +56,10 @@ class Podlove_Web_Player {
 	 * @since    5.0.2
 	 */
 	public function __construct() {
-		if ( defined( 'PLUGIN_NAME_VERSION' ) ) {
-			$this->version = PLUGIN_NAME_VERSION;
+		if ( defined( 'PODLOVE_WEB_PLAYER_VERSION' ) ) {
+			$this->version = PODLOVE_WEB_PLAYER_VERSION;
 		} else {
-			$this->version = '5.0.11';
+			$this->version = '5.0.12';
 		}
 		$this->plugin_name = 'podlove-web-player';
 
