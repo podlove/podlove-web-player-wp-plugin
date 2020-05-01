@@ -39,6 +39,7 @@ class Podlove_Web_Player_i18n {
         'title' => static::i18n( 'Config <%= id %>' ),
         'active-tab' => static::i18n( 'Active Tab' ),
         'select-tab' => static::i18n( 'Select Tab' ),
+        'no-default-tab' => static::i18n( 'none' ),
         'share-tab' => static::i18n( 'Share Tab' ),
         'channels' => static::i18n( 'Channels' ),
         'channels-add' => static::i18n( 'Add' ),

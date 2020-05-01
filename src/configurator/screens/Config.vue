@@ -3,7 +3,7 @@
     <card :title="$i18n(['config', 'active-tab'])">
       <form-element>
         <el-select :placeholder="$i18n(['config', 'select-tab'])" :value="activeTab" size="small" @change="selectActiveTab">
-          <el-option v-for="item in tabs" :key="`tab-${item}`" :label="item" :value="item"></el-option>
+          <el-option v-for="item in tabs" :key="`tab-${item}`" :label="item === null ? $i18n(['config', 'no-default-tab']) : item" :value="item"></el-option>
         </el-select>
       </form-element>
     </card>
