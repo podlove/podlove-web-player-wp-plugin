@@ -45,13 +45,13 @@ function activate_podlove_web_player() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-podlove-web-player-deactivator.php
  */
-function deactivate_podlove_web_player() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-podlove-web-player-deactivator.php';
-	Podlove_Web_Player_Deactivator::deactivate('podlove-web-player');
+function uninstall_podlove_web_player() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-podlove-web-player-uninstall.php';
+	Podlove_Web_Player_Uninstall::uninstall('podlove-web-player');
 }
 
 register_activation_hook( __FILE__, 'activate_podlove_web_player' );
-register_deactivation_hook( __FILE__, 'deactivate_podlove_web_player' );
+register_uninstall_hook( __FILE__, 'uninstall_podlove_web_player' );
 
 /**
  * The core plugin class that is used to define internationalization,

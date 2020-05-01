@@ -59,7 +59,7 @@ class Podlove_Web_Player {
 		if ( defined( 'PLUGIN_NAME_VERSION' ) ) {
 			$this->version = PLUGIN_NAME_VERSION;
 		} else {
-			$this->version = '5.0.8';
+			$this->version = '5.0.11';
 		}
 		$this->plugin_name = 'podlove-web-player';
 
