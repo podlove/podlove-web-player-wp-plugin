@@ -1,5 +1,5 @@
 dist/
 database/
-uploads.ini
 content
 node_modules
+wp

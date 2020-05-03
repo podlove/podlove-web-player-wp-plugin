@@ -28,6 +28,7 @@ class Podlove_Web_Player_Enclosure {
 	 */
 	public function __construct( $plugin_name ) {
     $this->options = new Podlove_Web_Player_Options( $plugin_name );
+    $this->interoperability = new Podlove_Web_Player_Interoperability( $plugin_name );
   }
 
   /**

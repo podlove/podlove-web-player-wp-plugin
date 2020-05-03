@@ -29,3 +29,6 @@
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
+
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-podlove-web-player-uninstall.php';
+Podlove_Web_Player_Uninstall::uninstall('podlove-web-player');

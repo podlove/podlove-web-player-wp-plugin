@@ -3,12 +3,15 @@ version: '2'
 services:
   wordpress:
     container_name: "${project}_wordpress"
-    image: wordpress:5.3-php7.2
+    image: wordpress:5.4-php7.2
     ports:
       - 8080:80
     volumes:
       - ../dist:/var/www/html/wp-content/plugins/podlove-web-player
       - ../content:/var/www/html/wp-content
+      - ../env/wp-config.php:/var/www/html/wp-config.php
+      - ../env/.htaccess:/var/www/html/.htaccess
+      - ../env/mu-plugins:/var/www/html/wp-content/mu-plugins/
       - ../uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     environment:
       WORDPRESS_DB_PASSWORD: "${database_password}"
