@@ -135,7 +135,7 @@ class Podlove_Web_Player_Public {
 		add_shortcode( 'podlove-web-player', array( $this->shortcode, 'render' ) );
     add_shortcode( 'podloveaudio', array( $this->shortcode, 'render' ) );
 
-    if ($this->interoperability->isPublisherActive()) {
+    if ($this->interoperability->isPlayerActiveInPublisher()) {
       add_shortcode( 'podlove-episode-web-player', array( $this->shortcode, 'render' ) );
     }
 	}

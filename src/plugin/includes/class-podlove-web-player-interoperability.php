@@ -26,4 +26,14 @@ class Podlove_Web_Player_Interoperability {
   public function isPublisherActive() {
     return function_exists('podlove_pwp5_attributes');
   }
+
+  public function isPlayerActiveInPublisher() {
+    if (!function_exists('\Podlove\get_webplayer_settings')) {
+      return false;
+    }
+
+    $settings = (array) \Podlove\get_webplayer_settings();
+
+    return $settings['version'] == 'player_v5';
+  }
 }

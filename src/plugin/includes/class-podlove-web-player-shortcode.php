@@ -356,7 +356,9 @@ class Podlove_Web_Player_Shortcode
         $embed = '
       <div class="podlove-web-player intrinsic-ignore" id="$id">$template</div>
       <script>
-        podlovePlayer("#$id", $episode, "$config");
+        document.addEventListener("DOMContentLoaded", function () {
+          podlovePlayer("#$id", $episode, "$config");
+        });
       </script>
     ';
 
