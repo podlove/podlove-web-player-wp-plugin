@@ -1,4 +1,4 @@
-version: '2'
+version: '3.3'
 
 services:
   wordpress:
@@ -7,12 +7,9 @@ services:
     ports:
       - 8080:80
     volumes:
+      - ../wp:/var/www/html/
       - ../dist:/var/www/html/wp-content/plugins/podlove-web-player
-      - ../content:/var/www/html/wp-content
-      - ../env/wp-config.php:/var/www/html/wp-config.php
-      - ../env/.htaccess:/var/www/html/.htaccess
-      - ../env/mu-plugins:/var/www/html/wp-content/mu-plugins/
-      - ../uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     environment:
       WORDPRESS_DB_PASSWORD: "${database_password}"
     depends_on:
