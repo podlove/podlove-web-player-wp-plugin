@@ -104,6 +104,17 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.0.13 =
+
+- Debounce player embedding until page is fully loaded
+- Don't show the embed code when deactivated
+
+= 5.0.12 =
+
+- Sort menu items by defaukt
+- Bump Podlvoe Player to 5.1.3
+- Fix missing demo content
+
 = 5.0.11 =
 
 - Fix a bug that prevented removing configurations
