@@ -187,8 +187,8 @@ class Podlove_Web_Player_Embed_API
         $themeId  = $request->get_param('theme');
 
         $options = $this->options->read();
-
         $config = $options['configs'][$configId];
+
         $config['version'] = 5;
         $theme  = array(
             'theme' => $options['themes'][$themeId],
@@ -201,7 +201,9 @@ class Podlove_Web_Player_Embed_API
             'base' => $sources[$selected],
         );
 
-        $config['share']['outlet'] = $sources[$selected] . 'share.html';
+        if (!is_null($config['share']['outlet'])) {
+          $config['share']['outlet'] = $sources[$selected] . 'share.html';
+        }
 
         // Disable subscribe when no clients are available
         $availableClients = $config['subscribe-button']['clients'];
