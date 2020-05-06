@@ -18,9 +18,9 @@ class Podlove_Web_Player_Activator {
 	 *
 	 * @since    5.0.2
 	 */
-	public static function activate($plugin_name) {
+	public static function activate($plugin_name, $networkActivated) {
     $options = new Podlove_Web_Player_Options($plugin_name);
-    $options->create();
+    $options->create($networkActivated);
 	}
 
 }
