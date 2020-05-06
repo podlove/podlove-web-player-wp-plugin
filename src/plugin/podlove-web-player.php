@@ -16,7 +16,7 @@
  * Plugin Name:       Podlove Web Player
  * Plugin URI:        https://docs.podlove.org/podlove-web-player/
  * Description:       Audio First Podcast Web Player
- * Version:           5.0.13
+ * Version:           5.0.14
  * Author:            Podlove
  * Author URI:        http://podlove.org
  * License:           MIT
