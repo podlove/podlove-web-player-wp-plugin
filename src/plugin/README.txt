@@ -104,6 +104,11 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.0.14 =
+
+- Support Wordpress MultiSite instances, in network activated mode all settings are stored globally on the site
+- Fix player embed base path on instances where wordpress is running in subdirectories
+
 = 5.0.13 =
 
 - Debounce player embedding until page is fully loaded

@@ -1,13 +1,13 @@
 {
   "name": "@podlove/web-player-configurator",
-  "version": "5.0.13",
+  "version": "5.0.14",
   "description": "Podlove Web Player Configurator",
   "author": "Alexander Heimbuch <github@heimbu.ch>",
   "scripts": {
     "dist:clean": "rm -rf dist/*",
     "plugin:copy": "mkdir -p dist/ && cp -R src/plugin/* dist/ && cp -R node_modules/@podlove/web-player dist/",
     "plugin:dev": "nodemon --ext php --watch src/plugin --exec 'npm run plugin:copy'",
-    "plugin:env": "cp ./env/.htaccess ./wp/.htacces && cp ./env/wp-config.php ./wp/wp-config.php && mkdir -p ./wp/wp-content/mu-plugins && cp -R ./env/mu-plugins ./wp/wp-content/mu-plugins",
+    "plugin:env": "cp ./env/.htaccess ./wp/.htaccess && cp ./env/wp-config.php ./wp/wp-config.php && mkdir -p ./wp/wp-content/mu-plugins && cp ./env/mu-plugins/* ./wp/wp-content/mu-plugins/*",
     "configurator:dev": "webpack --watch --config build/webpack.dev.conf.js",
     "configurator:build": "webpack --config build/webpack.prod.conf.js",
     "dev:init": "./wordpress dev init && npm run plugin:env",

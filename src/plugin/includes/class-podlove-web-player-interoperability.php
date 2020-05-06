@@ -17,10 +17,18 @@ class Podlove_Web_Player_Interoperability {
 	 * @access   private
 	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
-	private $plugin_name;
+  private $plugin_name;
 
   public function __construct( $plugin_name ) {
     $this->plugin_name = $plugin_name;
+  }
+
+  public function isNetworkActivated() {
+    if ( ! function_exists( 'is_plugin_active_for_network' ) ) {
+      require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+    }
+
+    return is_plugin_active_for_network( 'podlove-web-player/podlove-web-player.php' );
   }
 
   public function isPublisherActive() {

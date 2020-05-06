@@ -39,11 +39,22 @@ class Podlove_Web_Player_Options
    */
   protected $defaults;
 
+
+  /**
+   * Interoperability Object
+   *
+   * @since    5.0.13
+   * @access   private
+   * @var      object   $interoperability   The player interoperability.
+   */
+  private $interoperability;
+
   public function __construct($plugin_name)
   {
 
     $this->plugin_name = $plugin_name;
     $this->plugin_directory = plugin_dir_path(__DIR__);
+    $this->interoperability = new Podlove_Web_Player_Interoperability($this->plugin_name);
     $this->defaults = array(
       'configs' => $this->readFolder($this->plugin_directory . 'defaults/configs/', 'json'),
       'themes' => $this->readFolder($this->plugin_directory . 'defaults/themes/', 'json'),
@@ -104,9 +115,13 @@ class Podlove_Web_Player_Options
    *
    * @since     5.0.2
    */
-  public function create()
+  public function create($networkActivated)
   {
-    add_option($this->plugin_name, $this->serializer());
+    if ($networkActivated) {
+      add_site_option($this->plugin_name, $this->serializer());
+    } else {
+      add_option($this->plugin_name, $this->serializer());
+    }
   }
 
   /**
@@ -117,10 +132,15 @@ class Podlove_Web_Player_Options
   public function read()
   {
     global $content_width;
-    $options = json_decode(get_option($this->plugin_name), true);
+
+    if ($this->interoperability->isNetworkActivated()) {
+      $options = json_decode(get_site_option($this->plugin_name), true);
+    } else {
+      $options = json_decode(get_option($this->plugin_name), true);
+    }
 
     $options['settings']['source']['items'] = array(
-      'local' => get_site_url(null, '/wp-content/plugins/podlove-web-player/web-player/'),
+      'local' => plugins_url('/podlove-web-player/web-player/'),
       'cdn' => 'https://cdn.podlove.org/web-player/5.x/'
     );
 
@@ -135,7 +155,11 @@ class Podlove_Web_Player_Options
    */
   public function update($value = array())
   {
-    update_option($this->plugin_name, $this->serializer($value));
+    if ($this->interoperability->isNetworkActivated()) {
+      update_site_option($this->plugin_name, $this->serializer($value));
+    } else {
+      update_option($this->plugin_name, $this->serializer($value));
+    }
   }
 
   /**
@@ -145,6 +169,10 @@ class Podlove_Web_Player_Options
    */
   public function delete()
   {
-    delete_option($this->plugin_name);
+    if ($this->interoperability->isNetworkActivated()) {
+      delete_site_option($this->plugin_name);
+    } else {
+      delete_option($this->plugin_name);
+    }
   }
 }

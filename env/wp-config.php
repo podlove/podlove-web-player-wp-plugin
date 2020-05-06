@@ -55,6 +55,7 @@ define( 'SECURE_AUTH_SALT', 'd646fc1d3f9d0613d8f468f8f3ae15ade652d0f9');
 define( 'LOGGED_IN_SALT',   'a3db6f5529170571d6eabe863a5fc2e09466c881');
 define( 'NONCE_SALT',       'c7dd7d2eba9b98bb965335851f2bf57df8c9f517');
 
+// define('WP_ALLOW_MULTISITE', true);
 // define('MULTISITE', true);
 // define('SUBDOMAIN_INSTALL', false);
 // define('DOMAIN_CURRENT_SITE', 'localhost:8080');
