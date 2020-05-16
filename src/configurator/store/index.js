@@ -9,12 +9,14 @@ import templates from './templates'
 import settings from './settings'
 import preview from './preview'
 import modal from './modal'
+import presets from './presets'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
     configs,
+    presets,
     themes,
     templates,
     settings,

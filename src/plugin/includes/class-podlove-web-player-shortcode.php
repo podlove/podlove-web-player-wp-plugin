@@ -322,8 +322,10 @@ class Podlove_Web_Player_Shortcode
      */
     private function template($attributes)
     {
-        $template = $attributes['template'] ?? 'default';
         $options = $this->options->read();
+        $default = $options['settings']['defaults']['template'] ?? 'default';
+
+        $template = $attributes['template'] ?? $default;
 
         return $options['templates'][$template];
     }
@@ -336,8 +338,12 @@ class Podlove_Web_Player_Shortcode
      */
     private function config($attributes)
     {
-        $config = $attributes['config'] ?? 'default';
-        $theme = $attributes['theme'] ?? 'default';
+        $options = $this->options->read();
+        $defaultConfig = $options['settings']['defaults']['config'] ?? 'default';
+        $defaultTheme = $options['settings']['defaults']['theme'] ?? 'default';
+
+        $config = $attributes['config'] ?? $defaultConfig;
+        $theme = $attributes['theme'] ?? $defaultTheme;
 
         return $this->routes['config'] . '/' . $config . '/' . 'theme' . '/' . $theme;
     }

@@ -102,7 +102,11 @@ class Podlove_Web_Player_i18n {
         'enclosure-top' => static::i18n( 'insert player at the top of the post' ),
         'enclosure-bottom' => static::i18n( 'insert player at the end of the post' ),
         'legacy' => static::i18n( 'Legacy' ),
-        'legacy-browser' => static::i18n( 'enable support for legacy browsers (increases loading time)' )
+        'legacy-browser' => static::i18n( 'enable support for legacy browsers (increases loading time)' ),
+        'defaults' => static::i18n( 'Default Appearance' ),
+        'default-config' => static::i18n( 'Default Configuration' ),
+        'default-theme' => static::i18n( 'Default Theme' ),
+        'default-template' => static::i18n( 'Default Template' )
       ),
 
       'navigation' => array(
@@ -126,6 +130,9 @@ class Podlove_Web_Player_i18n {
       'modal' => array(
         'id-invalid' => static::i18n( 'Only lower cased characters are allowed' ),
         'id-exists' => static::i18n( 'Id already exists' ),
+        'id-assigned' => static::i18n( 'You can\'t delete "<%= id %>" since it is assigned as the default for "<%= type %>"' ),
+        'delete' => static::i18n( 'Delete' ),
+        'cancel' => static::i18n( 'Cancel' ),
       ),
 
       'actions' => array(

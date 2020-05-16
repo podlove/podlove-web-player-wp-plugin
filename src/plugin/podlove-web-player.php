@@ -30,7 +30,8 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'PODLOVE_WEB_PLAYER_VERSION', '5.0.13' );
+define( 'PODLOVE_WEB_PLAYER_VERSION', '5.0.14' );
+define( 'PODLOVE_WEB_PLAYER_PATH', plugin_dir_path( __FILE__ ) );
 
 /**
  * The code that runs during plugin activation.
@@ -40,15 +41,6 @@ function activate_podlove_web_player($network) {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-podlove-web-player-activator.php';
 	Podlove_Web_Player_Activator::activate('podlove-web-player', $network);
 }
-
-// /**
-//  * The code that runs during plugin deactivation.
-//  * This action is documented in includes/class-podlove-web-player-deactivator.php
-//  */
-// function uninstall_podlove_web_player() {
-// 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-podlove-web-player-uninstall.php';
-// 	Podlove_Web_Player_Uninstall::uninstall('podlove-web-player');
-// }
 
 register_activation_hook( __FILE__, 'activate_podlove_web_player' );
 

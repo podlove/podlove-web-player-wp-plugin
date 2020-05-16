@@ -4,9 +4,9 @@ export default {
   namespaced: true,
 
   state: {
-    config: 'default',
-    theme: 'default',
-    template: 'default',
+    config: null,
+    theme: null,
+    template: null,
     size: 'desktop',
     contentWidth: null
   },
@@ -38,10 +38,11 @@ export default {
       const name = rootGetters['router/name']
       const id = rootGetters['router/id']
       const contentWidth = get(data, 'settings.contentWidth')
+      const defaultSettings = get(data, 'settings.defaults')
 
-      commit('setPreviewOption', { option: 'config', value: name === 'config' ? id : (getters.config || head(rootGetters['configs/configList'])) })
-      commit('setPreviewOption', { option: 'theme', value: name === 'theme' ? id : (getters.theme || head(rootGetters['themes/themeList'])) })
-      commit('setPreviewOption', { option: 'template', value: name === 'config' ? id : (getters.template || head(rootGetters['templates/templateList'])) })
+      commit('setPreviewOption', { option: 'config', value: name === 'config' ? id : (getters.config || get(defaultSettings, 'config')) })
+      commit('setPreviewOption', { option: 'theme', value: name === 'theme' ? id : (getters.theme || get(defaultSettings, 'theme')) })
+      commit('setPreviewOption', { option: 'template', value: name === 'config' ? id : (getters.template || get(defaultSettings, 'template')) })
       commit('setPreviewOption', { option: 'contentWidth', value: contentWidth })
 
       if (contentWidth) {

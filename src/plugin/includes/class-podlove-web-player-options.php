@@ -51,20 +51,38 @@ class Podlove_Web_Player_Options
 
   public function __construct($plugin_name)
   {
+    global $content_width;
 
     $this->plugin_name = $plugin_name;
     $this->plugin_directory = plugin_dir_path(__DIR__);
     $this->interoperability = new Podlove_Web_Player_Interoperability($this->plugin_name);
+
     $this->defaults = array(
-      'configs' => $this->readFolder($this->plugin_directory . 'defaults/configs/', 'json'),
-      'themes' => $this->readFolder($this->plugin_directory . 'defaults/themes/', 'json'),
-      'templates' => $this->readFolder($this->plugin_directory . 'defaults/templates/', 'html'),
+      'configs' => array(
+        'default' => $this->readFile($this->plugin_directory . 'defaults/configs/default.json', 'json'),
+      ),
+      'themes' => array(
+        'default' => $this->readFile($this->plugin_directory . 'defaults/themes/default.json', 'json'),
+      ),
+      'templates' => array(
+        'default' => $this->readFile($this->plugin_directory . 'defaults/templates/default.html', 'html'),
+      ),
       'settings' => array(
         'source' => array(
-          'selected' => 'local'
+          'selected' => 'local',
+          'items' => array(
+            'local' => PODLOVE_WEB_PLAYER_PATH . '/web-player',
+            'cdn' => 'https://cdn.podlove.org/web-player/5.x/'
+          )
         ),
+        'contentWidth' => $content_width,
         'enclosure' => 'bottom',
-        'legacy' => false
+        'legacy' => false,
+        'defaults' => array(
+          'theme' => 'default',
+          'config' => 'default',
+          'template' => 'default'
+        )
       )
     );
   }
@@ -79,6 +97,24 @@ class Podlove_Web_Player_Options
     $merged = (object) array_merge((array) $this->defaults, (array) $value);
 
     return json_encode($merged);
+  }
+
+  /**
+   * Reads file from plugin
+   */
+  private function readFile($path = null,  $type = 'json')
+  {
+    if (!$path) {
+      return null;
+    }
+
+    $content = file_get_contents($path);
+
+    if ($type === 'json') {
+      $content = json_decode($content, true);
+    }
+
+    return $content;
   }
 
   /**
@@ -100,11 +136,7 @@ class Podlove_Web_Player_Options
         continue;
       }
 
-      $contents[$info['filename']] = file_get_contents(trailingslashit($path) . $file);
-
-      if ($info['extension'] === 'json') {
-        $contents[$info['filename']] = json_decode($contents[$info['filename']], true);
-      }
+      $contents[$info['filename']] = $this->readFile(trailingslashit($path) . $file, $info['extension']);
     }
 
     return $contents;
@@ -125,27 +157,33 @@ class Podlove_Web_Player_Options
   }
 
   /**
+   * Gets the defaults
+   *
+   * @since     5.0.14
+   */
+  public function presets()
+  {
+    return array(
+      'configs' => $this->readFolder($this->plugin_directory . 'defaults/configs/', 'json'),
+      'themes' => $this->readFolder($this->plugin_directory . 'defaults/themes/', 'json'),
+      'templates' => $this->readFolder($this->plugin_directory . 'defaults/templates/', 'html')
+    );
+  }
+
+  /**
    * Reads the plugin options
    *
    * @since     5.0.2
    */
   public function read()
   {
-    global $content_width;
-
     if ($this->interoperability->isNetworkActivated()) {
       $options = json_decode(get_site_option($this->plugin_name), true);
     } else {
       $options = json_decode(get_option($this->plugin_name), true);
     }
 
-    $options['settings']['source']['items'] = array(
-      'local' => plugins_url('/podlove-web-player/web-player/'),
-      'cdn' => 'https://cdn.podlove.org/web-player/5.x/'
-    );
-
-    $options['settings']['contentWidth'] = $content_width;
-    return $options;
+    return array_replace_recursive($this->defaults, $options);
   }
 
   /**
