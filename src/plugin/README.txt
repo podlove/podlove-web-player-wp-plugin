@@ -48,6 +48,7 @@ Use a simple shortcode in your posts and pages, and the Podlove Web Player will 
 [podlove-web-player
   theme="default"
   config="default"
+  show="My Show Title"
   title="My episode title"
   subtitle="Episode Subtitle"
   poster="/files/path/to/poster.png"

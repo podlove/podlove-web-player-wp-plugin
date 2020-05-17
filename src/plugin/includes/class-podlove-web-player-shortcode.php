@@ -162,6 +162,9 @@ class Podlove_Web_Player_Shortcode
             'summary' => $attributes['summary'] ?? null,
             'duration' => $attributes['duration'] ?? null,
             'poster' => $attributes['poster'] ?? null,
+            'show' => array(
+              'title' => $attributes['show'] ?? null
+            ),
             'chapters' => $chapters ?? array(),
             'transcripts' => $transcripts ?? array(),
             'audio' => $this->audio($attributes),
