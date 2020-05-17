@@ -5,7 +5,8 @@ export default {
     visible: false,
     type: null,
     target: null,
-    value: null,
+    id: null,
+    blueprint: 'default',
     error: null,
     id: null,
   },
@@ -23,8 +24,8 @@ export default {
       return state.type
     },
 
-    value(state) {
-      return state.value
+    id(state) {
+      return state.id
     },
 
     error(state) {
@@ -34,10 +35,14 @@ export default {
     id(state) {
       return state.id
     },
+
+    blueprint(state) {
+      return state.blueprint
+    },
   },
 
   actions: {
-    updateCreateModalValue({ commit, getters, rootGetters }, value) {
+    updateCreateModalId({ commit, getters, rootGetters }, value) {
       let existing
 
       switch (getters.target) {
@@ -52,7 +57,11 @@ export default {
           break
       }
 
-      commit('updateModalValue', { value, existing })
+      commit('updateModalId', { value, existing })
+    },
+
+    updateCreateModalBlueprint({ commit }, value) {
+      commit('updateModalBlueprint', { value })
     },
 
     closeModal({ commit }) {
@@ -71,7 +80,7 @@ export default {
 
   mutations: {
     // Modal
-    updateModalValue(state, { value, existing }) {
+    updateModalId(state, { value, existing }) {
       let error = false
 
       if (existing.includes(value)) {
@@ -79,7 +88,7 @@ export default {
         error = true
       }
 
-      if (!/^[a-z]+$/.test(value)) {
+      if (!/^[a-z0-9-]+$/.test(value)) {
         state.error = window.PODLOVE_WEB_PLAYER.i18n.modal['id-invalid']
         error = true
       }
@@ -88,16 +97,21 @@ export default {
         state.error = null
       }
 
-      state.value = value
+      state.id = value
+    },
+
+    updateModalBlueprint(state, { value }) {
+      state.blueprint = value
     },
 
     updateModalVisibility(state, { value, type, target, id }) {
       state.visible = value
       state.error = null
-      state.value = null
+      state.id = null
       state.type = type
       state.id = id
       state.target = target
+      state.blueprint = 'default'
     },
   },
 }

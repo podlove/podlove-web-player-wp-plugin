@@ -76,7 +76,7 @@ class Podlove_Web_Player_Admin_API
       )
     );
 
-    register_rest_route( $this->plugin_name . '/' . $this->version, 'config/(?P<id>\w+)',
+    register_rest_route( $this->plugin_name . '/' . $this->version, 'config/(?P<id>[a-z0-9-]+)',
       array(
         'methods' => 'POST',
         'callback' => array( $this, 'saveConfig' ),
@@ -101,7 +101,7 @@ class Podlove_Web_Player_Admin_API
       )
     );
 
-    register_rest_route( $this->plugin_name . '/' . $this->version, 'theme/(?P<id>\w+)',
+    register_rest_route( $this->plugin_name . '/' . $this->version, 'theme/(?P<id>[a-z0-9-]+)',
       array(
         'methods' => 'POST',
         'callback' => array( $this, 'saveTheme' ),
@@ -126,7 +126,7 @@ class Podlove_Web_Player_Admin_API
       )
     );
 
-    register_rest_route( $this->plugin_name . '/' . $this->version, 'template/(?P<id>\w+)',
+    register_rest_route( $this->plugin_name . '/' . $this->version, 'template/(?P<id>[a-z0-9-]+)',
       array(
         'methods' => 'POST',
         'callback' => array( $this, 'saveTemplate' ),
@@ -142,7 +142,7 @@ class Podlove_Web_Player_Admin_API
       )
     );
 
-    register_rest_route( $this->plugin_name . '/' . $this->version, 'config/(?P<id>\w+)',
+    register_rest_route( $this->plugin_name . '/' . $this->version, 'config/(?P<id>[a-z0-9-]+)',
       array(
         'methods' => 'DELETE',
         'callback' => array( $this, 'deleteConfig' ),
@@ -158,7 +158,7 @@ class Podlove_Web_Player_Admin_API
       )
     );
 
-    register_rest_route( $this->plugin_name . '/' . $this->version, 'theme/(?P<id>\w+)',
+    register_rest_route( $this->plugin_name . '/' . $this->version, 'theme/(?P<id>[a-z0-9-]+)',
       array(
         'methods' => 'DELETE',
         'callback' => array( $this, 'deleteTheme' ),
@@ -174,7 +174,7 @@ class Podlove_Web_Player_Admin_API
       )
     );
 
-    register_rest_route( $this->plugin_name . '/' . $this->version, 'template/(?P<id>\w+)',
+    register_rest_route( $this->plugin_name . '/' . $this->version, 'template/(?P<id>[a-z0-9-]+)',
       array(
         'methods' => 'DELETE',
         'callback' => array( $this, 'deleteTemplate' ),

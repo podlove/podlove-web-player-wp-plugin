@@ -34,11 +34,12 @@ export default {
 
     create({ commit, rootGetters, dispatch }) {
       const target = rootGetters['modal/target']
-      const id =  rootGetters['modal/value']
+      const id = rootGetters['modal/id']
+      const blueprint = rootGetters['modal/blueprint']
 
       switch (target) {
         case 'config': {
-          dispatch('configs/add', id, { root: true }).then(() => {
+          dispatch('configs/add', { id, blueprint }, { root: true }).then(() => {
             commit('modal/updateModalVisibility', { value: false, type: null, target: null }, { root: true })
             router.push({ name: 'config', params: { id } })
           })
@@ -46,7 +47,7 @@ export default {
         }
 
         case 'theme': {
-          dispatch('themes/add', id, { root: true }).then(() => {
+          dispatch('themes/add', { id, blueprint }, { root: true }).then(() => {
             commit('modal/updateModalVisibility', { value: false, type: null, target: null }, { root: true })
             router.push({ name: 'theme', params: { id } })
           })
@@ -54,7 +55,7 @@ export default {
         }
 
         case 'template': {
-          dispatch('templates/add', id, { root: true }).then(() => {
+          dispatch('templates/add', { id, blueprint }, { root: true }).then(() => {
             commit('modal/updateModalVisibility', { value: false, type: null, target: null }, { root: true })
             router.push({ name: 'template', params: { id } })
           })
