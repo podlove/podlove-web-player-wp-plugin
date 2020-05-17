@@ -1,4 +1,5 @@
 <?php
+require_once plugin_dir_path( __FILE__ ) . '/class-podlove-web-player-interoperability.php';
 require_once plugin_dir_path( __FILE__ ) . '/class-podlove-web-player-options.php';
 
 /**

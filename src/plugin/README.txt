@@ -105,6 +105,17 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.1.0 =
+
+- Set default configuration, theme and template for player instances
+- Add show title attribute in short codes
+- Add ability to select a blueprint while creating a config, theme or template
+- Add full configuration with all subscribe-button options enabled
+- Add Podlove Web Player 4 (classic) template as blueprint
+- Add themes for Wordpress TwentyTwenty and Wordpress TwentyNineteen
+- Fix bug that prevents complete uninstall
+- Upgrade Podlove Web Player to 5.1.4
+
 = 5.0.14 =
 
 - Support Wordpress MultiSite instances, in network activated mode all settings are stored globally on the site

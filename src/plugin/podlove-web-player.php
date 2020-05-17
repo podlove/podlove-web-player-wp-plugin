@@ -16,7 +16,7 @@
  * Plugin Name:       Podlove Web Player
  * Plugin URI:        https://docs.podlove.org/podlove-web-player/
  * Description:       Audio First Podcast Web Player
- * Version:           5.0.14
+ * Version:           5.1.0
  * Author:            Podlove
  * Author URI:        http://podlove.org
  * License:           MIT
@@ -30,8 +30,8 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'PODLOVE_WEB_PLAYER_VERSION', '5.0.14' );
-define( 'PODLOVE_WEB_PLAYER_PATH', plugin_dir_path( __FILE__ ) );
+define( 'PODLOVE_WEB_PLAYER_VERSION', '5.1.0' );
+define( 'PODLOVE_WEB_PLAYER_PATH', plugin_dir_url( __FILE__ ) );
 
 /**
  * The code that runs during plugin activation.

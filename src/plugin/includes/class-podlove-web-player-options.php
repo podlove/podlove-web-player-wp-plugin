@@ -71,7 +71,7 @@ class Podlove_Web_Player_Options
         'source' => array(
           'selected' => 'local',
           'items' => array(
-            'local' => PODLOVE_WEB_PLAYER_PATH . '/web-player',
+            'local' => PODLOVE_WEB_PLAYER_PATH . 'web-player/',
             'cdn' => 'https://cdn.podlove.org/web-player/5.x/'
           )
         ),
