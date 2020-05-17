@@ -55,9 +55,15 @@ class Podlove_Web_Player_i18n {
         'client-service-id' => static::i18n( 'Service Id' ),
 
         'create' => static::i18n( 'Add Config' ),
-        'create-message' => static::i18n( 'Please set a config id' ),
+        'create-id' => static::i18n( 'Config ID' ),
+        'create-blueprint' => static::i18n( 'Config Blueprint' ),
         'delete' => static::i18n( 'Delete Config' ),
-        'delete-message' => static::i18n( 'Do you really want to delete the config <%= id %>' )
+        'delete-message' => static::i18n( 'Do you really want to delete the config <%= id %>' ),
+
+        'presets' => array(
+          'default' => static::i18n( 'Chapters tab default enabled;Share settings active;Subscribe Button not defined' ),
+          'full-clients' => static::i18n( 'No default tab;Share settings active;Subscribe Buttone defined' )
+        )
       ),
 
       'template' => array(
@@ -65,9 +71,16 @@ class Podlove_Web_Player_i18n {
         'markup' => static::i18n( 'Markup' ),
 
         'create' => static::i18n( 'Add Template' ),
-        'create-message' => static::i18n( 'Please set a template id' ),
+        'create-id' => static::i18n( 'Template ID' ),
+        'create-blueprint' => static::i18n( 'Template Blueprint' ),
         'delete' => static::i18n( 'Delete Template' ),
-        'delete-message' => static::i18n( 'Do you really want to delete the template <%= id %>' )
+        'delete-message' => static::i18n( 'Do you really want to delete the template <%= id %>' ),
+        'presets' => array(
+          'default' => static::i18n( 'Use case: Landing Pages;Full feature play and audio controls;Tabs: chapters, transcripts, files, playlist, share;Subscribe Button' ),
+          'compact' => static::i18n( 'Use case: List Pages;Reduced play and audio controls;No tabs;Subscribe Button' ),
+          'sidebar' => static::i18n( 'Use case: Sidebar;Reduced play and audio controls;No tabs;Subscribe Button' ),
+          'classic' => static::i18n( 'Use case: Landing Pages;Full feature play and audio controls;Tabs: shownotes, chapters, transcripts, files, playlist, share;Subscribe Button' ),
+        )
       ),
 
       'theme' => array(
@@ -88,9 +101,15 @@ class Podlove_Web_Player_i18n {
         'font-family' => static::i18n( 'Font Family' ),
 
         'create' => static::i18n( 'Add Theme' ),
-        'create-message' => static::i18n( 'Please set a theme id' ),
+        'create-id' => static::i18n( 'Theme ID' ),
+        'create-blueprint' => static::i18n( 'Theme Blueprint' ),
         'delete' => static::i18n( 'Delete Theme' ),
-        'delete-message' => static::i18n( 'Do you really want to delete the theme <%= id %>' )
+        'delete-message' => static::i18n( 'Do you really want to delete the theme <%= id %>' ),
+        'presets' => array(
+          'default' => static::i18n( 'Default Web Player Fonts & Colors' ),
+          'twentytwenty' => static::i18n( 'Wordpress TwentyTwenty Fonts & Colors' ),
+          'twentynineteen' => static::i18n( 'Wordpress TwentyNineteen Fonts & Colors' ),
+        )
       ),
 
       'settings' => array (
@@ -102,7 +121,11 @@ class Podlove_Web_Player_i18n {
         'enclosure-top' => static::i18n( 'insert player at the top of the post' ),
         'enclosure-bottom' => static::i18n( 'insert player at the end of the post' ),
         'legacy' => static::i18n( 'Legacy' ),
-        'legacy-browser' => static::i18n( 'enable support for legacy browsers (increases loading time)' )
+        'legacy-browser' => static::i18n( 'enable support for legacy browsers (increases loading time)' ),
+        'defaults' => static::i18n( 'Appearance' ),
+        'default-config' => static::i18n( 'Default Configuration' ),
+        'default-theme' => static::i18n( 'Default Theme' ),
+        'default-template' => static::i18n( 'Default Template' )
       ),
 
       'navigation' => array(
@@ -113,19 +136,23 @@ class Podlove_Web_Player_i18n {
       ),
 
       'preview' => array(
-        'config' => static::i18n( 'Config' ),
+        'config' => static::i18n( 'Preview Config' ),
         'config-placeholder' => static::i18n( 'Select Config' ),
-        'theme' => static::i18n( 'Theme' ),
+        'theme' => static::i18n( 'Preview Theme' ),
         'theme-placeholder' => static::i18n( 'Select Theme' ),
-        'template' => static::i18n( 'Template' ),
+        'template' => static::i18n( 'Preview Template' ),
         'template-placeholder' => static::i18n( 'Select Template' ),
-        'size' => static::i18n( 'Size' ),
+        'size' => static::i18n( 'Preview Size' ),
         'size-placeholder' => static::i18n( 'Select Size' ),
       ),
 
       'modal' => array(
-        'id-invalid' => static::i18n( 'Only lower cased characters are allowed' ),
+        'id-invalid' => static::i18n( 'Only lower cased characters, numbers and dashes are allowed' ),
         'id-exists' => static::i18n( 'Id already exists' ),
+        'id-assigned' => static::i18n( 'You can\'t delete "<%= id %>" since it is assigned as the default for "<%= type %>"' ),
+        'delete' => static::i18n( 'Delete' ),
+        'cancel' => static::i18n( 'Cancel' ),
+        'add' => static::i18n( 'Add' ),
       ),
 
       'actions' => array(

@@ -1,5 +1,37 @@
 <template>
   <div class="template">
+    <card :title="$i18n(['settings', 'defaults'])">
+      <form-element full :label="$i18n(['settings', 'default-config'])">
+       <el-select
+          :value="defaults.config"
+          size="small"
+          @change="updateDefault({ type: 'config', value: $event })"
+        >
+          <el-option v-for="(item, index) in configList" :value="item" :key="`default-config-${index}`"></el-option>
+        </el-select>
+      </form-element>
+
+      <form-element full :label="$i18n(['settings', 'default-theme'])">
+       <el-select
+          :value="defaults.theme"
+          size="small"
+          @change="updateDefault({ type: 'theme', value: $event })"
+        >
+          <el-option v-for="(item, index) in themeList" :value="item" :key="`default-theme-${index}`"></el-option>
+        </el-select>
+      </form-element>
+
+      <form-element full :label="$i18n(['settings', 'default-template'])">
+       <el-select
+          :value="defaults.template"
+          size="small"
+          @change="updateDefault({ type: 'template', value: $event })"
+        >
+          <el-option v-for="(item, index) in templateList" :value="item" :key="`default-theme-${index}`"></el-option>
+        </el-select>
+      </form-element>
+    </card>
+
     <card :title="$i18n(['settings', 'source'])">
       <form-element full>
        <el-select
@@ -48,7 +80,10 @@ import { Card, FormElement } from '../components'
 
 export default {
   computed: {
-    ...mapGetters('settings', ['source', 'settings', 'enclosure', 'legacy']),
+    ...mapGetters('settings', ['source', 'settings', 'enclosure', 'legacy', 'defaults']),
+    ...mapGetters('configs', ['configList']),
+    ...mapGetters('themes', ['themeList']),
+    ...mapGetters('templates', ['templateList']),
 
     sources() {
       return reduce(get(this.settings, 'source.items', {}), (result, value, label) => [...result, { label, value }], [])
@@ -60,7 +95,7 @@ export default {
     FormElement
   },
 
-  methods: mapActions('settings', ['updateSource', 'updateEnclosure', 'updateLegacy'])
+  methods: mapActions('settings', ['updateSource', 'updateEnclosure', 'updateLegacy', 'updateDefault'])
 }
 </script>
 

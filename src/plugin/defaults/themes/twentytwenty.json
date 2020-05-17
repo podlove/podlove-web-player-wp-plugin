@@ -1,0 +1,53 @@
+{
+  "tokens": {
+    "brand": "#fff",
+    "brandDark": "#f5efe0",
+    "brandDarkest": "#f5efe0",
+    "brandLightest": "#cd2653",
+    "shadeDark": "#6d6d6d",
+    "shadeBase": "#fff",
+    "contrast": "#fff",
+    "alt": "#000"
+  },
+  "fonts": {
+    "ci": {
+      "name": "ci",
+      "family": [
+        "\"Inter var\"",
+        "-apple-system",
+        "BlinkMacSystemFont",
+        "\"Helvetica Neue\"",
+        "Helvetica",
+        "sans-serif"
+      ],
+      "src": [],
+      "weight": 700
+    },
+    "regular": {
+      "name": "regular",
+      "family": [
+        "\"Inter var\"",
+        "-apple-system",
+        "BlinkMacSystemFont",
+        "\"Helvetica Neue\"",
+        "Helvetica",
+        "sans-serif"
+      ],
+      "src": [],
+      "weight": 500
+    },
+    "bold": {
+      "name": "bold",
+      "family": [
+        "\"Inter var\"",
+        "-apple-system",
+        "BlinkMacSystemFont",
+        "\"Helvetica Neue\"",
+        "Helvetica",
+        "sans-serif"
+      ],
+      "src": [],
+      "weight": 800
+    }
+  }
+}

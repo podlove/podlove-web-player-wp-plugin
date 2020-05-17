@@ -223,8 +223,8 @@ export default {
         })
     },
 
-    add({ getters, commit }, id) {
-      const copy = get(getters.themes, 'default', {})
+    add({ rootGetters, commit }, { id, blueprint }) {
+      const copy = rootGetters['presets/item']('themes', blueprint)
 
       return request
         .create(`${PODLOVE_WEB_PLAYER.api.theme}/${id}`, copy, {

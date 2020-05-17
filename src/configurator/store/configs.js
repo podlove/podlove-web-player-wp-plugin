@@ -221,8 +221,8 @@ export default {
         })
     },
 
-    add({ getters, commit }, id) {
-      const copy = get(getters.configs, "default", {});
+    add({ rootGetters, commit }, id) {
+      const copy = rootGetters['presets/item']('configs', blueprint)
 
       return request
         .create(`${PODLOVE_WEB_PLAYER.api.config}/${id}`, copy, {

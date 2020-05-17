@@ -1,0 +1,39 @@
+{
+  "activeTab": null,
+  "subscribe-button": {
+    "feed": null,
+    "clients": [
+      { "id": "antenna-pod", "service": null },
+      { "id": "apple-podcasts", "service": null },
+      { "id": "beyond-pod", "service": null },
+      { "id": "castbox", "service": null },
+      { "id": "castro", "service": null },
+      { "id": "clementine", "service": null },
+      { "id": "deezer", "service": null },
+      { "id": "downcast", "service": null },
+      { "id": "google-podcasts", "service": null },
+      { "id": "gpodder", "service": null },
+      { "id": "i-catcher", "service": null },
+      { "id": "instacast", "service": null },
+      { "id": "overcast", "service": null },
+      { "id": "pocket-casts", "service": null },
+      { "id": "podcat", "service": null },
+      { "id": "podcast-addict", "service": null },
+      { "id": "podcast-republic", "service": null },
+      { "id": "pod-grasp", "service": null },
+      { "id": "podscout", "service": null },
+      { "id": "player-fm", "service": null },
+      { "id": "rss", "service": null },
+      { "id": "rss-radio", "service": null },
+      { "id": "soundcloud", "service": null },
+      { "id": "spotify", "service": null },
+      { "id": "stitcher", "service": null },
+      { "id": "youtube", "service": null }
+    ]
+  },
+  "share": {
+    "channels": ["facebook", "twitter", "whats-app", "linkedin", "pinterest", "xing", "mail", "link"],
+    "outlet": "/share.html",
+    "sharePlaytime": true
+  }
+}

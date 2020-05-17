@@ -76,7 +76,7 @@ class Podlove_Web_Player_Admin_API
       )
     );
 
-    register_rest_route( $this->plugin_name . '/' . $this->version, 'config/(?P<id>\w+)',
+    register_rest_route( $this->plugin_name . '/' . $this->version, 'config/(?P<id>[a-z0-9-]+)',
       array(
         'methods' => 'POST',
         'callback' => array( $this, 'saveConfig' ),
@@ -101,7 +101,7 @@ class Podlove_Web_Player_Admin_API
       )
     );
 
-    register_rest_route( $this->plugin_name . '/' . $this->version, 'theme/(?P<id>\w+)',
+    register_rest_route( $this->plugin_name . '/' . $this->version, 'theme/(?P<id>[a-z0-9-]+)',
       array(
         'methods' => 'POST',
         'callback' => array( $this, 'saveTheme' ),
@@ -126,7 +126,7 @@ class Podlove_Web_Player_Admin_API
       )
     );
 
-    register_rest_route( $this->plugin_name . '/' . $this->version, 'template/(?P<id>\w+)',
+    register_rest_route( $this->plugin_name . '/' . $this->version, 'template/(?P<id>[a-z0-9-]+)',
       array(
         'methods' => 'POST',
         'callback' => array( $this, 'saveTemplate' ),
@@ -142,7 +142,7 @@ class Podlove_Web_Player_Admin_API
       )
     );
 
-    register_rest_route( $this->plugin_name . '/' . $this->version, 'config/(?P<id>\w+)',
+    register_rest_route( $this->plugin_name . '/' . $this->version, 'config/(?P<id>[a-z0-9-]+)',
       array(
         'methods' => 'DELETE',
         'callback' => array( $this, 'deleteConfig' ),
@@ -158,7 +158,7 @@ class Podlove_Web_Player_Admin_API
       )
     );
 
-    register_rest_route( $this->plugin_name . '/' . $this->version, 'theme/(?P<id>\w+)',
+    register_rest_route( $this->plugin_name . '/' . $this->version, 'theme/(?P<id>[a-z0-9-]+)',
       array(
         'methods' => 'DELETE',
         'callback' => array( $this, 'deleteTheme' ),
@@ -174,7 +174,7 @@ class Podlove_Web_Player_Admin_API
       )
     );
 
-    register_rest_route( $this->plugin_name . '/' . $this->version, 'template/(?P<id>\w+)',
+    register_rest_route( $this->plugin_name . '/' . $this->version, 'template/(?P<id>[a-z0-9-]+)',
       array(
         'methods' => 'DELETE',
         'callback' => array( $this, 'deleteTemplate' ),
@@ -326,7 +326,6 @@ class Podlove_Web_Player_Admin_API
       $templateId => $request->get_param( 'template' )
     ));
 
-
     $this->options->update($options);
     $options = $this->options->read();
 
@@ -392,10 +391,12 @@ class Podlove_Web_Player_Admin_API
     $source = $request->get_param( 'source' );
     $enclosure = $request->get_param( 'enclosure' );
     $legacy = $request->get_param( 'legacy' );
+    $defaults = $request->get_param( 'defaults' );
 
     $options['settings']['source']['selected'] = $source;
     $options['settings']['enclosure'] = $enclosure;
     $options['settings']['legacy'] = $legacy;
+    $options['settings']['defaults'] = $defaults;
 
     $this->options->update($options);
     $options = $this->options->read();
@@ -410,6 +411,9 @@ class Podlove_Web_Player_Admin_API
 	 */
   public function bootstrap()
   {
-    return rest_ensure_response( $this->options->read() );
+    $data = $this->options->read();
+    $data['presets'] = $this->options->presets();
+
+    return rest_ensure_response( $data );
   }
 }

@@ -20,8 +20,8 @@
           </div>
         </div>
         <div class="el-message-box__btns">
-          <el-button size="small" @click="closeModal">Cancel</el-button>
-          <el-button ref="delete" type="danger" icon="el-icon-delete" size="small" @click="remove({ target, id })">Delete</el-button>
+          <el-button size="small" @click="closeModal">{{ $i18n(['modal', 'cancel']) }}</el-button>
+          <el-button ref="delete" type="danger" icon="el-icon-delete" size="small" :disabled="disabled" @click="remove({ target, id })">{{ $i18n(['modal', 'delete']) }}</el-button>
         </div>
       </div>
     </div>
@@ -29,23 +29,29 @@
 </template>
 
 <script>
+import { get } from 'lodash';
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
     ...mapGetters('modal', ['target', 'id', 'type', 'visible']),
+    ...mapGetters('settings', ['defaults']),
 
     title() {
       return this.$i18n([this.target, 'delete'])
     },
 
     message() {
-      return this.$i18n([this.target, 'delete-message'], { id: this.id })
+      return this.disabled ? this.$i18n(['modal', 'id-assigned'], { id: this.id, type: this.target }) : this.$i18n([this.target, 'delete-message'], { id: this.id })
     },
 
     open() {
       return this.visible && this.type === 'delete'
-    }
+    },
+
+    disabled() {
+      return this.id === get(this.defaults, this.target)
+    },
   },
 
   watch: {

@@ -67,7 +67,7 @@ class Custom extends Component {
               options={[
                 { value: null, label: null },
                 { value: 'audio/mpeg', label: 'mp3' },
-                { value: 'audio/m4a', label: 'mp4' },
+                { value: 'audio/mp4', label: 'mp4' },
                 { value: 'audio/ogg', label: 'ogg' },
                 { value: 'audio/opus', label: 'opus' },
                 { value: 'audio/wav', label: 'wav' },

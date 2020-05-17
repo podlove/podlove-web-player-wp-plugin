@@ -35,10 +35,10 @@ export default {
       const id = getters.id
 
       if (!getters.id) {
-        return {}
+        return ''
       }
 
-      return get(getters.templates, id, '')
+      return get(state, ['templates', id], '')
     },
   },
 
@@ -57,9 +57,10 @@ export default {
       commit('updateTemplate', { id, value })
     },
 
-    add({ getters, commit }, id) {
-      const template = get(getters.templates, 'default', {})
-      request
+    add({ commit, rootGetters }, { id, blueprint }) {
+      const template = rootGetters['presets/item']('templates', blueprint)
+
+      return request
         .create(
           `${PODLOVE_WEB_PLAYER.api.template}/${id}`,
           { template },
@@ -105,10 +106,10 @@ export default {
       state.templates = payload
     },
 
-    updateTemplate(state, { id, value }) {
+    updateTemplate(state, { id, template }) {
       state.templates = {
         ...state.templates,
-        [id]: value,
+        [id]: template,
       }
     },
 
