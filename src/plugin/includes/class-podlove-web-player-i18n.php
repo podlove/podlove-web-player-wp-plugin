@@ -132,13 +132,13 @@ class Podlove_Web_Player_i18n {
       ),
 
       'preview' => array(
-        'config' => static::i18n( 'Config' ),
+        'config' => static::i18n( 'Preview Config' ),
         'config-placeholder' => static::i18n( 'Select Config' ),
-        'theme' => static::i18n( 'Theme' ),
+        'theme' => static::i18n( 'PReview Theme' ),
         'theme-placeholder' => static::i18n( 'Select Theme' ),
-        'template' => static::i18n( 'Template' ),
+        'template' => static::i18n( 'Preview Template' ),
         'template-placeholder' => static::i18n( 'Select Template' ),
-        'size' => static::i18n( 'Size' ),
+        'size' => static::i18n( 'Preview Size' ),
         'size-placeholder' => static::i18n( 'Select Size' ),
       ),
 
