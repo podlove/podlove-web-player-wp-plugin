@@ -1,0 +1,32 @@
+{
+  "tokens": {
+    "brand": "#6d6d6d",
+    "brandDark": "#0073aa",
+    "brandDarkest": "#0073aa",
+    "brandLightest": "#fff",
+    "shadeDark": "#6d6d6d",
+    "shadeBase": "#6d6d6d",
+    "contrast": "#111",
+    "alt": "#fff"
+  },
+  "fonts": {
+    "ci": {
+      "name": "ci",
+      "family": ["\"NonBreakingSpaceOverride\"", "\"Hoefler Text\"", "Garamond", "\"Times New Roman\"", "serif"],
+      "src": [],
+      "weight": 400
+    },
+    "regular": {
+      "name": "regular",
+      "family": ["\"NonBreakingSpaceOverride\"", "\"Hoefler Text\"", "Garamond", "\"Times New Roman\"", "serif"],
+      "src": [],
+      "weight": 400
+    },
+    "bold": {
+      "name": "bold",
+      "family": ["\"NonBreakingSpaceOverride\"", "\"Hoefler Text\"", "Garamond", "\"Times New Roman\"", "serif"],
+      "src": [],
+      "weight": 700
+    }
+  }
+}

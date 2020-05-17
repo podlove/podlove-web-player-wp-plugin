@@ -61,7 +61,8 @@ class Podlove_Web_Player_i18n {
         'delete-message' => static::i18n( 'Do you really want to delete the config <%= id %>' ),
 
         'presets' => array(
-          'default' => static::i18n( "Chapters tab enabled;Share settings active;Subscribe Button not defined" )
+          'default' => static::i18n( 'Chapters tab default enabled;Share settings active;Subscribe Button not defined' ),
+          'full-clients' => static::i18n( 'No default tab;Share settings active;Subscribe Buttone defined' )
         )
       ),
 
@@ -75,9 +76,10 @@ class Podlove_Web_Player_i18n {
         'delete' => static::i18n( 'Delete Template' ),
         'delete-message' => static::i18n( 'Do you really want to delete the template <%= id %>' ),
         'presets' => array(
-          'default' => static::i18n( "Use case: Landing Pages;Full feature play and audio controls;Tabs: chapters, transcripts, files, playlist, share;Subscribe Button" ),
-          'compact' => static::i18n( "Use case: List Pages;Reduced play and audio controls;No tabs;Subscribe Button" ),
-          'sidebar' => static::i18n( "Use case: Sidebar;Reduced play and audio controls;No tabs;Subscribe Button" )
+          'default' => static::i18n( 'Use case: Landing Pages;Full feature play and audio controls;Tabs: chapters, transcripts, files, playlist, share;Subscribe Button' ),
+          'compact' => static::i18n( 'Use case: List Pages;Reduced play and audio controls;No tabs;Subscribe Button' ),
+          'sidebar' => static::i18n( 'Use case: Sidebar;Reduced play and audio controls;No tabs;Subscribe Button' ),
+          'classic' => static::i18n( 'Use case: Landing Pages;Full feature play and audio controls;Tabs: shownotes, chapters, transcripts, files, playlist, share;Subscribe Button' ),
         )
       ),
 
@@ -104,7 +106,9 @@ class Podlove_Web_Player_i18n {
         'delete' => static::i18n( 'Delete Theme' ),
         'delete-message' => static::i18n( 'Do you really want to delete the theme <%= id %>' ),
         'presets' => array(
-          'default' => 'Default Web Player Theme;Fonts: OS native font stack'
+          'default' => static::i18n( 'Default Web Player Fonts & Colors' ),
+          'twentytwenty' => static::i18n( 'Wordpress TwentyTwenty Fonts & Colors' ),
+          'twentynineteen' => static::i18n( 'Wordpress TwentyNineteen Fonts & Colors' ),
         )
       ),
 
@@ -134,7 +138,7 @@ class Podlove_Web_Player_i18n {
       'preview' => array(
         'config' => static::i18n( 'Preview Config' ),
         'config-placeholder' => static::i18n( 'Select Config' ),
-        'theme' => static::i18n( 'PReview Theme' ),
+        'theme' => static::i18n( 'Preview Theme' ),
         'theme-placeholder' => static::i18n( 'Select Theme' ),
         'template' => static::i18n( 'Preview Template' ),
         'template-placeholder' => static::i18n( 'Select Template' ),
