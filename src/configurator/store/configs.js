@@ -221,7 +221,7 @@ export default {
         })
     },
 
-    add({ rootGetters, commit }, id) {
+    add({ rootGetters, commit }, { id, blueprint }) {
       const copy = rootGetters['presets/item']('configs', blueprint)
 
       return request
