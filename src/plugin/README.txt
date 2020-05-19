@@ -105,6 +105,10 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.1.1 =
+
+- Fix a bug that prevents adding/updating configs or templates
+
 = 5.1.0 =
 
 - Set default configuration, theme and template for player instances

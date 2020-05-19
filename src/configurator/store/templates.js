@@ -47,14 +47,14 @@ export default {
       commit('bootstrap', get(payload, 'templates'))
     },
 
-    updateTemplate({ getters, commit }, value) {
+    updateTemplate({ getters, commit }, template) {
       const id = getters.id
 
       if (!id) {
         return
       }
 
-      commit('updateTemplate', { id, value })
+      commit('updateTemplate', { id, template })
     },
 
     add({ commit, rootGetters }, { id, blueprint }) {
@@ -84,8 +84,8 @@ export default {
             error: PODLOVE_WEB_PLAYER.i18n.error_save_template,
           }
         )
-        .then(value => {
-          commit('updateTemplate', { id: getters.id, value })
+        .then(template => {
+          commit('updateTemplate', { id: getters.id, template })
         })
     },
 
