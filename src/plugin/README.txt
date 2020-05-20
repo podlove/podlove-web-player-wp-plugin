@@ -105,6 +105,10 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.1.2 =
+
+- Fix a bug that causes a warning on pages
+
 = 5.1.1 =
 
 - Fix a bug that prevents adding/updating configs or templates

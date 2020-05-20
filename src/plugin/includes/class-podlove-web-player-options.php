@@ -183,7 +183,8 @@ class Podlove_Web_Player_Options
       $options = json_decode(get_option($this->plugin_name), true);
     }
 
-    return array_replace_recursive($this->defaults, $options);
+
+    return array_replace_recursive($this->defaults, $options ?? array());
   }
 
   /**
