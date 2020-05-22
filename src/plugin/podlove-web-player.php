@@ -31,7 +31,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 define( 'PODLOVE_WEB_PLAYER_VERSION', '5.1.2' );
-define( 'PODLOVE_WEB_PLAYER_PATH', plugin_dir_url( __FILE__ ) );
+define( 'PODLOVE_WEB_PLAYER_PATH', plugins_url( basename( __DIR__ ) ) );
 
 /**
  * The code that runs during plugin activation.
