@@ -126,19 +126,19 @@ class Podlove_Web_Player_Shortcode
         }
 
         if ($this->interoperability->isPublisherActive()) {
-          if (isset($attributes['publisher'])) {
-              return $this->routes['publisher'] . '/' . $attributes['publisher'];
-          }
+            if (isset($attributes['publisher'])) {
+                return $this->routes['publisher'] . '/' . $attributes['publisher'];
+            }
 
-          if (isset($attributes['post_id'])) {
-              return $this->routes['publisher'] . '/' . $attributes['post_id'];
-          }
+            if (isset($attributes['post_id'])) {
+                return $this->routes['publisher'] . '/' . $attributes['post_id'];
+            }
 
-          $id = get_the_ID();
+            $id = get_the_ID();
 
-          if (isset($id)) {
-              return $this->routes['publisher'] . '/' . $id;
-          }
+            if (isset($id)) {
+                return $this->routes['publisher'] . '/' . $id;
+            }
         }
     }
 
@@ -163,7 +163,7 @@ class Podlove_Web_Player_Shortcode
             'duration' => $attributes['duration'] ?? null,
             'poster' => $attributes['poster'] ?? null,
             'show' => array(
-              'title' => $attributes['show'] ?? null
+                'title' => $attributes['show'] ?? null,
             ),
             'chapters' => $chapters ?? array(),
             'transcripts' => $transcripts ?? array(),
@@ -182,11 +182,11 @@ class Podlove_Web_Player_Shortcode
         $size = 0;
 
         if (isset($attributes['size'])) {
-          $size = $attributes['size'];
+            $size = $attributes['size'];
         }
 
         if (isset($attributes['filesize'])) {
-          $size = $attributes['filesize'];
+            $size = $attributes['filesize'];
         }
 
         if (isset($attributes['mp3'])) {
@@ -298,23 +298,23 @@ class Podlove_Web_Player_Shortcode
      */
     private function transcripts($attribute, $transcripts)
     {
-      if (!isset($attribute)) {
-        return array();
-      }
+        if (!isset($attribute)) {
+            return array();
+        }
 
-      if ($transcripts === '') {
-        return $attribute;
-      }
+        if ($transcripts === '') {
+            return $attribute;
+        }
 
-      $result = json_decode($transcripts);
+        $result = json_decode($transcripts);
 
-      if ($result === '') {
-          return array();
-      }
+        if ($result === '') {
+            return array();
+        }
 
-      if ($result !== null) {
-          return $result;
-      }
+        if ($result !== null) {
+            return $result;
+        }
     }
 
     /**
@@ -347,8 +347,9 @@ class Podlove_Web_Player_Shortcode
 
         $config = $attributes['config'] ?? $defaultConfig;
         $theme = $attributes['theme'] ?? $defaultTheme;
+        $show = $attributes['show'] ?? 'default';
 
-        return $this->routes['config'] . '/' . $config . '/' . 'theme' . '/' . $theme;
+        return $this->routes['config'] . '/' . $config . '/' . 'theme' . '/' . $theme . '/' . 'show' . '/' . $show;
     }
 
     /**
@@ -372,10 +373,10 @@ class Podlove_Web_Player_Shortcode
     ';
 
         return strtr($embed, array(
-          '$id' => $id,
-          '$episode' => is_string($episode) ? '"' . $episode . '"' : json_encode($episode),
-          '$config' => $config,
-          '$template' => $template,
+            '$id' => $id,
+            '$episode' => is_string($episode) ? '"' . $episode . '"' : json_encode($episode),
+            '$config' => $config,
+            '$template' => $template,
         ));
     }
 

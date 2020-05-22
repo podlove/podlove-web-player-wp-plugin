@@ -50,7 +50,7 @@ export default compose([
       }),
       posts: getEntityRecords('postType', 'post', {
         per_page: 1,
-      }),
+      })
     }
   }),
   withSpokenMessages,

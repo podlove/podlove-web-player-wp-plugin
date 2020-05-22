@@ -27,7 +27,7 @@ class Player extends Component {
     const routes = window.PODLOVE_WEB_PLAYER.embed
 
     let episode
-    const config = [routes.config, attributes.config, 'theme', attributes.theme].join('/')
+    const config = [routes.config, attributes.config, 'theme', attributes.theme, ...(attributes.show ? ['show', attributes.show] : [])].join('/')
     const template = get(this.plugin, ['templates', attributes.template], '')
 
     switch (this.type) {

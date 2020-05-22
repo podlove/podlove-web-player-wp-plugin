@@ -11,409 +11,435 @@
  */
 class Podlove_Web_Player_Admin_API
 {
-  	/**
-	 * The ID of this plugin.
-	 *
-	 * @since    5.0.2
-	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
-	 */
-	private $plugin_name;
+    /**
+     * The ID of this plugin.
+     *
+     * @since    5.0.2
+     * @access   private
+     * @var      string    $plugin_name    The ID of this plugin.
+     */
+    private $plugin_name;
 
-	/**
-	 * The version of this plugin.
-	 *
-	 * @since    5.0.2
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
-	 */
-	private $version;
+    /**
+     * The version of this plugin.
+     *
+     * @since    5.0.2
+     * @access   private
+     * @var      string    $version    The current version of this plugin.
+     */
+    private $version;
 
-  /**
-   * Plugin options
-   */
-  private $options;
+    /**
+     * Plugin options
+     */
+    private $options;
 
-  /**
-	 * Initialize the class and set its properties.
-	 *
-	 * @since    5.0.2
-	 * @param      string    $plugin_name       The name of this plugin.
-	 * @param      string    $version    The version of this plugin.
-	 */
-	public function __construct( $plugin_name, $version ) {
-		$this->plugin_name = $plugin_name;
-    $this->version = $version;
-    $this->options = new Podlove_Web_Player_Options($plugin_name);
-  }
-
-  /**
-	 * Define API paths
-	 *
-	 * @since    5.0.2
-	 */
-  public function routes() {
-    return array(
-      'bootstrap' => esc_url_raw( rest_url( $this->plugin_name . '/' . $this->version . '/' . 'bootstrap' ) ),
-      'config' => esc_url_raw( rest_url( $this->plugin_name . '/' . $this->version . '/' . 'config' ) ),
-      'theme' => esc_url_raw( rest_url( $this->plugin_name . '/' . $this->version . '/' . 'theme' ) ),
-      'template' => esc_url_raw( rest_url( $this->plugin_name . '/' . $this->version . '/' . 'template' ) ),
-      'settings' => esc_url_raw( rest_url( $this->plugin_name . '/' . $this->version . '/' . 'settings' ) )
-    );
-  }
-
-  /**
-	 * Register the API routes
-	 *
-	 * @since    5.0.2
-	 */
-  public function registerRoutes() {
-    register_rest_route( $this->plugin_name . '/' . $this->version, 'bootstrap',
-      array(
-        'methods' => 'GET',
-        'callback' => array( $this, 'bootstrap' ),
-        'permissions_callback' => array( $this, 'api_permissions' )
-      )
-    );
-
-    register_rest_route( $this->plugin_name . '/' . $this->version, 'config/(?P<id>[a-z0-9-]+)',
-      array(
-        'methods' => 'POST',
-        'callback' => array( $this, 'saveConfig' ),
-        'args' => array (
-          'id' => array(
-            'required' => true
-          ),
-          'subscribe-button' => array(
-            'required' => true,
-            'validate_callback' => function( $param ) {
-              return $this->validate( 'config/subscribe-button', $param );
-            }
-          ),
-          'share' => array(
-            'required' => true,
-            'validate_callback' => function( $param ) {
-              return $this->validate( 'config/share', $param );
-            }
-          )
-        ),
-        'permissions_callback' => array( $this, 'api_permissions' )
-      )
-    );
-
-    register_rest_route( $this->plugin_name . '/' . $this->version, 'theme/(?P<id>[a-z0-9-]+)',
-      array(
-        'methods' => 'POST',
-        'callback' => array( $this, 'saveTheme' ),
-        'args' => array (
-          'id' => array(
-            'required' => true
-          ),
-          'tokens' => array(
-            'required' => true,
-            'validate_callback' => function( $param ) {
-              return $this->validate( 'theme/tokens', $param );
-            }
-          ),
-          'fonts' => array(
-            'required' => true,
-            'validate_callback' => function( $param ) {
-              return $this->validate( 'theme/fonts', $param );
-            }
-          )
-        ),
-        'permissions_callback' => array( $this, 'api_permissions' )
-      )
-    );
-
-    register_rest_route( $this->plugin_name . '/' . $this->version, 'template/(?P<id>[a-z0-9-]+)',
-      array(
-        'methods' => 'POST',
-        'callback' => array( $this, 'saveTemplate' ),
-        'args' => array (
-          'id' => array(
-            'required' => true
-          ),
-          'template' => array(
-            'required' => true
-          )
-          ),
-        'permissions_callback' => array( $this, 'api_permissions' )
-      )
-    );
-
-    register_rest_route( $this->plugin_name . '/' . $this->version, 'config/(?P<id>[a-z0-9-]+)',
-      array(
-        'methods' => 'DELETE',
-        'callback' => array( $this, 'deleteConfig' ),
-        'args' => array (
-          'id' => array(
-            'required' => true,
-            'validate_callback' => function( $param ) {
-              return $this->validate( 'delete/id', $param );
-            }
-          )
-        ),
-        'permissions_callback' => array( $this, 'api_permissions' )
-      )
-    );
-
-    register_rest_route( $this->plugin_name . '/' . $this->version, 'theme/(?P<id>[a-z0-9-]+)',
-      array(
-        'methods' => 'DELETE',
-        'callback' => array( $this, 'deleteTheme' ),
-        'args' => array (
-          'id' => array(
-            'required' => true,
-            'validate_callback' => function( $param ) {
-              return $this->validate( 'delete/id', $param );
-            }
-          )
-        ),
-        'permissions_callback' => array( $this, 'api_permissions' )
-      )
-    );
-
-    register_rest_route( $this->plugin_name . '/' . $this->version, 'template/(?P<id>[a-z0-9-]+)',
-      array(
-        'methods' => 'DELETE',
-        'callback' => array( $this, 'deleteTemplate' ),
-        'args' => array (
-          'id' => array(
-            'required' => true,
-            'validate_callback' => function( $param ) {
-              return $this->validate( 'delete/id', $param );
-            }
-          )
-        ),
-        'permissions_callback' => array( $this, 'api_permissions' )
-      )
-    );
-
-    register_rest_route( $this->plugin_name . '/' . $this->version, 'settings',
-      array(
-        'methods' => 'POST',
-        'callback' => array( $this, 'saveSettings' ),
-        'args' => array (
-          'source' => array(
-            'required' => true,
-            'validate_callback' => function( $param ) {
-              return $this->validate( 'settings/source', $param );
-            }
-          )
-        ),
-        'permissions_callback' => array( $this, 'api_permissions' )
-      )
-    );
-  }
-
-  /**
-	 * Validates the API payload
-	 *
-	 * @since    5.0.2
-	 */
-  public function validate($type, $value)
-  {
-    switch ($type) {
-      case 'config/subscribe-button':
-        return
-          array_key_exists('feed', $value) &&
-          array_key_exists('clients', $value);
-
-      case 'config/share':
-        return
-          array_key_exists('channels', $value) &&
-          array_key_exists('outlet', $value) &&
-          array_key_exists('sharePlaytime', $value);
-
-      case 'theme/tokens':
-        return
-          array_key_exists('brand', $value) &&
-          array_key_exists('brandDark', $value) &&
-          array_key_exists('brandDarkest', $value) &&
-          array_key_exists('brandLightest', $value) &&
-          array_key_exists('shadeDark', $value) &&
-          array_key_exists('shadeBase', $value) &&
-          array_key_exists('contrast', $value) &&
-          array_key_exists('alt', $value);
-
-      case 'theme/fonts':
-        return
-          array_key_exists('ci', $value) &&
-          array_key_exists('regular', $value) &&
-          array_key_exists('bold', $value);
-
-      case 'delete/id':
-        return $value !== 'default';
-
-      case 'settings/source':
-        return $value === 'local' || $value === 'cdn';
-
-      default:
-        return false;
+    /**
+     * Initialize the class and set its properties.
+     *
+     * @since    5.0.2
+     * @param      string    $plugin_name       The name of this plugin.
+     * @param      string    $version    The version of this plugin.
+     */
+    public function __construct($plugin_name, $version)
+    {
+        $this->plugin_name = $plugin_name;
+        $this->version = $version;
+        $this->options = new Podlove_Web_Player_Options($plugin_name);
     }
-  }
 
-  /**
-	 * Check API permissions
-	 *
-	 * @since    5.0.2
-	 */
-  public function api_permissions()
-  {
-		return current_user_can( 'manage_options' );
-  }
+    /**
+     * Define API paths
+     *
+     * @since    5.0.2
+     */
+    public function routes()
+    {
+        return array(
+            'bootstrap' => esc_url_raw(rest_url($this->plugin_name . '/' . $this->version . '/' . 'bootstrap')),
+            'config' => esc_url_raw(rest_url($this->plugin_name . '/' . $this->version . '/' . 'config')),
+            'theme' => esc_url_raw(rest_url($this->plugin_name . '/' . $this->version . '/' . 'theme')),
+            'template' => esc_url_raw(rest_url($this->plugin_name . '/' . $this->version . '/' . 'template')),
+            'settings' => esc_url_raw(rest_url($this->plugin_name . '/' . $this->version . '/' . 'settings')),
+            'shows' => esc_url_raw(rest_url($this->plugin_name . '/' . $this->version . '/' . 'shows')),
+        );
+    }
 
-  /**
-	 * Save API config
-	 *
-	 * @since    5.0.2
-	 */
-  public function saveConfig( WP_REST_Request $request )
-  {
-    $options = $this->options->read();
-    $configId = $request->get_param( 'id' );
+    /**
+     * Register the API routes
+     *
+     * @since    5.0.2
+     */
+    public function registerRoutes()
+    {
+        register_rest_route($this->plugin_name . '/' . $this->version, 'bootstrap',
+            array(
+                'methods' => 'GET',
+                'callback' => array($this, 'bootstrap'),
+                'permissions_callback' => array($this, 'api_permissions'),
+            )
+        );
 
-    $options['configs'] = array_merge($options['configs'], array(
-      $configId => array(
-        'activeTab' => $request->get_param( 'activeTab' ),
-        'subscribe-button' => $request->get_param( 'subscribe-button' ),
-        'share' => $request->get_param( 'share' )
-      )
-    ));
+        register_rest_route($this->plugin_name . '/' . $this->version, 'config/(?P<id>[a-z0-9-]+)',
+            array(
+                'methods' => 'POST',
+                'callback' => array($this, 'saveConfig'),
+                'args' => array(
+                    'id' => array(
+                        'required' => true,
+                    ),
+                    'subscribe-button' => array(
+                        'required' => true,
+                        'validate_callback' => function ($param) {
+                            return $this->validate('config/subscribe-button', $param);
+                        },
+                    ),
+                    'share' => array(
+                        'required' => true,
+                        'validate_callback' => function ($param) {
+                            return $this->validate('config/share', $param);
+                        },
+                    ),
+                ),
+                'permissions_callback' => array($this, 'api_permissions'),
+            )
+        );
 
+        register_rest_route($this->plugin_name . '/' . $this->version, 'theme/(?P<id>[a-z0-9-]+)',
+            array(
+                'methods' => 'POST',
+                'callback' => array($this, 'saveTheme'),
+                'args' => array(
+                    'id' => array(
+                        'required' => true,
+                    ),
+                    'tokens' => array(
+                        'required' => true,
+                        'validate_callback' => function ($param) {
+                            return $this->validate('theme/tokens', $param);
+                        },
+                    ),
+                    'fonts' => array(
+                        'required' => true,
+                        'validate_callback' => function ($param) {
+                            return $this->validate('theme/fonts', $param);
+                        },
+                    ),
+                ),
+                'permissions_callback' => array($this, 'api_permissions'),
+            )
+        );
 
-    $this->options->update($options);
-    $options = $this->options->read();
+        register_rest_route($this->plugin_name . '/' . $this->version, 'template/(?P<id>[a-z0-9-]+)',
+            array(
+                'methods' => 'POST',
+                'callback' => array($this, 'saveTemplate'),
+                'args' => array(
+                    'id' => array(
+                        'required' => true,
+                    ),
+                    'template' => array(
+                        'required' => true,
+                    ),
+                ),
+                'permissions_callback' => array($this, 'api_permissions'),
+            )
+        );
 
-    return rest_ensure_response( $options['configs'][$configId] );
-  }
+        register_rest_route($this->plugin_name . '/' . $this->version, 'config/(?P<id>[a-z0-9-]+)',
+            array(
+                'methods' => 'DELETE',
+                'callback' => array($this, 'deleteConfig'),
+                'args' => array(
+                    'id' => array(
+                        'required' => true,
+                        'validate_callback' => function ($param) {
+                            return $this->validate('delete/id', $param);
+                        },
+                    ),
+                ),
+                'permissions_callback' => array($this, 'api_permissions'),
+            )
+        );
 
-  /**
-	 * Save API theme
-	 *
-	 * @since    5.0.2
-	 */
-  public function saveTheme( WP_REST_Request $request )
-  {
-    $options = $this->options->read();
-    $themeId = $request->get_param( 'id' );
+        register_rest_route($this->plugin_name . '/' . $this->version, 'theme/(?P<id>[a-z0-9-]+)',
+            array(
+                'methods' => 'DELETE',
+                'callback' => array($this, 'deleteTheme'),
+                'args' => array(
+                    'id' => array(
+                        'required' => true,
+                        'validate_callback' => function ($param) {
+                            return $this->validate('delete/id', $param);
+                        },
+                    ),
+                ),
+                'permissions_callback' => array($this, 'api_permissions'),
+            )
+        );
 
-    $options['themes'] = array_merge($options['themes'], array(
-      $themeId => array(
-        'tokens' => $request->get_param( 'tokens' ),
-        'fonts' => $request->get_param( 'fonts' )
-      )
-    ));
+        register_rest_route($this->plugin_name . '/' . $this->version, 'template/(?P<id>[a-z0-9-]+)',
+            array(
+                'methods' => 'DELETE',
+                'callback' => array($this, 'deleteTemplate'),
+                'args' => array(
+                    'id' => array(
+                        'required' => true,
+                        'validate_callback' => function ($param) {
+                            return $this->validate('delete/id', $param);
+                        },
+                    ),
+                ),
+                'permissions_callback' => array($this, 'api_permissions'),
+            )
+        );
 
-    $this->options->update($options);
-    $options = $this->options->read();
+        register_rest_route($this->plugin_name . '/' . $this->version, 'settings',
+            array(
+                'methods' => 'POST',
+                'callback' => array($this, 'saveSettings'),
+                'args' => array(
+                    'source' => array(
+                        'required' => true,
+                        'validate_callback' => function ($param) {
+                            return $this->validate('settings/source', $param);
+                        },
+                    ),
+                ),
+                'permissions_callback' => array($this, 'api_permissions'),
+            )
+        );
 
-    return rest_ensure_response( $options['themes'][$themeId] );
-  }
+        register_rest_route($this->plugin_name . '/' . $this->version, 'shows',
+            array(
+                'methods' => 'GET',
+                'callback' => array($this, 'shows'),
+                'permissions_callback' => array($this, 'api_permissions'),
+            )
+        );
+    }
 
-  /**
-	 * Save API template
-	 *
-	 * @since    5.0.2
-	 */
-  public function saveTemplate( WP_REST_Request $request )
-  {
-    $options = $this->options->read();
-    $templateId = $request->get_param( 'id' );
+    /**
+     * Validates the API payload
+     *
+     * @since    5.0.2
+     */
+    public function validate($type, $value)
+    {
+        switch ($type) {
+            case 'config/subscribe-button':
+                return
+                array_key_exists('feed', $value) &&
+                array_key_exists('clients', $value);
 
-    $options['templates'] = array_merge($options['templates'], array(
-      $templateId => $request->get_param( 'template' )
-    ));
+            case 'config/share':
+                return
+                array_key_exists('channels', $value) &&
+                array_key_exists('outlet', $value) &&
+                array_key_exists('sharePlaytime', $value);
 
-    $this->options->update($options);
-    $options = $this->options->read();
+            case 'theme/tokens':
+                return
+                array_key_exists('brand', $value) &&
+                array_key_exists('brandDark', $value) &&
+                array_key_exists('brandDarkest', $value) &&
+                array_key_exists('brandLightest', $value) &&
+                array_key_exists('shadeDark', $value) &&
+                array_key_exists('shadeBase', $value) &&
+                array_key_exists('contrast', $value) &&
+                array_key_exists('alt', $value);
 
-    return rest_ensure_response( $options['templates'][$templateId] );
-  }
+            case 'theme/fonts':
+                return
+                array_key_exists('ci', $value) &&
+                array_key_exists('regular', $value) &&
+                array_key_exists('bold', $value);
 
-  /**
-	 * Delete API config
-	 *
-	 * @since    5.0.2
-	 */
-  public function deleteConfig( WP_REST_Request $request )
-  {
-    $options = $this->options->read();
-    $configId = $request->get_param( 'id' );
+            case 'delete/id':
+                return $value !== 'default';
 
-    unset($options['configs'][$configId]);
+            case 'settings/source':
+                return $value === 'local' || $value === 'cdn';
 
-    $this->options->update($options);
-    return rest_ensure_response( true );
-  }
+            default:
+                return false;
+        }
+    }
 
-  /**
-	 * Delete API theme
-	 *
-	 * @since    5.0.2
-	 */
-  public function deleteTheme( WP_REST_Request $request )
-  {
-    $options = $this->options->read();
-    $themeId = $request->get_param( 'id' );
+    /**
+     * Check API permissions
+     *
+     * @since    5.0.2
+     */
+    public function api_permissions()
+    {
+        return current_user_can('manage_options');
+    }
 
-    unset($options['themes'][$themeId]);
+    /**
+     * Save API config
+     *
+     * @since    5.0.2
+     */
+    public function saveConfig(WP_REST_Request $request)
+    {
+        $options = $this->options->read();
+        $configId = $request->get_param('id');
 
-    $this->options->update($options);
-    return rest_ensure_response( true );
-  }
+        $options['configs'] = array_merge($options['configs'], array(
+            $configId => array(
+                'activeTab' => $request->get_param('activeTab'),
+                'subscribe-button' => $request->get_param('subscribe-button'),
+                'share' => $request->get_param('share'),
+            ),
+        ));
 
-  /**
-	 * Delete API template
-	 *
-	 * @since    5.0.2
-	 */
-  public function deleteTemplate( WP_REST_Request $request )
-  {
-    $options = $this->options->read();
-    $templateId = $request->get_param( 'id' );
+        $this->options->update($options);
+        $options = $this->options->read();
 
-    unset($options['templates'][$templateId]);
+        return rest_ensure_response($options['configs'][$configId]);
+    }
 
-    $this->options->update($options);
-    return rest_ensure_response( true );
-  }
+    /**
+     * Save API theme
+     *
+     * @since    5.0.2
+     */
+    public function saveTheme(WP_REST_Request $request)
+    {
+        $options = $this->options->read();
+        $themeId = $request->get_param('id');
 
-  /**
-	 * Save settings
-	 *
-	 * @since    5.0.2
-	 */
-  public function saveSettings( WP_REST_Request $request )
-  {
-    $options = $this->options->read();
-    $source = $request->get_param( 'source' );
-    $enclosure = $request->get_param( 'enclosure' );
-    $legacy = $request->get_param( 'legacy' );
-    $defaults = $request->get_param( 'defaults' );
+        $options['themes'] = array_merge($options['themes'], array(
+            $themeId => array(
+                'tokens' => $request->get_param('tokens'),
+                'fonts' => $request->get_param('fonts'),
+            ),
+        ));
 
-    $options['settings']['source']['selected'] = $source;
-    $options['settings']['enclosure'] = $enclosure;
-    $options['settings']['legacy'] = $legacy;
-    $options['settings']['defaults'] = $defaults;
+        $this->options->update($options);
+        $options = $this->options->read();
 
-    $this->options->update($options);
-    $options = $this->options->read();
+        return rest_ensure_response($options['themes'][$themeId]);
+    }
 
-    return rest_ensure_response( $options['settings'] );
-  }
+    /**
+     * Save API template
+     *
+     * @since    5.0.2
+     */
+    public function saveTemplate(WP_REST_Request $request)
+    {
+        $options = $this->options->read();
+        $templateId = $request->get_param('id');
 
-  /**
-	 * Load initial data
-	 *
-	 * @since    5.0.2
-	 */
-  public function bootstrap()
-  {
-    $data = $this->options->read();
-    $data['presets'] = $this->options->presets();
+        $options['templates'] = array_merge($options['templates'], array(
+            $templateId => $request->get_param('template'),
+        ));
 
-    return rest_ensure_response( $data );
-  }
+        $this->options->update($options);
+        $options = $this->options->read();
+
+        return rest_ensure_response($options['templates'][$templateId]);
+    }
+
+    /**
+     * Delete API config
+     *
+     * @since    5.0.2
+     */
+    public function deleteConfig(WP_REST_Request $request)
+    {
+        $options = $this->options->read();
+        $configId = $request->get_param('id');
+
+        unset($options['configs'][$configId]);
+
+        $this->options->update($options);
+        return rest_ensure_response(true);
+    }
+
+    /**
+     * Delete API theme
+     *
+     * @since    5.0.2
+     */
+    public function deleteTheme(WP_REST_Request $request)
+    {
+        $options = $this->options->read();
+        $themeId = $request->get_param('id');
+
+        unset($options['themes'][$themeId]);
+
+        $this->options->update($options);
+        return rest_ensure_response(true);
+    }
+
+    /**
+     * Delete API template
+     *
+     * @since    5.0.2
+     */
+    public function deleteTemplate(WP_REST_Request $request)
+    {
+        $options = $this->options->read();
+        $templateId = $request->get_param('id');
+
+        unset($options['templates'][$templateId]);
+
+        $this->options->update($options);
+        return rest_ensure_response(true);
+    }
+
+    /**
+     * Save settings
+     *
+     * @since    5.0.2
+     */
+    public function saveSettings(WP_REST_Request $request)
+    {
+        $options = $this->options->read();
+        $source = $request->get_param('source');
+        $enclosure = $request->get_param('enclosure');
+        $legacy = $request->get_param('legacy');
+        $defaults = $request->get_param('defaults');
+
+        $options['settings']['source']['selected'] = $source;
+        $options['settings']['enclosure'] = $enclosure;
+        $options['settings']['legacy'] = $legacy;
+        $options['settings']['defaults'] = $defaults;
+
+        $this->options->update($options);
+        $options = $this->options->read();
+
+        return rest_ensure_response($options['settings']);
+    }
+
+    /**
+     * Load initial data
+     *
+     * @since    5.0.2
+     */
+    public function bootstrap()
+    {
+        $data = $this->options->read();
+        $data['presets'] = $this->options->presets();
+
+        return rest_ensure_response($data);
+    }
+
+    /**
+     * List all available shows
+     *
+     * @since 5.1.2
+     */
+    public function shows()
+    {
+        $result = get_terms('shows', array(
+          'hide_empty' => 0,
+          'fields' => 'all',
+        ));
+
+        return rest_ensure_response($result);
+    }
 }

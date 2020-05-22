@@ -24,7 +24,7 @@ class Settings extends Component {
     this.setState({
       configs: keys(data.configs).map(data => ({ value: data, label: data })),
       themes: keys(data.themes).map(data => ({ value: data, label: data })),
-      templates: keys(data.templates).map(data => ({ value: data, label: data }))
+      templates: keys(data.templates).map(data => ({ value: data, label: data })),
     })
   }
 

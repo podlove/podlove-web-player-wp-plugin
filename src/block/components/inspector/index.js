@@ -2,6 +2,7 @@ import Custom from './custom'
 import Post from './post'
 import Publisher from './publisher'
 import Settings from './settings'
+import Shows from './shows'
 import { type } from '../utils'
 
 const { compose } = wp.compose
@@ -26,6 +27,7 @@ class Inspector extends Component {
           <Fragment>
             <Settings {...this.props} />
             <Publisher {...this.props} />
+            <Shows {...this.props} />
           </Fragment>
         )
 
