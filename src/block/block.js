@@ -41,6 +41,10 @@ registerBlockType('podlove-web-player/shortcode', {
       type: 'string',
       default: 'default',
     },
+
+    show: {
+      type: 'string'
+    },
   },
 
   edit: props => (

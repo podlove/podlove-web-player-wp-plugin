@@ -105,6 +105,11 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.2.0 =
+
+- Extract defaults to fix incorrect persisted paths
+- Add the ability to use Podlove Publisher shows to display related episodes
+
 = 5.1.2 =
 
 - Fix a bug that causes a warning on pages
