@@ -73,6 +73,7 @@ Or in case you have our [Podlove Publisher](https://wordpress.org/plugins/podlov
   theme="default"
   config="default"
   publisher="1234"
+  show="my-awesome-show"
 ]
 
 #### 2 Using Wordpress Gutenberg Blocks
@@ -104,6 +105,10 @@ If you encounter any issue with the plugin or want to request a specific feature
 4. Gutenberg Block
 
 == Changelog ==
+
+= 5.2.1 =
+
+- Update Podlove Web Player package to address network related errors
 
 = 5.2.0 =
 
