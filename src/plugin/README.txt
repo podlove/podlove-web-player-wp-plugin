@@ -54,6 +54,7 @@ Use a simple shortcode in your posts and pages, and the Podlove Web Player will 
   poster="/files/path/to/poster.png"
   chapters="/files/path/to/chapters.json"
   transcripts="/files/path/to/transcripts.json"
+  playlist="/files/path/to/playlist.json"
   src="http://mysite.com/mymedia.mp3"
   size="1337"
   duration="03:33"
@@ -105,6 +106,11 @@ If you encounter any issue with the plugin or want to request a specific feature
 4. Gutenberg Block
 
 == Changelog ==
+
+= 5.2.2 =
+
+- Update Podlove Web Player package to prevent unitential preload
+- Add shortcode attribute for playlists
 
 = 5.2.1 =
 
