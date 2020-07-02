@@ -30,8 +30,8 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'PODLOVE_WEB_PLAYER_VERSION', '5.2.2' );
-define( 'PODLOVE_WEB_PLAYER_PATH', plugins_url( basename( __DIR__ ) ) );
+define( 'PODLOVE_WEB_PLAYER_VERSION', '5.2.3' );
+define( 'PODLOVE_WEB_PLAYER_PATH', plugins_url( '.', __FILE__ ) );
 
 /**
  * The code that runs during plugin activation.

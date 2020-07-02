@@ -157,6 +157,16 @@ export default {
       commit('updateFontWeight', { id: getters.id, font, value })
     },
 
+    updateFontName({ getters, commit }, { value }) {
+      if(!getters.isActive) {
+        return
+      }
+
+      const font = get(getters.fonts, ['selected'], 'ci')
+
+      commit('updateFontName', { id: getters.id, font, value })
+    },
+
     addFontFamily({ getters, commit }) {
       if(!getters.isActive) {
         return
@@ -286,6 +296,10 @@ export default {
 
     updateFontWeight(state, { id, font, value }) {
       set(state, ['themes', id, 'fonts', font, 'weight'], value)
+    },
+
+    updateFontName(state, { id, font, value }) {
+      set(state, ['themes', id, 'fonts', font, 'name'], value)
     },
 
     stageFontFamily(state, { font, value }) {

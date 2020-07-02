@@ -95,6 +95,7 @@ class Podlove_Web_Player_i18n {
         'color-contrast' => static::i18n( 'Contrast' ),
         'color-alt' => static::i18n( 'Alt' ),
         'fonts' => static::i18n( 'Fonts' ),
+        'font-name' => static::i18n( 'Font Name' ),
         'font-sources' => static::i18n( 'Font Sources' ),
         'font-add' => static::i18n( 'Add Source' ),
         'font-weight' => static::i18n( 'Font Weight' ),
