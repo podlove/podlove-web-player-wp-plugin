@@ -12,7 +12,11 @@
                 color-format="hex"
                 @change="updateToken({ token: 'brand', color: $event })"
               ></el-color-picker>
-              <el-input :value="color('brand')" size="small" @input="updateToken({ token: 'brand', color: $event })"></el-input>
+              <el-input
+                :value="color('brand')"
+                size="small"
+                @input="updateToken({ token: 'brand', color: $event })"
+              ></el-input>
             </div>
           </form-element>
 
@@ -25,7 +29,11 @@
                 color-format="hex"
                 @change="updateToken({ token: 'brandDark', color: $event })"
               ></el-color-picker>
-              <el-input :value="color('brandDark')" size="small" @input="updateToken({ token: 'brandDark', color: $event })"></el-input>
+              <el-input
+                :value="color('brandDark')"
+                size="small"
+                @input="updateToken({ token: 'brandDark', color: $event })"
+              ></el-input>
             </div>
           </form-element>
 
@@ -38,7 +46,11 @@
                 color-format="hex"
                 @change="updateToken({ token: 'brandDarkest', color: $event })"
               ></el-color-picker>
-              <el-input :value="color('brandDarkest')" size="small" @input="updateToken({ token: 'brandDarkest', color: $event })"></el-input>
+              <el-input
+                :value="color('brandDarkest')"
+                size="small"
+                @input="updateToken({ token: 'brandDarkest', color: $event })"
+              ></el-input>
             </div>
           </form-element>
 
@@ -51,7 +63,11 @@
                 color-format="hex"
                 @change="updateToken({ token: 'brandLightest', color: $event })"
               ></el-color-picker>
-              <el-input :value="color('brandLightest')" size="small" @input="updateToken({ token: 'brandLightest', color: $event })"></el-input>
+              <el-input
+                :value="color('brandLightest')"
+                size="small"
+                @input="updateToken({ token: 'brandLightest', color: $event })"
+              ></el-input>
             </div>
           </form-element>
         </div>
@@ -65,7 +81,11 @@
                 color-format="hex"
                 @change="updateToken({ token: 'shadeBase', color: $event })"
               ></el-color-picker>
-              <el-input :value="color('shadeBase')" size="small" @input="updateToken({ token: 'shadeBase', color: $event })"></el-input>
+              <el-input
+                :value="color('shadeBase')"
+                size="small"
+                @input="updateToken({ token: 'shadeBase', color: $event })"
+              ></el-input>
             </div>
           </form-element>
 
@@ -78,7 +98,11 @@
                 color-format="hex"
                 @change="updateToken({ token: 'shadeDark', color: $event })"
               ></el-color-picker>
-              <el-input :value="color('shadeDark')" size="small" @input="updateToken({ token: 'shadeDark', color: $event })"></el-input>
+              <el-input
+                :value="color('shadeDark')"
+                size="small"
+                @input="updateToken({ token: 'shadeDark', color: $event })"
+              ></el-input>
             </div>
           </form-element>
 
@@ -91,7 +115,11 @@
                 color-format="hex"
                 @change="updateToken({ token: 'contrast', color: $event })"
               ></el-color-picker>
-              <el-input :value="color('contrast')" size="small" @input="updateToken({ token: 'contrast', color: $event })"></el-input>
+              <el-input
+                :value="color('contrast')"
+                size="small"
+                @input="updateToken({ token: 'contrast', color: $event })"
+              ></el-input>
             </div>
           </form-element>
 
@@ -104,7 +132,11 @@
                 color-format="hex"
                 @change="updateToken({ token: 'alt', color: $event })"
               ></el-color-picker>
-              <el-input :value="color('alt')" size="small" @input="updateToken({ token: 'alt', color: $event })"></el-input>
+              <el-input
+                :value="color('alt')"
+                size="small"
+                @input="updateToken({ token: 'alt', color: $event })"
+              ></el-input>
             </div>
           </form-element>
         </div>
@@ -117,6 +149,13 @@
           <el-option v-for="item in clients" :key="item" :label="item" :value="item"></el-option>
         </el-select>
       </form-element>
+
+      <form-element full :label="$i18n(['theme', 'font-name'])" class="mb-4">
+        <div class="input">
+          <el-input :value="fontName" size="small" @input="updateFontName({ value: $event })"></el-input>
+        </div>
+      </form-element>
+
       <div class="mb-4">
         <form-element :label="$i18n(['theme', 'font-sources'])" full>
           <div class="font-input mb-2">
@@ -134,23 +173,17 @@
           </div>
 
           <div class="sources">
-            <el-tag v-for="element in fontSources" :key="element" closable @close="removeFontSrc({ value: element })">
+            <el-tag v-for="element in fontSources" class="truncate pr-4" :key="element" closable @close="removeFontSrc({ value: element })">
               {{ element }}
             </el-tag>
           </div>
         </form-element>
       </div>
 
-      <form-element :label="$i18n(['theme', 'font-weight'])" class="font-input mb-2">
-        <el-input-number
-          :value="fontWeight"
-          size="small"
-          type="number"
-          :step="100"
-          :min="100"
-          :max="900"
-          @input="updateFontWeight({ value: $event })"
-        ></el-input-number>
+      <form-element :label="$i18n(['theme', 'font-weight'])" class="mb-4" full>
+        <div class="input">
+          <el-input :value="fontWeight" size="small" @input="updateFontWeight({ value: $event })"></el-input>
+        </div>
       </form-element>
 
       <form-element :label="$i18n(['theme', 'font-family'])" full>
@@ -166,11 +199,7 @@
           </el-input>
         </div>
 
-        <draggable
-          :list="fontFamily"
-          @change="updateFontFamily"
-          @remove="removeFontFamily"
-        />
+        <draggable :list="fontFamily" @change="updateFontFamily" @remove="removeFontFamily" />
       </form-element>
     </card>
   </div>
@@ -205,6 +234,10 @@ export default {
       return get(this.current, 'tokens', {})
     },
 
+    fontName() {
+      return get(this.current, ['fonts', this.selected, 'name'], '')
+    },
+
     fontSources() {
       return get(this.current, ['fonts', this.selected, 'src'], 300)
     },
@@ -228,6 +261,7 @@ export default {
     ...mapActions('themes', [
       'updateToken',
       'stageFontSource',
+      'updateFontName',
       'updateFontSource',
       'removeFontSrc',
       'updateFontWeight',
@@ -244,7 +278,7 @@ export default {
 
     updateFont(element) {
       this.updateFontFamily({ value: element })
-    }
+    },
   },
 }
 </script>
