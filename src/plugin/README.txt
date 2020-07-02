@@ -107,6 +107,12 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.2.3 =
+
+- Update Podlove Web Player package to fix font names
+- Add ability to create fonts in themes with names
+- Fix multi site support directory name
+
 = 5.2.2 =
 
 - Update Podlove Web Player package to prevent unitential preload
