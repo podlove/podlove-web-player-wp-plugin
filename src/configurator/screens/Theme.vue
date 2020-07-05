@@ -163,13 +163,13 @@
               :placeholder="$i18n(['theme', 'add-source'])"
               size="small"
               @keyup.enter.native="updateFontSource"
-              :class="{ invalid: fonts.ci.error }"
-              :value="fonts.ci.src"
+              :class="{ invalid: fonts[selected].error }"
+              :value="fonts[selected].src"
               @input="stageFontSource({ value: $event })"
             >
               <el-button slot="append" icon="el-icon-plus" @click="updateFontSource"></el-button>
             </el-input>
-            <div class="mt-1 mr-0 mb-2 ml-0 text-sm text-red-600" v-if="fonts.ci.error">{{ fonts.ci.error }}</div>
+            <div class="mt-1 mr-0 mb-2 ml-0 text-sm text-red-600" v-if="fonts[selected].error">{{ fonts[selected].error }}</div>
           </div>
 
           <div class="sources">
@@ -192,7 +192,7 @@
             :placeholder="$i18n(['theme', 'font-add'])"
             size="small"
             @keyup.enter.native="addFontFamily"
-            :value="fonts.ci.family"
+            :value="fonts[selected].family"
             @input="stageFontFamily({ value: $event })"
           >
             <el-button slot="append" icon="el-icon-plus" @click="addFontFamily"></el-button>

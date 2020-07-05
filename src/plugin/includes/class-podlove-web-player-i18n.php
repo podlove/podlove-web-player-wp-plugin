@@ -97,7 +97,7 @@ class Podlove_Web_Player_i18n {
         'fonts' => static::i18n( 'Fonts' ),
         'font-name' => static::i18n( 'Font Name' ),
         'font-sources' => static::i18n( 'Font Sources' ),
-        'font-add' => static::i18n( 'Add Source' ),
+        'font-add' => static::i18n( 'Add Font' ),
         'font-weight' => static::i18n( 'Font Weight' ),
         'font-family' => static::i18n( 'Font Family' ),
 
