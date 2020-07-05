@@ -107,6 +107,10 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.2.5 =
+
+- Fixes issue with theme font editing
+
 = 5.2.4 =
 
 - Update Podlove Web Player package
