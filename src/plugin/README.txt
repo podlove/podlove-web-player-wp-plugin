@@ -107,6 +107,9 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.2.6 =
+
+- Fixes issue in the configurator on systems running on subdomains
 = 5.2.5 =
 
 - Fixes issue with theme font editing
