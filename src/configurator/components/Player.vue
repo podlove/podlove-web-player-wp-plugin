@@ -79,7 +79,7 @@ export default {
         .podlovePlayer(this.$refs.player, this.episode, {
           ...this.config,
           theme: this.theme,
-          base: '/wp-content/plugins/podlove-web-player/web-player/',
+          base: window.PODLOVE_WEB_PLAYER.base + '/web-player/',
           version: 5,
           playlist: this.playlist,
         })
