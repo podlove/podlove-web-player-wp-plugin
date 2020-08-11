@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import { get } from 'lodash'
+import { get, uniq } from 'lodash'
 import { mapGetters, mapActions } from 'vuex'
 import { Card, FormElement, Draggable } from '../components'
 
@@ -110,11 +110,11 @@ export default {
     ...mapGetters('configs', ['current', 'channels', 'clients', 'stagedClient', 'tabs']),
 
     selectedChannels() {
-      return get(this.current, 'share.channels', [])
+      return uniq(get(this.current, 'share.channels', []))
     },
 
     availableChannels() {
-      return (this.channels || []).filter(channel => !this.selectedChannels.includes(channel))
+      return uniq(this.channels || []).filter(channel => !this.selectedChannels.includes(channel))
     },
 
     sharePlaytime() {

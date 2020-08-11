@@ -182,6 +182,69 @@ class Podlove_Web_Player_Options
             'templates' => $this->readFolder($this->plugin_directory . 'defaults/templates/', 'html'),
         );
     }
+/**
+     * Creates a fallback to defaults
+     *
+     * @since 5.2.6
+     */
+    private function fallback($type, $payload)
+    {
+        switch ($type) {
+            case 'config':
+                return array(
+                    'activeTab' => isset($payload['activeTab']) ? $payload['activeTab'] : 'chapters',
+                    'subscribe-button' => array(
+                        'feed' => isset($payload['subscribe-button']['feed']) ? $payload['subscribe-button']['feed'] : null,
+                        'clients' => isset($payload['subscribe-button']['clients']) ? $payload['subscribe-button']['clients'] : []
+                    ),
+                    'share' => array(
+                        'channels' => isset($payload['share']['channels']) ? $payload['share']['channels'] : [],
+                        'outlet' => '/share.html',
+                        'sharePlaytime' => isset($payload['share']['sharePlaytime']) ? $payload['share']['sharePlaytime'] : true
+                    ),
+                );
+
+            case 'theme':
+              return array(
+                'tokens' => array(
+                  'brand' => isset($payload['tokens']['brand']) ? $payload['tokens']['brand'] : '#E64415',
+                  'brandDark' => isset($payload['tokens']['brandDark']) ? $payload['tokens']['brandDark'] : '#235973',
+                  'brandDarkest' => isset($payload['tokens']['brandDarkest']) ? $payload['tokens']['brandDarkest'] : '#1A3A4A',
+                  'brandLightest' => isset($payload['tokens']['brandLightest']) ? $payload['tokens']['brandLightest'] : '#E9F1F5',
+                  'shadeDark' => isset($payload['tokens']['shadeDark']) ? $payload['tokens']['shadeDark'] : '#807E7C',
+                  'shadeBase' => isset($payload['tokens']['shadeBase']) ? $payload['tokens']['shadeBase'] : '#807E7C',
+                  'contrast' => isset($payload['tokens']['contrast']) ? $payload['tokens']['contrast'] : '#000',
+                  'alt' => isset($payload['tokens']['alt']) ? $payload['tokens']['alt'] : '#fff'
+                ),
+                'fonts' => array(
+                  'ci' => array(
+                    'name' =>  isset($payload['fonts']['ci']['name']) ? $payload['fonts']['ci']['name'] : 'ci',
+                    'family' =>  isset($payload['fonts']['ci']['family']) ? $payload['fonts']['ci']['family'] : [],
+                    'src' =>  isset($payload['fonts']['ci']['src']) ? $payload['fonts']['ci']['src'] : [],
+                    'weight' =>  isset($payload['fonts']['ci']['weight']) ? $payload['fonts']['ci']['weight'] : 800
+                  ),
+                  'bold' => array(
+                    'name' =>  isset($payload['fonts']['bold']['name']) ? $payload['fonts']['bold']['name'] : 'bold',
+                    'family' =>  isset($payload['fonts']['bold']['family']) ? $payload['fonts']['bold']['family'] : [],
+                    'src' =>  isset($payload['fonts']['bold']['src']) ? $payload['fonts']['bold']['src'] : [],
+                    'weight' =>  isset($payload['fonts']['bold']['weight']) ? $payload['fonts']['bold']['weight'] : 700
+                  ),
+                  'regular' => array(
+                    'name' =>  isset($payload['fonts']['regular']['name']) ? $payload['fonts']['regular']['name'] : 'regular',
+                    'family' =>  isset($payload['fonts']['regular']['family']) ? $payload['fonts']['regular']['family'] : [],
+                    'src' =>  isset($payload['fonts']['regular']['src']) ? $payload['fonts']['regular']['src'] : [],
+                    'weight' =>  isset($payload['fonts']['regular']['weight']) ? $payload['fonts']['regular']['weight'] : 300
+                  )
+                )
+              );
+
+            case 'template':
+              return isset($payload) ? $payload : '';
+
+            default:
+                return array();
+        }
+    }
 
     /**
      * Reads the plugin options
@@ -198,7 +261,22 @@ class Podlove_Web_Player_Options
 
         $settings = array_replace_recursive($options ?? array(), $this->config);
 
-        return array_replace_recursive($this->defaults, $settings);
+        // configs
+        foreach($settings['configs'] as $key => $value) {
+          $settings['configs'][$key] = $this->fallback('config', $value);
+        }
+
+        // themes
+        foreach($settings['themes'] as $key => $value) {
+          $settings['themes'][$key] = $this->fallback('theme', $value);
+        }
+
+        // templates
+        foreach($settings['templates'] as $key => $value) {
+          $settings['templates'][$key] = $this->fallback('template', $value);
+        }
+
+        return $settings;
     }
 
     /**
