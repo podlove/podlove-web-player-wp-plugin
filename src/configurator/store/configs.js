@@ -1,5 +1,5 @@
 import podcastClients from '@podlove/clients'
-import { get, set, pick, unset, cloneDeep } from 'lodash'
+import { get, set, pick, unset, cloneDeep, uniq } from 'lodash'
 
 import { request } from '../lib'
 
@@ -252,7 +252,7 @@ export default {
     },
 
     updateChannels(state, { id, channels }) {
-      set(state, ['configs', id, 'share', 'channels'], channels)
+      set(state, ['configs', id, 'share', 'channels'], uniq(channels))
     },
 
     updateSharePlaytime(state, { id, sharePlaytime }) {
