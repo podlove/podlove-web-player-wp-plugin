@@ -107,6 +107,10 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.2.9 =
+
+- Update Podlove Web Player to v5.2.0
+
 = 5.2.8 =
 
 - Rollback changes
