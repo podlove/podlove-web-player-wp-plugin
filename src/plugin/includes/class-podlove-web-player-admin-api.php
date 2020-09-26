@@ -76,7 +76,7 @@ class Podlove_Web_Player_Admin_API
             array(
                 'methods' => 'GET',
                 'callback' => array($this, 'bootstrap'),
-                'permissions_callback' => array($this, 'api_permissions'),
+                'permission_callback' => array($this, 'api_permissions'),
             )
         );
 
@@ -101,7 +101,7 @@ class Podlove_Web_Player_Admin_API
                         },
                     ),
                 ),
-                'permissions_callback' => array($this, 'api_permissions'),
+                'permission_callback' => array($this, 'api_permissions'),
             )
         );
 
@@ -126,7 +126,7 @@ class Podlove_Web_Player_Admin_API
                         },
                     ),
                 ),
-                'permissions_callback' => array($this, 'api_permissions'),
+                'permission_callback' => array($this, 'api_permissions'),
             )
         );
 
@@ -142,7 +142,7 @@ class Podlove_Web_Player_Admin_API
                         'required' => true,
                     ),
                 ),
-                'permissions_callback' => array($this, 'api_permissions'),
+                'permission_callback' => array($this, 'api_permissions'),
             )
         );
 
@@ -158,7 +158,7 @@ class Podlove_Web_Player_Admin_API
                         },
                     ),
                 ),
-                'permissions_callback' => array($this, 'api_permissions'),
+                'permission_callback' => array($this, 'api_permissions'),
             )
         );
 
@@ -174,7 +174,7 @@ class Podlove_Web_Player_Admin_API
                         },
                     ),
                 ),
-                'permissions_callback' => array($this, 'api_permissions'),
+                'permission_callback' => array($this, 'api_permissions'),
             )
         );
 
@@ -190,7 +190,7 @@ class Podlove_Web_Player_Admin_API
                         },
                     ),
                 ),
-                'permissions_callback' => array($this, 'api_permissions'),
+                'permission_callback' => array($this, 'api_permissions'),
             )
         );
 
@@ -206,7 +206,7 @@ class Podlove_Web_Player_Admin_API
                         },
                     ),
                 ),
-                'permissions_callback' => array($this, 'api_permissions'),
+                'permission_callback' => array($this, 'api_permissions'),
             )
         );
 
@@ -214,7 +214,7 @@ class Podlove_Web_Player_Admin_API
             array(
                 'methods' => 'GET',
                 'callback' => array($this, 'shows'),
-                'permissions_callback' => array($this, 'api_permissions'),
+                'permission_callback' => array($this, 'api_permissions'),
             )
         );
     }
