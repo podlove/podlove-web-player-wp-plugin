@@ -107,7 +107,12 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
-= 5.2.9 =
+= 5.3.0 =
+
+- Fix API warnings
+- Update Podlove Web Player to v5.3.0
+
+= 5.3.0 =
 
 - Update Podlove Web Player to v5.2.0
 
