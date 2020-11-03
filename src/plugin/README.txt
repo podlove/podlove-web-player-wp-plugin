@@ -107,12 +107,16 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.3.1 =
+
+- Fix API requests to make configurator working again
+
 = 5.3.0 =
 
 - Fix API warnings
 - Update Podlove Web Player to v5.3.0
 
-= 5.3.0 =
+= 5.2.9 =
 
 - Update Podlove Web Player to v5.2.0
 

@@ -5,12 +5,17 @@ import { get } from "lodash";
 import { Loading, Notification } from "element-ui";
 
 const loading = text => Loading.service({ fullscreen: true, text });
+const nonce = get(PODLOVE_WEB_PLAYER, 'nonce')
 
 export const read = (url, messages) => {
   const initializing = loading(messages.loading);
 
   return Vue.http
-    .get(url)
+    .get(url, {
+      headers: {
+        'X-WP-Nonce': nonce
+      }
+    })
     .then(({ data }) => data)
     .catch(async err => {
       const error = err.json ? await err.json() : {};
@@ -32,7 +37,11 @@ export const create = (url, payload, messages) => {
   const saving = loading(messages.loading);
 
   return Vue.http
-    .post(url, payload)
+    .post(url, payload, {
+      headers: {
+        'X-WP-Nonce': nonce
+      }
+    })
     .then(({ data }) => data)
     .catch(async err => {
       const error = err.json ? await err.json() : {};
@@ -53,7 +62,11 @@ export const remove = (url, messages) => {
   const removing = loading(messages.loading);
 
   return Vue.http
-    .delete(url)
+    .delete(url, {
+      headers: {
+        'X-WP-Nonce': nonce
+      }
+    })
     .then(({ data }) => data)
     .catch(async err => {
       const error = err.json ? await err.json() : {};

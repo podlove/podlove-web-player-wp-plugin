@@ -80,7 +80,8 @@ class Podlove_Web_Player_Admin {
     wp_localize_script( $this->plugin_name . '-configurator', 'PODLOVE_WEB_PLAYER', array(
         'i18n' => Podlove_Web_Player_i18n::translations(),
         'api' => $this->api->routes(),
-        'base' => PODLOVE_WEB_PLAYER_PATH
+        'base' => PODLOVE_WEB_PLAYER_PATH,
+        'nonce' => wp_create_nonce('wp_rest')
       )
     );
   }

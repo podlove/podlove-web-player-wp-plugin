@@ -273,7 +273,7 @@ class Podlove_Web_Player_Admin_API
      */
     public function api_permissions()
     {
-        return current_user_can('manage_options');
+      return current_user_can('manage_options');
     }
 
     /**
