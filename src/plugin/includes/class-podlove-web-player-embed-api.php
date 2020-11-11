@@ -78,6 +78,7 @@ class Podlove_Web_Player_Embed_API
             array(
                 'methods' => 'GET',
                 'callback' => array($this, 'post'),
+                'permission_callback' => array($this, 'api_permissions'),
                 'args' => array(
                     'id' => array(
                         'required' => true,
@@ -93,6 +94,7 @@ class Podlove_Web_Player_Embed_API
                 array(
                     'methods' => 'GET',
                     'callback' => array($this, 'episode'),
+                    'permission_callback' => array($this, 'api_permissions'),
                     'args' => array(
                         'id' => array(
                             'required' => true,
@@ -107,6 +109,7 @@ class Podlove_Web_Player_Embed_API
                 array(
                     'methods' => 'GET',
                     'callback' => array($this, 'show'),
+                    'permission_callback' => array($this, 'api_permissions'),
                     'args' => array(
                         'slug' => array(
                             'required' => true,
@@ -122,6 +125,7 @@ class Podlove_Web_Player_Embed_API
           array(
               'methods' => 'GET',
               'callback' => array($this, 'config'),
+              'permission_callback' => array($this, 'api_permissions'),
               'args' => array(
                   'config' => array(
                       'required' => true,
@@ -278,4 +282,14 @@ class Podlove_Web_Player_Embed_API
 
         return rest_ensure_response(array_merge($config, $theme, $share));
     }
+  
+    /**
+     * Check API permissions
+     *
+     * @since    5.3.1
+     */
+    public function api_permissions()
+    {
+      return current_user_can('manage_options');
+    }  
 }
