@@ -1,9 +1,8 @@
 <template>
   <div class="theme">
     <card :title="$i18n(['theme', 'colors'])">
-      <div class="flex">
-        <div>
-          <form-element :label="$i18n(['theme', 'color-brand'])">
+      <div class="theme-colors w-1/2">
+          <form-element full :label="$i18n(['theme', 'color-brand'])">
             <div class="color-picker">
               <el-color-picker
                 :value="color('brand')"
@@ -18,10 +17,13 @@
                 @input="updateToken({ token: 'brand', color: $event })"
               ></el-input>
             </div>
+            <div class="color-description ml-4 flex items-center text-gray-600 italic w-1/2">
+              {{ $i18n(['theme', 'color-brand-description']) }}
+            </div>
           </form-element>
 
-          <form-element :label="$i18n(['theme', 'color-brand-dark'])">
-            <div class="color-picker">
+          <form-element full :label="$i18n(['theme', 'color-brand-dark'])">
+            <div class="color-picker w-1/2">
               <el-color-picker
                 :value="color('brandDark')"
                 size="small"
@@ -35,10 +37,13 @@
                 @input="updateToken({ token: 'brandDark', color: $event })"
               ></el-input>
             </div>
+            <div class="color-description ml-4 flex items-center text-gray-600 italic w-1/2">
+              {{ $i18n(['theme', 'color-brand-dark-description']) }}
+            </div>
           </form-element>
 
-          <form-element :label="$i18n(['theme', 'color-brand-darkest'])">
-            <div class="color-picker">
+          <form-element full :label="$i18n(['theme', 'color-brand-darkest'])">
+            <div class="color-picker w-1/2">
               <el-color-picker
                 :value="color('brandDarkest')"
                 size="small"
@@ -52,10 +57,13 @@
                 @input="updateToken({ token: 'brandDarkest', color: $event })"
               ></el-input>
             </div>
+            <div class="color-description ml-4 flex items-center text-gray-600 italic w-1/2">
+              {{ $i18n(['theme', 'color-brand-darkest-description']) }}
+            </div>
           </form-element>
 
-          <form-element :label="$i18n(['theme', 'color-brand-lightest'])">
-            <div class="color-picker">
+          <form-element full :label="$i18n(['theme', 'color-brand-lightest'])">
+            <div class="color-picker w-1/2">
               <el-color-picker
                 :value="color('brandLightest')"
                 size="small"
@@ -69,11 +77,13 @@
                 @input="updateToken({ token: 'brandLightest', color: $event })"
               ></el-input>
             </div>
+            <div class="color-description ml-4 flex items-center text-gray-600 italic w-1/2">
+              {{ $i18n(['theme', 'color-brand-lightest-description']) }}
+            </div>
           </form-element>
-        </div>
-        <div>
-          <form-element :label="$i18n(['theme', 'color-shade-base'])">
-            <div class="color-picker">
+
+          <form-element full :label="$i18n(['theme', 'color-shade-base'])">
+            <div class="color-picker w-1/2">
               <el-color-picker
                 :value="color('shadeBase')"
                 size="small"
@@ -87,10 +97,13 @@
                 @input="updateToken({ token: 'shadeBase', color: $event })"
               ></el-input>
             </div>
+            <div class="color-description ml-4 flex items-center text-gray-600 italic w-1/2">
+              {{ $i18n(['theme', 'color-shade-base-description']) }}
+            </div>
           </form-element>
 
-          <form-element :label="$i18n(['theme', 'color-shade-dark'])">
-            <div class="color-picker">
+          <form-element full :label="$i18n(['theme', 'color-shade-dark'])">
+            <div class="color-picker w-1/2">
               <el-color-picker
                 :value="color('shadeDark')"
                 size="small"
@@ -104,10 +117,13 @@
                 @input="updateToken({ token: 'shadeDark', color: $event })"
               ></el-input>
             </div>
+            <div class="color-description ml-4 flex items-center text-gray-600 italic w-1/2">
+              {{ $i18n(['theme', 'color-shade-dark-description']) }}
+            </div>
           </form-element>
 
-          <form-element :label="$i18n(['theme', 'color-contrast'])">
-            <div class="color-picker">
+          <form-element full :label="$i18n(['theme', 'color-contrast'])">
+            <div class="color-picker w-1/2">
               <el-color-picker
                 :value="color('contrast')"
                 size="small"
@@ -121,10 +137,13 @@
                 @input="updateToken({ token: 'contrast', color: $event })"
               ></el-input>
             </div>
+            <div class="color-description ml-4 flex items-center text-gray-600 italic w-1/2">
+              {{ $i18n(['theme', 'color-contrast-description']) }}
+            </div>
           </form-element>
 
-          <form-element :label="$i18n(['theme', 'color-alt'])">
-            <div class="color-picker">
+          <form-element full :label="$i18n(['theme', 'color-alt'])">
+            <div class="color-picker w-1/2">
               <el-color-picker
                 :value="color('alt')"
                 size="small"
@@ -138,8 +157,10 @@
                 @input="updateToken({ token: 'alt', color: $event })"
               ></el-input>
             </div>
+            <div class="color-description ml-4 flex items-center text-gray-600 italic w-1/2">
+              {{ $i18n(['theme', 'color-alt-description']) }}
+            </div>
           </form-element>
-        </div>
       </div>
     </card>
 
@@ -285,6 +306,18 @@ export default {
 
 <style lang="scss">
 .theme {
+  .theme-colors {
+    .form-element {
+      .input {
+        display: flex;
+      }
+    }
+
+    .color-description {
+      height: 32px;
+    }
+  }
+
   .color-picker {
     display: flex;
     margin-bottom: 1em;
