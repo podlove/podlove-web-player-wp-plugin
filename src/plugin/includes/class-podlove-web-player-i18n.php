@@ -63,6 +63,27 @@ class Podlove_Web_Player_i18n {
         'presets' => array(
           'default' => static::i18n( 'Chapters tab default enabled;Share settings active;Subscribe Button not defined' ),
           'full-clients' => static::i18n( 'No default tab;Share settings active;Subscribe Buttone defined' )
+        ),
+
+        'related-episodes' => array(
+          'title' => static::i18n( 'Related Episodes' ),
+          'description' => static::i18n( 'Related episodes displayed in the player and automatically played ' ),
+          'source' => static::i18n( 'Source' ),
+          'sources' => array(
+            'disabled' => array(
+              'title' => static::i18n( 'Disabled' ),
+              'description' => static::i18n( 'Don\'t show related episodes' )
+            ),
+            'show' => array(
+              'title' => static::i18n( 'Show' ),
+              'label' => static::i18n( 'Select a Show' ),
+              'description' => static::i18n( 'Episodes from this show are listed in the related episodes' )
+            ),
+            'podcast' => array(
+              'title' => static::i18n( 'Podcast' ),
+              'description' => static::i18n( 'Latest 25 episodes are listed in the related episodes' )
+            )
+          )
         )
       ),
 

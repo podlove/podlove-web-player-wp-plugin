@@ -62,6 +62,7 @@ class Podlove_Web_Player_Embed_API
             'publisher' => esc_url_raw(rest_url($this->plugin_name . '/' . 'shortcode' . '/' . 'publisher')),
             'config' => esc_url_raw(rest_url($this->plugin_name . '/' . 'shortcode' . '/' . 'config')),
             'show' => esc_url_raw(rest_url($this->plugin_name . '/' . 'shortcode' . '/' . 'show')),
+            'podcast' => esc_url_raw(rest_url($this->plugin_name . '/' . 'shortcode' . '/' . 'podcast')),
         );
     }
 
@@ -83,7 +84,7 @@ class Podlove_Web_Player_Embed_API
                         'required' => true,
                     ),
                 ),
-                'permission_callback' => '__return_true'
+                'permission_callback' => '__return_true',
             )
         );
 
@@ -99,6 +100,7 @@ class Podlove_Web_Player_Embed_API
                             'required' => true,
                         ),
                     ),
+                    'permission_callback' => '__return_true',
                 )
             );
 
@@ -113,31 +115,38 @@ class Podlove_Web_Player_Embed_API
                             'required' => true,
                         ),
                     ),
-                    'permission_callback' => '__return_true'
+                    'permission_callback' => '__return_true',
+                )
+            );
+
+            register_rest_route(
+                $this->plugin_name . '/' . 'shortcode',
+                'podcast',
+                array(
+                    'methods' => 'GET',
+                    'callback' => array($this, 'podcast'),
+                    'permission_callback' => '__return_true',
                 )
             );
         }
 
         register_rest_route(
-          $this->plugin_name . '/' . 'shortcode',
-          'config/(?P<config>[a-z0-9-]+)/theme/(?P<theme>[a-z0-9-]+)/show/(?P<show>[a-z0-9-]+)',
-          array(
-              'methods' => 'GET',
-              'callback' => array($this, 'config'),
-              'args' => array(
-                  'config' => array(
-                      'required' => true,
-                  ),
-                  'theme' => array(
-                      'required' => true,
-                  ),
-                  'show' => array(
-                      'required' => true,
-                  ),
-              ),
-              'permission_callback' => '__return_true'
-          )
-      );
+            $this->plugin_name . '/' . 'shortcode',
+            'config/(?P<config>[a-z0-9-]+)/theme/(?P<theme>[a-z0-9-]+)/(?P<path>[\S]+)',
+            array(
+                'methods' => 'GET',
+                'callback' => array($this, 'config'),
+                'args' => array(
+                    'config' => array(
+                        'required' => true,
+                    ),
+                    'theme' => array(
+                        'required' => true,
+                    ),
+                ),
+                'permission_callback' => '__return_true',
+            )
+        );
     }
 
     /**
@@ -205,19 +214,11 @@ class Podlove_Web_Player_Embed_API
     {
         $slug = $request->get_param('slug');
 
-        if( $this->interoperability->isPublisherActive() === false) {
-          return rest_ensure_response(array());
+        if ($this->interoperability->isPublisherActive() === false) {
+            return rest_ensure_response(array());
         }
 
-        if ($slug === 'default') {
-            $args = array(
-              'post_type' => 'podcast',
-              'orderby' => array( 'post_date' => 'DESC' ),
-              'post_status' => 'publish',
-              'posts_per_page' => 20
-            );
-        } else {
-          $args = array(
+        $show = new WP_Query(array(
             'post_type' => 'podcast',
             'tax_query' => array(
                 array(
@@ -226,11 +227,39 @@ class Podlove_Web_Player_Embed_API
                     'terms' => $slug,
                 ),
             ),
-          );
+        ));
+
+        $posts = $show->get_posts();
+
+        $result = array();
+
+        foreach ($posts as &$post) {
+            $episode = \podlove_pwp5_attributes(array('post_id' => $post->ID));
+            $result[] = array(
+                'title' => $episode['title'],
+                'config' => $this->routes()['publisher'] . '/' . $post->ID,
+                'duration' => $episode['duration'],
+            );
         }
 
-        $show = new WP_Query($args);
-        $posts = $show->get_posts();
+        return rest_ensure_response($result);
+    }
+
+    public function podcast()
+    {
+        if ($this->interoperability->isPublisherActive() === false) {
+            return rest_ensure_response(array());
+        }
+
+        $podcast = new WP_Query(array(
+            'post_type' => 'podcast',
+            'orderby' => array('post_date' => 'DESC'),
+            'post_status' => 'publish',
+            'posts_per_page' => 25,
+        )
+        );
+
+        $posts = $podcast->get_posts();
 
         $result = array();
 
@@ -250,18 +279,19 @@ class Podlove_Web_Player_Embed_API
     {
         $configId = $request->get_param('config');
         $themeId = $request->get_param('theme');
-        $showId = $request->get_param('show');
 
         $options = $this->options->read();
         $config = $options['configs'][$configId];
 
         $config['version'] = 5;
+
         $theme = array(
             'theme' => $options['themes'][$themeId],
         );
 
         $sources = $options['settings']['source']['items'];
         $selected = $options['settings']['source']['selected'];
+        $relatedEpisodes = $config['related-episodes'];
 
         $share = array(
             'base' => $sources[$selected],
@@ -275,8 +305,13 @@ class Podlove_Web_Player_Embed_API
         $availableClients = $config['subscribe-button']['clients'];
         $config['subscribe-button'] = count($availableClients) > 0 ? $config['subscribe-button'] : null;
 
-        if (isset($showId)) {
-            $config['playlist'] = $this->routes()['show'] . '/' . $showId;
+        switch ($relatedEpisodes['source']) {
+            case 'podcast':
+                $config['playlist'] = $this->routes()['podcast'];
+                break;
+            case 'show':
+                $config['playlist'] = $this->routes()['show'] . '/' . $relatedEpisodes['value'];
+                break;
         }
 
         return rest_ensure_response(array_merge($config, $theme, $share));

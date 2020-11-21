@@ -80,6 +80,15 @@ export default {
     stagedClient(state) {
       return state.stagedClient
     },
+
+    relatedEpisodes(state, getters) {
+      const current = getters.current
+
+      return get(current, 'related-episodes', {
+        source: 'podcast',
+        value: 25
+      })
+    }
   },
 
   actions: {
@@ -207,6 +216,22 @@ export default {
       commit('setActiveTab', { id: getters.id, tab })
     },
 
+    updateSource({ getters, commit }, source) {
+      if (!getters.id) {
+        return
+      }
+
+      commit('updateSource', { id: getters.id, source })
+    },
+
+    updateSourceShow({ getters, commit }, show) {
+      if (!getters.id) {
+        return
+      }
+
+      commit('updateSourceShow', { id: getters.id, show })
+    },
+
     save({ getters, commit }) {
       if (!getters.id) {
         return
@@ -291,6 +316,15 @@ export default {
       unset(data, id)
 
       state.configs = data
+    },
+
+    updateSource(state, { id, source }) {
+      set(state, ['configs', id, 'related-episodes', 'source'], source)
+      set(state, ['configs', id, 'related-episodes', 'value'], null)
+    },
+
+    updateSourceShow(state, { id, show }) {
+      set(state, ['configs', id, 'related-episodes', 'value'], show)
     }
   },
 }

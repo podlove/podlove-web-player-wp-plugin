@@ -1,11 +1,13 @@
 import './inspector.scss'
-import { keys } from 'lodash'
+import { get } from 'lodash'
 
 const { Component } = wp.element
 const { compose } = wp.compose
 const { withSpokenMessages, SelectControl, PanelBody, PanelRow } = wp.components
 const { InspectorControls } = wp.blockEditor
 const { __ } = wp.i18n
+
+const nonce = get(window.PODLOVE_WEB_PLAYER, 'nonce')
 
 class Shows extends Component {
   constructor(props) {
@@ -17,8 +19,12 @@ class Shows extends Component {
   }
 
   async componentDidMount() {
-    const shows = await fetch(window.PODLOVE_WEB_PLAYER.api.shows).then(result => result.json())
-    console.log(shows)
+    const shows = await fetch(window.PODLOVE_WEB_PLAYER.api.shows, {
+      headers: {
+        'X-WP-Nonce': nonce
+      },
+    }).then(result => result.json())
+
     this.setState({
       shows: shows || []
     })
@@ -36,7 +42,7 @@ class Shows extends Component {
       return null
     }
 
-    const select = show => console.log(show) || setAttributes({ show })
+    const select = show => setAttributes({ show })
     const options = [{ id: null, name: __('Select', 'podlove-web-player') }]
       .concat(shows || [])
       .map(({ slug, name }) => ({ value: slug, label: name }))

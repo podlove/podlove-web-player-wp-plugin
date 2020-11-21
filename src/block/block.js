@@ -40,11 +40,7 @@ registerBlockType('podlove-web-player/shortcode', {
     template: {
       type: 'string',
       default: 'default',
-    },
-
-    show: {
-      type: 'string'
-    },
+    }
   },
 
   edit: props => (

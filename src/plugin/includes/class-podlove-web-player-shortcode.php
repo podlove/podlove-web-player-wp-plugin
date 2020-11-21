@@ -162,9 +162,6 @@ class Podlove_Web_Player_Shortcode
             'summary' => $attributes['summary'] ?? null,
             'duration' => $attributes['duration'] ?? null,
             'poster' => $attributes['poster'] ?? null,
-            'show' => array(
-                'title' => $attributes['show'] ?? null,
-            ),
             'chapters' => $chapters ?? array(),
             'transcripts' => $transcripts ?? array(),
             'audio' => $this->audio($attributes),
@@ -348,9 +345,8 @@ class Podlove_Web_Player_Shortcode
 
         $config = $attributes['config'] ?? $defaultConfig;
         $theme = $attributes['theme'] ?? $defaultTheme;
-        $show = $attributes['show'] ?? 'default';
 
-        return $this->routes['config'] . '/' . $config . '/' . 'theme' . '/' . $theme . '/' . 'show' . '/' . $show;
+        return $this->routes['config'] . '/' . $config . '/' . 'theme' . '/' . $theme;
     }
 
     /**
@@ -367,9 +363,7 @@ class Podlove_Web_Player_Shortcode
         $embed = '
       <div class="podlove-web-player intrinsic-ignore" id="$id">$template</div>
       <script>
-        document.addEventListener("DOMContentLoaded", function () {
-          podlovePlayer("#$id", $episode, "$config");
-        });
+        podlovePlayer("#$id", $episode, "$config");
       </script>
     ';
 

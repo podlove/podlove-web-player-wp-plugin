@@ -10,6 +10,7 @@ import settings from './settings'
 import preview from './preview'
 import modal from './modal'
 import presets from './presets'
+import shows from './shows'
 
 Vue.use(Vuex)
 
@@ -23,6 +24,7 @@ export default new Vuex.Store({
     preview,
     modal,
     lifecycle,
-    router
+    router,
+    shows
   }
 })

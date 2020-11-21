@@ -17,5 +17,9 @@
     ],
     "outlet": "/share.html",
     "sharePlaytime": true
+  },
+  "related-episodes": {
+    "source": "disabled",
+    "value": null
   }
 }

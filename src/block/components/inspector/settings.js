@@ -1,11 +1,13 @@
 import './inspector.scss'
-import { keys } from 'lodash'
+import { get, keys } from 'lodash'
 
 const { Component } = wp.element
 const { compose } = wp.compose
 const { withSpokenMessages, SelectControl, PanelBody, PanelRow } = wp.components
 const { InspectorControls } = wp.blockEditor
 const { __ } = wp.i18n
+
+const nonce = get(window.PODLOVE_WEB_PLAYER, 'nonce')
 
 class Settings extends Component {
   constructor(props) {
@@ -19,7 +21,11 @@ class Settings extends Component {
   }
 
   async componentDidMount() {
-    const data = await fetch(window.PODLOVE_WEB_PLAYER.api.bootstrap).then(result => result.json())
+    const data = await fetch(window.PODLOVE_WEB_PLAYER.api.bootstrap, {
+      headers: {
+        'X-WP-Nonce': nonce
+      },
+    }).then(result => result.json())
 
     this.setState({
       configs: keys(data.configs).map(data => ({ value: data, label: data })),
