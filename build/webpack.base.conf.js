@@ -11,7 +11,8 @@ function resolve(dir) {
 module.exports = {
   entry: {
     "admin/js/app": "./src/configurator/main.js",
-    "block/js/block": "./src/block/block.js"
+    "block/js/block": "./src/block/block.js",
+    "js": "./src/plugin/js/cache.js"
   },
   output: {
     path: resolve("dist"),

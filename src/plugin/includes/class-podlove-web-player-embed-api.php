@@ -21,11 +21,11 @@ class Podlove_Web_Player_Embed_API
     private $plugin_name;
 
     /**
-     * Plugin options
+     * Plugin data
      * @since    5.0.2
-     * @param    array    $options       The plugin options.
+     * @param    array    $data       The plugin data.
      */
-    private $options;
+    private $data;
 
     /**
      * Interoperability Object
@@ -46,8 +46,13 @@ class Podlove_Web_Player_Embed_API
     public function __construct($plugin_name)
     {
         $this->plugin_name = $plugin_name;
-        $this->options = new Podlove_Web_Player_Options($plugin_name);
         $this->interoperability = new Podlove_Web_Player_Interoperability($this->plugin_name);
+        add_action('init', [$this, 'defineData']);
+    }
+
+    public function defineData()
+    {
+        $this->data = new Podlove_Web_Player_Embed_Data($this->plugin_name, $this->routes());
     }
 
     /**
@@ -132,6 +137,24 @@ class Podlove_Web_Player_Embed_API
 
         register_rest_route(
             $this->plugin_name . '/' . 'shortcode',
+            'config/(?P<config>[a-z0-9-]+)/theme/(?P<theme>[a-z0-9-]+)',
+            array(
+                'methods' => 'GET',
+                'callback' => array($this, 'config'),
+                'args' => array(
+                    'config' => array(
+                        'required' => true,
+                    ),
+                    'theme' => array(
+                        'required' => true,
+                    ),
+                ),
+            )
+        );
+
+        // legacy support
+        register_rest_route(
+            $this->plugin_name . '/' . 'shortcode',
             'config/(?P<config>[a-z0-9-]+)/theme/(?P<theme>[a-z0-9-]+)/(?P<path>[\S]+)',
             array(
                 'methods' => 'GET',
@@ -165,49 +188,13 @@ class Podlove_Web_Player_Embed_API
     public function post(WP_REST_Request $request)
     {
         $postId = $request->get_param('id');
-        $post = get_post($postId);
-        $customFields = get_post_custom($postId);
-
-        $chapters = json_decode($customFields['chapters'][0]);
-        $transcripts = json_decode($customFields['transcripts'][0]);
-
-        $enclosure = explode("\n", $customFields['enclosure'][0]);
-
-        $url = $enclosure[0];
-        $fileSize = $enclosure[1];
-        $mimeType = $enclosure[2];
-
-        $duration = unserialize($enclosure[3]);
-
-        return rest_ensure_response(
-            array(
-                'title' => $post->post_title,
-                'duration' => $duration['duration'],
-                'link' => get_permalink($post),
-                'poster' => get_the_post_thumbnail_url($post),
-                'audio' => array(
-                    array(
-                        'mimeType' => $mimeType,
-                        'url' => $url,
-                        'size' => $fileSize,
-                        'title' => strtoupper($mimeType),
-                    ),
-                ),
-                'chapters' => $chapters ? $chapters : array(),
-                'show' => array(
-                    'title' => get_bloginfo('name'),
-                    'subtitle' => get_bloginfo('description'),
-                    'link' => get_bloginfo('url'),
-                ),
-                'transcripts' => $transcripts ? $transcripts : array(),
-            )
-        );
+        return rest_ensure_response($this->data->post($postId));
     }
 
     public function episode(WP_REST_Request $request)
     {
         $publisherId = $request->get_param('id');
-        return rest_ensure_response(\podlove_pwp5_attributes(array('post_id' => $publisherId)));
+        return rest_ensure_response($this->data->episode($publisherId));
     }
 
     public function show(WP_REST_Request $request)
@@ -218,31 +205,7 @@ class Podlove_Web_Player_Embed_API
             return rest_ensure_response(array());
         }
 
-        $show = new WP_Query(array(
-            'post_type' => 'podcast',
-            'tax_query' => array(
-                array(
-                    'taxonomy' => 'shows',
-                    'field' => 'slug',
-                    'terms' => $slug,
-                ),
-            ),
-        ));
-
-        $posts = $show->get_posts();
-
-        $result = array();
-
-        foreach ($posts as &$post) {
-            $episode = \podlove_pwp5_attributes(array('post_id' => $post->ID));
-            $result[] = array(
-                'title' => $episode['title'],
-                'config' => $this->routes()['publisher'] . '/' . $post->ID,
-                'duration' => $episode['duration'],
-            );
-        }
-
-        return rest_ensure_response($result);
+        return rest_ensure_response($this->data->show($slug));
     }
 
     public function podcast()
@@ -251,28 +214,7 @@ class Podlove_Web_Player_Embed_API
             return rest_ensure_response(array());
         }
 
-        $podcast = new WP_Query(array(
-            'post_type' => 'podcast',
-            'orderby' => array('post_date' => 'DESC'),
-            'post_status' => 'publish',
-            'posts_per_page' => 25,
-        )
-        );
-
-        $posts = $podcast->get_posts();
-
-        $result = array();
-
-        foreach ($posts as &$post) {
-            $episode = \podlove_pwp5_attributes(array('post_id' => $post->ID));
-            $result[] = array(
-                'title' => $episode['title'],
-                'config' => $this->routes()['publisher'] . '/' . $post->ID,
-                'duration' => $episode['duration'],
-            );
-        }
-
-        return rest_ensure_response($result);
+        return rest_ensure_response($this->data->podcast());
     }
 
     public function config(WP_REST_Request $request)
@@ -280,40 +222,6 @@ class Podlove_Web_Player_Embed_API
         $configId = $request->get_param('config');
         $themeId = $request->get_param('theme');
 
-        $options = $this->options->read();
-        $config = $options['configs'][$configId];
-
-        $config['version'] = 5;
-
-        $theme = array(
-            'theme' => $options['themes'][$themeId],
-        );
-
-        $sources = $options['settings']['source']['items'];
-        $selected = $options['settings']['source']['selected'];
-        $relatedEpisodes = $config['related-episodes'];
-
-        $share = array(
-            'base' => $sources[$selected],
-        );
-
-        if (!is_null($config['share']['outlet'])) {
-            $config['share']['outlet'] = $sources[$selected] . 'share.html';
-        }
-
-        // Disable subscribe when no clients are available
-        $availableClients = $config['subscribe-button']['clients'];
-        $config['subscribe-button'] = count($availableClients) > 0 ? $config['subscribe-button'] : null;
-
-        switch ($relatedEpisodes['source']) {
-            case 'podcast':
-                $config['playlist'] = $this->routes()['podcast'];
-                break;
-            case 'show':
-                $config['playlist'] = $this->routes()['show'] . '/' . $relatedEpisodes['value'];
-                break;
-        }
-
-        return rest_ensure_response(array_merge($config, $theme, $share));
+        return rest_ensure_response($this->data->config($configId, $themeId));
     }
 }

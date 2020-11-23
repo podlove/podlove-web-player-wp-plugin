@@ -35,7 +35,7 @@ class Podlove_Web_Player_Shortcode
      *
      * @since    5.0.2
      * @access   private
-     * @var      array    $options    The current player configuration.
+     * @var      object    $options    The current player configuration.
      */
     private $options;
 
@@ -47,6 +47,14 @@ class Podlove_Web_Player_Shortcode
      * @var      array    $routes    The shortcode routes.
      */
     private $routes;
+
+    /**
+     * Shortcode Data
+     * @since   5.4.0
+     * @access  private
+     * @var     object  $embedData     The player data
+     */
+    private $embedData;
 
     /**
      * Interoperability Object
@@ -70,13 +78,14 @@ class Podlove_Web_Player_Shortcode
 
         $this->options = new Podlove_Web_Player_Options($this->plugin_name);
         $this->interoperability = new Podlove_Web_Player_Interoperability($this->plugin_name);
-        add_action('init', [$this, 'set_routes']);
+        add_action('init', [$this, 'defineData']);
     }
 
-    public function set_routes()
+    public function defineData()
     {
         $api = new Podlove_Web_Player_Embed_API($this->plugin_name);
         $this->routes = $api->routes();
+        $this->embedData = new Podlove_Web_Player_Embed_Data($this->plugin_name, $this->routes);
     }
 
     /**
@@ -110,34 +119,46 @@ class Podlove_Web_Player_Shortcode
      */
     private function episode($attributes)
     {
-        // if a post is provided
-        if (isset($attributes['post'])) {
-            return $this->routes['post'] . '/' . $attributes['post'];
-        }
-
         // if attributes are provided
         if (isset($attributes['src']) || isset($attributes['mp3'])) {
-            return $this->fromAttributes($attributes);
+            return array('url' => $this->fromAttributes($attributes));
+        }
+
+        // if a post is provided
+        if (isset($attributes['post'])) {
+            return array(
+                'url' => $this->routes['post'] . '/' . $attributes['post'],
+                'data' => $this->embedData->post($attributes['post']),
+            );
         }
 
         // if episode data is directly provided
         if (isset($attributes['episode'])) {
-            return $attributes['episode'];
+            return array('url' => $attributes['episode']);
         }
 
         if ($this->interoperability->isPublisherActive()) {
             if (isset($attributes['publisher'])) {
-                return $this->routes['publisher'] . '/' . $attributes['publisher'];
+                return array(
+                    'url' => $this->routes['publisher'] . '/' . $attributes['publisher'],
+                    'data' => $this->embedData->episode($attributes['publisher']),
+                );
             }
 
             if (isset($attributes['post_id'])) {
-                return $this->routes['publisher'] . '/' . $attributes['post_id'];
+                return array(
+                    'url' => $this->routes['publisher'] . '/' . $attributes['post_id'],
+                    'data' => $this->embedData->episode($attributes['post_id']),
+                );
             }
 
             $id = get_the_ID();
 
             if (isset($id)) {
-                return $this->routes['publisher'] . '/' . $id;
+                return array(
+                    'url' => $this->routes['publisher'] . '/' . $id,
+                    'data' => $this->embedData->episode($id),
+                );
             }
         }
     }
@@ -165,7 +186,7 @@ class Podlove_Web_Player_Shortcode
             'chapters' => $chapters ?? array(),
             'transcripts' => $transcripts ?? array(),
             'audio' => $this->audio($attributes),
-            'playlist' => $attributes['playlist'] ?? null
+            'playlist' => $attributes['playlist'] ?? null,
         );
     }
 
@@ -346,7 +367,10 @@ class Podlove_Web_Player_Shortcode
         $config = $attributes['config'] ?? $defaultConfig;
         $theme = $attributes['theme'] ?? $defaultTheme;
 
-        return $this->routes['config'] . '/' . $config . '/' . 'theme' . '/' . $theme;
+        return array(
+            'url' => $this->routes['config'] . '/' . $config . '/' . 'theme' . '/' . $theme,
+            'data' => $this->embedData->config($config, $theme),
+        );
     }
 
     /**
@@ -355,23 +379,26 @@ class Podlove_Web_Player_Shortcode
      * @since    5.0.2
      * @param    string         $id             Unique player id.
      * @param    string/array   $episode        Url/object with configuration.
-     * @param    string         $config         Url to player configuration.
-     * @param    string         $template       Url to template
+     * @param    string         $config         Url/object to player configuration.
+     * @param    string         $template       string template
      */
     private function html($id, $episode, $config, $template)
     {
         $embed = '
       <div class="podlove-web-player intrinsic-ignore" id="$id">$template</div>
       <script>
+        podlovePlayerCache.add([$episodeCache, $configCache]);
         podlovePlayer("#$id", $episode, "$config");
       </script>
     ';
 
         return strtr($embed, array(
             '$id' => $id,
-            '$episode' => is_string($episode) ? '"' . $episode . '"' : json_encode($episode),
-            '$config' => $config,
+            '$episode' => is_string($episode['url']) ? '"' . $episode['url'] . '"' : json_encode($episode['url']),
+            '$config' => $config['url'],
             '$template' => $template,
+            '$episodeCache' => json_encode($episode),
+            '$configCache' => json_encode($config),
         ));
     }
 
