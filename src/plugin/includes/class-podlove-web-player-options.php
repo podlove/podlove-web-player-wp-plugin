@@ -50,30 +50,6 @@ class Podlove_Web_Player_Options
         $this->defaultConfig = $this->readFile($this->plugin_directory . 'defaults/configs/default.json', 'json');
         $this->defaultTheme = $this->readFile($this->plugin_directory . 'defaults/themes/default.json', 'json');
         $this->defaultTemplate = $this->readFile($this->plugin_directory . 'defaults/templates/default.html', 'html');
-
-        $this->defaultSettings = array(
-            'source' => array(
-                'selected' => 'local',
-            ),
-
-            'enclosure' => 'bottom',
-            'legacy' => false,
-            'defaults' => array(
-                'theme' => 'default',
-                'config' => 'default',
-                'template' => 'default',
-            ),
-        );
-
-        $this->settings = array(
-          'source' => array(
-              'items' => array(
-                  'local' => PODLOVE_WEB_PLAYER_PATH . '/web-player/',
-                  'cdn' => 'https://cdn.podlove.org/web-player/5.x/',
-              ),
-          ),
-          'contentWidth' => $content_width
-        );
     }
 
     /**
@@ -133,28 +109,29 @@ class Podlove_Web_Player_Options
      * Ensures defaults are available
      *
      * @since   5.4.0
-    */
-    private function defaults($type, $collection = array(), $default) {
-      $result = array();
+     */
+    private function defaults($type, $collection = array(), $default)
+    {
+        $result = array();
 
-      if (!isset($collection['default'])) {
-        $result['default'] = $default;
-      }
-
-      foreach($collection as $name => $value) {
-        switch($type) {
-          case 'config':
-            $result[$name] = $this->fallbackConfig($value);
-          break;
-          case 'theme':
-            $result[$name] = $this->fallbackTheme($value);
-          break;
-          case 'template':
-            $result[$name] = $this->fallbackTemplate($value);
+        if (!isset($collection['default'])) {
+            $result['default'] = $default;
         }
-      }
 
-      return $result;
+        foreach ($collection as $name => $value) {
+            switch ($type) {
+                case 'config':
+                    $result[$name] = $this->fallbackConfig($value);
+                    break;
+                case 'theme':
+                    $result[$name] = $this->fallbackTheme($value);
+                    break;
+                case 'template':
+                    $result[$name] = $this->fallbackTemplate($value);
+            }
+        }
+
+        return $result;
     }
 
     /**
@@ -162,23 +139,24 @@ class Podlove_Web_Player_Options
      *
      * @since 5.4.0
      */
-    private function fallbackConfig($config) {
-      return array(
-        'activeTab' => (is_string($config['activeTab']) ? $config['activeTab'] : 'chapters'),
-        'subscribe-button' => array(
-          'feed' => (is_string($config['subscribe-button']['feed']) ? $config['subscribe-button']['feed'] : null),
-          'clients' => (is_array($config['subscribe-button']['clients']) ? $config['subscribe-button']['clients'] : [])
-        ),
-        'share' => array(
-          'channels' => (is_array($config['share']['channels']) ? array_unique($config['share']['channels']) : []),
-          'outlet' => (is_string($config['share']['outlet']) ? $config['share']['outlet'] : '/share.html'),
-          'sharePlaytime' => (is_bool($config['share']['outlet']) ? $config['share']['outlet'] : true)
-        ),
-        'related-episodes' => array(
-          'source' => (is_string($config['related-episodes']['source']) ? $config['related-episodes']['source'] : 'disabled'),
-          'value' => $config['related-episodes']['value'] ?? null
-        )
-      );
+    private function fallbackConfig($config)
+    {
+        return array(
+            'activeTab' => (is_string($config['activeTab']) ? $config['activeTab'] : 'chapters'),
+            'subscribe-button' => array(
+                'feed' => (is_string($config['subscribe-button']['feed']) ? $config['subscribe-button']['feed'] : null),
+                'clients' => (is_array($config['subscribe-button']['clients']) ? $config['subscribe-button']['clients'] : [])
+            ),
+            'share' => array(
+                'channels' => (is_array($config['share']['channels']) ? array_unique($config['share']['channels']) : []),
+                'outlet' => (is_string($config['share']['outlet']) ? $config['share']['outlet'] : '/share.html'),
+                'sharePlaytime' => (is_bool($config['share']['outlet']) ? $config['share']['outlet'] : true)
+            ),
+            'related-episodes' => array(
+                'source' => (is_string($config['related-episodes']['source']) ? $config['related-episodes']['source'] : 'disabled'),
+                'value' => $config['related-episodes']['value'] ?? null,
+            ),
+        );
     }
 
     /**
@@ -186,39 +164,68 @@ class Podlove_Web_Player_Options
      *
      * @since 5.4.0
      */
-    private function fallbackTheme($theme) {
-      return array(
-        'tokens' => array (
-          'brand' => (is_string($theme['tokens']['brand']) ? $theme['tokens']['brand'] : '#E64415'),
-          'brandDark' => (is_string($theme['tokens']['brandDark']) ? $theme['tokens']['brandDark'] : '#235973'),
-          'brandDarkest' => (is_string($theme['tokens']['brandDarkest']) ? $theme['tokens']['brandDarkest'] : '#1A3A4A'),
-          'brandLightest' => (is_string($theme['tokens']['brandLightest']) ? $theme['tokens']['brandLightest'] : '#E9F1F5'),
-          'shadeDark' => (is_string($theme['tokens']['shadeDark']) ? $theme['tokens']['shadeDark'] : '#807E7C'),
-          'shadeBase' => (is_string($theme['tokens']['shadeBase']) ? $theme['tokens']['shadeBase'] : '#807E7C'),
-          'contrast' => (is_string($theme['tokens']['contrast']) ? $theme['tokens']['contrast'] : '#000'),
-          'alt' => (is_string($theme['tokens']['alt']) ? $theme['tokens']['alt'] : '#fff')
-        ),
-        'fonts' => array(
-          'ci' => array(
-            'name' => (is_string($theme['fonts']['ci']['name']) ? $theme['fonts']['ci']['name'] : 'ci'),
-            'family' => (is_array($theme['fonts']['ci']['family']) ? $theme['fonts']['ci']['family'] : []),
-            'src' => (is_array($theme['fonts']['ci']['src']) ? $theme['fonts']['ci']['src'] : []),
-            'weight' => (isset($theme['fonts']['ci']['weight']) ? $theme['fonts']['ci']['weight'] : 800)
-          ),
-          'regular' => array(
-            'name' => (is_string($theme['fonts']['regular']['name']) ? $theme['fonts']['regular']['name'] : 'regular'),
-            'family' => (is_array($theme['fonts']['regular']['family']) ? $theme['fonts']['regular']['family'] : []),
-            'src' => (is_array($theme['fonts']['regular']['src']) ? $theme['fonts']['regular']['src'] : []),
-            'weight' => (isset($theme['fonts']['regular']['weight']) ? $theme['fonts']['regular']['weight'] : 300)
-          ),
-          'bold' => array(
-            'name' => (is_string($theme['fonts']['bold']['name']) ? $theme['fonts']['bold']['name'] : 'bold'),
-            'family' => (is_array($theme['fonts']['bold']['family']) ? $theme['fonts']['bold']['family'] : []),
-            'src' => (is_array($theme['fonts']['bold']['src']) ? $theme['fonts']['bold']['src'] : []),
-            'weight' => (isset($theme['fonts']['bold']['weight']) ? $theme['fonts']['bold']['weight'] : 700)
-          )
-        )
-      );
+    private function fallbackTheme($theme)
+    {
+        return array(
+            'tokens' => array(
+                'brand' => (is_string($theme['tokens']['brand']) ? $theme['tokens']['brand'] : '#E64415'),
+                'brandDark' => (is_string($theme['tokens']['brandDark']) ? $theme['tokens']['brandDark'] : '#235973'),
+                'brandDarkest' => (is_string($theme['tokens']['brandDarkest']) ? $theme['tokens']['brandDarkest'] : '#1A3A4A'),
+                'brandLightest' => (is_string($theme['tokens']['brandLightest']) ? $theme['tokens']['brandLightest'] : '#E9F1F5'),
+                'shadeDark' => (is_string($theme['tokens']['shadeDark']) ? $theme['tokens']['shadeDark'] : '#807E7C'),
+                'shadeBase' => (is_string($theme['tokens']['shadeBase']) ? $theme['tokens']['shadeBase'] : '#807E7C'),
+                'contrast' => (is_string($theme['tokens']['contrast']) ? $theme['tokens']['contrast'] : '#000'),
+                'alt' => (is_string($theme['tokens']['alt']) ? $theme['tokens']['alt'] : '#fff'),
+            ),
+            'fonts' => array(
+                'ci' => array(
+                    'name' => (is_string($theme['fonts']['ci']['name']) ? $theme['fonts']['ci']['name'] : 'ci'),
+                    'family' => (is_array($theme['fonts']['ci']['family']) ? $theme['fonts']['ci']['family'] : []),
+                    'src' => (is_array($theme['fonts']['ci']['src']) ? $theme['fonts']['ci']['src'] : []),
+                    'weight' => (isset($theme['fonts']['ci']['weight']) ? $theme['fonts']['ci']['weight'] : 800)
+                ),
+                'regular' => array(
+                    'name' => (is_string($theme['fonts']['regular']['name']) ? $theme['fonts']['regular']['name'] : 'regular'),
+                    'family' => (is_array($theme['fonts']['regular']['family']) ? $theme['fonts']['regular']['family'] : []),
+                    'src' => (is_array($theme['fonts']['regular']['src']) ? $theme['fonts']['regular']['src'] : []),
+                    'weight' => (isset($theme['fonts']['regular']['weight']) ? $theme['fonts']['regular']['weight'] : 300)
+                ),
+                'bold' => array(
+                    'name' => (is_string($theme['fonts']['bold']['name']) ? $theme['fonts']['bold']['name'] : 'bold'),
+                    'family' => (is_array($theme['fonts']['bold']['family']) ? $theme['fonts']['bold']['family'] : []),
+                    'src' => (is_array($theme['fonts']['bold']['src']) ? $theme['fonts']['bold']['src'] : []),
+                    'weight' => (isset($theme['fonts']['bold']['weight']) ? $theme['fonts']['bold']['weight'] : 700)
+                )
+            ),
+        );
+    }
+
+    /**
+     * Apply fallbacks and fix settings
+     *
+     * @since 5.4.0
+     */
+    private function fallbackSettings($settings)
+    {
+        global $content_width;
+        return array(
+            'source' => array(
+                'selected' => (is_string($settings['source']['selected']) ? $settings['source']['selected']  : 'local'),
+                'items' => array(
+                  'local' => PODLOVE_WEB_PLAYER_PATH . '/web-player/',
+                  'cdn' => 'https://cdn.podlove.org/web-player/5.x/',
+              ),
+            ),
+
+            'enclosure' => $settings['enclosure'] ?? 'bottom',
+            'legacy' => (is_bool($settings['legacy']) ? $settings['legacy'] : false),
+            'defaults' => array(
+                'theme' => (is_string($settings['defaults']['theme']) ? $settings['defaults']['theme']  : 'default'),
+                'config' => (is_string($settings['defaults']['config']) ? $settings['defaults']['config']  : 'default'),
+                'template' => (is_string($settings['defaults']['template']) ? $settings['defaults']['template']  : 'default'),
+            ),
+            'contentWidth' => $content_width,
+        );
     }
 
     /**
@@ -226,8 +233,9 @@ class Podlove_Web_Player_Options
      *
      * @since 5.4.0
      */
-    private function fallbackTemplate($template) {
-      return (is_string($template) ? $template : '<root></root>');
+    private function fallbackTemplate($template)
+    {
+        return (is_string($template) ? $template : '<root></root>');
     }
 
     /**
@@ -272,10 +280,10 @@ class Podlove_Web_Player_Options
         }
 
         return array_replace_recursive($options, array(
-          'configs' => $this->defaults('config', $options['configs'], $this->defaultConfig),
-          'themes' => $this->defaults('theme', $options['themes'], $this->defaultTheme),
-          'templates' => $this->defaults('template', $options['templates'], $this->defaultTemplate),
-          'settings' => array_replace_recursive($this->defaultSettings, $options['settings'], $this->settings)
+            'configs' => $this->defaults('config', $options['configs'], $this->defaultConfig),
+            'themes' => $this->defaults('theme', $options['themes'], $this->defaultTheme),
+            'templates' => $this->defaults('template', $options['templates'], $this->defaultTemplate),
+            'settings' => $this->fallbackSettings($options['settings']),
         ));
     }
 
