@@ -105,6 +105,16 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.4.0 =
+
+- Fix issues with default configuration saving
+- Fix menu highlighting
+- Add assistive texts to theming
+- Feature add ability to define related episodes
+- Improve player loading and caching performance
+- Update Podlove Web Player to v5.3.1
+- Breaking: removes ability to define a show as a related episode in the publisher player template
+
 = 5.3.1 =
 
 - Fix API requests to make configurator working again
