@@ -50,7 +50,6 @@
 
   .configurator {
     height: calc(100vh - 60px - 32px);
-    z-index: 9999;
   }
 
   .el-menu.el-menu--horizontal {
