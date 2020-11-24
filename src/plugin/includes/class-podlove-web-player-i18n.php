@@ -63,6 +63,27 @@ class Podlove_Web_Player_i18n {
         'presets' => array(
           'default' => static::i18n( 'Chapters tab default enabled;Share settings active;Subscribe Button not defined' ),
           'full-clients' => static::i18n( 'No default tab;Share settings active;Subscribe Buttone defined' )
+        ),
+
+        'related-episodes' => array(
+          'title' => static::i18n( 'Related Episodes' ),
+          'description' => static::i18n( 'Related episodes displayed in the player and automatically played ' ),
+          'source' => static::i18n( 'Source' ),
+          'sources' => array(
+            'disabled' => array(
+              'title' => static::i18n( 'Disabled' ),
+              'description' => static::i18n( 'Don\'t show related episodes' )
+            ),
+            'show' => array(
+              'title' => static::i18n( 'Show' ),
+              'label' => static::i18n( 'Select a Show' ),
+              'description' => static::i18n( 'Episodes from this show are listed in the related episodes' )
+            ),
+            'podcast' => array(
+              'title' => static::i18n( 'Podcast' ),
+              'description' => static::i18n( 'Latest 25 episodes are listed in the related episodes' )
+            )
+          )
         )
       ),
 
@@ -87,13 +108,21 @@ class Podlove_Web_Player_i18n {
         'title' => static::i18n( 'Theme <%= id %>' ),
         'colors' => static::i18n( 'Colors' ),
         'color-brand' => static::i18n( 'Brand' ),
+        'color-brand-description' => static::i18n( 'Podcast Show Name, Subscribe Button' ),
         'color-brand-dark' => static::i18n( 'Brand Dark' ),
+        'color-brand-dark-description' => static::i18n( 'Player Controls, Background Tabs, Social Icons' ),
         'color-brand-darkest' => static::i18n( 'Brand Darkest' ),
+        'color-brand-darkest-description' => static::i18n( 'Hover Play Button' ),
         'color-brand-lightest' => static::i18n( 'Brand Lightest' ),
+        'color-brand-lightest-description' => static::i18n( 'Background Player' ),
         'color-shade-base' => static::i18n( 'Shade Base' ),
+        'color-shade-base-description' => static::i18n( 'Dotted Lines' ),
         'color-shade-dark' => static::i18n( 'Shade Dark' ),
+        'color-shade-dark-description' => static::i18n( 'Highlight Transcript' ),
         'color-contrast' => static::i18n( 'Contrast' ),
+        'color-contrast-description' => static::i18n( 'Text Player' ),
         'color-alt' => static::i18n( 'Alt' ),
+        'color-alt-description' => static::i18n( 'Text Tabs' ),
         'fonts' => static::i18n( 'Fonts' ),
         'font-name' => static::i18n( 'Font Name' ),
         'font-sources' => static::i18n( 'Font Sources' ),

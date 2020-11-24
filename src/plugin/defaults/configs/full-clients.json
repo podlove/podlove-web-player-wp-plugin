@@ -35,5 +35,9 @@
     "channels": ["facebook", "twitter", "whats-app", "linkedin", "pinterest", "xing", "mail", "link"],
     "outlet": "/share.html",
     "sharePlaytime": true
+  },
+  "related-episodes": {
+    "source": "podcast",
+    "value": 25
   }
 }

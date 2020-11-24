@@ -28,6 +28,7 @@ export default {
           dispatch('templates/bootstrap', data, { root: true })
           dispatch('presets/bootstrap', data, { root: true })
           dispatch('settings/bootstrap', data, { root: true })
+          dispatch('shows/bootstrap', data, { root: true })
         })
         .finally(() => commit('loaded'))
     },

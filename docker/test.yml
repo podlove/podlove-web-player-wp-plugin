@@ -1,0 +1,23 @@
+version: '3.3'
+
+services:
+  wordpress:
+    container_name: "wordpress"
+    image: wordpress:5.4-php7.2
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_PASSWORD: "password"
+      WORDPRESS_CONFIG_EXTRA: |
+        define('ALTERNATE_WP_CRON', true);
+        define( 'DISABLE_WP_CRON', true );
+    depends_on:
+      - mysql
+    volumes:
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+
+  mysql:
+    container_name: "database"
+    image: mariadb:10.4
+    environment:
+      MYSQL_ROOT_PASSWORD: "password"

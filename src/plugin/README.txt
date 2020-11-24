@@ -48,7 +48,6 @@ Use a simple shortcode in your posts and pages, and the Podlove Web Player will 
 [podlove-web-player
   theme="default"
   config="default"
-  show="My Show Title"
   title="My episode title"
   subtitle="Episode Subtitle"
   poster="/files/path/to/poster.png"
@@ -74,7 +73,6 @@ Or in case you have our [Podlove Publisher](https://wordpress.org/plugins/podlov
   theme="default"
   config="default"
   publisher="1234"
-  show="my-awesome-show"
 ]
 
 #### 2 Using Wordpress Gutenberg Blocks
@@ -106,6 +104,16 @@ If you encounter any issue with the plugin or want to request a specific feature
 4. Gutenberg Block
 
 == Changelog ==
+
+= 5.4.0 =
+
+- Fix issues with default configuration saving
+- Fix menu highlighting
+- Add assistive texts to theming
+- Feature add ability to define related episodes
+- Improve player loading and caching performance
+- Update Podlove Web Player to v5.3.1
+- Breaking: removes ability to define a show as a related episode in the publisher player template
 
 = 5.3.1 =
 

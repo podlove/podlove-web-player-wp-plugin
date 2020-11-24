@@ -129,6 +129,11 @@ class Podlove_Web_Player {
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-podlove-web-player-admin-api.php';
 
     /**
+     * The class responsible for defining the embed data
+     */
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-podlove-web-player-embed-data.php';
+
+    /**
      * The class responsible for defining the Public Embed REST API
      */
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-podlove-web-player-embed-api.php';
@@ -142,6 +147,7 @@ class Podlove_Web_Player {
      * The class responsible for defining the block
      */
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'block/class-podlove-web-player-block.php';
+
 
     $this->loader = new Podlove_Web_Player_Loader();
 

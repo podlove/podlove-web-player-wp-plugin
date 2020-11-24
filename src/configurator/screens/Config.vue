@@ -2,8 +2,18 @@
   <div class="config">
     <card :title="$i18n(['config', 'active-tab'])">
       <form-element>
-        <el-select :placeholder="$i18n(['config', 'select-tab'])" :value="activeTab" size="small" @change="selectActiveTab">
-          <el-option v-for="item in tabs" :key="`tab-${item}`" :label="item === null ? $i18n(['config', 'no-default-tab']) : item" :value="item"></el-option>
+        <el-select
+          :placeholder="$i18n(['config', 'select-tab'])"
+          :value="activeTab"
+          size="small"
+          @change="selectActiveTab"
+        >
+          <el-option
+            v-for="item in tabs"
+            :key="`tab-${item}`"
+            :label="item === null ? $i18n(['config', 'no-default-tab']) : item"
+            :value="item"
+          ></el-option>
         </el-select>
       </form-element>
     </card>
@@ -34,8 +44,16 @@
         </div>
         <div class="row">
           <form-element :label="$i18n(['config', 'share-options'])">
-            <el-switch :value="sharePlaytime" :active-text="$i18n(['config', 'share-playtime'])" @change="updateSharePlaytime"></el-switch>
-            <el-switch :value="embedPlayer" :active-text="$i18n(['config', 'embed-player'])" @change="updateEmbedPlayer"></el-switch>
+            <el-switch
+              :value="sharePlaytime"
+              :active-text="$i18n(['config', 'share-playtime'])"
+              @change="updateSharePlaytime"
+            ></el-switch>
+            <el-switch
+              :value="embedPlayer"
+              :active-text="$i18n(['config', 'embed-player'])"
+              @change="updateEmbedPlayer"
+            ></el-switch>
           </form-element>
         </div>
       </div>
@@ -43,12 +61,24 @@
 
     <card :title="$i18n(['config', 'subscribe-button'])">
       <form-element :label="$i18n(['config', 'feed'])" :full="true">
-        <el-input size="small" :placeholder="$i18n(['config', 'rss-feed'])" :value="feed" @input="updateFeed" clearable></el-input>
+        <el-input
+          size="small"
+          :placeholder="$i18n(['config', 'rss-feed'])"
+          :value="feed"
+          @input="updateFeed"
+          clearable
+        ></el-input>
       </form-element>
 
       <div class="flex">
         <form-element :label="$i18n(['config', 'clients'])">
-          <el-select :placeholder="$i18n(['config', 'client-add'])" value="" :disabled="false" size="small" @change="addClient">
+          <el-select
+            :placeholder="$i18n(['config', 'client-add'])"
+            value=""
+            :disabled="false"
+            size="small"
+            @change="addClient"
+          >
             <el-option v-for="item in availableClients" :key="item.id" :label="item.title" :value="item"></el-option>
           </el-select>
           <draggable
@@ -64,19 +94,17 @@
         </form-element>
         <div v-if="stagedClient.id">
           <form-element :label="$i18n(['config', 'client-supported-plattforms'])" class="h-16">
-            <el-tag
-              v-for="platform in stagedClient.platforms"
-              :key="platform"
-              size="small"
-              type="info"
-              class="mr-2"
-              >{{ platform }}</el-tag
-            >
+            <el-tag v-for="platform in stagedClient.platforms" :key="platform" size="small" type="info" class="mr-2">{{
+              platform
+            }}</el-tag>
           </form-element>
 
           <form-element>
             <el-tooltip :content="stagedClient.serviceScheme('[service id]')" placement="top-start">
-              <h4 class="item-title"><span>{{ $i18n(['config', 'client-service-id']) }}</span><i class="el-icon-info ml-1" /></h4>
+              <h4 class="item-title">
+                <span>{{ $i18n(['config', 'client-service-id']) }}</span
+                ><i class="el-icon-info ml-1" />
+              </h4>
             </el-tooltip>
 
             <el-input
@@ -90,6 +118,22 @@
           </form-element>
         </div>
       </div>
+    </card>
+
+    <card :title="$i18n(['config', 'related-episodes', 'title'])">
+      <form-element :label="$i18n(['config', 'related-episodes', 'source'])" :full="true">
+        <el-select :value="relatedEpisodes.source" :disabled="false" size="small" @change="updateSource">
+          <el-option value="disabled" :label="$i18n(['config', 'related-episodes', 'sources', 'disabled', 'title'])"></el-option>
+          <el-option value="show" :label="$i18n(['config', 'related-episodes', 'sources', 'show', 'title'])"></el-option>
+          <el-option value="podcast" :label="$i18n(['config', 'related-episodes', 'sources', 'podcast', 'title'])"></el-option>
+        </el-select>
+      </form-element>
+      <form-element v-if="relatedEpisodes.source === 'show'" :label="$i18n(['config', 'related-episodes', 'sources', 'show', 'label'])" :full="true">
+        <el-select :value="relatedEpisodes.value" :disabled="false" size="small" @change="updateSourceShow">
+          <el-option v-for="item in shows" :key="item.slug" :label="item.name" :value="item.slug"></el-option>
+        </el-select>
+      </form-element>
+      <div class="related-episodes-description">{{ $i18n(['config', 'related-episodes', 'sources', relatedEpisodes.source, 'description']) }}</div>
     </card>
   </div>
 </template>
@@ -107,7 +151,8 @@ export default {
   },
 
   computed: {
-    ...mapGetters('configs', ['current', 'channels', 'clients', 'stagedClient', 'tabs']),
+    ...mapGetters('configs', ['current', 'channels', 'clients', 'stagedClient', 'tabs', 'relatedEpisodes']),
+    ...mapGetters('shows', ['shows']),
 
     selectedChannels() {
       return uniq(get(this.current, 'share.channels', []))
@@ -161,9 +206,17 @@ export default {
       'stageClient',
       'updateFeed',
       'selectActiveTab',
+      'updateSource',
+      'updateSourceShow'
     ]),
   },
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.related-episodes-description {
+  font-style: italic;
+  color: grey;
+  padding: 0.25em;
+}
+</style>

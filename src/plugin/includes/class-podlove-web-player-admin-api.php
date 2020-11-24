@@ -213,7 +213,7 @@ class Podlove_Web_Player_Admin_API
         register_rest_route($this->plugin_name . '/' . $this->version, 'shows',
             array(
                 'methods' => 'GET',
-                'callback' => array($this, 'shows'),
+                'callback' => array($this, '  '),
                 'permission_callback' => array($this, 'api_permissions'),
             )
         );
@@ -291,6 +291,7 @@ class Podlove_Web_Player_Admin_API
                 'activeTab' => $request->get_param('activeTab'),
                 'subscribe-button' => $request->get_param('subscribe-button'),
                 'share' => $request->get_param('share'),
+                'related-episodes' => $request->get_param('related-episodes')
             ),
         ));
 
@@ -424,6 +425,7 @@ class Podlove_Web_Player_Admin_API
     {
         $data = $this->options->read();
         $data['presets'] = $this->options->presets();
+        $data['shows'] = $this->shows()->data;
 
         return rest_ensure_response($data);
     }
