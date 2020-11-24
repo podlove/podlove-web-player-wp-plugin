@@ -48,7 +48,6 @@ Use a simple shortcode in your posts and pages, and the Podlove Web Player will 
 [podlove-web-player
   theme="default"
   config="default"
-  show="My Show Title"
   title="My episode title"
   subtitle="Episode Subtitle"
   poster="/files/path/to/poster.png"
@@ -74,7 +73,6 @@ Or in case you have our [Podlove Publisher](https://wordpress.org/plugins/podlov
   theme="default"
   config="default"
   publisher="1234"
-  show="my-awesome-show"
 ]
 
 #### 2 Using Wordpress Gutenberg Blocks

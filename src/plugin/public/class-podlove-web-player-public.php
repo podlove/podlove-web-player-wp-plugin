@@ -44,7 +44,7 @@ class Podlove_Web_Player_Public {
 	 *
 	 * @since    5.0.2
 	 * @access   private
-	 * @var      array    $options    The current player configuration.
+	 * @var      object    $options    The current player configuration.
 	 */
   private $options;
 
@@ -126,6 +126,7 @@ class Podlove_Web_Player_Public {
     }
 
 		wp_enqueue_script( $this->plugin_name . '-player', $sources[$selected] . 'embed.js', array(), $this->version, false );
+		wp_enqueue_script( $this->plugin_name . '-player-cache', PODLOVE_WEB_PLAYER_PATH . '/js/cache.js', array(), $this->version, false );
   }
 
   /**

@@ -1,4 +1,4 @@
-import { head, get } from 'lodash'
+import { get } from 'lodash'
 
 export default {
   namespaced: true,

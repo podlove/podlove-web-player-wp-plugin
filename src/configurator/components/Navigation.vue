@@ -11,7 +11,7 @@
         @click="navigate({ name: 'config', params: { id: config } })"
         :index="`1-${index + 1}`"
       >
-        <div class="flex w-full items-center justify-between">
+        <div class="flex w-full items-center justify-between" :class="{ 'font-bold': activeItem('config', config) }">
           <span>{{ config }}</span>
           <button
             @click="showDeleteModal({ target: 'config', id: config })"
@@ -38,7 +38,7 @@
         @click="navigate({ name: 'theme', params: { id: theme } })"
         :index="`2-${index + 1}`"
       >
-        <div class="flex w-full items-center justify-between">
+        <div class="flex w-full items-center justify-between" :class="{ 'font-bold': activeItem('theme', theme) }">
           <span>{{ theme }}</span>
           <button @click="showDeleteModal({ target: 'theme', id: theme })" class="p-0 -mr-2" v-if="theme !== 'default'">
             <i class="el-icon-close"></i>
@@ -61,7 +61,7 @@
         @click="navigate({ name: 'template', params: { id: template } })"
         :index="`3-${index + 1}`"
       >
-        <div class="flex w-full items-center justify-between">
+        <div class="flex w-full items-center justify-between"  :class="{ 'font-bold': activeItem('template', template) }">
           <span>{{ template }}</span>
           <button
             @click="showDeleteModal({ target: 'template', id: template })"
@@ -104,7 +104,7 @@ export default {
         case 'settings':
           return '4'
       }
-    },
+    }
   },
   methods: {
     ...mapActions('modal', ['showCreateModal', 'showDeleteModal']),
@@ -124,6 +124,9 @@ export default {
         }
         return 0
       })
+    },
+    activeItem(type, id) {
+      return this.name === type && this.id === id;
     },
   },
 }

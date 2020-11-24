@@ -8,6 +8,8 @@ const { compose } = wp.compose
 const { withSpokenMessages } = wp.components
 const { __ } = wp.i18n
 
+const nonce = get(window.PODLOVE_WEB_PLAYER, 'nonce')
+
 class Player extends Component {
   constructor(props) {
     super(...arguments)
@@ -27,7 +29,12 @@ class Player extends Component {
     const routes = window.PODLOVE_WEB_PLAYER.embed
 
     let episode
-    const config = [routes.config, attributes.config, 'theme', attributes.theme, ...(attributes.show ? ['show', attributes.show] : [])].join('/')
+    const config = [
+      routes.config,
+      attributes.config,
+      'theme',
+      attributes.theme
+    ].join('/')
     const template = get(this.plugin, ['templates', attributes.template], '')
 
     switch (this.type) {
@@ -47,9 +54,12 @@ class Player extends Component {
     this.mountIframe({ node, config, episode, template })
   }
 
-
   async componentDidMount() {
-    this.plugin = await fetch(window.PODLOVE_WEB_PLAYER.api.bootstrap).then(result => result.json())
+    this.plugin = await fetch(window.PODLOVE_WEB_PLAYER.api.bootstrap, {
+      headers: {
+        'X-WP-Nonce': nonce
+      },
+    }).then(result => result.json())
     const base = get(get(this.plugin, 'settings.source.items'), get(this.plugin, 'settings.source.selected'))
     await loadScript(base + 'embed.js', 'podlovePlayer')
 
@@ -71,14 +81,16 @@ class Player extends Component {
   }
 
   render() {
-    return <div className="podlove-web-player--preview">
-      <div className="logo">
-        { logo(50) }
-        <span class="title">{ __('Podlove Web Player', 'podlove-web-player') }</span>
+    return (
+      <div className="podlove-web-player--preview">
+        <div className="logo">
+          {logo(50)}
+          <span class="title">{__('Podlove Web Player', 'podlove-web-player')}</span>
+        </div>
+        <div className="player" ref={this.playerRef}></div>
       </div>
-      <div className="player" ref={this.playerRef}></div>
-    </div>
+    )
   }
 }
 
-export default compose([ withSpokenMessages ])(Player)
+export default compose([withSpokenMessages])(Player)

@@ -49,8 +49,8 @@
   @import './theme/index.css';
 
   .configurator {
-    height: calc(100vh - 32px);
-    z-idex: 9999;
+    height: calc(100vh - 60px - 32px);
+    z-index: 9999;
   }
 
   .el-menu.el-menu--horizontal {
