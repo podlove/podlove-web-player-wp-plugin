@@ -110,12 +110,13 @@ class Podlove_Web_Player_Options
      *
      * @since   5.4.0
      */
-    private function defaults($type, $collection = array(), $default)
+    private function defaults($type, $collection, $default)
     {
         $result = array();
+        $collection = (is_array($collection) ? $collection : array());
 
         if (!isset($collection['default'])) {
-            $result['default'] = $default;
+          $collection['default'] = $default;
         }
 
         foreach ($collection as $name => $value) {
@@ -142,7 +143,7 @@ class Podlove_Web_Player_Options
     private function fallbackConfig($config)
     {
         return array(
-            'activeTab' => (is_string($config['activeTab']) ? $config['activeTab'] : 'chapters'),
+            'activeTab' => (is_string($config['activeTab']) ? $config['activeTab'] : null),
             'subscribe-button' => array(
                 'feed' => (is_string($config['subscribe-button']['feed']) ? $config['subscribe-button']['feed'] : null),
                 'clients' => (is_array($config['subscribe-button']['clients']) ? $config['subscribe-button']['clients'] : [])
