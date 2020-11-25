@@ -105,6 +105,11 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.4.1 =
+
+- Fixes issue with active default tab
+- Fixes an issue with invalid stored configurations
+
 = 5.4.0 =
 
 - Fix issues with default configuration saving
