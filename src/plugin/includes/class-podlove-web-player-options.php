@@ -41,8 +41,6 @@ class Podlove_Web_Player_Options
 
     public function __construct($plugin_name)
     {
-        global $content_width;
-
         $this->plugin_name = $plugin_name;
         $this->plugin_directory = plugin_dir_path(__DIR__);
         $this->interoperability = new Podlove_Web_Player_Interoperability($this->plugin_name);
@@ -218,7 +216,7 @@ class Podlove_Web_Player_Options
               ),
             ),
 
-            'enclosure' => $settings['enclosure'] ?? 'bottom',
+            'enclosure' => (isset($settings['enclosure'])? $settings['enclosure'] : null),
             'legacy' => (is_bool($settings['legacy']) ? $settings['legacy'] : false),
             'defaults' => array(
                 'theme' => (is_string($settings['defaults']['theme']) ? $settings['defaults']['theme']  : 'default'),

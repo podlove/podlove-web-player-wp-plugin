@@ -16,7 +16,7 @@ class Podlove_Web_Player_Enclosure {
 	 *
 	 * @since    5.0.2
 	 * @access   private
-	 * @var      array    $options    The current player configuration.
+	 * @var      object    $options    The current player configuration.
 	 */
   private $options;
 
