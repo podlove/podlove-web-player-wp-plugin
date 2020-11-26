@@ -105,6 +105,11 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.4.2 =
+
+- Fixes an issue with persisting the embedding settings
+- Improves compatability if the plugin is activated but not enabled in the Podlove Publisher settings
+
 = 5.4.1 =
 
 - Fixes issue with active default tab
