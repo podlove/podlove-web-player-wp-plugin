@@ -161,9 +161,8 @@ class Podlove_Web_Player_Public
     public function register_enclosure()
     {
         $options = $this->options->read();
-
-        if (!$options['settings']['enclosure'] && !is_feed()) {
-            return;
+        if (!$options['settings']['enclosure'] || is_feed()) {
+          return;
         }
 
         add_filter('the_content', array($this->enclosure, 'render'), 10);

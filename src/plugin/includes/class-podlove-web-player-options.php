@@ -140,7 +140,7 @@ class Podlove_Web_Player_Options
      */
     private function fallbackConfig($config)
     {
-        return array(
+      return array(
             'activeTab' => (is_string($config['activeTab']) ? $config['activeTab'] : null),
             'subscribe-button' => array(
                 'feed' => (is_string($config['subscribe-button']['feed']) ? $config['subscribe-button']['feed'] : null),
@@ -148,8 +148,8 @@ class Podlove_Web_Player_Options
             ),
             'share' => array(
                 'channels' => (is_array($config['share']['channels']) ? array_unique($config['share']['channels']) : []),
-                'outlet' => (is_string($config['share']['outlet']) ? $config['share']['outlet'] : '/share.html'),
-                'sharePlaytime' => (is_bool($config['share']['outlet']) ? $config['share']['outlet'] : true)
+                'outlet' => $config['share']['outlet'],
+                'sharePlaytime' => (is_bool($config['share']['sharePlaytime']) ? $config['share']['sharePlaytime'] : true)
             ),
             'related-episodes' => array(
                 'source' => (is_string($config['related-episodes']['source']) ? $config['related-episodes']['source'] : 'disabled'),
