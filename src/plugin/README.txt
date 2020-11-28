@@ -105,6 +105,11 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.4.3 =
+
+- Fixes an issue with persisting embed player and share playtime config
+- Fixes an issue with rendering the player enclosure in feed
+
 = 5.4.2 =
 
 - Fixes an issue with persisting the embedding settings
