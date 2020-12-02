@@ -56,6 +56,7 @@ Use a simple shortcode in your posts and pages, and the Podlove Web Player will 
   playlist="/files/path/to/playlist.json"
   src="http://mysite.com/mymedia.mp3"
   size="1337"
+  show="My show title"
   duration="03:33"
 ]
 
@@ -104,6 +105,11 @@ If you encounter any issue with the plugin or want to request a specific feature
 4. Gutenberg Block
 
 == Changelog ==
+
+= 5.4.4 =
+
+- Brings back show tag for shortcode
+- Fixes shortcode registration
 
 = 5.4.3 =
 
