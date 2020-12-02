@@ -187,6 +187,9 @@ class Podlove_Web_Player_Shortcode
             'transcripts' => $transcripts ?? array(),
             'audio' => $this->audio($attributes),
             'playlist' => $attributes['playlist'] ?? null,
+            'show' => array(
+              'title' => $attributes['show'] ?? null
+            )
         );
     }
 

@@ -56,6 +56,7 @@ Use a simple shortcode in your posts and pages, and the Podlove Web Player will 
   playlist="/files/path/to/playlist.json"
   src="http://mysite.com/mymedia.mp3"
   size="1337"
+  show="My show title"
   duration="03:33"
 ]
 
