@@ -106,6 +106,11 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.4.4 =
+
+- Brings back show tag for shortcode
+- Fixes shortcode registration
+
 = 5.4.3 =
 
 - Fixes an issue with persisting embed player and share playtime config
