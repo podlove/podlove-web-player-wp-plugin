@@ -5,7 +5,7 @@
   }
 
   window.podlovePlayerCache.add = (responses = []) => {
-    ;[].concat(responses).forEach(({ url, data }) => {
+    ;[].concat(responses).filter(Boolean).forEach(({ url, data }) => {
       window.podlovePlayerCache.cache[url] = data
     })
   }
