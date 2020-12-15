@@ -3,7 +3,7 @@ Contributors: alexander-heimbuch,ericteuber
 Donate link: https://podlove.org/donations
 Tags: podcasting, audio
 Requires at least: 5.3
-Tested up to: 5.4
+Tested up to: 5.6
 Requires PHP: 7.2
 Stable tag: 5.0
 License: MIT
@@ -105,6 +105,12 @@ If you encounter any issue with the plugin or want to request a specific feature
 4. Gutenberg Block
 
 == Changelog ==
+
+= 5.4.5 =
+
+- Fix PHP warnings
+- Minimize cache.js size
+- Only add api requests to cache
 
 = 5.4.4 =
 

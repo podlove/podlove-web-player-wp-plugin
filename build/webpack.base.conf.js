@@ -12,7 +12,7 @@ module.exports = {
   entry: {
     "admin/js/app": "./src/configurator/main.js",
     "block/js/block": "./src/block/block.js",
-    "js": "./src/plugin/js/cache.js"
+    "js/cache": "./src/plugin/js/cache.js"
   },
   output: {
     path: resolve("dist"),
@@ -35,7 +35,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         loader: "babel-loader",
-        include: [resolve("src/configurator"), resolve("src/block")]
+        include: [resolve("src/configurator"), resolve("src/block"), resolve("src/plugin")]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

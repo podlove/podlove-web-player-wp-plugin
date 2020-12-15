@@ -400,8 +400,8 @@ class Podlove_Web_Player_Shortcode
             '$episode' => is_string($episode['url']) ? '"' . $episode['url'] . '"' : json_encode($episode['url']),
             '$config' => $config['url'],
             '$template' => $template,
-            '$episodeCache' => json_encode($episode),
-            '$configCache' => json_encode($config),
+            '$episodeCache' => is_string($episode['url']) ? json_encode($episode) : 'null',
+            '$configCache' => json_encode($config)
         ));
     }
 

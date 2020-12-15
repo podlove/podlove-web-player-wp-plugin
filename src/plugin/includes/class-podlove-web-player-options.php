@@ -279,10 +279,10 @@ class Podlove_Web_Player_Options
         }
 
         return array_replace_recursive($options, array(
-            'configs' => $this->defaults('config', $options['configs'], $this->defaultConfig),
-            'themes' => $this->defaults('theme', $options['themes'], $this->defaultTheme),
-            'templates' => $this->defaults('template', $options['templates'], $this->defaultTemplate),
-            'settings' => $this->fallbackSettings($options['settings']),
+            'configs' => $this->defaults('config', $options['configs'] ?? [], $this->defaultConfig),
+            'themes' => $this->defaults('theme', $options['themes'] ?? [], $this->defaultTheme),
+            'templates' => $this->defaults('template', $options['templates'] ?? [], $this->defaultTemplate),
+            'settings' => $this->fallbackSettings($options['settings'] ?? []),
         ));
     }
 
