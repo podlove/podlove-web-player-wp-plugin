@@ -106,6 +106,10 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.4.8 =
+
+- Remove conditonal loading due to WordPress quirkyness :/
+
 = 5.4.7 =
 
 - Improve page performance by only adding scripts on pages with a player
