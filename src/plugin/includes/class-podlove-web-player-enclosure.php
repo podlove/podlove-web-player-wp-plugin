@@ -38,7 +38,7 @@ class Podlove_Web_Player_Enclosure {
    */
   public function enqueue_scripts()
   {
-      // If the publisher is active but the player wasn't selected disable script enqueue
+       // If the publisher is active but the player wasn't selected disable script enqueue
       if ($this->interoperability->isPublisherActive() && !$this->interoperability->isPlayerActiveInPublisher()) {
         return;
       }
