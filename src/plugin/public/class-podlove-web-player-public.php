@@ -114,31 +114,6 @@ class Podlove_Web_Player_Public
     {}
 
     /**
-     * Register the JavaScript for the public-facing side of the site.
-     *
-     * @since    5.0.2
-     */
-    public function enqueue_scripts()
-    {
-        // If the publisher is active but the player wasn't selected disable script enqueue
-        if ($this->interoperability->isPublisherActive() && !$this->interoperability->isPlayerActiveInPublisher()) {
-          return;
-        }
-
-        $options = $this->options->read();
-        $sources = $options['settings']['source']['items'];
-        $selected = $options['settings']['source']['selected'];
-        $legacy = $options['settings']['legacy'];
-
-        if ($legacy) {
-            wp_enqueue_script($this->plugin_name . '-polyfills', $sources[$selected] . 'polyfills.js', array(), $this->version, false);
-        }
-
-        wp_enqueue_script($this->plugin_name . '-player', $sources[$selected] . 'embed.js', array(), $this->version, false);
-        wp_enqueue_script($this->plugin_name . '-player-cache', PODLOVE_WEB_PLAYER_PATH . '/js/cache.js', array(), $this->version, false);
-    }
-
-    /**
      * Registers all shortcodes at once
      */
     public function register_shortcodes()
