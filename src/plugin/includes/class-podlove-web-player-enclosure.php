@@ -32,6 +32,31 @@ class Podlove_Web_Player_Enclosure {
   }
 
   /**
+   * Register the JavaScript for the public-facing side of the site.
+   *
+   * @since    5.4.6
+   */
+  public function enqueue_scripts()
+  {
+      // If the publisher is active but the player wasn't selected disable script enqueue
+      if ($this->interoperability->isPublisherActive() && !$this->interoperability->isPlayerActiveInPublisher()) {
+        return;
+      }
+
+      $options = $this->options->read();
+      $sources = $options['settings']['source']['items'];
+      $selected = $options['settings']['source']['selected'];
+      $legacy = $options['settings']['legacy'];
+
+      if ($legacy) {
+          wp_enqueue_script($this->plugin_name . '-polyfills', $sources[$selected] . 'polyfills.js', array(), $this->version, false);
+      }
+
+      wp_enqueue_script($this->plugin_name . '-player', $sources[$selected] . 'embed.js', array(), $this->version, false);
+      wp_enqueue_script($this->plugin_name . '-player-cache', PODLOVE_WEB_PLAYER_PATH . '/js/cache.js', array(), $this->version, false);
+  }
+
+  /**
 	 * Enclosure Renderer
 	 *
 	 * @since    5.0.2
@@ -43,6 +68,10 @@ class Podlove_Web_Player_Enclosure {
 
       $options      = $this->options->read();
       $customFields = get_post_custom($post->ID);
+
+      if (has_shortcode($content, 'podloveaudio') || has_shortcode($content, 'podlove-web-player') || has_shortcode($content, 'podlove-episode-web-player')) {
+        $this->enqueue_scripts();
+      }
 
       // Publisher ❤️
       if (get_post_type() == 'podcast') {

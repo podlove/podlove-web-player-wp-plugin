@@ -388,12 +388,14 @@ class Podlove_Web_Player_Shortcode
     private function html($id, $episode, $config, $template)
     {
         $embed = '
-      <div class="podlove-web-player intrinsic-ignore" id="$id">$template</div>
-      <script>
-        podlovePlayerCache.add([$episodeCache, $configCache]);
-        podlovePlayer("#$id", $episode, "$config");
-      </script>
-    ';
+            <div class="podlove-web-player intrinsic-ignore" id="$id">$template</div>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    podlovePlayerCache.add([$episodeCache, $configCache]);
+                    podlovePlayer("#$id", $episode, "$config");
+                });
+            </script>
+        ';
 
         return strtr($embed, array(
             '$id' => $id,
