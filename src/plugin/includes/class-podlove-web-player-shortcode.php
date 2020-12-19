@@ -390,10 +390,10 @@ class Podlove_Web_Player_Shortcode
         $embed = '
             <div class="podlove-web-player intrinsic-ignore" id="$id">$template</div>
             <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    podlovePlayerCache.add([$episodeCache, $configCache]);
-                    podlovePlayer("#$id", $episode, "$config");
-                });
+              document.addEventListener("DOMContentLoaded", function() {
+                podlovePlayerCache.add([$episodeCache, $configCache]);
+                podlovePlayer("#$id", $episode, "$config");
+              });
             </script>
         ';
 
