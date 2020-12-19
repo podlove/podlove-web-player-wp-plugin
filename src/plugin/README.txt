@@ -106,6 +106,11 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.4.6 =
+
+- Improve page performance by only adding scripts on pages with a player
+- Harden lifecycle, only render player once all scripts are available (this may lead to slower page rendering)
+
 = 5.4.5 =
 
 - Fix PHP warnings
