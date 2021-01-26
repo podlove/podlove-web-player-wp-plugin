@@ -278,6 +278,10 @@ class Podlove_Web_Player_Options
             $options = json_decode(get_option($this->plugin_name), true);
         }
 
+        if (!is_array($options['settings'])) {
+          $options['settings'] = [];
+        }
+
         return array_replace_recursive($options, array(
             'configs' => $this->defaults('config', $options['configs'] ?? [], $this->defaultConfig),
             'themes' => $this->defaults('theme', $options['themes'] ?? [], $this->defaultTheme),
