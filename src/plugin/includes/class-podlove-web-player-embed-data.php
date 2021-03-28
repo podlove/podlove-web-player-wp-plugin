@@ -121,6 +121,11 @@ class Podlove_Web_Player_Embed_Data
 
         // Disable subscribe when no clients are available
         $availableClients = $config['subscribe-button']['clients'];
+
+        if (!is_array($availableClients)) {
+          $availableClients = [];
+        }
+
         $config['subscribe-button'] = count($availableClients) > 0 ? $config['subscribe-button'] : null;
 
         switch ($relatedEpisodes['source']) {
