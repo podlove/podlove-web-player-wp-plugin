@@ -111,6 +111,10 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.4.10 =
+
+- Update wordpress repository
+
 = 5.4.9 =
 
 - Fix PHP warnings for array_replace and array_merge
