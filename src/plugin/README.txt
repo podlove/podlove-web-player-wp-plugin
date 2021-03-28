@@ -44,7 +44,7 @@ There are basically four ways to use the Podlove Web Player:
 #### 1 Manual Wordpress Shortcode
 
 Use a simple shortcode in your posts and pages, and the Podlove Web Player will appear, playing any media file you want to assign. Basic usage:
-
+`
 [podlove-web-player
   theme="default"
   config="default"
@@ -59,22 +59,27 @@ Use a simple shortcode in your posts and pages, and the Podlove Web Player will 
   show="My show title"
   duration="03:33"
 ]
+`
 
 Use an existing post with a media enclosure that is provided from plugins like Blubrry:
 
+`
 [podlove-web-player
   theme="default"
   config="default"
   post="1234"
 ]
+`
 
 Or in case you have our [Podlove Publisher](https://wordpress.org/plugins/podlove-podcasting-plugin-for-wordpress/) installed:
 
+`
 [podlove-web-player
   theme="default"
   config="default"
   publisher="1234"
 ]
+`
 
 #### 2 Using Wordpress Gutenberg Blocks
 
@@ -105,6 +110,12 @@ If you encounter any issue with the plugin or want to request a specific feature
 4. Gutenberg Block
 
 == Changelog ==
+
+= 5.4.9 =
+
+- Fix PHP warnings for array_replace and array_merge
+- Add logic to hide player while it's initializing
+- Improve README
 
 = 5.4.8 =
 

@@ -140,20 +140,24 @@ class Podlove_Web_Player_Options
      */
     private function fallbackConfig($config)
     {
+      $relatedEpisodes = isset($config['related-episodes']) ? $config['related-episodes'] : array();
+      $subscribeButton = isset($config['subscribe-button']) ? $config['subscribe-button'] : array();
+      $share = isset($config['share']) ? $config['share'] : array();
+
       return array(
             'activeTab' => (is_string($config['activeTab']) ? $config['activeTab'] : null),
             'subscribe-button' => array(
-                'feed' => (is_string($config['subscribe-button']['feed']) ? $config['subscribe-button']['feed'] : null),
-                'clients' => (is_array($config['subscribe-button']['clients']) ? $config['subscribe-button']['clients'] : [])
+                'feed' => (is_string($subscribeButton['feed']) ? $subscribeButton['feed'] : null),
+                'clients' => (is_array($subscribeButton['clients']) ? $subscribeButton['clients'] : [])
             ),
             'share' => array(
-                'channels' => (is_array($config['share']['channels']) ? array_unique($config['share']['channels']) : []),
-                'outlet' => $config['share']['outlet'],
-                'sharePlaytime' => (is_bool($config['share']['sharePlaytime']) ? $config['share']['sharePlaytime'] : true)
+                'channels' => (is_array($share['channels']) ? array_unique($share['channels']) : []),
+                'outlet' => $share['outlet'],
+                'sharePlaytime' => (is_bool($share['sharePlaytime']) ? $share['sharePlaytime'] : true)
             ),
             'related-episodes' => array(
-                'source' => (is_string($config['related-episodes']['source']) ? $config['related-episodes']['source'] : 'disabled'),
-                'value' => $config['related-episodes']['value'] ?? null,
+                'source' => (is_string($relatedEpisodes['source']) ? $relatedEpisodes['source'] : 'disabled'),
+                'value' => $relatedEpisodes['value'] ?? null,
             ),
         );
     }
@@ -278,11 +282,15 @@ class Podlove_Web_Player_Options
             $options = json_decode(get_option($this->plugin_name), true);
         }
 
-        return array_replace_recursive($options, array(
+        if (!is_array($options['settings'])) {
+          $options['settings'] = [];
+        }
+
+        return array_replace_recursive($options ?? [], array(
             'configs' => $this->defaults('config', $options['configs'] ?? [], $this->defaultConfig),
             'themes' => $this->defaults('theme', $options['themes'] ?? [], $this->defaultTheme),
             'templates' => $this->defaults('template', $options['templates'] ?? [], $this->defaultTemplate),
-            'settings' => $this->fallbackSettings($options['settings'] ?? []),
+            'settings' => $this->fallbackSettings($options['settings']),
         ));
     }
 
