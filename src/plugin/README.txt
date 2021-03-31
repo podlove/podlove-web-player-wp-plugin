@@ -111,6 +111,10 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.4.11 =
+
+- Fix an issue that could lead to invisible player
+
 = 5.4.10 =
 
 - Update wordpress repository
