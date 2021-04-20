@@ -67,6 +67,7 @@ class Podlove_Web_Player_Block {
     $this->shortcode = new Podlove_Web_Player_Shortcode( $this->plugin_name, $this->version );
     $this->api = new Podlove_Web_Player_Admin_API( $this->plugin_name, $this->version );
     $this->embed = new Podlove_Web_Player_Embed_API( $this->plugin_name, $this->version );
+    $this->interoperability = new Podlove_Web_Player_Interoperability( $this->plugin_name );
   }
 
   public function enqueue_scripts() {
@@ -80,7 +81,7 @@ class Podlove_Web_Player_Block {
   }
 
   public function register_block() {
-    if ( ! function_exists( 'register_block_type' ) ) {
+    if ( ! function_exists( 'register_block_type' ) || $this->interoperability->isClassicPress()) {
       return;
     }
 

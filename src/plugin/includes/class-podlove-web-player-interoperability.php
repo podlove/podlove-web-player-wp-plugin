@@ -44,4 +44,12 @@ class Podlove_Web_Player_Interoperability {
 
     return $settings['version'] == 'player_v5';
   }
+
+  public function isClassicPress() {
+    if ( function_exists( 'classicpress_version' ) ) {
+      return true;
+    } else {
+        return false;
+    }
+  }
 }
