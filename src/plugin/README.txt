@@ -2,8 +2,8 @@
 Contributors: alexander-heimbuch,ericteuber
 Donate link: https://podlove.org/donations
 Tags: podcasting, audio
-Requires at least: 5.3
-Tested up to: 5.6
+Requires at least: 4.9.6
+Tested up to: 5.7
 Requires PHP: 7.2
 Stable tag: 5.0
 License: MIT
@@ -110,6 +110,11 @@ If you encounter any issue with the plugin or want to request a specific feature
 4. Gutenberg Block
 
 == Changelog ==
+
+= 5.4.12 =
+
+- Add ClassicPress interoperability
+- Drop minimal requirement to 4.9.6
 
 = 5.4.11 =
 
