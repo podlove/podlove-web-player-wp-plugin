@@ -149,6 +149,7 @@ class Podlove_Web_Player_Embed_API
                         'required' => true,
                     ),
                 ),
+                'permission_callback' => '__return_true',
             )
         );
 

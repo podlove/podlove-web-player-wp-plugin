@@ -349,7 +349,6 @@ class Podlove_Web_Player_Shortcode
     {
         $options = $this->options->read();
         $default = $options['settings']['defaults']['template'] ?? 'default';
-
         $template = $attributes['template'] ?? $default;
 
         return $options['templates'][$template];

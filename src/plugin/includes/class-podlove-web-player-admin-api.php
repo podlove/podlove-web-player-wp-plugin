@@ -437,11 +437,15 @@ class Podlove_Web_Player_Admin_API
      */
     public function shows()
     {
+      try {
         $result = get_terms('shows', array(
-          'hide_empty' => 0,
+          'hide_empty' => false,
           'fields' => 'all',
         ));
+      } catch (Exception $e) {
+        $result = rest_ensure_response(array('data' => []));
+      }
 
-        return rest_ensure_response($result);
+      return rest_ensure_response($result);
     }
 }
