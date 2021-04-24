@@ -111,7 +111,7 @@ class Podlove_Web_Player_Options
     private function defaults($type, $collection, $default)
     {
         $result = array();
-        $collection = (is_array($collection) ? $collection : array());
+        $collection = $collection ?? array();
 
         if (!isset($collection['default'])) {
           $collection['default'] = $default;
@@ -142,7 +142,7 @@ class Podlove_Web_Player_Options
     {
       $relatedEpisodes = isset($config['related-episodes']) ? $config['related-episodes'] : array();
       $subscribeButton = isset($config['subscribe-button']) ? $config['subscribe-button'] : array();
-      $share = isset($config['share']) ? $config['share'] : array();
+      $share = $config['share'] ?? array();
 
       return array(
             'activeTab' => (is_string($config['activeTab']) ? $config['activeTab'] : null),
@@ -211,21 +211,22 @@ class Podlove_Web_Player_Options
     private function fallbackSettings($settings)
     {
         global $content_width;
+
         return array(
             'source' => array(
-                'selected' => (is_string($settings['source']['selected']) ? $settings['source']['selected']  : 'local'),
+                'selected' => $settings['source']['selected'] ?? 'local',
                 'items' => array(
                   'local' => PODLOVE_WEB_PLAYER_PATH . '/web-player/',
                   'cdn' => 'https://cdn.podlove.org/web-player/5.x/',
               ),
             ),
 
-            'enclosure' => (isset($settings['enclosure'])? $settings['enclosure'] : null),
-            'legacy' => (is_bool($settings['legacy']) ? $settings['legacy'] : false),
+            'enclosure' => $settings['enclosure'] ?? null,
+            'legacy' => $settings['legacy'] ?? false,
             'defaults' => array(
-                'theme' => (is_string($settings['defaults']['theme']) ? $settings['defaults']['theme']  : 'default'),
-                'config' => (is_string($settings['defaults']['config']) ? $settings['defaults']['config']  : 'default'),
-                'template' => (is_string($settings['defaults']['template']) ? $settings['defaults']['template']  : 'default'),
+                'theme' => $settings['defaults']['theme'] ?? 'default',
+                'config' => $settings['defaults']['config'] ?? 'default',
+                'template' => $settings['defaults']['template'] ?? 'default',
             ),
             'contentWidth' => $content_width,
         );
@@ -277,13 +278,15 @@ class Podlove_Web_Player_Options
     public function read()
     {
         if ($this->interoperability->isNetworkActivated()) {
-            $options = json_decode(get_site_option($this->plugin_name), true);
+          $options = json_decode(get_site_option($this->plugin_name), true);
         } else {
-            $options = json_decode(get_option($this->plugin_name), true);
+          $options = json_decode(get_option($this->plugin_name), true);
         }
 
-        if (!is_array($options['settings'])) {
-          $options['settings'] = [];
+        $options = $options ?? array();
+
+        if (!isset($options['settings']) || !is_array($options['settings'])) {
+          $options['settings'] = array();
         }
 
         return array_replace_recursive($options ?? [], array(
