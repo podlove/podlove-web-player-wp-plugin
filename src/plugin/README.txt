@@ -111,6 +111,11 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.4.13 =
+
+- Update to Podlove Web Player 5.5.0
+- Fixes warnings because of incomplete data structures
+
 = 5.4.12 =
 
 - Add ClassicPress interoperability
