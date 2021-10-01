@@ -111,6 +111,10 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.4.14 =
+
+- Update to Podlove Web Player 5.7.2
+
 = 5.4.13 =
 
 - Update to Podlove Web Player 5.5.0
