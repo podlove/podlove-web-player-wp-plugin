@@ -3,7 +3,7 @@ Contributors: alexander-heimbuch,ericteuber
 Donate link: https://podlove.org/donations
 Tags: podcasting, audio
 Requires at least: 4.9.6
-Tested up to: 5.7
+Tested up to: 5.8
 Requires PHP: 7.2
 Stable tag: 5.0
 License: MIT
@@ -110,6 +110,11 @@ If you encounter any issue with the plugin or want to request a specific feature
 4. Gutenberg Block
 
 == Changelog ==
+
+= 5.4.15 =
+
+- Update to Podlove Web Player 5.7.4
+- Update Wordpress compatability
 
 = 5.4.14 =
 
