@@ -13,7 +13,6 @@ export default {
       },
     },
     enclosure: null,
-    legacy: null,
     defaults: {
       theme: null,
       template: null,
@@ -36,10 +35,6 @@ export default {
 
     enclosure(state) {
       return state.enclosure
-    },
-
-    legacy(state) {
-      return state.legacy
     },
 
     defaults(state) {
@@ -66,10 +61,6 @@ export default {
       commit('updateEnclosure', value)
     },
 
-    updateLegacy({ commit }, value) {
-      commit('updateLegacy', value)
-    },
-
     updateDefault({ commit }, { type, value }) {
       switch (type) {
         case 'config':
@@ -87,13 +78,12 @@ export default {
     save({ getters, commit }) {
       const source = get(getters.settings, 'source.selected')
       const enclosure = getters.enclosure
-      const legacy = getters.legacy
       const defaults = getters.defaults
 
         request
           .create(
             PODLOVE_WEB_PLAYER.api.settings,
-            { source, enclosure, legacy, defaults },
+            { source, enclosure, defaults },
             {
               loading: PODLOVE_WEB_PLAYER.i18n.message_saving,
               error: PODLOVE_WEB_PLAYER.i18n.error_save_settings,
@@ -109,7 +99,6 @@ export default {
     bootstrap(state, payload = {}) {
       state.source = get(payload, 'source', {})
       state.enclosure = get(payload, 'enclosure')
-      state.legacy = get(payload, 'legacy', false),
       state.defaults  = get(payload, 'defaults', {})
     },
 
@@ -123,10 +112,6 @@ export default {
 
     updateSettings(state, settings) {
       state.settings = settings
-    },
-
-    updateLegacy(state, legacy) {
-      state.legacy = legacy
     },
 
     updateDefaultConfig(state, config) {

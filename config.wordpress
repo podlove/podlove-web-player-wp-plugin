@@ -1,4 +1,0 @@
-# Config for Wordpress Development Environment
-production_domain=production.com
-development_domain=localhost:8080
-database_password=my-password

@@ -402,12 +402,10 @@ class Podlove_Web_Player_Admin_API
         $options = $this->options->read();
         $source = $request->get_param('source');
         $enclosure = $request->get_param('enclosure');
-        $legacy = $request->get_param('legacy');
         $defaults = $request->get_param('defaults');
 
         $options['settings']['source']['selected'] = $source;
         $options['settings']['enclosure'] = $enclosure;
-        $options['settings']['legacy'] = $legacy;
         $options['settings']['defaults'] = $defaults;
 
         $this->options->update($options);

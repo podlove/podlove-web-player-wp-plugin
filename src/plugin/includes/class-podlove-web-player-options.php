@@ -222,7 +222,6 @@ class Podlove_Web_Player_Options
             ),
 
             'enclosure' => $settings['enclosure'] ?? null,
-            'legacy' => $settings['legacy'] ?? false,
             'defaults' => array(
                 'theme' => $settings['defaults']['theme'] ?? 'default',
                 'config' => $settings['defaults']['config'] ?? 'default',
