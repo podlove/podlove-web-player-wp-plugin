@@ -113,6 +113,11 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 = 5.4.15 =
 
+- Update to Podlove Web Player 5.9.0
+- Update ability to add custom Subscribe Button clients
+
+= 5.4.15 =
+
 - Update to Podlove Web Player 5.7.4
 - Update Wordpress compatability
 

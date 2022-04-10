@@ -1,6 +1,6 @@
 {
   "name": "@podlove/web-player-configurator",
-  "version": "5.4.15",
+  "version": "5.5.0",
   "description": "Podlove Web Player Configurator",
   "author": "Alexander Heimbuch <github@heimbu.ch>",
   "scripts": {
