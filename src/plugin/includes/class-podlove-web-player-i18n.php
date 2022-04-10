@@ -53,6 +53,9 @@ class Podlove_Web_Player_i18n {
         'client-add' => static::i18n( 'Add' ),
         'client-supported-plattforms' => static::i18n( 'Supported Platforms' ),
         'client-service-id' => static::i18n( 'Service Id' ),
+        'client-title' => static::i18n( 'Title' ),
+        'client-link' => static::i18n( 'Link' ),
+        'client-icon' => static::i18n( 'Icon' ),
 
         'create' => static::i18n( 'Add Config' ),
         'create-id' => static::i18n( 'Config ID' ),

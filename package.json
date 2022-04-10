@@ -28,9 +28,9 @@
     "tailwindcss": "1.1.4",
     "vuex-router-sync": "5.0.0",
     "vuedraggable": "2.23.2",
-    "@podlove/clients": "5.8.0",
-    "@podlove/web-player": "5.8.0",
-    "@podlove/player-actions": "5.8.0",
+    "@podlove/clients": "5.9.0",
+    "@podlove/web-player": "5.9.0",
+    "@podlove/player-actions": "5.9.0",
     "object-hash": "2.0.1",
     "vue-prism-editor": "0.3.0",
     "prismjs": "1.18.0"

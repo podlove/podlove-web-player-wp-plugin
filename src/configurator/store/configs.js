@@ -13,23 +13,51 @@ export default {
     stagedClient: {
       id: null,
     },
-    clients: Object.values(
-      podcastClients().reduce((result, item) => {
+    clients: Object.values({
+      ...podcastClients().reduce((result, item) => {
         const existing = get(result, item.id, {})
+
+        let tooltip
+        let label
+
+        switch (item.id) {
+          case 'rss':
+            tooltip = null
+            label = 'RSS Feed'
+            break;
+          case 'google-podcasts':
+            tooltip = null
+            label = 'RSS Feed'
+            break;
+          default:
+            tooltip = item.scheme ? item.scheme('[service id]') : null
+            label = 'Service ID'
+        }
 
         return {
           ...result,
           [item.id]: {
             id: item.id,
             icon: item.icon,
+            tooltip,
+            label,
             platforms: [...(existing.platforms ? existing.platforms : []), item.platform],
             title: item.title,
             serviceScheme: existing.serviceScheme || item.type === 'service' ? item.scheme : null,
             service: null,
           },
         }
-      }, {})
-    ),
+      }, {}),
+      custom: {
+        id: 'custom',
+        title: 'Custom',
+        type: null,
+        link: null,
+        icon: null,
+        serviceScheme: null,
+        platform: [],
+      },
+    }),
   },
 
   getters: {
@@ -86,9 +114,9 @@ export default {
 
       return get(current, 'related-episodes', {
         source: 'podcast',
-        value: 25
+        value: 25,
       })
-    }
+    },
   },
 
   actions: {
@@ -159,6 +187,7 @@ export default {
       const clients = get(getters.current, ['subscribe-button', 'clients'], []).filter(
         client => client.id !== payload.id
       )
+
       commit('updateClients', { id: getters.id, clients })
 
       if (stagedClient.id === payload.id) {
@@ -192,8 +221,37 @@ export default {
       commit('updateClients', { id: getters.id, clients: clients.map(client => pick(client, ['id', 'service'])) })
     },
 
+    updateCustomClient({ getters, commit }, payload) {
+      if (!getters.id) {
+        return
+      }
+
+      const stagedClient = getters.stagedClient
+      const updatedClient = {
+        ...stagedClient,
+        ...payload,
+      }
+
+      commit('stageClient', updatedClient)
+
+      const clients = get(getters.current, ['subscribe-button', 'clients'], []).map(client =>
+        client.id === updatedClient.id ? updatedClient : client
+      )
+
+      commit('updateClients', {
+        id: getters.id,
+        clients: clients.map(client => {
+          if (client.id === 'custom') {
+            return client
+          }
+
+          return pick(client, ['id', 'service'])
+        }),
+      })
+    },
+
     stageClient({ getters, commit }, client) {
-      if (!getters.id || !client.serviceScheme) {
+      if ((!getters.id || !client.serviceScheme) && client.id !== 'custom') {
         return
       }
 
@@ -252,10 +310,10 @@ export default {
       return request
         .create(`${PODLOVE_WEB_PLAYER.api.config}/${id}`, copy, {
           loading: PODLOVE_WEB_PLAYER.i18n.message_creating,
-          error: PODLOVE_WEB_PLAYER.i18n.error_save_config
+          error: PODLOVE_WEB_PLAYER.i18n.error_save_config,
         })
         .then(config => {
-          commit("updateConfig", { id, config });
+          commit('updateConfig', { id, config })
         })
     },
 
@@ -268,7 +326,7 @@ export default {
         .then(() => {
           commit('removeConfig', { id })
         })
-    }
+    },
   },
 
   mutations: {
@@ -307,7 +365,7 @@ export default {
     updateConfig(state, { id, config }) {
       state.configs = {
         ...state.configs,
-        [id]: config
+        [id]: config,
       }
     },
 
@@ -325,6 +383,6 @@ export default {
 
     updateSourceShow(state, { id, show }) {
       set(state, ['configs', id, 'related-episodes', 'value'], show)
-    }
+    },
   },
 }
