@@ -111,6 +111,11 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.5.1 =
+
+- Update to Podlove Web Player 5.11.0
+- Add ability to add multiple custom Subscribe Button clients
+
 = 5.4.15 =
 
 - Update to Podlove Web Player 5.9.0
