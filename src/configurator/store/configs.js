@@ -1,5 +1,6 @@
 import podcastClients from '@podlove/clients'
 import { get, set, pick, unset, cloneDeep, uniq } from 'lodash'
+import { generate as generateId } from 'shortid';
 
 import { request } from '../lib'
 
@@ -174,8 +175,19 @@ export default {
       }
 
       const clients = get(getters.current, ['subscribe-button', 'clients'], [])
+      let client = {};
 
-      commit('updateClients', { id: getters.id, clients: [pick(payload, ['id', 'service']), ...clients] })
+      if (payload.id === 'custom') {
+        client = {
+          id: `custom-${generateId()}`,
+          title: 'Custom',
+          platform: 'custom'
+        }
+      } else {
+        client = pick(payload, ['id', 'service'])
+      }
+
+      commit('updateClients', { id: getters.id, clients: [client, ...clients] })
     },
 
     removeClient({ getters, commit }, payload) {
@@ -225,7 +237,6 @@ export default {
       if (!getters.id) {
         return
       }
-
       const stagedClient = getters.stagedClient
       const updatedClient = {
         ...stagedClient,
@@ -241,7 +252,7 @@ export default {
       commit('updateClients', {
         id: getters.id,
         clients: clients.map(client => {
-          if (client.id === 'custom') {
+          if (client.id.startsWith('custom')) {
             return client
           }
 
@@ -251,7 +262,7 @@ export default {
     },
 
     stageClient({ getters, commit }, client) {
-      if ((!getters.id || !client.serviceScheme) && client.id !== 'custom') {
+      if ((!getters.id || !client.serviceScheme) && ! client.id.startsWith('custom')) {
         return
       }
 

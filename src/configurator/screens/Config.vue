@@ -101,7 +101,7 @@
             :id="(element) => element.id"
           />
         </form-element>
-        <div v-if="stagedClient.id && stagedClient.id !== 'custom'">
+        <div v-if="stagedClient.id && !stagedClient.id.startsWith('custom')">
           <form-element
             :label="$i18n(['config', 'client-supported-plattforms'])"
             class="h-16"
@@ -142,7 +142,7 @@
             </el-input>
           </form-element>
         </div>
-        <div v-if="stagedClient.id && stagedClient.id === 'custom'">
+        <div v-if="stagedClient.id && stagedClient.id.startsWith('custom')">
           <form-element>
             <div class="mb-1">
               <h4 class="item-title mb-1">
