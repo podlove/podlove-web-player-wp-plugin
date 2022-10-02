@@ -53,6 +53,7 @@ class Podlove_Web_Player_Embed_API
     public function defineData()
     {
         $this->data = new Podlove_Web_Player_Embed_Data($this->plugin_name, $this->routes());
+        $this->options = new Podlove_Web_Player_Options($this->plugin_name);
     }
 
     /**
@@ -63,11 +64,13 @@ class Podlove_Web_Player_Embed_API
     public function routes()
     {
         return array(
-            'post' => esc_url_raw(rest_url($this->plugin_name . '/' . 'shortcode' . '/' . 'post')),
-            'publisher' => esc_url_raw(rest_url($this->plugin_name . '/' . 'shortcode' . '/' . 'publisher')),
-            'config' => esc_url_raw(rest_url($this->plugin_name . '/' . 'shortcode' . '/' . 'config')),
-            'show' => esc_url_raw(rest_url($this->plugin_name . '/' . 'shortcode' . '/' . 'show')),
-            'podcast' => esc_url_raw(rest_url($this->plugin_name . '/' . 'shortcode' . '/' . 'podcast')),
+          'post' => esc_url_raw(rest_url($this->plugin_name . '/' . 'shortcode' . '/' . 'post')),
+          'publisher' => esc_url_raw(rest_url($this->plugin_name . '/' . 'shortcode' . '/' . 'publisher')),
+          'config' => esc_url_raw(rest_url($this->plugin_name . '/' . 'shortcode' . '/' . 'config')),
+          'show' => esc_url_raw(rest_url($this->plugin_name . '/' . 'shortcode' . '/' . 'show')),
+          'podcast' => esc_url_raw(rest_url($this->plugin_name . '/' . 'shortcode' . '/' . 'podcast')),
+          'template' => esc_url_raw(rest_url($this->plugin_name . '/' . 'shortcode' . '/' . 'template')),
+          'options' => esc_url_raw(rest_url($this->plugin_name . '/' . 'options')),
         );
     }
 
@@ -171,6 +174,14 @@ class Podlove_Web_Player_Embed_API
                 'permission_callback' => '__return_true',
             )
         );
+
+        register_rest_route($this->plugin_name . '/', 'options',
+            array(
+                'methods' => 'GET',
+                'callback' => array($this, 'options'),
+                'permission_callback' => '__return_true',
+            )
+        );
     }
 
     /**
@@ -224,5 +235,11 @@ class Podlove_Web_Player_Embed_API
         $themeId = $request->get_param('theme');
 
         return rest_ensure_response($this->data->config($configId, $themeId));
+    }
+
+
+    public function options(WP_REST_Request $request)
+    {
+        return rest_ensure_response($this->options->read());
     }
 }
