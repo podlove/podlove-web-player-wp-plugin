@@ -156,7 +156,7 @@ class Podlove_Web_Player_Options
                 'sharePlaytime' => (is_bool($share['sharePlaytime']) ? $share['sharePlaytime'] : true)
             ),
             'related-episodes' => array(
-                'source' => (is_string($relatedEpisodes['source']) ? $relatedEpisodes['source'] : 'disabled'),
+                'source' => (isset($relatedEpisodes['source']) ? $relatedEpisodes['source'] : 'disabled'),
                 'value' => $relatedEpisodes['value'] ?? null,
             ),
         );
