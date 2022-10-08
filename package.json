@@ -1,6 +1,6 @@
 {
   "name": "@podlove/web-player-configurator",
-  "version": "5.6.0",
+  "version": "5.7.0",
   "description": "Podlove Web Player Configurator",
   "author": "Alexander Heimbuch <github@heimbu.ch>",
   "scripts": {
@@ -28,9 +28,9 @@
     "tailwindcss": "1.1.4",
     "vuex-router-sync": "5.0.0",
     "vuedraggable": "2.23.2",
-    "@podlove/clients": "5.11.1",
-    "@podlove/web-player": "5.11.1",
-    "@podlove/player-actions": "5.11.1",
+    "@podlove/clients": "5.12.0",
+    "@podlove/web-player": "5.12.0",
+    "@podlove/player-actions": "5.12.0",
     "object-hash": "2.0.1",
     "vue-prism-editor": "0.3.0",
     "prismjs": "1.18.0",

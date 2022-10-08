@@ -111,6 +111,11 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.7.0 =
+
+- Update to Podlove Web Player 5.12.0
+- Fix issue with missing config properties
+
 = 5.6.0 =
 
 - Update to Podlove Web Player 5.11.1
