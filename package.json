@@ -14,7 +14,9 @@
     "build": "npm run dist:clean && npm run plugin:copy && npm run js:build",
     "package": "npm run build && cd dist && zip -r -X podlove-web-player-beta.zip .",
     "publish:prepare": "npm run build && cp -R ./src/assets ./dist/.wordpress-org && cp -R .git dist/ && cp .distignore dist/",
-    "publish:workspace": "node build/workspace.js"
+    "publish:workspace": "node build/workspace.js",
+    "version": "node ./build/version.js",
+    "release": "release-it"
   },
   "dependencies": {
     "element-ui": "2.13.0",
@@ -37,6 +39,8 @@
     "shortid": "2.2.16"
   },
   "devDependencies": {
+    "replace-in-file": "6.3.5",
+    "release-it": "15.5.0",
     "@babel/core": "7.6.4",
     "@babel/plugin-proposal-object-rest-spread": "7.6.2",
     "@babel/plugin-syntax-dynamic-import": "7.2.0",
@@ -95,5 +99,16 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "release-it": {
+    "github": {
+      "release": false
+    },
+    "npm": {
+      "publish": false
+    },
+    "hooks": {
+      "after:bump": "npm run version"
+    }
+  }
 }

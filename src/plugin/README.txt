@@ -111,6 +111,10 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.7.1 =
+
+- Add episode id to related episodes
+
 = 5.7.0 =
 
 - Update to Podlove Web Player 5.12.0

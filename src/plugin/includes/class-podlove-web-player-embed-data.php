@@ -162,8 +162,9 @@ class Podlove_Web_Player_Embed_Data
             $episode = \podlove_pwp5_attributes(array('post_id' => $post->ID));
             $result[] = array(
                 'title' => $episode['title'],
+                'episode' => $post->ID,
                 'config' => $this->routes['publisher'] . '/' . $post->ID,
-                'duration' => $episode['duration'],
+                'duration' => $episode['duration']
             );
         }
 
@@ -188,6 +189,7 @@ class Podlove_Web_Player_Embed_Data
             $episode = \podlove_pwp5_attributes(array('post_id' => $post->ID));
             $result[] = array(
                 'title' => $episode['title'],
+                'episode' => $post->ID,
                 'config' => $this->routes['publisher'] . '/' . $post->ID,
                 'duration' => $episode['duration'],
             );
