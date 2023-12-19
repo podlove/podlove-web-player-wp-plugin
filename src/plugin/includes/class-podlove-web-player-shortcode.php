@@ -406,8 +406,8 @@ class Podlove_Web_Player_Shortcode
 
         return strtr($embed, array(
             '$id' => $id,
-            '$episode' => is_string($episode['url']) ? '"' . $episode['url'] . '"' : json_encode($episode['url']),
-            '$config' => $config['url'],
+            '$episode' => is_string($episode['url']) ? '"' . esc_url($episode['url']) . '"' : json_encode($episode['url']),
+            '$config' => esc_url($config['url']),
             '$template' => $template,
             '$episodeCache' => is_string($episode['url']) ? json_encode($episode) : 'null',
             '$configCache' => json_encode($config)
@@ -423,6 +423,6 @@ class Podlove_Web_Player_Shortcode
      */
     private function endsWith($haystack, $needle)
     {
-        return strrpos($haystack, $needle) + strlen($needle) === strlen($haystack);
+      return strrpos($haystack, $needle) + strlen($needle) === strlen($haystack);
     }
 }
