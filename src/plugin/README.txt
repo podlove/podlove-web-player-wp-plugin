@@ -3,7 +3,7 @@ Contributors: alexander-heimbuch,ericteuber
 Donate link: https://podlove.org/donations
 Tags: podcasting, audio
 Requires at least: 4.9.6
-Tested up to: 5.8
+Tested up to: 6.4
 Requires PHP: 7.2
 Stable tag: 5.0
 License: MIT
