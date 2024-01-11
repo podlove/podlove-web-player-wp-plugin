@@ -39,7 +39,22 @@ class Podlove_Web_Player_Options
      */
     private $interoperability;
 
-    public function __construct($plugin_name)
+    /**
+     * @var false|mixed|string|null
+     */
+    private $defaultConfig;
+
+    /**
+     * @var false|mixed|string|null
+     */
+    private $defaultTheme;
+
+    /**
+     * @var false|mixed|string|null
+     */
+    private $defaultTemplate;
+
+  public function __construct($plugin_name)
     {
         $this->plugin_name = $plugin_name;
         $this->plugin_directory = plugin_dir_path(__DIR__);
