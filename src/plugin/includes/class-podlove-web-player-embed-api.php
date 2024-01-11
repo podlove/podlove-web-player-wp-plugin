@@ -37,6 +37,11 @@ class Podlove_Web_Player_Embed_API
     private $interoperability;
 
     /**
+     * @var Podlove_Web_Player_Options
+     */
+    private $options;
+
+    /**
      * Initialize the class and set its properties.
      *
      * @since    5.0.2
