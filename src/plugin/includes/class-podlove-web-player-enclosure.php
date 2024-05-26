@@ -21,6 +21,13 @@ class Podlove_Web_Player_Enclosure {
   private $options;
 
   /**
+   * @var Podlove_Web_Player_Interoperability
+   *
+   * @TODO This property is only written to, but not used anywhere. Check if it can be removed.
+   */
+  private $interoperability;
+
+  /**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    5.0.2
