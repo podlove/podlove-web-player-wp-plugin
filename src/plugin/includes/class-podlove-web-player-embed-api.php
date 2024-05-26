@@ -92,7 +92,7 @@ class Podlove_Web_Player_Embed_API
                         'required' => true,
                     ),
                 ),
-                'permission_callback' => '__return_true',
+                'permission_callback' => [$this, 'check_post_access_permissions'],
             )
         );
 
@@ -108,7 +108,7 @@ class Podlove_Web_Player_Embed_API
                             'required' => true,
                         ),
                     ),
-                    'permission_callback' => '__return_true',
+                    'permission_callback' => [$this, 'check_post_access_permissions'],
                 )
             );
 
@@ -242,4 +242,26 @@ class Podlove_Web_Player_Embed_API
     {
         return rest_ensure_response($this->options->read());
     }
+
+    public function check_post_access_permissions($request) {
+      $post_id = $request->get_param('id');
+
+      if (!$post_id) {
+          return false;
+      }
+
+      $post = get_post($post_id);
+
+      if (!$post) {
+          return false;
+      }
+
+      if ('publish' === $post->post_status) {
+          // The post is public, allow access.
+          return true;
+      } else {
+          // The post is not public, check if the user can edit posts.
+          return current_user_can('edit_posts', $post_id);
+      }
+  }
 }
