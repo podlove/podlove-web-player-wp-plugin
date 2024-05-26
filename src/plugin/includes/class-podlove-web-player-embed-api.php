@@ -180,7 +180,7 @@ class Podlove_Web_Player_Embed_API
             )
         );
 
-        register_rest_route($this->plugin_name . '/', 'options',
+        register_rest_route($this->plugin_name, 'options',
             array(
                 'methods' => 'GET',
                 'callback' => array($this, 'options'),
