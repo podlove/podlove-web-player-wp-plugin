@@ -111,6 +111,15 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Changelog ==
 
+= 5.7.5 =
+
+- Improve PHP 8 compatability
+- Improve compatability with Wordpress 6
+
+= 5.7.4 =
+
+- Fix security vulnerability
+
 = 5.7.3 =
 
 - Fix security vulnerability

@@ -404,6 +404,10 @@ class Podlove_Web_Player_Shortcode
             </style>
         ';
 
+        if (!isset($episode)) {
+          return "";
+        }
+
         return strtr($embed, array(
             '$id' => $id,
             '$episode' => is_string($episode['url']) ? '"' . esc_url($episode['url']) . '"' : json_encode($episode['url']),

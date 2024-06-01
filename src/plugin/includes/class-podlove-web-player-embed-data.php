@@ -99,7 +99,12 @@ class Podlove_Web_Player_Embed_Data
     public function config($configId, $themeId)
     {
         $options = $this->options->read();
-        $config = $options['configs'][$configId];
+
+        if (!isset($options['configs'][$configId])) {
+          $config = $options['configs']['default'];
+        } else {
+          $config = $options['configs'][$configId];
+        }
 
         $config['version'] = 5;
 
