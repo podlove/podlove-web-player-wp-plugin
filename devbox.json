@@ -1,0 +1,12 @@
+{
+  "packages": {
+    "nodejs":            "20"
+  },
+  "shell": {
+    "init_hook": [],
+    "scripts":   {}
+  },
+  "env": {
+    "NODE_OPTIONS": "--openssl-legacy-provider"
+  }
+}

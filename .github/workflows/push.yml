@@ -1,15 +1,27 @@
 name: Qualify Branch
 on: push
 jobs:
-  build:
-    name: Build
+  qualify:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-    - name: Build
-      run: |
-        npm ci
-        npm run build
+      - uses: actions/checkout@v3
+      - name: install
+        uses: jetpack-io/devbox-install-action@v0.11.0
+        with:
+          enable-cache: true
+      - name: npm env
+        id: npm
+        shell: bash
+        run: |
+          echo "npm_hash_key=${{ runner.os }}-npm-store-${{ hashFiles('**/package-lock.json') }}" >> "$GITHUB_OUTPUT"
+          echo "npm_restore_key=${{ runner.os }}-npm-store-" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v4
+        name: setup npm cache
+        with:
+          path: '**/node_modules'
+          key: ${{ steps.npm.outputs.npm_hash_key }}
+          restore-keys: ${{ steps.npm.outputs.npm_restore_key }}
+      - name: install
+        run: devbox run npm ci
+      - name: build
+        run: devbox run npm run build
