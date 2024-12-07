@@ -13,23 +13,11 @@ jobs:
         uses: jetpack-io/devbox-install-action@v0.11.0
         with:
           enable-cache: true
-      - name: npm env
-        id: npm
-        shell: bash
-        run: |
-          echo "npm_hash_key=${{ runner.os }}-npm-store-${{ hashFiles('**/package-lock.json') }}" >> "$GITHUB_OUTPUT"
-          echo "npm_restore_key=${{ runner.os }}-npm-store-" >> "$GITHUB_OUTPUT"
-      - uses: actions/cache@v4
-        name: setup npm cache
-        with:
-          path: '**/node_modules'
-          key: ${{ steps.npm.outputs.npm_hash_key }}
-          restore-keys: ${{ steps.npm.outputs.npm_restore_key }}
       - name: install
         run: devbox run npm ci
       - name: build
         run: |
-          devbox run npm build
+          devbox run npm run build
           devbox run npm run publish:prepare
           devbox run npm run publish:workspace
       - name: WordPress Plugin Deploy
