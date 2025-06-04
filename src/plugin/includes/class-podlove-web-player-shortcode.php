@@ -173,9 +173,14 @@ class Podlove_Web_Player_Shortcode
     {
         global $post;
         $customFields = get_post_custom($post->ID);
-
-        $chapters = $this->chapters(trim($attributes['chapters']), trim($customFields[$attributes['chapters']][0]));
-        $transcripts = $this->transcripts(trim($attributes['transcripts']), trim($customFields[$attributes['transcripts']][0]));
+        if( array_key_exists('chapters', $attributes) ) {
+          $chapters = $this->chapters( trim( $attributes[ 'chapters' ] ),
+            trim( $customFields[ $attributes[ 'chapters' ] ][ 0 ] ) );
+        }
+        if( array_key_exists('transcripts', $attributes) ) {
+          $transcripts = $this->transcripts( trim( $attributes[ 'transcripts' ] ),
+            trim( $customFields[ $attributes[ 'transcripts' ] ][ 0 ] ) );
+        }
 
         return array(
             'title' => $attributes['title'] ?? null,
