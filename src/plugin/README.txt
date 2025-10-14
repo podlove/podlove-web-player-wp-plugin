@@ -3,9 +3,9 @@ Contributors: alexander-heimbuch,ericteuber
 Donate link: https://podlove.org/donations
 Tags: podcasting, audio
 Requires at least: 4.9.6
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 5.0
+Stable tag: 5.9.1
 License: MIT
 
 The fast, flexible and responsive podcast player powered by podlove meta data.
@@ -116,6 +116,10 @@ If you encounter any issue with the plugin or want to request a specific feature
 Please report security bugs found in the source code of the Podlove Web Player plugin through the [Patchstack Vulnerability Disclosure  Program](https://patchstack.com/database/vdp/9e5fbc08-ca1f-4072-9764-b26c45f95853). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
 
 == Changelog ==
+
+= 5.9.1 =
+
+- Update software dependencies
 
 = 5.9.0 =
 
