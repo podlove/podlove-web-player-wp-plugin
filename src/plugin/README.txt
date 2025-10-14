@@ -109,6 +109,12 @@ If you encounter any issue with the plugin or want to request a specific feature
 3. Templating
 4. Gutenberg Block
 
+== Frequently Asked Questions ==
+
+= Where do I report security bugs found in this plugin? =
+
+Please report security bugs found in the source code of the Podlove Web Player plugin through the [Patchstack Vulnerability Disclosure  Program](https://patchstack.com/database/vdp/9e5fbc08-ca1f-4072-9764-b26c45f95853). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
+
 == Changelog ==
 
 = 5.9.0 =
