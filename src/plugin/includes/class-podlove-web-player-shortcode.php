@@ -175,11 +175,11 @@ class Podlove_Web_Player_Shortcode
         $customFields = get_post_custom($post->ID);
         if( array_key_exists('chapters', $attributes) ) {
           $chapters = $this->chapters( trim( $attributes[ 'chapters' ] ),
-            trim( $customFields[ $attributes[ 'chapters' ] ][ 0 ] ) );
+            trim( (!empty( $customFields[ $attributes[ 'chapters' ] ][ 0 ] ) ? $customFields[ $attributes[ 'chapters' ] ][ 0 ] : '') ) );
         }
         if( array_key_exists('transcripts', $attributes) ) {
           $transcripts = $this->transcripts( trim( $attributes[ 'transcripts' ] ),
-            trim( $customFields[ $attributes[ 'transcripts' ] ][ 0 ] ) );
+            trim( (!empty( $customFields[ $attributes[ 'transcripts' ] ][ 0 ] ) ? $customFields[ $attributes[ 'transcripts' ] ][ 0 ] : '') ) );
         }
 
         return array(
