@@ -70,7 +70,7 @@ class Podlove_Web_Player_Embed_Data
         $fileSize = $enclosure[1];
         $mimeType = $enclosure[2];
 
-        $duration = unserialize($enclosure[3]);
+        $duration = json_decode($enclosure[3], true);
 
         return array(
             'title' => $post->post_title,
