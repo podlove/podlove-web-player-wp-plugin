@@ -1,4 +1,3 @@
-import './inspector.scss'
 import { get, keys } from 'lodash'
 
 const { Component } = wp.element

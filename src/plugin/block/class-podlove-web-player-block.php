@@ -78,7 +78,7 @@ class Podlove_Web_Player_Block {
   }
 
   public function enqueue_scripts() {
-    wp_enqueue_script( $this->plugin_name . '-block', plugin_dir_url( __FILE__ ) . '/js/block.js', array( 'wp-blocks', 'wp-i18n', 'wp-element' ), $this->version, true );
+    wp_enqueue_script( $this->plugin_name . '-block', plugin_dir_url( __FILE__ ) . '/js/block.js', array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-block-editor', 'wp-components', 'wp-compose', 'wp-data', 'wp-core-data' ), $this->version, true );
     wp_localize_script( $this->plugin_name . '-block', 'PODLOVE_WEB_PLAYER', array(
       'api' => $this->api->routes(),
       'embed' => $this->embed->routes(),
@@ -92,7 +92,11 @@ class Podlove_Web_Player_Block {
       return;
     }
 
+    wp_register_style( $this->plugin_name . '-block', plugin_dir_url( __FILE__ ) . 'css/block.css', array(), $this->version );
+
     register_block_type( 'podlove-web-player/shortcode', array(
+      'api_version' => 3,
+      'editor_style' => $this->plugin_name . '-block',
       'render_callback' => array($this->shortcode, 'render')
     ));
   }

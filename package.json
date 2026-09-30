@@ -1,6 +1,6 @@
 {
   "name": "@podlove/web-player-configurator",
-  "version": "5.8.0",
+  "version": "5.10.0",
   "description": "Podlove Web Player Configurator",
   "author": "Alexander Heimbuch <github@heimbu.ch>",
   "scripts": {
@@ -10,13 +10,16 @@
     "plugin:env": "cp ./env/.htaccess ./wp/.htaccess && cp ./env/wp-config.php ./wp/wp-config.php && mkdir -p ./wp/wp-content/mu-plugins && cp ./env/mu-plugins/* ./wp/wp-content/mu-plugins/*",
     "js:dev": "NODE_OPTIONS=--openssl-legacy-provider webpack --watch --config build/webpack.dev.conf.js",
     "js:build": "NODE_OPTIONS=--openssl-legacy-provider webpack --config build/webpack.prod.conf.js",
-    "dev": "npm run dist:clean && concurrently 'npm run plugin:dev' 'npm run js:dev'",
-    "build": "npm run dist:clean && npm run plugin:copy && npm run js:build",
+    "dev": "npm run dist:clean && concurrently 'npm run plugin:dev' 'npm run js:dev' 'npm run css:dev'",
+    "build": "npm run dist:clean && npm run plugin:copy && npm run js:build && npm run css:build",
     "package": "npm run build && cd dist && zip -r -X podlove-web-player-beta.zip .",
     "publish:prepare": "npm run build && cp -R ./src/assets ./dist/.wordpress-org && cp -R .git dist/ && cp .distignore dist/",
     "publish:workspace": "node build/workspace.js",
     "version": "node ./build/version.js",
-    "release": "release-it"
+    "release": "release-it",
+    "css:build": "sass --no-source-map src/block/block.scss dist/block/css/block.css",
+    "css:dev": "sass --watch --no-source-map src/block/block.scss:dist/block/css/block.css",
+    "test:block": "node --test tests/block/*.test.js"
   },
   "dependencies": {
     "@podlove/clients": "5.12.0",

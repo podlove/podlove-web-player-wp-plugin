@@ -1,4 +1,3 @@
-import './source.scss'
 import { type } from './utils'
 
 const { Component, Fragment } = wp.element
