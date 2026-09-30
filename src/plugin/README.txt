@@ -118,6 +118,7 @@ Please report security bugs found in the source code of the Podlove Web Player p
 == Changelog ==
 
 = 5.10.0 =
+* Update compatible npm dependencies and enforce a 14-day release cooldown.
 * Migrate the player block to Block API v3 with iframe-aware previews and editor styles.
 * Require WordPress 6.3 or newer.
 

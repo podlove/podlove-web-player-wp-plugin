@@ -20,7 +20,11 @@ You will find all plugin assets in `/dist`
 
 ## Development
 
-Use Node 20 (see `devbox.json`) and start Docker Desktop.
+Use Node 20.18.1 (see `devbox.lock`) or a supported newer version, npm 11.18.0 or newer, and start Docker Desktop.
+
+The project `.npmrc` enforces a 14-day cooldown for new package releases.
+The engine check requires npm 11.18.0 or newer for the release-age and audit-fix behavior used here.
+Sass and two release-tool dependencies are pinned to releases compatible with Node 20.18.1.
 
 Build the plugin before starting WordPress:
 
