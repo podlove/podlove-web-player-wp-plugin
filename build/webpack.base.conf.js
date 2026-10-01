@@ -16,7 +16,8 @@ module.exports = {
   },
   output: {
     path: resolve("dist"),
-    filename: "[name].js"
+    filename: "[name].js",
+    publicPath: ""
   },
   resolve: {
     extensions: [".js", ".vue", ".json"],
@@ -39,15 +40,15 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: "url-loader"
+        type: "asset/inline"
       },
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
-        loader: "url-loader"
+        type: "asset/inline"
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: "url-loader"
+        type: "asset/inline"
       },
       {
         test: /\.css$/,
@@ -72,13 +73,14 @@ module.exports = {
           {
             loader: "postcss-loader",
             options: {
-              ident: "postcss",
-              plugins: [
-                cssClean({
-                  inline: ["none"]
-                }),
-                autoprefixer
-              ]
+              postcssOptions: {
+                plugins: [
+                  cssClean({
+                    inline: ["none"]
+                  }),
+                  autoprefixer
+                ]
+              }
             }
           },
           {
@@ -97,14 +99,15 @@ module.exports = {
           {
             loader: "postcss-loader",
             options: {
-              ident: "postcss",
-              plugins: [
-                cssClean({
-                  inline: ["none"]
-                }),
-                autoprefixer,
-                tailwind()
-              ]
+              postcssOptions: {
+                plugins: [
+                  cssClean({
+                    inline: ["none"]
+                  }),
+                  autoprefixer,
+                  tailwind()
+                ]
+              }
             }
           }
         ]
