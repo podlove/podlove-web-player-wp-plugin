@@ -1,18 +1,19 @@
-=== Plugin Name ===
+=== Podlove Web Player ===
 Contributors: alexander-heimbuch,ericteuber
 Donate link: https://podlove.org/donations
 Tags: podcasting, audio
 Requires at least: 6.3
-Tested up to: 6.8
+Tested up to: 7.1
 Requires PHP: 7.2
 Stable tag: 5.10.0
 License: MIT
+License URI: https://opensource.org/licenses/MIT
 
-The fast, flexible and responsive podcast player powered by podlove meta data.
+A fast, flexible and responsive podcast player with chapters, transcripts and customizable themes.
 
 == Description ==
 
-Podlove Web Player is a HTML5 based web player for audio and video media files that is optimized and extended for the specific needs of podcasters.
+Podlove Web Player is an HTML5 web player for audio and video media files that is optimized and extended for the specific needs of podcasters.
 It has a native integration with [Podlove Publisher](https://wordpress.org/plugins/podlove-podcasting-plugin-for-wordpress/), can be used as a shortcode and also plays well with Gutenberg Blocks.
 
 ### Made for Podcasters
@@ -39,56 +40,55 @@ The Player is fully customizable in terms of
 
 ### Usage
 
-There are basically four ways to use the Podlove Web Player:
+There are three ways to use the Podlove Web Player:
 
-#### 1 Manual Wordpress Shortcode
+#### 1 Using a WordPress Shortcode
 
 Use a simple shortcode in your posts and pages, and the Podlove Web Player will appear, playing any media file you want to assign. Basic usage:
-`
-[podlove-web-player
-  theme="default"
-  config="default"
-  title="My episode title"
-  subtitle="Episode Subtitle"
-  poster="/files/path/to/poster.png"
-  chapters="/files/path/to/chapters.json"
-  transcripts="/files/path/to/transcripts.json"
-  playlist="/files/path/to/playlist.json"
-  src="http://mysite.com/mymedia.mp3"
-  size="1337"
-  show="My show title"
-  duration="03:33"
-]
-`
+
+    [podlove-web-player
+      theme="default"
+      config="default"
+      title="My episode title"
+      subtitle="Episode Subtitle"
+      poster="/files/path/to/poster.png"
+      chapters="/files/path/to/chapters.json"
+      transcripts="/files/path/to/transcripts.json"
+      playlist="/files/path/to/playlist.json"
+      src="https://mysite.com/mymedia.mp3"
+      size="1337"
+      show="My show title"
+      duration="03:33"
+    ]
 
 Use an existing post with a media enclosure that is provided from plugins like Blubrry:
 
-`
-[podlove-web-player
-  theme="default"
-  config="default"
-  post="1234"
-]
-`
+    [podlove-web-player
+      theme="default"
+      config="default"
+      post="1234"
+    ]
 
 Or in case you have our [Podlove Publisher](https://wordpress.org/plugins/podlove-podcasting-plugin-for-wordpress/) installed:
 
-`
-[podlove-web-player
-  theme="default"
-  config="default"
-  publisher="1234"
-]
-`
+    [podlove-web-player
+      theme="default"
+      config="default"
+      publisher="1234"
+    ]
 
-#### 2 Using Wordpress Gutenberg Blocks
+#### 2 Using the WordPress Block Editor
 
-You can choose between different references, like Podlove Publisher, Blocks or you can add the meta data manually. Right now the latter option is limited to a limited set of attributes, this will be expanded in further releases.
+Add the Podlove Web Player block to a post or page. Choose an existing post with a media enclosure, a Podlove Publisher episode, or enter custom audio and episode details.
+For Post and Publisher sources, select an episode in the block sidebar to load the preview.
+Use the block settings to choose a configuration, theme and template.
 
 #### 3 Automatic Integration with Podcasting Engines
 
-If you are using Podlove Publisher you should be able to select it in the Publisher Player settings.
-In case you are still using Blubrry you can simply enable the automatic insertions on enclosures in the settings and choose the position.
+If you use Podlove Publisher, select Podlove Web Player in the Publisher player settings.
+For posts with media enclosures, such as those created by Blubrry PowerPress, enable automatic player insertion in the Web Player settings and choose its position.
+
+Configure the player under **Settings > Podlove Web Player**. See the [getting started guide](https://docs.podlove.org/podlove-web-player/wordpress-plugin/getting-started/) for more details.
 
 ### Help & Support
 
@@ -96,11 +96,10 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 == Installation ==
 
-1. Download the Podlove Web Player Plugin to your desktop.
-2. If downloaded as a zip archive, extract the Plugin folder to your desktop.
-3. With your FTP program, upload the Plugin folder to the wp-content/plugins folder in your WordPress directory online.
-4. Go to Plugins screen and find the newly uploaded Plugin in the list.
-5. Click Activate Plugin to activate it.
+1. In your WordPress dashboard, go to **Plugins > Add New Plugin** and search for **Podlove Web Player**.
+2. Click **Install Now**, then **Activate**. To install a downloaded ZIP, use **Upload Plugin** instead.
+3. Open **Settings > Podlove Web Player** to configure the player.
+4. Add a Podlove Web Player block or shortcode to a post or page, or enable automatic integration.
 
 == Screenshots ==
 
@@ -115,9 +114,15 @@ If you encounter any issue with the plugin or want to request a specific feature
 
 Please report security bugs found in the source code of the Podlove Web Player plugin through the [Patchstack Vulnerability Disclosure  Program](https://patchstack.com/database/vdp/9e5fbc08-ca1f-4072-9764-b26c45f95853). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
 
+== Upgrade Notice ==
+
+= 5.10.0 =
+Requires WordPress 6.3 or newer. Updates block editor compatibility, including previews in the editor iframe. Existing blocks and shortcodes need no conversion.
+
 == Changelog ==
 
 = 5.10.0 =
+* Verify compatibility with WordPress 7.1.2.
 * Avoid empty episode preview requests when choosing Publisher or Post in the block.
 * Upgrade the build tooling to Webpack 5.
 * Update compatible npm dependencies and enforce a 14-day release cooldown.
@@ -137,7 +142,7 @@ Please report security bugs found in the source code of the Podlove Web Player p
 - Update to Podlove Web Player 5.13.0
 - Verify WordPress 6.7 compatability
 
-= 5.7.5 =
+= 5.8.0 =
 
 - Improve PHP 8 compatability
 - Improve compatability with Wordpress 6
