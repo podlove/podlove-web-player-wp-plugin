@@ -56,3 +56,19 @@ export const type = (attributes = {}) => {
 
   return null
 }
+
+export const previewEpisode = (attributes, routes) => {
+  const source = type(attributes)
+  if (source === 'custom') {
+    return attributes.episode
+  }
+
+  if (source === 'post' || source === 'publisher') {
+    const id = attributes[source]
+    if (/^\d+$/.test(id) && Number(id) > 0) {
+      return [routes[source], id].join('/')
+    }
+  }
+
+  return null
+}

@@ -1,5 +1,5 @@
 import { get } from 'lodash'
-import { type, loadScript } from './utils'
+import { previewEpisode, loadScript } from './utils'
 import logo from './logo'
 
 const { useState, useEffect, useCallback } = wp.element
@@ -50,9 +50,14 @@ export default function Player({ attributes }) {
       return
     }
 
+    setError(false)
+    const episode = previewEpisode(attributes, settings.embed)
+    if (!episode) {
+      return
+    }
+
     let cancelled = false
     let container = null
-    setError(false)
     const timer = setTimeout(async () => {
       try {
         const base = get(get(plugin, 'settings.source.items'), get(plugin, 'settings.source.selected'))
@@ -64,18 +69,6 @@ export default function Player({ attributes }) {
 
         const routes = settings.embed
         const config = [routes.config, attributes.config, 'theme', attributes.theme].join('/')
-        let episode
-        switch (type(attributes)) {
-          case 'post':
-            episode = [routes.post, attributes.post].join('/')
-            break
-          case 'publisher':
-            episode = [routes.publisher, attributes.publisher].join('/')
-            break
-          case 'custom':
-            episode = attributes.episode
-            break
-        }
 
         container = ownerDocument.createElement('div')
         node.appendChild(container)

@@ -10,7 +10,7 @@ class Publisher extends Component {
     const { episodes, setAttributes, attributes } = this.props
 
     const select = publisher => setAttributes({ publisher })
-    const options = [{ id: null, title: { rendered: __('Select', 'podlove-web-player') } }]
+    const options = [{ id: '', title: { rendered: __('Select', 'podlove-web-player') } }]
       .concat(episodes || [])
       .map(({ id, title }) => ({ value: id, label: title.rendered }))
 
@@ -18,7 +18,7 @@ class Publisher extends Component {
         <PanelBody title={__('Publisher', 'podlove-web-player')}>
           <PanelRow>
             <SelectControl
-              value={attributes.publisher}
+              value={attributes.publisher || ''}
               options={options}
               onChange={select}
             />

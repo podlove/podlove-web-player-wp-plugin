@@ -12,7 +12,7 @@ const { code } = transformSync(source, {
 })
 const moduleResult = { exports: {} }
 new Function('require', 'module', 'exports', code)(require, moduleResult, moduleResult.exports)
-const { loadScript } = moduleResult.exports
+const { loadScript, previewEpisode } = moduleResult.exports
 
 function documentFixture() {
   const nodes = []
@@ -76,4 +76,22 @@ test('a script without the expected global rejects and allows retry', async () =
   doc.defaultView.podlovePlayer = () => {}
   doc.nodes[1].onload()
   await retry
+})
+
+const routes = { post: '/shortcode/post', publisher: '/shortcode/publisher' }
+
+for (const source of ['post', 'publisher']) {
+  test(`${source} preview waits for an episode selection`, () => {
+    for (const id of [undefined, null, '', '0', 0, 'invalid', '-1']) {
+      assert.equal(previewEpisode({ [source]: id }, routes), null)
+    }
+    assert.equal(previewEpisode({ [source]: '42' }, routes), `${routes[source]}/42`)
+    assert.equal(previewEpisode({ [source]: 42 }, routes), `${routes[source]}/42`)
+  })
+}
+
+test('custom preview keeps the episode data', () => {
+  const episode = { title: 'Custom episode' }
+  assert.equal(previewEpisode({ episode }, routes), episode)
+  assert.equal(previewEpisode({}, routes), null)
 })
