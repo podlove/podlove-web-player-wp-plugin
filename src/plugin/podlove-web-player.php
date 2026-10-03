@@ -17,6 +17,7 @@
  * Plugin URI:        https://docs.podlove.org/podlove-web-player/
  * Description:       Audio First Podcast Web Player
  * Requires at least: 6.3
+ * Requires PHP:      7.2
  * Version:           5.10.0
  * Author:            Podlove
  * Author URI:        http://podlove.org
