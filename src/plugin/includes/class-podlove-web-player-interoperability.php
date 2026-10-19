@@ -10,13 +10,13 @@
  * @author     Alexander Heimbuch <github@heimbu.ch>
  */
 class Podlove_Web_Player_Interoperability {
-	/**
-	 * The ID of this plugin.
-	 *
-	 * @since    5.0.6
-	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
-	 */
+  /**
+   * The ID of this plugin.
+   *
+   * @since    5.0.6
+   * @access   private
+   * @var      string    $plugin_name    The ID of this plugin.
+   */
   private $plugin_name;
 
   public function __construct( $plugin_name ) {
@@ -42,14 +42,14 @@ class Podlove_Web_Player_Interoperability {
 
     $settings = (array) \Podlove\get_webplayer_settings();
 
-    return $settings['version'] == 'player_v5';
+    return ($settings['version'] ?? null) == 'player_v5';
   }
 
   public function isClassicPress() {
     if ( function_exists( 'classicpress_version' ) ) {
       return true;
     } else {
-        return false;
+      return false;
     }
   }
 }
