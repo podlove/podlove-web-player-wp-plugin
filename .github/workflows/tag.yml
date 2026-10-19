@@ -9,17 +9,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: install
-        uses: jetpack-io/devbox-install-action@v0.11.0
+      - uses: actions/setup-node@v4
         with:
-          enable-cache: true
+          node-version: '20.18.1'
       - name: install
-        run: devbox run npm ci
-      - name: build
         run: |
-          devbox run npm run build
-          devbox run npm run publish:prepare
-          devbox run npm run publish:workspace
+          npm install --global npm@11.18.0
+          npm ci
+      - name: test and build
+        run: |
+          npm run test:block
+          npm run publish:prepare
+          npm run publish:workspace
       - name: WordPress Plugin Deploy
         uses: 10up/action-wordpress-plugin-deploy@master
         env:

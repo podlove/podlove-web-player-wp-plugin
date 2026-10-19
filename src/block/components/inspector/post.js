@@ -10,7 +10,7 @@ class Post extends Component {
     const { posts, setAttributes, attributes } = this.props
 
     const select = post => setAttributes({ post })
-    const options = [{ id: null, title: { rendered: __('Select', 'podlove-web-player') } }]
+    const options = [{ id: '', title: { rendered: __('Select', 'podlove-web-player') } }]
       .concat(posts || [])
       .map(({ id, title }) => ({ value: id, label: title.rendered }))
 
@@ -18,7 +18,7 @@ class Post extends Component {
         <PanelBody title={__('Post', 'podlove-web-player')}>
           <PanelRow>
             <SelectControl
-              value={attributes.post}
+              value={attributes.post || ''}
               options={options}
               onChange={select}
             />

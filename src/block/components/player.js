@@ -1,96 +1,114 @@
-import './player.scss'
-import { get, isEqual, debounce } from 'lodash'
-import { type, loadScript } from './utils'
+import { get } from 'lodash'
+import { previewEpisode, loadScript } from './utils'
 import logo from './logo'
 
-const { Component, createRef } = wp.element
-const { compose } = wp.compose
-const { withSpokenMessages } = wp.components
+const { useState, useEffect, useCallback } = wp.element
+const { Notice } = wp.components
 const { __ } = wp.i18n
 
-const nonce = get(window.PODLOVE_WEB_PLAYER, 'nonce')
-
-class Player extends Component {
-  constructor(props) {
-    super(...arguments)
-    this.props = props
-    this.playerRef = createRef()
-    this.plugin = null
-    this.type = null
-    this.mountIframe = debounce(({ node, episode, config, template }) => {
-      node.innerHTML = template
-      window.podlovePlayer(node, episode, config)
-    }, 600)
-  }
-
-  renderPlayer() {
-    const { attributes } = this.props
-    const node = this.playerRef.current
-    const routes = window.PODLOVE_WEB_PLAYER.embed
-
-    let episode
-    const config = [
-      routes.config,
-      attributes.config,
-      'theme',
-      attributes.theme
-    ].join('/')
-    const template = get(this.plugin, ['templates', attributes.template], '')
-
-    switch (this.type) {
-      case 'post':
-        episode = [routes.post, attributes.post].join('/')
-        break
-
-      case 'publisher':
-        episode = [routes.publisher, attributes.publisher].join('/')
-        break
-
-      case 'custom':
-        episode = attributes.episode
-        break
+const clearPlayer = (node) => {
+  node.querySelectorAll('iframe').forEach((iframe) => {
+    if (iframe.iFrameResizer) {
+      iframe.iFrameResizer.removeListeners()
     }
+  })
+  node.innerHTML = ''
+}
 
-    this.mountIframe({ node, config, episode, template })
-  }
+export default function Player({ attributes }) {
+  const [node, setNode] = useState(null)
+  const [plugin, setPlugin] = useState(null)
+  const [error, setError] = useState(false)
+  const playerRef = useCallback((element) => setNode(element), [])
 
-  async componentDidMount() {
-    this.plugin = await fetch(window.PODLOVE_WEB_PLAYER.api.bootstrap, {
-      headers: {
-        'X-WP-Nonce': nonce
-      },
-    }).then(result => result.json())
-    const base = get(get(this.plugin, 'settings.source.items'), get(this.plugin, 'settings.source.selected'))
-    await loadScript(base + 'embed.js', 'podlovePlayer')
+  // Localized API configuration belongs to the admin window, not the canvas.
+  const settings = window.PODLOVE_WEB_PLAYER
 
-    this.type = type(this.props.attributes)
-    this.renderPlayer()
-  }
+  useEffect(() => {
+    const controller = new AbortController()
+    fetch(settings.api.bootstrap, {
+      headers: { 'X-WP-Nonce': settings.nonce },
+      signal: controller.signal,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Could not load player configuration')
+        }
+        return response.json()
+      })
+      .then(setPlugin)
+      .catch((error) => {
+        if (error.name !== 'AbortError') {
+          setError(true)
+        }
+      })
+    return () => controller.abort()
+  }, [settings])
 
-  shouldComponentUpdate() {
-    return !this.plugin
-  }
-
-  componentWillReceiveProps(props) {
-    if (isEqual(props.attributes, this.props.attributes)) {
+  useEffect(() => {
+    if (!node || !plugin) {
       return
     }
 
-    this.props = props
-    this.renderPlayer()
-  }
+    setError(false)
+    const episode = previewEpisode(attributes, settings.embed)
+    if (!episode) {
+      return
+    }
 
-  render() {
-    return (
+    let cancelled = false
+    let container = null
+    const timer = setTimeout(async () => {
+      try {
+        const base = get(get(plugin, 'settings.source.items'), get(plugin, 'settings.source.selected'))
+        const { ownerDocument } = node
+        await loadScript(base + 'embed.js', 'podlovePlayer', ownerDocument)
+        if (cancelled) {
+          return
+        }
+
+        const routes = settings.embed
+        const config = [routes.config, attributes.config, 'theme', attributes.theme].join('/')
+
+        container = ownerDocument.createElement('div')
+        node.appendChild(container)
+        container.innerHTML = get(plugin, ['templates', attributes.template], '')
+        await ownerDocument.defaultView.podlovePlayer(container, episode, config)
+        if (cancelled) {
+          clearPlayer(container)
+          container.remove()
+        }
+      } catch (error) {
+        if (!cancelled) {
+          setError(true)
+        }
+      }
+    }, 600)
+
+    return () => {
+      cancelled = true
+      clearTimeout(timer)
+      if (container) {
+        clearPlayer(container)
+        container.remove()
+      }
+    }
+  }, [node, plugin, attributes, settings])
+
+  return (
+    <div>
+      {error && (
+        <Notice status="error" isDismissible={false}>
+          {__('The player preview could not be loaded.', 'podlove-web-player')}
+        </Notice>
+      )}
       <div className="podlove-web-player--preview">
         <div className="logo">
           {logo(50)}
-          <span class="title">{__('Podlove Web Player', 'podlove-web-player')}</span>
+          <span className="title">{__('Podlove Web Player', 'podlove-web-player')}</span>
         </div>
-        <div className="player" ref={this.playerRef}></div>
+        <div className="player" ref={playerRef}></div>
       </div>
-    )
-  }
+    </div>
+  )
 }
-
-export default compose([withSpokenMessages])(Player)

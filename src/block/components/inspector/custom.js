@@ -1,4 +1,3 @@
-import './inspector.scss'
 import { get, set, cloneDeep } from 'lodash'
 
 const { Component } = wp.element

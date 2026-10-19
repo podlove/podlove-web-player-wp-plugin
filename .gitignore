@@ -3,3 +3,4 @@ database/
 content
 node_modules
 wp
+.DS_Store

@@ -7,8 +7,10 @@ import { type } from './components/utils'
 
 const { __ } = wp.i18n
 const { registerBlockType } = wp.blocks
+const { useBlockProps } = wp.blockEditor
 
 registerBlockType('podlove-web-player/shortcode', {
+  apiVersion: 3,
   title: __('Podlove Web Player', 'podlove-web-player'),
   description: __('HTML 5 Podcast Player', 'podlove-web-player'),
   icon: logo(),
@@ -43,13 +45,16 @@ registerBlockType('podlove-web-player/shortcode', {
     }
   },
 
-  edit: props => (
-    <div className={props.className}>
-      <Inspector {...props} />
-      <Source {...props} />
-      {type(props.attributes) && <Player {...props} />}
-    </div>
-  ),
+  edit: function Edit(props) {
+    const blockProps = useBlockProps()
+    return (
+      <div {...blockProps}>
+        <Inspector {...props} />
+        <Source {...props} />
+        {type(props.attributes) && <Player {...props} />}
+      </div>
+    )
+  },
 
   save() {
     return null

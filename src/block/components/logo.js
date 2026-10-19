@@ -7,15 +7,15 @@ export default (size = 20) => (
     width={size}
     height={size}
     viewBox="0 0 160.472 160.81"
-    enable-background="new 0 0 160.472 160.81"
+    enableBackground="new 0 0 160.472 160.81"
   >
     <g>
       <g>
         <g>
           <g>
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               fill="#F2875C"
               d="M139.271,0h-56.92c-2.909,0-5.68,0.588-8.204,1.649h2.37
             c11.47,0,20.767,9.298,20.767,20.767v115.979c0,11.468-9.297,20.767-20.767,20.767h-2.369c2.523,1.061,5.294,1.648,8.203,1.648
@@ -26,8 +26,8 @@ export default (size = 20) => (
         <path
           fill="#FFFFFF"
           stroke="#FFFFFF"
-          stroke-width="2"
-          stroke-miterlimit="10"
+          strokeWidth="2"
+          strokeMiterlimit="10"
           d="M117.392,66.03l5.836,3.645l17.503,10.931
         l-3.502,2.135l-19.837,12.095V66.03 M116.054,61.839c-0.989,0-1.754,0.99-1.754,2.079c0,7.712,0,26.184,0,33.43
         c0,1.222,0.622,1.623,1.37,1.623c0.56,0,1.191-0.223,1.686-0.496c6.372-3.884,20.962-12.776,26.794-16.331
@@ -55,20 +55,20 @@ export default (size = 20) => (
           />
         </g>
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           fill="none"
           stroke="#181716"
-          stroke-width="9"
-          stroke-miterlimit="10"
+          strokeWidth="9"
+          strokeMiterlimit="10"
           d="
         M72.957,46.223L49.388,69.806L25.82,46.22c-2.649-2.7-4.285-6.399-4.285-10.481c0-8.267,6.702-14.968,14.968-14.968
         c5.485,0,10.278,2.949,12.885,7.347c2.606-4.398,7.401-7.347,12.884-7.347c8.268,0,14.97,6.701,14.97,14.968
         C77.242,39.821,75.606,43.522,72.957,46.223z"
         />
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           fill="#181716"
           d="M49.64,105.223c4.561,0,8.26,3.698,8.26,8.257
         c0,4.562-3.699,8.258-8.26,8.258c-4.56,0-8.257-3.696-8.257-8.258C41.383,108.921,45.08,105.223,49.64,105.223z"
